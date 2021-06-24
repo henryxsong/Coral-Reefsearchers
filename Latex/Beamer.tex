@@ -1,0 +1,253 @@
+\documentclass{beamer}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage[backend=biber]{biblatex}
+\usepackage{tikz}
+
+\RequirePackage{currfile} 
+\setbeamertemplate{caption}[numbered]
+
+\usetheme{Copenhagen}
+%\usecolortheme{whale}
+
+\addbibresource{main.bib}
+
+%--------Stuff for Compartment/Blocks-----%
+\tikzstyle{block} = [rectangle, draw, text width = 1em, text centered, minimum height = 1em]
+\tikzstyle{line} = [thick, ->, >= stealth]
+\tikzstyle{noBlock} = [rectangle, draw = none]
+
+%\logo{\includegraphics[width = 0.5 in]{Figures/epscor.jpeg}}
+
+\definecolor{maincol}{HTML}{4B778D}
+\definecolor{secondcol}{RGB}{75,119,141}
+\definecolor{thirdcol}{RGB}{40,181,181}
+\setbeamercolor{palette primary}{bg = maincol, fg=white}
+\setbeamercolor{palette secondary}{bg = secondcol, fg=white}
+\setbeamercolor{palette tertiary}{bg=thirdcol, fg=white}
+\setbeamercolor{palette quaternary}{bg = thirdcol, fg=white}
+\setbeamercolor{structure}{fg=maincol}
+\setbeamercolor{section in toc}{fg=maincol} 
+\setbeamercolor{subsection in head/foot}{bg=maincol, fg=white}
+
+%%--------------- Title Slide ------------------------------
+\title[]{Coral Reefsearchers}
+\author{Aaron Bumagat\inst{1}, Michelle Luces \inst{1}, Henry Song \inst{1} }
+\institute{University of Guam}
+\date{\today} 
+
+
+\begin{document}
+\frame{\titlepage}
+
+\AtBeginSection[]{}
+\begin{frame}<Beamer>
+\frametitle{}
+\setcounter{tocdepth}{2}
+\tableofcontents{currentsection, sections = \thesection}
+\setcounter{tocdepth}{1}
+\end{frame}
+
+%%------------------Table of Contents---------------------------
+\begin{frame}{Table of Contents}
+\tableofcontents
+\end{frame}
+
+%%-----------------------Introduction----------------------------
+\section{Introduction}
+\begin{frame}{Introduction}
+\begin{itemize}
+    \item Aaron, Henry, Michelle
+    \item General Question: How will Guam's reef ecosystem change over the coming decades?
+\end{itemize}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{Figures/coral_picture.jpg}
+    %\caption{Caption}
+    %\label{fig:my_label}
+\end{figure}
+\end{frame}
+
+%%--------------------------Background--------------------------
+\section{Background}
+\begin{frame}{Background}
+    \begin{itemize}
+        \item Coral Reefs are large underwater structures composed of the skeletons of colonial marine invertebrates known as coral \cite{ross}.
+        \item Climate change is a leading factor for the cause of coral bleaching/death.
+        \item Overfishing, temperature changes, and resiliency of coral reef species are factors when it comes to the changes in a reef ecosystem.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Continuation Background}
+    \begin{itemize}
+        \item According to the 2008 State of the Coral Reef Ecosystems of Guam report, Guam’s coral reef resources are both economically and culturally important, providing numerous goods and services for the residents of Guam, including cultural/traditional use, tourism, recreation, fisheries, and shoreline/infrastructure protection \cite{guamwebsite}.
+    \end{itemize}
+\end{frame}
+
+%%-----------------------------Plan-------------------------
+\section{Plans/Findings}
+\begin{frame}{Plans}
+    \begin{itemize}
+        \item After speaking with Dr. Bentlage, we gained an understanding of the specific question we want to tackle:
+        \begin{itemize}
+            \item How will a specific coral species change throughout the upcoming decades on Guam? 
+            \item Choose a representative species of average resiliency (specifically on Guam) and examine how it will change over time through climate changes.
+            \item Next we plan to establish our methodology and mathematical model in order to answer our question.
+        \end{itemize}
+        %\item Continue to digest articles and literature relevant to our research.
+        \item Brainstorm and finalize our compartment model.
+        \item We will use the application of Game Theory (specifically education game theory).
+    \end{itemize}
+\end{frame}
+\begin{frame}{Plans Cont.}
+\begin{center}
+    \begin{tikzpicture}{node distance = 1cm, auto}
+        \node (S) [block] {S}; 
+        \node (E) [block, right of = S, node distance = 3 cm] {E};
+        \node (I) [block, right of = E, node distance = 3 cm] {I};
+        \node (R) [block, right of = I, node distance = 3 cm] {R};
+        \node (H) [block, below of = E, node distance = 2 cm] {H};
+        \draw[line] (S) --node[above]{} (E);
+        \draw[line] (S) --node[above]{} (H);
+        \draw[line] (E) --node[above]{} (I);
+        \draw[line] (H) --node[above]{} (I);
+        \draw[line] (I) --node[above]{} (R);
+    \end{tikzpicture}
+\end{center}
+\end{frame}
+
+%%------------------------Literature Review----------------
+\section{Literature Review}
+\begin{frame}{Literature Review}
+Articles covered:
+\begin{itemize}
+    \item Assessing relative resilience potential of coral reefs to inform management.
+    \item Prioritizing Key Resilience Indicators to Support Coral Reef Management in a Changing Climate.
+    \item Model of coral population response to accelerated bleaching and mass.
+mortality in a changing climate.
+    \item Mathematical Model of Coral Reef Models.
+\end{itemize}
+\end{frame}
+
+\subsection{Assessing relative resilience potential of coral reefs to inform management}
+\begin{frame}{Assessing relative resilience potential of coral reefs to inform management \cite{assesing_relative}}
+    \begin{block}{Summary}
+        \small{This research discusses ecological resilience as a essential part of resilience-based management (RBM) and the use of such assessments to explain resilience potentials of coral reefs in the Northern Mariana Islands (CNMI).}
+    \end{block}
+    Why is this article important?
+    \begin{itemize}
+        \item Acts as a guide to implement ecological resilience assessments.
+        \item Explores and elaborates on factors affecting coral resilience.
+        \item Analyzes inter-island and intra-island connectivity.
+    \end{itemize}
+\end{frame}
+
+\subsection{Prioritizing Key Resilience Indicators to Support Coral Reef Management in a Changing Climate}
+\begin{frame}{Prioritizing Key Resilience Indicators to Support Coral Reef Management in a Changing Climate \cite{prioritize}}
+    \begin{block}{Summary}
+        Empirical selection criteria was created in order to prioritize coral reef management.
+    \end{block}
+    Why is this article important?
+    \begin{itemize}
+        \item Provides data from certified scientists when it comes to resilience of coral reef.
+            \begin{itemize}
+                \item Can be used to see which will be focused on when creating our parameters.
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+%\begin{frame}{Prioritizing Key Resilience Indicators to Support Coral Reef Management in a Changing Climate Cont.}
+%\includegraphics[width = 4.3 in. , height = 1.7 in.]{Figures/Resilience Data.png}
+%\end{frame}
+
+\subsection{Model of coral population response to accelerated bleaching and mass
+mortality in a changing climate}
+\begin{frame}{Model of coral population response to accelerated bleaching and mass
+mortality in a changing climate \cite{Riegl_Purkis_Model}}
+    \begin{block}{Summary}
+        Researchers studied coral populations located within the Arabian Peninsula. The study primarily focused on the Porites and \textit{Acropora} species of coral. The researchers found that coral populations can survive more extreme conditions.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Model of coral population response to accelerated bleaching and mass
+mortality in a changing climate (Cont.)}
+    Why is this article important?
+    \begin{itemize}
+        \item Methods used include a system of differential equations.
+        \item It implements a compartment model to illustrate the relationships.
+        \item It uses the Lotka-Volterra model to simulate a predator prey relationship between \textit{Acropora} as the dominant species and others as the recessive species.
+        \begin{itemize}
+            \item Incorporates ideas of Game Theory into methods.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\subsection{Mathematical Analysis of Coral Reef Models}
+\begin{frame}{Mathematical Analysis of Coral Reef Models \cite{mathanalysis}}
+    \begin{block}{Summary}
+        This research analyzes grazing in response to threatened coral reef systems. Specifically, this model is focused on the impact of different grazing intensities and their influences on coral-algae interactions. Results provided from this research can provide insight on how to revitalize unhealthy reefs.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Mathematical Analysis of Coral Reef Models (Cont.)}
+    Why is this article important?
+    \begin{itemize}
+        \item The authors used ordinary differential equations (ODE) to model coral reefs.
+        \item The method also incorporates a time delay by using delay differential equations (DDE).
+        \item The research offers insight on the effects of fishing on coral reef populations.
+        \item Discusses about stable and unstable nodes of three different states: extinction state, macroalgae-only state, and coral-only state.
+    \end{itemize}
+\end{frame}
+
+%%------------------------------------------------------
+
+
+%---------------------Conclusion---------------------
+%\section{Conclusion}
+%\begin{frame}{Conclusion}
+    %Type conclusion here
+%\end{frame}
+
+
+
+
+
+
+%%-------------------------Acknowledgements----------------
+\section{Acknowledgements}
+\begin{frame}{Acknowledgements}
+    Support for the Young Scholars Research Experience in Mathematics (YSREM)  is through the MAA Tensor SUMMA Program. Support for the MAA National Research Experience for Undergraduates Program (NREUP) is provided by the National Science Foundation (Grant Number DMS-1950644. Support for the NSF EPSCoR project, Guam Ecosystems Collaboratorium for Corals and Oceans (GECCO) is provided by the National Science Foundation (Grant Number DMS-1946352).
+    \begin{figure}
+        \includegraphics[width = 0.20\textwidth]{Figures/MAA_logo_PMS286.jpg}
+        \label{MAA}
+        \includegraphics[width = 0.12\textwidth]{Figures/NSF_4-Color_bitmap_Logo.png}
+        \label{NSF}
+        \includegraphics[width = 0.20\textwidth]{Figures/GECCO.png}
+        \label{gecco}
+        \includegraphics[width = 0.12\textwidth]{Figures/epscor.jpeg}
+        \label{epscor}
+        \includegraphics[width = 0.20\textwidth]{Figures/UOG-horizontal.png}
+        \label{uog}
+    \end{figure}
+\end{frame}
+
+
+
+%%----------------------Bibliography-------------------
+\section{Bibliography}
+\begin{frame}[allowframebreaks]{Bibliography}
+    \tiny{\printbibliography}
+\end{frame}
+
+
+%%---------------Thank you/Questions----------------------
+\section{Q \& A}
+\begin{frame}
+    \Huge{Questions?}
+\end{frame}
+\begin{frame}
+    \Huge{Thank you!}
+\end{frame}
+
+
+\end{document}

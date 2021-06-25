@@ -5,11 +5,18 @@
 \usepackage{graphicx}
 \usepackage[utf8]{inputenc}
 \usepackage{biblatex}
+\usepackage{tikz}
 
-%bibfile
+% tikz style stuff
+\usetikzlibrary{arrows}
+\tikzstyle{block} = [rectangle, draw, text width = 1em, text centered, minimum height = 1em]
+\tikzstyle{line} = [thick, ->, >= stealth]
+\tikzstyle{noBlock} = [rectangle, draw = none]
+
+
 \addbibresource{main.bib}
 
-\title{Coral Reefsearchers}
+\title{Model of Guam's Coral Reef Change\\Coral Reefsearchers}
 \author{Aaron Bumagat, Michelle Luces, Henry Song\\University of Guam}
 \date{\today}
 
@@ -26,12 +33,30 @@ Because a handful of coral species are considered to be threatened, efforts in m
 The objective of this paper is to analyze how Guam's reef ecosystem will change over the coming decades, focusing on the resilience of corals and the impact of human factors on the coral reefs. 
 
 % objectives of research question, brief explanation of math model
-\section{Objectives}
+%\section{Objectives}
 
 
 \section{Modeling}
 \subsection{Compartment Model}
-\subsection{Education Game Theory}
+\begin{center}
+    \begin{tikzpicture}{node distance = 1cm, auto}
+        \node (S) [block] {S}; 
+        \node (E) [block, right of = S, node distance = 3 cm] {E};
+        \node (I) [block, right of = E, node distance = 3 cm] {I};
+        \node (R) [block, right of = I, node distance = 3 cm] {R};
+        \node (H) [block, below of = E, node distance = 2 cm] {H};
+        \draw[line] (S) --node[above]{} (E);
+        \draw[dotted] (H) --node[above]{} (S);
+        \draw[line] (E) --node[above]{} (I);
+        %\draw[line] (H) --node[above]{} (I);
+        \draw[line] (I) --node[above]{} (R);
+    \end{tikzpicture} 
+\end{center}
+
+Represented above is our general compartment model. While this version is a rough draft, it represents the compartments that we wish to include in our model. Included in our model is our $S$ compartment, which represents all susceptible corals, our $E$ compartment representing all exposed corals, our $I$ compartment representing our infected corals, and our $R$ compartment representing recovered corals. While this follows the standard SEIR model layout, we included an $H$ compartment to account for human factors. This is in order to assess how the human factor may directly or indirectly affect the typical "life" cycle of corals. \par
+The $H$ compartment allows to factor in the human factor to the overall equation, however in order to achieve this, we must implement education game theory. This is in order to model human factors such as education about corals, ignorance, and various other factors. By using education game theory, we are able to visualize which strategy is dominant between humans and corals, and reflect this strategy in our overall compartment model.
+
+%\subsection{Education Game Theory}
 
 \section{Literature Review}
 Throughout this week, our group has dedicated a large portion of time to reviewing scholarly articles and research publications relevant to our areas of research. This aspect of performing our research is crucial as, through literature review, we are able to gather information, techniques, methods, data, results, and many other variables that we are able to use in our own research. \par
@@ -47,8 +72,6 @@ Our faculty mentors have graciously provided several research publications relat
 \end{itemize}
 These articles provide valuable insight in various areas of coral reef research from parameters and conditions to modeling and application. In particular, each of these papers gave us insight on how other researchers approached their problems, how they created and modified their methods, and how they produced results based on their models and equations. 
 
-\section{Acknowledgements}
-Support for the Young Scholars Research Experience in Mathematics (YSREM)  is through the MAA Tensor SUMMA Program. Support for the MAA National Research Experience for Undergraduates Program (NREUP) is provided by the National Science Foundation (Grant Number DMS-1950644. Support for the NSF EPSCoR project, Guam Ecosystems Collaboratorium for Corals and Oceans (GECCO) is provided by the National Science Foundation (Grant Number DMS-1946352).
 
 \newpage
 % \bibliography{main}

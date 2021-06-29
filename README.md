@@ -16,5 +16,8 @@
 
 [//]: <> (GECCO Logo)
 <p align="center">
+  
+  <img src="./Latex/Figures/NSF_4-Color_bitmap_Logo.png" width="120">
   <img src="./Latex/Figures/GECCO.png" width="400">
+  <img src="./Latex/Figures/UOG-horizontal.png" width="300">
 </p>

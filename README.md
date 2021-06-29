@@ -1,4 +1,4 @@
-# Guam EPSCoR GECCO: Team Coral Reefsearchers
+# EPSCoR GECCO: Team Coral Reefsearchers
 
   ## Description
   Our research project, under the Guam EPSCoR GECCO program, is focused on the modeling of coral reef dynamics and application of game theory in order to determine the effects of overfishing on Guam's coral reef ecosystem in the coming decades. By using compartment models and differential equations, we are able to model the dynamics of coral reef ecosystems in response to the overfishing of parrotfish (_Scarus Altipinnis_), and by applying game theory, we are able to assess the dominant strategy in terms of education to better protect coral reefs and their ecosystem.

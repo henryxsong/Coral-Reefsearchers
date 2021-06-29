@@ -92,10 +92,10 @@
 % \end{frame}
 \begin{frame}{Background}
     \begin{itemize}
-        \item<1-> Coral Reefs are large underwater structures composed of the skeletons of colonial marine invertebrates known as coral$^\cite{ross}$.
+        \item<1-> Coral Reefs are large underwater structures composed of the skeletons of colonial marine invertebrates known as coral $^\cite{ross}$.
         \item<2-> Climate change is a leading factor for the cause of coral bleaching/death.
         \item<3-> Other factors that contribute to changes in a reef ecosystem are overfishing, temperature changes, and coral reef resilience.
-        \item<4-> According to the 2008 State of the Coral Reef Ecosystems of Guam report, Guam’s coral reef resources are both economically and culturally important, providing numerous goods and services for the residents of Guam, including cultural/traditional use, tourism, recreation, fisheries, and shoreline/infrastructure protection$^\cite{guamwebsite}$.
+        \item<4-> According to the 2008 State of the Coral Reef Ecosystems of Guam report, Guam’s coral reef resources are both economically and culturally important, providing numerous goods and services for the residents of Guam, including cultural/traditional use, tourism, recreation, fisheries, and shoreline/infrastructure protection $^\cite{guamwebsite}$.
     \end{itemize}
 \end{frame}
 
@@ -189,16 +189,32 @@ mortality in a changing climate (Cont.)}
 \begin{frame}{Compartment Model}
 \begin{center}
     \begin{tikzpicture}{node distance = 1cm, auto}
-        \node (S) [block] {S}; 
-        \node (E) [block, right of = S, node distance = 3 cm] {E};
-        \node (I) [block, right of = E, node distance = 3 cm] {I};
-        \node (R) [block, right of = I, node distance = 3 cm] {R};
-        \node (H) [block, below of = E, node distance = 2 cm] {H};
-        \draw[line] (S) --node[above]{} (E);
-        \draw[line] (H) --node[above]{} (S);
-        \draw[line] (E) --node[above]{} (I);
-        %\draw[line] (H) --node[above]{} (I);
-        \draw[line] (I) --node[above]{} (R);
+        \node (leftofC) [noblock] {}; 
+        \node (C) [block, right of = leftofC, node distance = 3 cm] {C};
+        \node (P) [block, right of = C, node distance = 3 cm] {P};
+        \node (M) [block, below of = C, node distance = 3 cm] {M};
+        \node (T) [block, below of = leftofC, node distance = 3 cm] {T};
+        \node (rightofP) [noblock, right of = P, node distance = 1.5 cm]{};
+        \node (aboveofP) [noblock, above of = P, node distance = 1.5 cm]{};
+        \node (aboveofC) [noblock, above of = C, node distance = 1.5 cm]{};
+        \draw[line] (C) --node[above]{} (P);
+        \draw[line] (C) --node[above]{} (M);
+        \draw[line] (M) --node[above]{} (P);
+        \draw[line] (P) --node[above]{hP} (rightofP);
+        \draw[line] (P) --node[left]{} (aboveofP);
+        \draw[line] (C) --node[left]{dC} (aboveofC)
+        \begin{scope}[transform canvas = {xshift = -.15cm}]
+            \draw[line](C) -- node[left]{$rTC$} (T);
+        \end{scope}
+        \begin{scope}[transform canvas = {xshift = .15cm}]
+            \draw[line](T) --node[right]{\mu_{1}C} (C);        
+        \end{scope}
+        \begin{scope}[transform canvas = {yshift = .15cm}]
+            \draw[line] (T) --node[above]{$\gammaMT$} (M);
+        \end{scope}
+        \begin{scope}[transform canvas = {xshift = -.15cm}]
+            \draw[line] (M) --node[below]{gMP} (T);
+        \end{scope}
     \end{tikzpicture}
 \end{center}
 \begin{block}{Compartments }

@@ -52,13 +52,21 @@
 \begin{document}
 \frame{\titlepage}
 
-\AtBeginSection[]{}
-\begin{frame}<Beamer>
-\frametitle{}
-\setcounter{tocdepth}{2}
-\tableofcontents{currentsection, sections = \thesection}
-\setcounter{tocdepth}{1}
-\end{frame}
+\AtBeginSection[]{
+    \begin{frame}{}
+        \frametitle{}
+        \setcounter{tocdepth}{2}
+        \tableofcontents[currentsection, sections = \thesection]
+        \setcounter{tocdepth}{1}
+    \end{frame}
+}
+% \AtBeginSection[]{}
+% \begin{frame}<Beamer>
+% \frametitle{}
+% \setcounter{tocdepth}{2}
+% \tableofcontents{currentsection, sections = \thesection}
+% \setcounter{tocdepth}{1}
+% \end{frame}
 
 %%------------------Table of Contents---------------------------
 \begin{frame}{Table of Contents}
@@ -113,15 +121,15 @@
 
 %%------------------------Literature Review----------------
 \section{Literature Review}
-%\begin{frame}{Literature Review}
+\begin{frame}{Literature Review}
 %Articles covered:
 %\begin{itemize}
-    %\item Assessing relative resilience potential of coral reefs to inform management$^\cite{assesing_relative}$
-    %\item Prioritizing Key Resilience Indicators to Support Coral Reef Management in a Changing Climate$^\cite{prioritize}$
-    %\item Model of coral population response to accelerated bleaching and mass mortality in a changing climate$^\cite{Riegl_Purkis_Model}$
-    %\item Mathematical Analysis of Coral Reef Models$^\cite{mathanalysis}$
+    %\item Assessing relative resilience potential of coral reefs to inform management$^\cite{01_assesing_relative}$
+    %\item Prioritizing Key Resilience Indicators to Support Coral Reef Management in a Changing Climate$^\cite{03_prioritize}$
+    %\item Model of coral population response to accelerated bleaching and mass mortality in a changing climate$^\cite{02_Riegl_Purkis_Model}$
+    %\item Mathematical Analysis of Coral Reef Models$^\cite{04_mathanalysis}$
 %\end{itemize}
-%\end{frame}
+\end{frame}
 
 \subsection{Assessing relative resilience potential of coral reefs to inform management}
 \begin{frame}{Assessing relative resilience potential of coral reefs to inform management}
@@ -195,18 +203,18 @@ mortality in a changing climate (Cont.)}
 %%------------------------------------------------------
 
 
-%%-----------------------------Plan-------------------------
+%%-----------------------------Math-------------------------
 \section{Mathematical Model} % & Analysis
 
 \begin{frame}{Assumptions}
     \begin{itemize}
         \item Closed Ecosystem
-        \item Only predator for coral is Macoralgae
-        \item Assume time dimensions in year
-        \item Coral outgrow Algal Turfs
-        \item Macroalgae outgrow on coral
-        \item Macroalgae colonize dead coral by spreading vegetative over Algal Turfs
-        \item Assume that coral natural death rate is nonexistent
+        \item Only predator for coral is macroalgae (M)
+        \item Time dimension unit in years
+        \item Coral recruit to and overgrow algal turfs\cite{04_mathanalysis}
+        \item Corals are overgrown by macroalgae\cite{04_mathanalysis}
+        \item Macroalgae colonize dead coral by spreading vegetative over algal turfs\cite{04_mathanalysis}
+        \item Coral natural death rate is nonexistent (i.e. not from macroalgae overgrowth)
         \item Algal Turf and Macroalgae do not have death rate
     \end{itemize}
 \end{frame}
@@ -247,15 +255,7 @@ mortality in a changing climate (Cont.)}
         \end{scope}
     \end{tikzpicture}
 \end{center}
-%\begin{block}{Compartments }
- %   \begin{itemize}
-  %  \item $S$: all susceptible corals
-   % \item $E$: our exposed corals
-%    \item $I$: our infected corals
- %   \item $R$: our recovered corals
-  %  \item $H$: human factors potentially affecting coral reefs
-%\end{itemize}
-%\end{block}
+
 %\begin{itemize}
     %\item Compartment $S$ represents all susceptible corals.
     %\item Compartment $H$ represents the human factors potentially affecting coral reefs.
@@ -265,7 +265,18 @@ mortality in a changing climate (Cont.)}
 %\end{itemize}
 \end{frame}
 
-\begin{frame}{Mathematical Model}
+\begin{frame}{Coral Reef Ecosystem Model Compartments}
+    \begin{block}{Compartments }
+        \begin{itemize}
+        \item \small{$C$: Corals}
+        \item \small{$T$: Algal Turfs}
+        \item \small{$M$: Macroalgae}
+        \item \small{$P$: Parrotfish}
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Coral Reef Ecosystem Model Parameters}
     \begin{block}{Parameters}
     \begin{itemize}
         \item $d$: natural death rate of coral reefs
@@ -290,7 +301,10 @@ mortality in a changing climate (Cont.)}
         \frac{dM}{dt} &= (aC+ \gamma T)M - \frac{g(P)M}{M+T}
     \end{align*}
 \end{frame}
+%----------------------------------------------------
 
+
+%---------------------Plans---------------------
 \section{Plans}
 \begin{frame}{Plans}
     \begin{itemize}
@@ -300,10 +314,11 @@ mortality in a changing climate (Cont.)}
             %\item Select a representative species of average resiliency (specifically on Guam) and examine how it will change over time through climate changes.
         %\end{itemize}
         %\item Continue to digest articles and literature relevant to our research.
-        \item Establish our methodology and finalize our mathematical model and assumptions.
-        \item find missing parameter values
+        \item Establish our methodology and finalize our mathematical model and assumptions
+        \item Find missing parameter values
+        \item Refine and improve differential equations to improve dynamics
         % analyze diff eqs
-        \item Application of Game Theory (specifically education game theory).
+        \item Application of Education Game Theory on the harvest rate parameter ($h$) to quantify human behavior and the best strategy to protect coral reef sustainability
     \end{itemize}
 \end{frame}
 
@@ -316,13 +331,10 @@ mortality in a changing climate (Cont.)}
     %Type conclusion here
 %\end{frame}
 
-
+\section{Q \& A}
 \begin{frame}
     \Huge{Questions?}
 \end{frame}
-
-\section{Q \& A}
-
 
 %%-------------------------Acknowledgements----------------
 \section{Acknowledgements}
@@ -354,6 +366,17 @@ mortality in a changing climate (Cont.)}
 \section{Bibliography}
 \begin{frame}[allowframebreaks]{Bibliography}
     \tiny{\printbibliography}
+    \nocite{01_assesing_relative}
+    \nocite{02_Riegl_Purkis_Model}
+    \nocite{03_prioritize}
+    \nocite{05_quintero_machuca_cotto_bradley_ríos-soto_2016}
+    \nocite{06_yong_herrera_castillo-chavez_2016}
+    \nocite{07_bauch_earn_2004}
+    \nocite{12_noaa_report}
+    \nocite{13_blackwood_hastings_mumby_2010}
+    \nocite{14_mumby_hastings_edwards_2007}
+    \nocite{15_blackwood_okasaki_archer_matt_sherman_montovan_2018}
+    \nocite{16_wolanski_richmond_mccook_2004}
 \end{frame}
 
 

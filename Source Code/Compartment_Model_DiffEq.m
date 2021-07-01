@@ -8,7 +8,7 @@ g = 10;
 beta = 21; %unknown
 kapa = 0.6; %known but not used
 mu = 0.22;
-h = -0.1; %<----CONTROL VARIABLE FOR GAME THEORY
+h = 1; %<----CONTROL VARIABLE FOR GAME THEORY
 alpha = 1;
 q = 0.47;
 
@@ -33,16 +33,15 @@ M = 1/3;
         
   
 % solve with ODE 45
-% IC: x = 1, y = 0.5
 [t,ya] = ode45(f, [0 1], [C, P, T, M]);
 
 % graph
 figure
 hold on
-plot(t, ya(:,1), '+-.b', 'Linewidth', 2.5)
-plot(t, ya(:,2), 'x-.c', 'Linewidth', 2.5)
-plot(t, ya(:,3), 'o-.g', 'Linewidth', 2.5)
-plot(t, ya(:,4), '*-.r', 'Linewidth', 2.5)
+plot(t, ya(:,1), '+-.', 'Color', '#FFC996', 'Linewidth', 2.5)
+plot(t, ya(:,2), 'x-.', 'Color', '#A7D0CD', 'Linewidth', 2.5)
+plot(t, ya(:,3), 'o-.', 'Color', '#BDD2B6', 'Linewidth', 2.5)
+plot(t, ya(:,4), '*-.', 'Color', '#CF0000', 'Linewidth', 2.5)
 legend('Coral (C)', 'Parrotfish (P)', 'Algal Turf (T)', 'Macroalgae (M)')
-xlabel('time')
-ylabel('')
+xlabel('Time (Year)')
+ylabel('Proportion of Population')

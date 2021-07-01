@@ -4,6 +4,14 @@
 \usepackage[backend=biber]{biblatex}
 \usepackage{tikz}
 \usepackage{amssymb}
+\usepackage[toc]{multitoc}
+\usepackage{wrapfig}
+\usepackage{subfig}
+\usepackage{graphicx}
+
+\renewcommand*{\multicolumntoc}{2}
+\setlength{\columnseprule}{1pt}
+
 \setbeamertemplate{bibliography item}{\insertbiblabel}
 
 \RequirePackage{currfile} 
@@ -70,7 +78,7 @@
 % \end{frame}
 
 %%------------------Table of Contents---------------------------
-\begin{frame}[allowframebreaks]{Table of Contents}
+\begin{frame}{Table of Contents}
 \tableofcontents
 \end{frame}
 
@@ -114,21 +122,42 @@
 %         \item Overfishing, temperature changes, and resiliency of coral reef species are factors when it comes to the changes in a reef ecosystem.
 %     \end{itemize}
 % \end{frame}
+
 \begin{frame}{Background}
     \begin{itemize}
-        \item<1-> Coral Reefs are large underwater structures composed of the skeletons of colonial marine invertebrates known as coral$^\cite{ross}$.
-        \item<2-> They play a crucial role in the marine ecosystem's biodiversity along with other functions, such as coastal defense from storms and economic benefits from tourism or local fisheries$^\cite{04_mathanalysis}$.
-        \item<3-> Factors that affect coral reefs include climate change, coral reef resilience$^\cite{02_Riegl_Purkis_Model}$, and exploitative fishing practices$^\cite{05_quintero_machuca_cotto_bradley_ríos-soto_2016}$.
-        \item<4-> According to the 2008 State of the Coral Reef Ecosystems of Guam report, Guam’s coral reef resources are both economically and culturally important, providing numerous goods and services for the residents of Guam, including cultural/traditional use, tourism, recreation, fisheries, and shoreline/infrastructure protection $^\cite{guamwebsite}$.
+        \item<1-> Coral Reefs are large underwater structures composed of the skeletons of colonial marine invertebrates known as coral\textsuperscript{\cite{ross}}.
+         \item<2-> They play a crucial role in the marine ecosystem's biodiversity along with other functions, such as coastal defense from storms and economic benefits from tourism or local fisheries\textsuperscript{\cite{04_mathanalysis}}.
+         \item<3->  Factors that affect coral reefs include climate change, coral reef resilience\textsuperscript{\cite{02_Riegl_Purkis_Model}}, and exploitative fishing practices\textsuperscript{\cite{05_quintero_machuca_cotto_bradley_ríos-soto_2016}}.
+         \item<4-> According to the 2008 State of the Coral Reef Ecosystems of Guam report, Guam’s coral reef resources are both economically and culturally important, providing numerous goods and services for the residents of Guam, including cultural/traditional use, tourism, recreation, fisheries, and shoreline/infrastructure protection \textsuperscript{\cite{guamwebsite}}.
     \end{itemize}
-    
-    \begin{frame}{Definitions}
-        
-    \end{frame}
 \end{frame}
 
+\subsection{Definitions}
+\begin{frame}{Definitions}
+    \begin{figure}%
+        \centering
+        \subfloat[\centering Coral Reefs]{{\includegraphics[width=5cm]{Latex/Figures/coral_reefs.jpg} }}%
+        \\
+        \subfloat[\centering Algal Turfs]{{\includegraphics[width=3.5cm]{Latex/Figures/algal_turf.jpg} }}%
+        \qquad
+        \subfloat[\centering Macroalgae]{{\includegraphics[width=3.5cm]{Latex/Figures/macroalgae.jpg} }}%
+        \caption{Images of Ecosystem}%
+        \label{fig:graphs}%
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Definitions (Cont.)}
+    \begin{figure}
+        \centering
+        \includegraphics{par}
+        \caption{Caption}
+        \label{fig:my_label}
+    \end{figure}
+\end{frame}
+
+
 %%------------------------Literature Review----------------
-\section{Literature Review}
+%\section{Literature Review}
 % \begin{frame}{Literature Review}
 %Articles covered:
 %\begin{itemize}
@@ -139,74 +168,73 @@
 %\end{itemize}
 % \end{frame}
 
-\subsection{Assessing relative resilience potential of coral reefs to inform management}
-\begin{frame}{Assessing relative resilience potential of coral reefs to inform management}
-    \begin{block}{Summary}
-        \small{This research discusses ecological resilience as a essential part of resilience-based management (RBM) and the use of such assessments to explain resilience potentials of coral reefs in the Northern Mariana Islands (CNMI).}
-    \end{block}
-    Why is this article important?
-    \begin{itemize}
-        \item Explores and elaborates on factors affecting coral resilience.
-        \item Acts as a guide to implement ecological resilience assessments.
-        \item Analyzes inter-island and intra-island connectivity.
-    \end{itemize}
-\end{frame}
+%\subsection{Assessing relative resilience potential of coral reefs to inform management}
+%\begin{frame}{Assessing relative resilience potential of coral reefs to inform management}
+    %\begin{block}{Summary}
+        %\small{This research discusses ecological resilience as a essential part of resilience-based management (RBM) and the use of such assessments to explain resilience potentials of coral reefs in the Northern Mariana Islands (CNMI).}
+    %\end{block}
+   % Why is this article important?
+   % \begin{itemize}
+        %\item Explores and elaborates on factors affecting coral resilience.
+        %\item Acts as a guide to implement ecological resilience assessments.
+        %\item Analyzes inter-island and intra-island connectivity.
+    %\end{itemize}
+%\end{frame}
 
-\subsection{Prioritizing Key Resilience Indicators to Support Coral Reef Management in a Changing Climate}
-\begin{frame}{Prioritizing Key Resilience Indicators to Support Coral Reef Management in a Changing Climate}
-    \begin{block}{Summary}
-        Empirical selection criteria was created in order to prioritize coral reef management.
-    \end{block}
-    Why is this article important?
-    \begin{itemize}
-        \item Provides data from certified scientists when it comes to resilience of coral reef.
-            \begin{itemize}
-                \item Can be used to see which will be focused on when creating our parameters.
-            \end{itemize}
-    \end{itemize}
-\end{frame}
+%\subsection{Prioritizing Key Resilience Indicators to Support Coral Reef Management in a Changing Climate}
+%\begin{frame}{Prioritizing Key Resilience Indicators to Support Coral Reef Management in a Changing Climate}
+    %\begin{block}{Summary}
+        %Empirical selection criteria was created in order to prioritize coral reef management.
+    %\end{block}
+    %Why is this article important?
+    %\begin{itemize}
+        %\item Provides data from certified scientists when it comes to resilience of coral reef.
+            %\begin{itemize}
+                %\item Can be used to see which will be focused on when creating our parameters.
+            %\end{itemize}
+    %\end{itemize}
+%\end{frame}
 
 %\begin{frame}{Prioritizing Key Resilience Indicators to Support Coral Reef Management in a Changing Climate Cont.}
 %\includegraphics[width = 4.3 in. , height = 1.7 in.]{Figures/Resilience Data.png}
 %\end{frame}
 
-\subsection{Model of coral population response to accelerated bleaching and mass
-mortality in a changing climate}
-\begin{frame}{Model of coral population response to accelerated bleaching and mass
-mortality in a changing climate}
-    \begin{block}{Summary}
-        Researchers studied coral populations located within the Arabian Peninsula. The study primarily focused on the Porites and \textit{Acropora} species of coral. The researchers found that coral populations can survive more extreme conditions.
-    \end{block}
-\end{frame}
+%\subsection{Model of coral population response to accelerated bleaching and mass
+%mortality in a changing climate}
+%\begin{frame}{Model of coral population response to accelerated bleaching and mass mortality in a changing climate}
+%    \begin{block}{Summary}
+        %Researchers studied coral populations located within the Arabian Peninsula. The study primarily focused on the Porites and %\textit{Acropora} species of coral. The researchers found that coral populations can survive more extreme conditions.
+    %\end{block}
+%\end{frame}
 
-\begin{frame}{Model of coral population response to accelerated bleaching and mass
-mortality in a changing climate (Cont.)}
-    Why is this article important?
-    \begin{itemize}
-        \item Methods used include a system of differential equations.
-        \item It implements a compartment model to illustrate the relationships.
-        \item It uses the Lotka-Volterra model to simulate a predator prey relationship between \textit{Acropora} as the dominant species and others as the recessive species.
-        \begin{itemize}
-            \item Incorporates ideas of Game Theory into methods.
-        \end{itemize}
-    \end{itemize}
-\end{frame}
+%\begin{frame}{Model of coral population response to accelerated bleaching and mass
+%mortality in a changing climate (Cont.)}
+    %Why is this article important?
+    %\begin{itemize}
+        %\item Methods used include a system of differential equations.
+        %\item It implements a compartment model to illustrate the relationships.
+        %\item It uses the Lotka-Volterra model to simulate a predator prey relationship between \textit{Acropora} as the dominant species and others as the recessive species.
+        %\begin{itemize}
+            %\item Incorporates ideas of Game Theory into methods.
+        %\end{itemize}
+    %\end{itemize}
+%\end{frame}
 
-\subsection{Mathematical Analysis of Coral Reef Models}
-\begin{frame}{Mathematical Analysis of Coral Reef Models}
-    \begin{block}{Summary}
-        This research analyzes grazing in response to threatened coral reef systems. Specifically, this model is focused on the impact of different grazing intensities and their influences on coral-algae interactions. Results provided from this research can provide insight on how to revitalize unhealthy reefs.
-    \end{block}
-\end{frame}
+%\subsection{Mathematical Analysis of Coral Reef Models}
+%\begin{frame}{Mathematical Analysis of Coral Reef Models}
+    %\begin{block}{Summary}
+        %This research analyzes grazing in response to threatened coral reef systems. Specifically, this model is focused on the impact of different grazing intensities and their influences on coral-algae interactions. Results provided from this research can provide insight on how to revitalize unhealthy reefs.
+    %\end{block}
+%\end{frame}
 
-\begin{frame}{Mathematical Analysis of Coral Reef Models (Cont.)}
-    Why is this article important?
-    \begin{itemize}
-        \item The authors used ordinary differential equations (ODE) and delay differential equations (DDE) to model coral reefs.
-        \item Discusses about the stability of three different states: extinction state, macroalgae-only state, and coral-only state.
-        \item  The mathematical results can help answer how to reverse the unhealthy reefs to a healthy status by knowing how overfishing affects our reefs.
-    \end{itemize}
-\end{frame}
+%\begin{frame}{Mathematical Analysis of Coral Reef Models (Cont.)}
+    %Why is this article important?
+    %\begin{itemize}
+        %\item The authors used ordinary differential equations (ODE) and delay differential equations (DDE) to model coral reefs.
+        %\item Discusses about the stability of three different states: extinction state, macroalgae-only state, and coral-only state.
+        %\item  The mathematical results can help answer how to reverse the unhealthy reefs to a healthy status by knowing how overfishing affects our reefs.
+    %\end{itemize}
+%\end{frame}
 
 %%------------------------------------------------------
 
@@ -216,46 +244,55 @@ mortality in a changing climate (Cont.)}
 \subsection{Assumptions}
 \begin{frame}{Assumptions}
     \begin{itemize}
-        \item Closed Ecosystem
-        \item Only predator for coral is macroalgae (M)
-        \item Time dimension unit in years
-        \item Coral recruit to and overgrow algal turfs\cite{04_mathanalysis}
-        \item Corals are overgrown by macroalgae\cite{04_mathanalysis}
-        \item Macroalgae colonize dead coral by spreading vegetative over algal turfs\cite{04_mathanalysis}
-        \item Coral natural death rate is nonexistent (i.e. not from macroalgae overgrowth)
-        \item Algal Turf and Macroalgae do not have death rate
+        \item Ecosystem is closed (i.e. no migration of parrot fish).
+        \item Macroalgae is the only predator for coral.
+        \item Rates are measured in year(s).
+        \item Coral recruit to and overgrow algal turfs$^\cite{04_mathanalysis}.$
+        \item Corals are overgrown by macroalgae$^\cite{04_mathanalysis}$.
+        \item Macroalgae colonize dead coral by spreading vegetative over algal turfs$^\cite{04_mathanalysis}$.
+        \item Coral natural death rate is nonexistent (i.e. not from macroalgae overgrowth).
+        \item Algal Turf and Macroalgae do not have death rate.
     \end{itemize}
 \end{frame}
 
 \subsection{Compartments}
 \begin{frame}{Coral Reef Ecosystem Model Compartments}
     \begin{block}{Compartments}
+    The Ecosystem Model consists of 4 compartments:
         \begin{itemize}
         \item \small{$C$: Corals}
         \item \small{$T$: Algal Turfs}
         \item \small{$M$: Macroalgae}
         \item \small{$P$: Parrotfish},
         \end{itemize}
-        where $C + T + M = 1$.
+        $$ \text{where } C + T + M = 1$$.
     \end{block}
 \end{frame}
 
 \subsection{Parameters}
 \begin{frame}{Coral Reef Ecosystem Model Parameters}
-    \begin{block}{Parameters}
-    \begin{itemize}
-        \item $d$: natural death rate of coral reefs
-        \item $\mu_{1}$: natural death rate of parrotfish
-        \item $a$: rate that coral is overgrown by macroalgae
-        \item $r$: rate that coral recruit to overgrow algal turfs
-        \item $g$: grazing rate that parrotfish graze macroalgae without distinction from algae turfs
-        \item $\gamma$: rate that macroalgae spread vegetative over algal turfs
-        \item $q$: intrinsic growth rate for parrotfish
-        \item $\beta$: carrying capacity of parrotfish
-        \item $h$: harvesting rate for parrotfish
-        \item $\alpha$: max grazing intensity
-    \end{itemize}
-    \end{block}
+    \begin{table}
+    \centering
+    \begin{tabular}{c p{7cm} c}
+        \hline
+        Parameter & Description & Value  \\
+        \hline
+        \hline
+        $d$ & natural death rate of coral reefs & 0.15$^\cite{16_wolanski_richmond_mccook_2004}\\
+        $\mu_{1}$ & natural death rate of parrotfish & 0.22$^\cite{12_noaa_report}$\\
+        $a$ & rate that coral is overgrown by macroalgae & $\frac{1}{yrs}$\\ % unknown
+        $r$ & rate that coral recruit to overgrow algal turfs & 10$^\cite{16_wolanski_richmond_mccook_2004}$\\
+        $g$ & grazing rate that parrotfish graze macroalgae without distinction from algae turfs & 10$^\cite{16_wolanski_richmond_mccook_2004}$\\
+        $\gamma$ & rate that macroalgae spread vegetative over algal turfs & $\frac{1}{yrs}$\\ % unknown
+        $q$ & intrinsic growth rate for parrotfish & 0.47$^\cite{12_noaa_report}\\
+        $\beta$ & carrying capacity of parrotfish & \\ % unknown
+        $h$ & harvesting rate for parrotfish & 0.14$^\cite{12_noaa_report}$\\
+        $\alpha$ & maximum grazing intensity & \\ % unknown
+        \hline
+    \end{tabular}
+    %\caption{Model Parameters}
+    %\label{tab:my_label}
+\end{table}
 \end{frame}
 
 \subsection{Compartment Model}

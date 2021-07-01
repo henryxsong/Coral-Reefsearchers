@@ -40,17 +40,37 @@ The objective of this paper is to analyze how Guam's reef ecosystem will change 
 \subsection{Compartment Model}
 \begin{center}
     \begin{tikzpicture}{node distance = 1cm, auto}
-        \node (S) [block] {S}; 
-        \node (E) [block, right of = S, node distance = 3 cm] {E};
-        \node (I) [block, right of = E, node distance = 3 cm] {I};
-        \node (R) [block, right of = I, node distance = 3 cm] {R};
-        \node (H) [block, below of = E, node distance = 2 cm] {H};
-        \draw[line] (S) --node[above]{} (E);
-        \draw[dotted] (H) --node[above]{} (S);
-        \draw[line] (E) --node[above]{} (I);
-        %\draw[line] (H) --node[above]{} (I);
-        \draw[line] (I) --node[above]{} (R);
-    \end{tikzpicture} 
+        \node (leftofC) [noblock] {}; 
+        \node (C) [block, right of = leftofC, node distance = 3 cm] {C};
+        \node (P) [block, right of = C, node distance = 3 cm] {P};
+        \node (M) [block, below of = C, node distance = 3 cm] {M};
+        \node (T) [block, below of = leftofC, node distance = 3 cm] {T};
+        \node (rightofP) [noblock, right of = P, node distance = 1.5 cm]{};
+        \node (aboveofP) [noblock, above of = P, node distance = 1.5 cm]{};
+        \node (aboveofC) [noblock, above of = C, node distance = 1.5 cm]{};
+        \node (belowofP) [noblock, below of = P, node distance = 1.5 cm]{};
+        \node (aboveofT) [noblock, above of = T, node distance = 0.1 cm]{};
+        \node (diagonalofT) [noblock, right of = aboveofT, node distance = 2 cm];
+        \draw[dashed] (P) --node[above]{} (diagonalofT);
+        \draw[line] (P) --node[above]{$\sigma P$} (C);
+        \draw[line] (C) --node[right]{aMC} (M);
+        \draw[line] (P) --node[above]{hP} (rightofP);
+        \draw[line] (P) --node[left]{$\mu_{1} P$} (aboveofP);
+        \draw[line] (C) --node[left]{dC} (aboveofC);
+        \draw[line] (belowofP) --node[right]{$\kappa P$} (P);
+        \begin{scope}[transform canvas = {xshift = -.15cm}]
+            \draw[line](C) -- node[left]{$rTC$} (T);
+        \end{scope}
+        \begin{scope}[transform canvas = {xshift = .15cm}]
+            \draw[line](T) --node[right]{$dC$} (C);        
+        \end{scope}
+        \begin{scope}[transform canvas = {yshift = .15cm}]
+            \draw[line] (M) --node[above]{$\frac{g(p)M}{M+T}$} (T);
+        \end{scope}
+        \begin{scope}[transform canvas = {xshift = -.15cm}]
+            \draw[line] (T) --node[below]{$\gamma MT$} (M);
+        \end{scope}
+    \end{tikzpicture}
 \end{center}
 
 Represented above is our general compartment model. While this version is a rough draft, it represents the compartments that we wish to include in our model. Included in our model is our $S$ compartment, which represents all susceptible corals, our $E$ compartment representing all exposed corals, our $I$ compartment representing our infected corals, and our $R$ compartment representing recovered corals. While this follows the standard SEIR model layout, we included an $H$ compartment to account for human factors. This is in order to assess how the human factor may directly or indirectly affect the typical "life" cycle of corals. \par
@@ -58,21 +78,22 @@ The $H$ compartment allows to factor in the human factor to the overall equation
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{c p{10cm} c}
+    \begin{tabular}{c p{9cm} c}
         \hline
         Parameter & Description & Units  \\
         \hline
-        $\mu_{1}$ & natural death rate of coral reefs & \\
-        $\mu_{2}$ & natural death rate of parrotfish & \\
-        a & rate that coral is overgrown by macroalgae & \\
-        r & rate that coral recruit to overgrow algal turfs & \\
-        g & grazing rate that parrotfish graze macroalgae without distinction from algae turfs & \\
+        \hline
+        $d$ & natural death rate of coral reefs & \\
+        $\mu_{1}$ & natural death rate of parrotfish & \\
+        $a$ & rate that coral is overgrown by macroalgae & \\
+        $r$ & rate that coral recruit to overgrow algal turfs & \\
+        $g$ & grazing rate that parrotfish graze macroalgae without distinction from algae turfs & \\
         $\gamma$ & rate that macroalgae spread vegetative over algal turfs & \\
         q & intrinsic growth rate for parrotfish & \\
         $\beta$ & carrying capacity of parrotfish & \\
-        h & harvesting rate for parrotfish & \\
-        d & instrinsic destruction rate for coral from harvesting & \\
-         \hline
+        $h$ & harvesting rate for parrotfish & \\
+        $\alpha$ & maximum grazing intensity & \\
+        \hline
     \end{tabular}
     \caption{Parameter Description}
     \label{tab:my_label}

@@ -24,11 +24,11 @@
 \maketitle
 
 \section{Introduction}
-Coral reefs play a crucial role in the marine's ecosystem as it serves a purpose for an abundance of marine life. Additionally, healthy coral reefs benefit the economy as it provides jobs and businesses through tourism. Unfortunately, in the recent years the health of coral reefs have been declining due to several factors. According to a 2008 world coral reef status report, it predicts that 15\% of all coral are in danger of disappearing within 10-20 years, and 20\% within 20-40 years \cite{quintero_machuca_cotto_bradley_ríos-soto_2016}. 
+Coral reefs play a crucial role in the marine's ecosystem as it serves a purpose for an abundance of marine life. Additionally, healthy coral reefs benefit the economy as it provides jobs and businesses through tourism. Unfortunately, in the recent years the health of coral reefs have been declining due to several factors. According to a 2008 world coral reef status report, it predicts that 15\% of all coral are in danger of disappearing within 10-20 years, and 20\% within 20-40 years \cite{05_quintero_machuca_cotto_bradley_ríos-soto_2016}. 
 
-With climate change rates increasing, one of the prevalent factors affecting coral reefs is rising sea temperatures, which leads to mass bleaching of corals. Other destructive environmental factors include ocean acidification, nutrient flow from run-off \cite{quintero_machuca_cotto_bradley_ríos-soto_2016}. Another factor that contributes to the decline of healthy coral reefs are due to human activities, such as exploitative fishing practices or pollution \cite{mathanalysis}. 
+With climate change rates increasing, one of the prevalent factors affecting coral reefs is rising sea temperatures, which leads to mass bleaching of corals. Other destructive environmental factors include ocean acidification, nutrient flow from run-off \cite{05_quintero_machuca_cotto_bradley_ríos-soto_2016}. Another factor that contributes to the decline of healthy coral reefs are due to human activities, such as exploitative fishing practices or pollution \cite{04_mathanalysis}. 
 
-Because a handful of coral species are considered to be threatened, efforts in measuring the resiliency factors of a coral reef has been of interest to many. In one study, ecological factors were studied and scored in which resistance, recovery, and resilience were taken into account. It claimed the top three ecological factors that contribute a coral's resiliency is its species type, temperature variability, and nutrients for pollution run-off \cite{Riegl_Purkis_Model}. 
+Because a handful of coral species are considered to be threatened, efforts in measuring the resiliency factors of a coral reef has been of interest to many. In one study, ecological factors were studied and scored in which resistance, recovery, and resilience were taken into account. It claimed the top three ecological factors that contribute a coral's resiliency is its species type, temperature variability, and nutrients for pollution run-off \cite{02_Riegl_Purkis_Model}. 
 
 The objective of this paper is to analyze how Guam's reef ecosystem will change over the coming decades, focusing on the resilience of corals and the impact of human factors on the coral reefs. 
 
@@ -84,18 +84,18 @@ The $H$ compartment allows to factor in the human factor to the overall equation
         \hline
         \hline
         $d$ & natural death rate of coral reefs & \\
-        $\mu_{1}$ & natural death rate of parrotfish & \\
-        $a$ & rate that coral is overgrown by macroalgae & \\
+        $\mu_{1}$ & natural death rate of parrotfish & $\frac{1}{yrs}$\cite{12_noaa_report}\\
+        $a$ & rate that coral is overgrown by macroalgae & $\frac{1}{yrs}$\\
         $r$ & rate that coral recruit to overgrow algal turfs & \\
-        $g$ & grazing rate that parrotfish graze macroalgae without distinction from algae turfs & \\
-        $\gamma$ & rate that macroalgae spread vegetative over algal turfs & \\
-        q & intrinsic growth rate for parrotfish & \\
+        $g$ & grazing rate that parrotfish graze macroalgae without distinction from algae turfs & $\frac{kg}{yrs}$\\
+        $\gamma$ & rate that macroalgae spread vegetative over algal turfs & $\frac{1}{yrs}$\\
+        $q$ & intrinsic growth rate for parrotfish & \\
         $\beta$ & carrying capacity of parrotfish & \\
-        $h$ & harvesting rate for parrotfish & \\
+        $h$ & harvesting rate for parrotfish & $\frac{1}{yrs}$\cite{12_noaa_report}\\
         $\alpha$ & maximum grazing intensity & \\
         \hline
     \end{tabular}
-    \caption{Parameter Description}
+    \caption{Model Parameters}
     \label{tab:my_label}
 \end{table}
 
@@ -105,13 +105,13 @@ The $H$ compartment allows to factor in the human factor to the overall equation
 Throughout this week, our group has dedicated a large portion of time to reviewing scholarly articles and research publications relevant to our areas of research. This aspect of performing our research is crucial as, through literature review, we are able to gather information, techniques, methods, data, results, and many other variables that we are able to use in our own research. \par
 Our faculty mentors have graciously provided several research publications related to the overall study coral reef ecosystems in order to stimulate creativity in creating our own research topic. These papers are as follow:
 \begin{itemize}
-    \item Assessing relative resilience potential of coral reefs to inform management\cite{assesing_relative}
-    \item Model of coral population response to accelerated bleaching and mass mortality in a changing climate\cite{Riegl_Purkis_Model}
-    \item Prioritizing Key Resilience Indicators to Support Coral Reef Management in a Changing Climate\cite{prioritize}
-    \item Mathematical analysis of coral reef models\cite{mathanalysis}
-    \item A Mathematical Model of Coral Reef Response to Destructive Fishing Practices with Predator-Prey Interactions\cite{quintero_machuca_cotto_bradley_ríos-soto_2016}
-    \item From bee species aggregation to models of disease avoidance: The Ben-Hur effect\cite{yong_herrera_castillo-chavez_2016}
-    \item Vaccination and the theory of games\cite{bauch_earn_2004}
+    \item Assessing relative resilience potential of coral reefs to inform management\cite{01_assesing_relative}
+    \item Model of coral population response to accelerated bleaching and mass mortality in a changing climate\cite{02_Riegl_Purkis_Model}
+    \item Prioritizing Key Resilience Indicators to Support Coral Reef Management in a Changing Climate\cite{03_prioritize}
+    \item Mathematical analysis of coral reef models\cite{04_mathanalysis}
+    \item A Mathematical Model of Coral Reef Response to Destructive Fishing Practices with Predator-Prey Interactions\cite{05_quintero_machuca_cotto_bradley_ríos-soto_2016}
+    \item From bee species aggregation to models of disease avoidance: The Ben-Hur effect\cite{06_yong_herrera_castillo-chavez_2016}
+    \item Vaccination and the theory of games\cite{07_bauch_earn_2004}
 \end{itemize}
 These articles provide valuable insight in various areas of coral reef research from parameters and conditions to modeling and application. In particular, each of these papers gave us insight on how other researchers approached their problems, how they created and modified their methods, and how they produced results based on their models and equations. 
 
@@ -119,6 +119,7 @@ These articles provide valuable insight in various areas of coral reef research 
 Support for the Young Scholars Research Experience in Mathematics (YSREM)  is through the MAA Tensor SUMMA Program. Support for the MAA National Research Experience for Undergraduates Program (NREUP) is provided by the National Science Foundation (Grant Number DMS-1950644). Support for the NSF EPSCoR project, Guam Ecosystems Collaboratorium for Corals and Oceans (GECCO) is provided by the National Science Foundation (Grant Number DMS-1946352).\\ 
 
 Special thanks to Dr. Bastian Bentlage, our faculty mentors (Dr. JaeYong Choi, Dr. HyunJu Oh, \& Dr. Leslie Aquino), and our Research Assistants (Jaron Bautista \& Regina-Mae Dominguez).
+
 \newpage
 % \bibliography{main}
 % \bibliographystyle{plain}

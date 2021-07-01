@@ -79,7 +79,7 @@
 
 %%------------------Table of Contents---------------------------
 \begin{frame}{Table of Contents}
-\tableofcontents
+    \tableofcontents
 \end{frame}
 
 %%-----------------------Introduction----------------------------
@@ -136,23 +136,42 @@
 \begin{frame}{Definitions}
     \begin{figure}%
         \centering
-        \subfloat[\centering Coral Reefs]{{\includegraphics[width=5cm]{Latex/Figures/coral_reefs.jpg} }}%
+        \subfloat[\centering Coral Reefs\textsuperscript{\cite{img_coral_reef}}]{{\includegraphics[width=4.7cm]{Latex/Figures/coral_reefs.jpg} }}%
         \\
-        \subfloat[\centering Algal Turfs]{{\includegraphics[width=3.5cm]{Latex/Figures/algal_turf.jpg} }}%
+        \subfloat[\centering Algal Turfs\textsuperscript{\cite{img_algal_turf}}]{{\includegraphics[width=3.5cm]{Latex/Figures/algal_turf.jpg} }}%
         \qquad
-        \subfloat[\centering Macroalgae]{{\includegraphics[width=3.5cm]{Latex/Figures/macroalgae.jpg} }}%
+        \subfloat[\centering Macroalgae\textsuperscript{\cite{img_macroalgae}}]{{\includegraphics[width=3.5cm]{Latex/Figures/macroalgae.jpg} }}%
         \caption{Images of Ecosystem}%
         \label{fig:graphs}%
     \end{figure}
 \end{frame}
 
 \begin{frame}{Definitions (Cont.)}
-    \begin{figure}
-        \centering
-        \includegraphics{par}
-        \caption{Caption}
-        \label{fig:my_label}
-    \end{figure}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=1\textwidth]{Latex/Figures/parrot_fish.jpg}
+                \caption{Parrot Fish\textsuperscript{\cite{img_parrot_fish}}}
+                \label{fig:my_label}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{itemize}
+                \item Parrotfish
+                \item are
+                \item will
+                \item finish
+                \item tomorrow
+            \end{itemize}
+        \end{column}
+    \end{columns}
+    % \begin{wrapfig}{l}
+    %     \centering
+    %     \includegraphics[width=0.45\textwidth]{Latex/Figures/parrot_fish.jpg}
+    %     \caption{Parrot Fish\textsuperscript{\cite{img_parrot_fish}}}
+    %     \label{fig:my_label}
+    % \end{wrapfig}
 \end{frame}
 
 
@@ -231,7 +250,6 @@
     %Why is this article important?
     %\begin{itemize}
         %\item The authors used ordinary differential equations (ODE) and delay differential equations (DDE) to model coral reefs.
-        %\item Discusses about the stability of three different states: extinction state, macroalgae-only state, and coral-only state.
         %\item  The mathematical results can help answer how to reverse the unhealthy reefs to a healthy status by knowing how overfishing affects our reefs.
     %\end{itemize}
 %\end{frame}
@@ -247,11 +265,11 @@
         \item Ecosystem is closed (i.e. no migration of parrot fish).
         \item Macroalgae is the only predator for coral.
         \item Rates are measured in year(s).
-        \item Coral recruit to and overgrow algal turfs$^\cite{04_mathanalysis}.$
-        \item Corals are overgrown by macroalgae$^\cite{04_mathanalysis}$.
-        \item Macroalgae colonize dead coral by spreading vegetative over algal turfs$^\cite{04_mathanalysis}$.
+        \item Coral recruit to and overgrow algal turfs\textsuperscript{\cite{04_mathanalysis}}.
+        \item Corals are overgrown by macroalgae\textsuperscript{\cite{04_mathanalysis}}.
+        \item Macroalgae colonize dead coral by spreading vegetative over algal turfs\textsuperscript{\cite{04_mathanalysis}}.
         \item Coral natural death rate is nonexistent (i.e. not from macroalgae overgrowth).
-        \item Algal Turf and Macroalgae do not have death rate.
+        \item Algal Turf and Macroalgae do not have a death rate.
     \end{itemize}
 \end{frame}
 
@@ -278,25 +296,26 @@
         Parameter & Description & Value  \\
         \hline
         \hline
-        $d$ & natural death rate of coral reefs & 0.15$^\cite{16_wolanski_richmond_mccook_2004}\\
-        $\mu_{1}$ & natural death rate of parrotfish & 0.22$^\cite{12_noaa_report}$\\
-        $a$ & rate that coral is overgrown by macroalgae & $\frac{1}{yrs}$\\ % unknown
-        $r$ & rate that coral recruit to overgrow algal turfs & 10$^\cite{16_wolanski_richmond_mccook_2004}$\\
-        $g$ & grazing rate that parrotfish graze macroalgae without distinction from algae turfs & 10$^\cite{16_wolanski_richmond_mccook_2004}$\\
-        $\gamma$ & rate that macroalgae spread vegetative over algal turfs & $\frac{1}{yrs}$\\ % unknown
-        $q$ & intrinsic growth rate for parrotfish & 0.47$^\cite{12_noaa_report}\\
-        $\beta$ & carrying capacity of parrotfish & \\ % unknown
-        $h$ & harvesting rate for parrotfish & 0.14$^\cite{12_noaa_report}$\\
-        $\alpha$ & maximum grazing intensity & \\ % unknown
+        $\mu_{1}$ & natural death rate of coral reefs & 0.15\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}}\\
+        $\mu_{2}$ & natural death rate of parrotfish & 0.22\textsuperscript{\cite{12_noaa_report}}\\
+        $a$ & rate that coral is overgrown by macroalgae & 2*\\ % unknown
+        $r$ & rate that coral recruit to overgrow algal turfs & 10 \textsuperscript{\cite{16_wolanski_richmond_mccook_2004}}\\
+        $g$ & grazing rate that parrotfish graze macroalgae without distinction from algae turfs & 10 \textsuperscript{\cite{16_wolanski_richmond_mccook_2004}}\\
+        $\gamma$ & rate that macroalgae spread vegetative over algal turfs & 3*\\ % unknown
+        $q$ & intrinsic growth rate for parrotfish & 0.47\textsuperscript{\cite{12_noaa_report}}\\
+        $\beta$ & carrying capacity of parrotfish & 21*\\ % unknown
+        $h$ & harvesting rate for parrotfish & 0.14 \textsuperscript{\cite{12_noaa_report}}\\
+        $\alpha$ & maximum grazing intensity & 1*\\ % unknown
         \hline
     \end{tabular}
     %\caption{Model Parameters}
     %\label{tab:my_label}
 \end{table}
+* = \textit{estimated value}
 \end{frame}
 
 \subsection{Compartment Model}
-\begin{frame}{Coral Reef Ecosystem Model$^\cite{04_mathanalysis}$}
+\begin{frame}{Coral Reef Ecosystem Model\textsuperscript{\cite{04_mathanalysis}}}
 \begin{center}
     \begin{tikzpicture}{node distance = 1cm, auto}
         \node(leftofC) [noblock] {}; 
@@ -315,14 +334,14 @@
         %\draw[line] (P) --node[above]{$\sigma P$} (C);
         \draw[line] (C) --node[right]{$a$} (M);
         \draw[line] (P) --node[above]{$h$} (rightofP);
-        \draw[line] (P) --node[left]{$\mu_{1}$} (aboveofP);
+        \draw[line] (P) --node[left]{$\mu_{2}$} (aboveofP);
         %\draw[line] (C) --node[left]{$d$} (aboveofC);
         \draw[line] (belowofP) --node[right]{$q$} (P);
         \begin{scope}[transform canvas = {xshift = -.15cm}]
-            \draw[line](C) -- node[left]{$r$} (T);
+            \draw[line](T) -- node[left]{$r$} (C);
         \end{scope}
         \begin{scope}[transform canvas = {xshift = .15cm}]
-            \draw[line](T) --node[right]{$d$} (C);        
+            \draw[line](C) --node[right]{$\mu_{1}$} (T);        
         \end{scope}
         \begin{scope}[transform canvas = {yshift = .1cm}]
             \draw[line] (M) --node[above]{$g$} (T);
@@ -349,7 +368,7 @@
 
 %---------------------Plans---------------------
 \section{Plans}
-\begin{frame}{Plans}
+\begin{frame}{Future Plans}
     \begin{itemize}
         %\item Specific ideas:
         %\begin{itemize}

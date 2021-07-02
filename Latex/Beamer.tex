@@ -360,9 +360,9 @@
     System of differential equations derived from compartment model:
     \begin{align}
         \begin{split}
-            \frac{dC}{dt} &= rTC + \sigma P C- (aM+d)C\\
-            \frac{dP}{dt} &= qP \left( 1-\frac{P}{\beta C} \right) - P \left( h+\mu_{1} \right)\\
-            \frac{dT}{dt} &= dC + \frac{g(P)M}{M+T} - T(rC+\gamma M)\\
+            \frac{dC}{dt} &= rTC + \sigma P C- (aM+\mu_{1})C\\
+            \frac{dP}{dt} &= qP \left( 1-\frac{P}{\beta C} \right) - P \left( h+\mu_{2} \right)\\
+            \frac{dT}{dt} &= \mu_{1}C + \frac{g(P)M}{M+T} - T(rC+\gamma M)\\
             \frac{dM}{dt} &= (aC+ \gamma T)M - \frac{g(P)M}{M+T}
             \label{SoODE}
         \end{split}
@@ -375,7 +375,7 @@
         \centering
         \includegraphics[width=0.9\textwidth]{Latex/Figures/initial_matlab_plot.png}
         \caption{Initial Conditions: $C = T = M = \frac{1}{3}$, and $P = 1$}
-        \label{fig:my_label}
+        \label{fig:initial_plot}
     \end{figure}
 \end{frame}
 
@@ -384,7 +384,7 @@
         \centering
         \includegraphics[width=0.9\textwidth]{Latex/Figures/0.5C_0.25T_0.25M.png}
         \caption{Initial Conditions: $C = \frac{1}{2}$, $T = M = \frac{1}{4}$, and $P = 1$}
-        \label{fig:my_label}
+        \label{fig:coral_dominant}
     \end{figure}
 \end{frame}
 
@@ -393,7 +393,7 @@
         \centering
         \includegraphics[width=0.85\textwidth]{Latex/Figures/0.25C_0.5T_0.25M.png}
         \caption{Initial Conditions: $T = \frac{1}{2}$, $C = M = \frac{1}{4}$, and $P = 1$}
-        \label{fig:my_label}
+        \label{fig:turf_dominant}
     \end{figure}
 \end{frame}
 
@@ -402,7 +402,7 @@
         \centering
         \includegraphics[width=0.9\textwidth]{Latex/Figures/0.25C_0.25T_0.5M.png}
         \caption{Initial Conditions: $M = \frac{1}{2}$, $C = T = \frac{1}{4}$, and $P = 1$}
-        \label{fig:my_label}
+        \label{fig:macroalgae_dominant}
     \end{figure}
 \end{frame}
 %----------------------------------------------------

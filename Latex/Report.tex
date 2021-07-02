@@ -39,7 +39,7 @@ With climate change rates increasing, one of the prevalent factors affecting cor
 
 Because a handful of coral species are considered to be threatened, efforts in measuring the resiliency factors of a coral reef has been of interest to many. In one study, ecological factors were studied and scored in which resistance, recovery, and resilience were taken into account. It claimed the top three ecological factors that contribute a coral's resiliency is its species type, temperature variability, and nutrients for pollution run-off \cite{02_Riegl_Purkis_Model}. 
 
-The objective of this paper is to analyze how Guam's reef ecosystem will change over the coming decades, focusing on the resilience of corals and the impact of human factors on the coral reefs. 
+The objective of this paper is to analyze how Guam's reef ecosystem will change over the coming decades, focusing on the impact of overfishing of parrotfish. 
 
 % objectives of research question, brief explanation of math model
 %\section{Objectives}
@@ -84,9 +84,23 @@ The objective of this paper is to analyze how Guam's reef ecosystem will change 
 \end{center}
 
 % add assumptions and describe model
+We assume that the system is closed, time dimensions are measured over one years, and macroalgae is the only predator for coral. Coral are assumed to recruit and overgrow alIn addition, the natural death rate of coral is nonexistent and algal turfs and macroalgae do not have a death rate (see Fig. 1).
 
 %Represented above is our general compartment model. While this version is a rough draft, it represents the compartments that we wish to include in our model. Included in our model is our $S$ compartment, which represents all susceptible corals, our $E$ compartment representing all exposed corals, our $I$ compartment representing our infected corals, and our $R$ compartment representing recovered corals. While this follows the standard SEIR model layout, we included an $H$ compartment to account for human factors. This is in order to assess how the human factor may directly or indirectly affect the typical "life" cycle of corals. \par
 %The $H$ compartment allows to factor in the human factor to the overall equation, however in order to achieve this, we must implement education game theory. This is in order to model human factors such as education about corals, ignorance, and various other factors. By using education game theory, we are able to visualize which strategy is dominant between humans and corals, and reflect this strategy in our overall compartment model.
+
+
+
+The coral reef dynamics are described as a system of nonlinear differential equations: 
+\begin{align}
+    \begin{split}
+        \frac{dC}{dt} &= rTC + \sigma P C- (aM+d)C\\
+        \frac{dP}{dt} &= qP \left( 1-\frac{P}{\beta C} \right) + \kappa P - P \left( h+\mu_{1} \right)\\
+        \frac{dT}{dt} &= dC + \frac{g(P)M}{M+T} - T(rC+\gamma M)\\
+        \frac{dM}{dt} &= (aC+ \gamma T)M - \frac{g(P)M}{M+T}
+    \end{split}
+\end{align}
+
 
 \begin{table}[H]
     \centering
@@ -111,16 +125,6 @@ The objective of this paper is to analyze how Guam's reef ecosystem will change 
     \caption{Model Parameters}
     \label{tab:my_label}
 \end{table}
-
-The coral reef dynamics are described as a system of nonlinear differential equations: 
-\begin{align}
-    \begin{split}
-        \frac{dC}{dt} &= rTC + \sigma P C- (aM+d)C\\
-        \frac{dP}{dt} &= qP \left( 1-\frac{P}{\beta C} \right) + \kappa P - P \left( h+\mu_{1} \right)\\
-        \frac{dT}{dt} &= dC + \frac{g(P)M}{M+T} - T(rC+\gamma M)\\
-        \frac{dM}{dt} &= (aC+ \gamma T)M - \frac{g(P)M}{M+T}
-    \end{split}
-\end{align}
 
 %\subsection{Education Game Theory}
 

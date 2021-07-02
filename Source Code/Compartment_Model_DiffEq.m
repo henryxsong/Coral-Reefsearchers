@@ -3,12 +3,12 @@
 r = 10;
 d = 2; %unknown
 a = 0.1; %unknown
-gamma = 3; %unknown
+gamma = 0.8; %unknown
 g = 10;
 beta = 21; %unknown
 kapa = 0.6; %known but not used
 mu = 0.22;
-h = 1; %<----CONTROL VARIABLE FOR GAME THEORY
+h = 0.3; %<----CONTROL VARIABLE FOR GAME THEORY
 alpha = 1;
 q = 0.47;
 sigma = 0.01; %unknown
@@ -27,14 +27,14 @@ f = @(t,y) [r*y(3)*y(1) + sigma*y(2)*y(1) - y(1)*(a*y(4) + d),
             d*y(1) + (g(y(2))*y(4))/(y(4)+y(3)) - (r*y(1) + gamma*y(4))*y(3),
             a * y(4)*y(1) + gamma*y(4)*y(3) - (g(y(2))*y(4))/(y(4)+y(3))];
 
-C = 1/2;
+C = 1/3;
 P = 1;
-T = 1/4;
-M = 1/4;
+T = 1/3;
+M = 1/3;
         
   
 % solve with ODE 45
-[t,ya] = ode45(f, [0 1.5], [C, P, T, M]);
+[t,ya] = ode45(f, [0 5], [C, P, T, M]);
 
 % graph
 figure

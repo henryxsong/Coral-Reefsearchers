@@ -2,6 +2,8 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amsthm,amssymb,amsfonts}
 \usepackage{float}
+\usepackage{color}
+\usepackage{xcolor}
 \usepackage{graphicx}
 \usepackage[utf8]{inputenc}
 \usepackage{biblatex}
@@ -9,10 +11,17 @@
 
 % tikz style stuff
 \usetikzlibrary{arrows}
-\tikzstyle{block} = [rectangle, draw, text width = 1em, text centered, minimum height = 1em]
+\tikzstyle{block} = [rectangle, draw, fill=orangeCoral, text width = 1.5em, text centered, minimum height = 2em]
+\tikzstyle{blockTurf} = [rectangle, draw, fill=turfGreen!50, text width = 1.5em, text centered, minimum height = 2em]
+\tikzstyle{blockAlgae} = [rectangle, draw, fill=algaeRed!45, text width = 1.5em, text centered, minimum height = 2em]
+\tikzstyle{blockParrot} = [rectangle, draw, fill=parrotBlue!50, text width = 1.5em, text centered, minimum height = 2em]
 \tikzstyle{line} = [thick, ->, >= stealth]
-\tikzstyle{noBlock} = [rectangle, draw = none]
+\tikzstyle{noblock} = [rectangle, draw = none]
 
+\definecolor{orangeCoral}{HTML}{FFC996}
+\definecolor{turfGreen}{HTML}{BDD2B6}
+\definecolor{algaeRed}{HTML}{CF0000}
+\definecolor{parrotBlue}{HTML}{A7D0CD}
 
 \addbibresource{main.bib}
 
@@ -40,41 +49,44 @@ The objective of this paper is to analyze how Guam's reef ecosystem will change 
 \subsection{Compartment Model}
 \begin{center}
     \begin{tikzpicture}{node distance = 1cm, auto}
-        \node (leftofC) [noblock] {}; 
-        \node (C) [block, right of = leftofC, node distance = 3 cm] {C};
-        \node (P) [block, right of = C, node distance = 3 cm] {P};
-        \node (M) [block, below of = C, node distance = 3 cm] {M};
-        \node (T) [block, below of = leftofC, node distance = 3 cm] {T};
-        \node (rightofP) [noblock, right of = P, node distance = 1.5 cm]{};
-        \node (aboveofP) [noblock, above of = P, node distance = 1.5 cm]{};
-        \node (aboveofC) [noblock, above of = C, node distance = 1.5 cm]{};
-        \node (belowofP) [noblock, below of = P, node distance = 1.5 cm]{};
-        \node (aboveofT) [noblock, above of = T, node distance = 0.1 cm]{};
-        \node (diagonalofT) [noblock, right of = aboveofT, node distance = 2 cm];
+        \node(leftofC) [noblock] {}; 
+        \node(C) [block, right of = leftofC, node distance = 1.5 cm] {C};
+        \node(P) [blockParrot, right of = C, node distance = 4 cm] {P};
+        \node(belowofC) [noblock, below of = C, node distance = 3 cm]{};
+        \node(M) [blockAlgae, right of = belowofC, node distance = 3 cm] {M};
+        \node(T) [blockTurf, left of = belowofC, node distance = 3 cm] {T};
+        \node(rightofP) [noblock, right of = P, node distance = 1.5 cm]{};
+        \node(aboveofP) [noblock, above of = P, node distance = 1.5 cm]{};
+        \node(aboveofC) [noblock, above of = C, node distance = 1.5 cm]{};
+        \node(belowofP) [noblock, below of = P, node distance = 1.5 cm]{};
+        \node(aboveofT) [noblock, above of = T, node distance = 0.6 cm]{};
+        \node(diagonalofT) [noblock, right of = aboveofT, node distance = 2.7 cm]{};
         \draw[dashed] (P) --node[above]{} (diagonalofT);
-        \draw[line] (P) --node[above]{$\sigma P$} (C);
-        \draw[line] (C) --node[right]{aMC} (M);
-        \draw[line] (P) --node[above]{hP} (rightofP);
-        \draw[line] (P) --node[left]{$\mu_{1} P$} (aboveofP);
-        \draw[line] (C) --node[left]{dC} (aboveofC);
-        \draw[line] (belowofP) --node[right]{$\kappa P$} (P);
+        %\draw[line] (P) --node[above]{$\sigma P$} (C);
+        \draw[line] (C) --node[right]{$a$} (M);
+        \draw[line] (P) --node[above]{$h$} (rightofP);
+        \draw[line] (P) --node[left]{$\mu_{2}$} (aboveofP);
+        %\draw[line] (C) --node[left]{$d$} (aboveofC);
+        \draw[line] (belowofP) --node[right]{$q$} (P);
         \begin{scope}[transform canvas = {xshift = -.15cm}]
-            \draw[line](C) -- node[left]{$rTC$} (T);
+            \draw[line](T) -- node[left]{$r$} (C);
         \end{scope}
         \begin{scope}[transform canvas = {xshift = .15cm}]
-            \draw[line](T) --node[right]{$dC$} (C);        
+            \draw[line](C) --node[right]{$\mu_{1}$} (T);        
         \end{scope}
-        \begin{scope}[transform canvas = {yshift = .15cm}]
-            \draw[line] (M) --node[above]{$\frac{g(p)M}{M+T}$} (T);
+        \begin{scope}[transform canvas = {yshift = .1cm}]
+            \draw[line] (M) --node[above]{$g$} (T);
         \end{scope}
-        \begin{scope}[transform canvas = {xshift = -.15cm}]
-            \draw[line] (T) --node[below]{$\gamma MT$} (M);
+        \begin{scope}[transform canvas = {yshift = -.15cm}]
+            \draw[line] (T) --node[below]{$\gamma$} (M);
         \end{scope}
     \end{tikzpicture}
 \end{center}
 
-Represented above is our general compartment model. While this version is a rough draft, it represents the compartments that we wish to include in our model. Included in our model is our $S$ compartment, which represents all susceptible corals, our $E$ compartment representing all exposed corals, our $I$ compartment representing our infected corals, and our $R$ compartment representing recovered corals. While this follows the standard SEIR model layout, we included an $H$ compartment to account for human factors. This is in order to assess how the human factor may directly or indirectly affect the typical "life" cycle of corals. \par
-The $H$ compartment allows to factor in the human factor to the overall equation, however in order to achieve this, we must implement education game theory. This is in order to model human factors such as education about corals, ignorance, and various other factors. By using education game theory, we are able to visualize which strategy is dominant between humans and corals, and reflect this strategy in our overall compartment model.
+% add assumptions and describe model
+
+%Represented above is our general compartment model. While this version is a rough draft, it represents the compartments that we wish to include in our model. Included in our model is our $S$ compartment, which represents all susceptible corals, our $E$ compartment representing all exposed corals, our $I$ compartment representing our infected corals, and our $R$ compartment representing recovered corals. While this follows the standard SEIR model layout, we included an $H$ compartment to account for human factors. This is in order to assess how the human factor may directly or indirectly affect the typical "life" cycle of corals. \par
+%The $H$ compartment allows to factor in the human factor to the overall equation, however in order to achieve this, we must implement education game theory. This is in order to model human factors such as education about corals, ignorance, and various other factors. By using education game theory, we are able to visualize which strategy is dominant between humans and corals, and reflect this strategy in our overall compartment model.
 
 \begin{table}[H]
     \centering
@@ -93,11 +105,22 @@ The $H$ compartment allows to factor in the human factor to the overall equation
         $\beta$ & carrying capacity of parrotfish & \\
         $h$ & harvesting rate for parrotfish & $\frac{1}{yrs}$\cite{12_noaa_report}\\
         $\alpha$ & maximum grazing intensity & \\
+        $\sigma$ & rate that parrot fish bite coral & \\
         \hline
     \end{tabular}
     \caption{Model Parameters}
     \label{tab:my_label}
 \end{table}
+
+The coral reef dynamics are described as a system of nonlinear differential equations: 
+\begin{align}
+    \begin{split}
+        \frac{dC}{dt} &= rTC + \sigma P C- (aM+d)C\\
+        \frac{dP}{dt} &= qP \left( 1-\frac{P}{\beta C} \right) + \kappa P - P \left( h+\mu_{1} \right)\\
+        \frac{dT}{dt} &= dC + \frac{g(P)M}{M+T} - T(rC+\gamma M)\\
+        \frac{dM}{dt} &= (aC+ \gamma T)M - \frac{g(P)M}{M+T}
+    \end{split}
+\end{align}
 
 %\subsection{Education Game Theory}
 

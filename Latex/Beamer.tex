@@ -51,7 +51,7 @@
 \tikzstyle{noblock} = [rectangle, draw = none]
 
 %%--------------- Title Slide ------------------------------
-\title[]{Model of Guam's Coral Reef Change}
+\title[]{Effects of Overfishing on Coral Reef Ecosystems}
 \subtitle{Coral Reefsearchers}
 \author{Aaron Bumagat, Michelle Luces, Henry Song }
 \institute{University of Guam}
@@ -110,13 +110,13 @@
     \begin{itemize}
         \item<1-> Coral Reefs are large underwater structures composed of the skeletons of colonial marine invertebrates known as coral\textsuperscript{\cite{ross}}.
          \item<2-> They play a crucial role in the marine ecosystem's biodiversity along with other functions, such as coastal defense from storms and economic benefits from tourism or local fisheries\textsuperscript{\cite{04_mathanalysis}}.
-         \item<3->  Factors that affect coral reefs include climate change, coral reef resilience\textsuperscript{\cite{02_Riegl_Purkis_Model}}, and exploitative fishing practices\textsuperscript{\cite{05_quintero_machuca_cotto_bradley_ríos-soto_2016}}.
-         \item<4-> According to the 2008 State of the Coral Reef Ecosystems of Guam report, Guam’s coral reef resources are both economically and culturally important, providing numerous goods and services for the residents of Guam, including cultural/traditional use, tourism, recreation, fisheries, and shoreline/infrastructure protection \textsuperscript{\cite{guamwebsite}}.
+         \item<3-> According to the 2008 State of the Coral Reef Ecosystems of Guam report, Guam’s coral reef resources are both economically and culturally important, providing numerous goods and services for the residents of Guam, including cultural/traditional use, tourism, recreation, fisheries, and shoreline/infrastructure protection \textsuperscript{\cite{guamwebsite}}.
+         \item<4-> Factors that affect coral reefs include climate change, coral reef resilience\textsuperscript{\cite{02_Riegl_Purkis_Model}}, and exploitative fishing practices\textsuperscript{\cite{05_quintero_machuca_cotto_bradley_ríos-soto_2016}}.
     \end{itemize}
 \end{frame}
 
 \subsection{General Question}
-\begin{frame}{Background Cont.}
+\begin{frame}{Our Question}
 \begin{itemize}
     \item General Question: How will Guam's reef ecosystem change over the coming decades?
 \end{itemize}
@@ -138,7 +138,7 @@
 \begin{frame}{Definitions}
     \begin{figure}%
         \centering
-        \subfloat[\centering Coral Reefs\textsuperscript{\cite{img_coral_reef}}]{{\includegraphics[width=4.7cm]{Latex/Figures/coral_reefs.jpg} }}%
+        \subfloat[\centering Corals\textsuperscript{\cite{img_coral_reef}}]{{\includegraphics[width=4.7cm]{Latex/Figures/coral_reefs.jpg} }}%
         \\
         \subfloat[\centering Algal Turfs\textsuperscript{\cite{img_algal_turf}}]{{\includegraphics[width=3.5cm]{Latex/Figures/algal_turf.jpg} }}%
         \qquad
@@ -160,7 +160,7 @@
         \end{column}
         \begin{column}{0.5\textwidth}
             \begin{itemize}
-                \item Parrot fish are common reef fish found in many tropical reefs\textsuperscript{\cite{13_blackwood_hastings_mumby_2010}}.
+                \item Parrot fish are common reef fish found in many tropical reefs\textsuperscript{\cite{13_blackwood_hastings_mumby_2010}} and are known to feed on algal turfs and macroalgae.
                 \item Their bites on corals have been shown to improve and promote coral growth.
                 \item Parrot fish are one of the most overfished reef fish in the Caribbean, and potentially on Guam as well\textsuperscript{\cite{13_blackwood_hastings_mumby_2010}}.
             \end{itemize}
@@ -281,7 +281,7 @@
         \item \small{$C$: Corals}
         \item \small{$T$: Algal Turfs}
         \item \small{$M$: Macroalgae}
-        \item \small{$P$: Parrotfish},
+        \item \small{$P$: Parrotfish}
         \end{itemize}
         $$ \text{where } C + T + M = 1.$$
     \end{block}
@@ -330,11 +330,11 @@
         \node(aboveofP) [noblock, above of = P, node distance = 1.5 cm]{};
         \node(aboveofC) [noblock, above of = C, node distance = 1.5 cm]{};
         \node(belowofP) [noblock, below of = P, node distance = 1.5 cm]{};
-        \node(aboveofT) [noblock, above of = T, node distance = 0.1 cm]{};
+        \node(aboveofT) [noblock, above of = T, node distance = 0.08 cm]{};
         \node(diagonalofT) [noblock, right of = aboveofT, node distance = 3 cm]{};
-        \draw[dashed] (P) --node[above]{} (diagonalofT);
+        \draw[dashed, ->] (P) --node[above]{} (diagonalofT);
         \draw[line] (P) --node[above]{$\sigma$} (C);
-        \draw[line] (C) --node[right]{$a$} (M);
+        \draw[line] (C) --node[left]{$a$} (M);
         \draw[line] (P) --node[above]{$h$} (rightofP);
         \draw[line] (P) --node[left]{$\mu_{2}$} (aboveofP);
         %\draw[line] (C) --node[left]{$d$} (aboveofC);
@@ -361,7 +361,7 @@
     \begin{align}
         \begin{split}
             \frac{dC}{dt} &= rTC + \sigma P C- (aM+d)C\\
-            \frac{dP}{dt} &= qP \left( 1-\frac{P}{\beta C} \right) + \kappa P - P \left( h+\mu_{1} \right)\\
+            \frac{dP}{dt} &= qP \left( 1-\frac{P}{\beta C} \right) - P \left( h+\mu_{1} \right)\\
             \frac{dT}{dt} &= dC + \frac{g(P)M}{M+T} - T(rC+\gamma M)\\
             \frac{dM}{dt} &= (aC+ \gamma T)M - \frac{g(P)M}{M+T}
             \label{SoODE}
@@ -391,7 +391,7 @@
 \begin{frame}{Coral Ecosystem Model Dynamics (Cont.)}
     \begin{figure}
         \centering
-        \includegraphics[width=1\textwidth]{Latex/Figures/0.25C_0.5T_0.25M.png}
+        \includegraphics[width=0.85\textwidth]{Latex/Figures/0.25C_0.5T_0.25M.png}
         \caption{Initial Conditions: $T = \frac{1}{2}$, $C = M = \frac{1}{4}$, and $P = 1$}
         \label{fig:my_label}
     \end{figure}
@@ -446,7 +446,7 @@
     \begin{center}
         Support for the Young Scholars Research Experience in Mathematics (YSREM)  is through the MAA Tensor SUMMA Program. Support for the MAA National Research Experience for Undergraduates Program (NREUP) is provided by the National Science Foundation (Grant Number DMS-1950644). Support for the NSF EPSCoR project, Guam Ecosystems Collaboratorium for Corals and Oceans (GECCO) is provided by the National Science Foundation (Grant Number DMS-1946352). \\
     \vspace{.2cm}
-    \small{Special thanks to Dr. Bastian Bentlage, our faculty mentors (Dr. JaeYong Choi, Dr. HyunJu Oh, \& Dr. Leslie Aquino), and our Research Assistants (Jaron Bautista \& Regina-Mae Dominguez).}
+    \small{Special thanks to the UOG Marine Laboratory(Dr. Bastian Bentlage and Ms. Grace McDermott), our faculty mentors (Dr. JaeYong Choi, Dr. HyunJu Oh, \& Dr. Leslie Aquino), and our Research Assistants (Jaron Bautista \& Regina-Mae Dominguez).}
     
     \begin{figure}
         \includegraphics[width = 0.20\textwidth]{Figures/MAA_logo_PMS286.jpg}
@@ -469,18 +469,18 @@
 %%----------------------Bibliography-------------------
 \section{Bibliography}
 \begin{frame}[allowframebreaks]{Bibliography}
-    \tiny{\printbibliography}
-    \nocite{01_assesing_relative}
-    \nocite{02_Riegl_Purkis_Model}
-    \nocite{03_prioritize}
-    \nocite{05_quintero_machuca_cotto_bradley_ríos-soto_2016}
-    \nocite{06_yong_herrera_castillo-chavez_2016}
-    \nocite{07_bauch_earn_2004}
-    \nocite{12_noaa_report}
-    \nocite{13_blackwood_hastings_mumby_2010}
-    \nocite{14_mumby_hastings_edwards_2007}
-    \nocite{15_blackwood_okasaki_archer_matt_sherman_montovan_2018}
-    \nocite{16_wolanski_richmond_mccook_2004}
+    \small{\printbibliography}
+    % \nocite{01_assesing_relative}
+    % \nocite{02_Riegl_Purkis_Model}
+    % \nocite{03_prioritize}
+    % \nocite{05_quintero_machuca_cotto_bradley_ríos-soto_2016}
+    % \nocite{06_yong_herrera_castillo-chavez_2016}
+    % \nocite{07_bauch_earn_2004}
+    % \nocite{12_noaa_report}
+    % \nocite{13_blackwood_hastings_mumby_2010}
+    % \nocite{14_mumby_hastings_edwards_2007}
+    % \nocite{15_blackwood_okasaki_archer_matt_sherman_montovan_2018}
+    % \nocite{16_wolanski_richmond_mccook_2004}
 \end{frame}
 
 

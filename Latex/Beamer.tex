@@ -92,7 +92,7 @@
     $\Downarrow$
 \end{center}
 \begin{itemize}
-    \item Specific Question: How will overfishing affect Guam's coral reef ecosystem?
+    \item Specific Question: How will overfishing affect Guam's coral reef ecosystem in the upcoming decades?
 \end{itemize}
 \begin{figure}
     \centering
@@ -283,7 +283,7 @@
         \item \small{$M$: Macroalgae}
         \item \small{$P$: Parrotfish},
         \end{itemize}
-        $$ \text{where } C + T + M = 1$$.
+        $$ \text{where } C + T + M = 1.$$
     \end{block}
 \end{frame}
 
@@ -298,14 +298,15 @@
         \hline
         $\mu_{1}$ & natural death rate of coral reefs & 0.15\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}}\\
         $\mu_{2}$ & natural death rate of parrotfish & 0.22\textsuperscript{\cite{12_noaa_report}}\\
-        $a$ & rate that coral is overgrown by macroalgae & 2*\\ % unknown
+        $a$ & rate that coral is overgrown by macroalgae & 0.1\textsuperscript{\cite{11_zikkah_anggriani_supriatna_2020}}\\ % unknown
         $r$ & rate that coral recruit to overgrow algal turfs & 10 \textsuperscript{\cite{16_wolanski_richmond_mccook_2004}}\\
         $g$ & grazing rate that parrotfish graze macroalgae without distinction from algae turfs & 10 \textsuperscript{\cite{16_wolanski_richmond_mccook_2004}}\\
-        $\gamma$ & rate that macroalgae spread vegetative over algal turfs & 3*\\ % unknown
+        $\gamma$ & rate that macroalgae spread vegetative over algal turfs & 0.8\textsuperscript{\cite{11_zikkah_anggriani_supriatna_2020}}\\ % unknown
         $q$ & intrinsic growth rate for parrotfish & 0.47\textsuperscript{\cite{12_noaa_report}}\\
         $\beta$ & carrying capacity of parrotfish & 21*\\ % unknown
         $h$ & harvesting rate for parrotfish & 0.14 \textsuperscript{\cite{12_noaa_report}}\\
         $\alpha$ & maximum grazing intensity & 1*\\ % unknown
+        $\sigma$ & rate that parrot fish bite coral & 0.01*\\ % unknown
         \hline
     \end{tabular}
     %\caption{Model Parameters}
@@ -328,10 +329,10 @@
         \node(aboveofP) [noblock, above of = P, node distance = 1.5 cm]{};
         \node(aboveofC) [noblock, above of = C, node distance = 1.5 cm]{};
         \node(belowofP) [noblock, below of = P, node distance = 1.5 cm]{};
-        \node(aboveofT) [noblock, above of = T, node distance = 0.6 cm]{};
-        \node(diagonalofT) [noblock, right of = aboveofT, node distance = 2.7 cm]{};
+        \node(aboveofT) [noblock, above of = T, node distance = 0.1 cm]{};
+        \node(diagonalofT) [noblock, right of = aboveofT, node distance = 3 cm]{};
         \draw[dashed] (P) --node[above]{} (diagonalofT);
-        %\draw[line] (P) --node[above]{$\sigma P$} (C);
+        \draw[line] (P) --node[above]{$\sigma$} (C);
         \draw[line] (C) --node[right]{$a$} (M);
         \draw[line] (P) --node[above]{$h$} (rightofP);
         \draw[line] (P) --node[left]{$\mu_{2}$} (aboveofP);
@@ -341,7 +342,7 @@
             \draw[line](T) -- node[left]{$r$} (C);
         \end{scope}
         \begin{scope}[transform canvas = {xshift = .15cm}]
-            \draw[line](C) --node[right]{$\mu_{1}$} (T);        
+            \draw[line](C) --node[right]{$\mu_{1}$} (T);     
         \end{scope}
         \begin{scope}[transform canvas = {yshift = .1cm}]
             \draw[line] (M) --node[above]{$g$} (T);
@@ -355,13 +356,26 @@
 
 \subsection{Equations}
 \begin{frame}{Differential Equations}
-    Equations derived from compartment model:
-    \begin{align*}
-        \frac{dC}{dt} &= rTC + \sigma P- (aM+d)C\\
-        \frac{dP}{dt} &= qP \left( 1-\frac{P}{\beta C} \right) + \kappa P - P \left( h+\mu_{1} \right)\\
-        \frac{dT}{dt} &= dC + \frac{g(P)M}{M+T} - T(rC+\gamma M)\\
-        \frac{dM}{dt} &= (aC+ \gamma T)M - \frac{g(P)M}{M+T}
-    \end{align*}
+    System of differential equations derived from compartment model:
+    \begin{align}
+        \begin{split}
+            \frac{dC}{dt} &= rTC + \sigma P C- (aM+d)C\\
+            \frac{dP}{dt} &= qP \left( 1-\frac{P}{\beta C} \right) + \kappa P - P \left( h+\mu_{1} \right)\\
+            \frac{dT}{dt} &= dC + \frac{g(P)M}{M+T} - T(rC+\gamma M)\\
+            \frac{dM}{dt} &= (aC+ \gamma T)M - \frac{g(P)M}{M+T}
+            \label{SoODE}
+        \end{split}
+    \end{align}
+\end{frame}
+
+\subsection{Plot}
+\begin{frame}{Differential Equations}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.8\textwidth]{Latex/Figures/initial_matlab_plot.png}
+        \caption{Matlab Plot of System of Differential Equations \ref{SoODE}}
+        \label{fig:my_label}
+    \end{figure}
 \end{frame}
 %----------------------------------------------------
 
@@ -393,13 +407,13 @@
     %Type conclusion here
 %\end{frame}
 
-\section{Q \& A}
+\section*{Q \& A}
 \begin{frame}
     \Huge{Questions?}
 \end{frame}
 
 %%-------------------------Acknowledgements----------------
-\section{Acknowledgements}
+\section*{Acknowledgements}
 \begin{frame}{Acknowledgements}
     \begin{center}
         Support for the Young Scholars Research Experience in Mathematics (YSREM)  is through the MAA Tensor SUMMA Program. Support for the MAA National Research Experience for Undergraduates Program (NREUP) is provided by the National Science Foundation (Grant Number DMS-1950644). Support for the NSF EPSCoR project, Guam Ecosystems Collaboratorium for Corals and Oceans (GECCO) is provided by the National Science Foundation (Grant Number DMS-1946352). \\

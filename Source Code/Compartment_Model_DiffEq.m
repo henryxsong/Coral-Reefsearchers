@@ -28,7 +28,7 @@ f = @(t,y) [r*y(3)*y(1) + sigma*y(2)*y(1) - y(1)*(a*y(4) + d),
             a * y(4)*y(1) + gamma*y(4)*y(3) - (g(y(2))*y(4))/(y(4)+y(3))];
 
 C = 1/4;
-P = 1;
+P = 10000;
 T = 1/2;
 M = 1/4;
         
@@ -40,9 +40,10 @@ M = 1/4;
 figure
 hold on
 plot(t, ya(:,1), '+-.', 'Color', '#FFC996', 'Linewidth', 2.5)
-plot(t, ya(:,2), 'x-.', 'Color', '#A7D0CD', 'Linewidth', 2.5)
+%plot(t, ya(:,2), 'x-.', 'Color', '#A7D0CD', 'Linewidth', 2.5)
 plot(t, ya(:,3), 'o-.', 'Color', '#BDD2B6', 'Linewidth', 2.5)
 plot(t, ya(:,4), '*-.', 'Color', '#CF0000', 'Linewidth', 2.5)
-legend('Coral (C)', 'Parrotfish (P)', 'Algal Turf (T)', 'Macroalgae (M)')
+legend('Coral (C)', 'Algal Turf (T)', 'Macroalgae (M)')
+%legend('Coral (C)', 'Parrotfish (P)', 'Algal Turf (T)', 'Macroalgae (M)')
 xlabel('Time (Year)')
 ylabel('Proportion of Population')

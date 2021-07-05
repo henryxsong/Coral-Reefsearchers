@@ -16,7 +16,7 @@ sigma = 0.01; %unknown
 g = @(P) (alpha*P)/beta;
 
 % set up DFE
-% dC/dt = rTC + sigmaPC - C(aM + d) #ignore sigmaPC for now
+% dC/dt = rTC + sigmaPC - C(aM + d)
 % dP/dt = qP(1-P/betaC) + kapaP - (h + mu)P #remove kapaP, so  = qP(1-P/betaC) - (h + mu)P
 % dT/dt = dC + (g(P)M)/(M + T) - (rC + gammaM)T
 % dM/dt = aMC + gammaMT - (g(P)M)/(M + T)
@@ -27,14 +27,14 @@ f = @(t,y) [r*y(3)*y(1) + sigma*y(2)*y(1) - y(1)*(a*y(4) + d),
             d*y(1) + (g(y(2))*y(4))/(y(4)+y(3)) - (r*y(1) + gamma*y(4))*y(3),
             a * y(4)*y(1) + gamma*y(4)*y(3) - (g(y(2))*y(4))/(y(4)+y(3))];
 
-C = 1/4;
-P = 10000;
-T = 1/2;
-M = 1/4;
+C = 1/3;
+P = 500;
+T = 1/3;
+M = 1/3;
         
   
 % solve with ODE 45
-[t,ya] = ode45(f, [0 5], [C, P, T, M]);
+[t,ya] = ode45(f, [0 1], [C, P, T, M]);
 
 % graph
 figure

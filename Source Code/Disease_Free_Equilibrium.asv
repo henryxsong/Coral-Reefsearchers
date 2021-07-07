@@ -2,7 +2,7 @@ syms C P T M mu1 mu2 q alpha sigma r h gamma beta g a t
 % g = g(P), a = a(t)
 
 %grazing intensity 'g'
-%g = @(P) (alpha*P)/beta;
+g = @(P) (alpha*P)/beta;
 
 %sin function of 
 %a = @(t) abs((0.9*(9*sin(pi*t)+1))/(10));
@@ -27,36 +27,42 @@ C_0 = solve(dCdt == 0, C);
 %------------------------------------------------------
 %solving Endemic
 dMdt = a*C*M + gamma*T*M - (g*M)/(M+T);
-dPdt = q*P*(1-(P/(beta*C))) - P*(h*mu2);
-dTdt = mu1*C + (g*M)/(M+T) - T*(r*C + gamma*M);
-dCdt = r*T*C + sigma*P*C - (a*M + mu1)*C;
-
 M_E = solve(dMdt == 0, M);
+
+dPdt = q*P*(1-(P/(beta*C))) - P*(h*mu2);
 P_E = solve(dPdt == 0, P);
+
+%dTdt = mu1*C + (g*M)/(M+T) - T*(r*C + gamma*M);
+dTdt = (mu1 + a*M_E(2))/(r);
 T_E = solve(dTdt == 0, T);
+
+%dCdt = r*T_E(2)*C + sigma*P_E(2)*C - (a*M_E(2) + mu1)*C - C;
+dCdt = r*T*C + sigma*P*C - (a*M + mu1)*C - C;
 C_E = solve(dCdt == 0, C, ReturnConditions = true);
 %------------------------------------------------------
 
 
+%------------------------------------------------------
+% Solving R0
 % scriptF
 % F: Jacobian matrix of script F
 % scriptVi
 % V: Jacobial matrix of script VI
-% the largest absolute eigenvalue of F*inverse(V) is the basic reproduction
-% number
 
+C_0 = q - h - mu2;
 %script F
-sF = [beta * S * I, 0];
-F = jacobian(sF, [S I]); % jacobian matrix
-F = subs(F, S, S0); %S0 = Pi/mu
-F = subs(F, I, 0);
+sF = [mu1*C + (g*M)/(M+T), 0];
+F = jacobian(sF, [C T]); % jacobian matrix
+F = subs(F, C, C_0); %S0 = Pi/mu
+F = subs(F, T, 0);
 
 %script V
-% sV = [(sigma+mu)*E, (gamma + mu)*I-sigma*E];
-% V = jacobian(sV, [E I]);
+sV = [r*C*T + gamma*M*T, -(a*C*M + gamma*T*M) + (g*M)/(M+T)];
+V = jacobian(sV, [T M]);
 
 %eigenvalues of F*V^-1
-% eigens = eig(F * inv(V));
+eigens = eig(F * inv(V));
 
 % basic reproduction number
-% R0 = eigen(2);
+R0 = eigens(2);
+%------------------------------------------------------

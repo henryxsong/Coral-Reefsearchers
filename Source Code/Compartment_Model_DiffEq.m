@@ -17,7 +17,8 @@ g = @(P) (alpha*P)/beta;
 
 % set up DFE
 % dC/dt = rTC + sigmaPC - C(aM + d) #ignore sigmaPC for now
-% dP/dt = qP(1-P/betaC) + kapaP - (h + mu)P #remove kapaP, so  = qP(1-P/betaC) - (h + mu)P
+% dP/dt = qP(1-P/betaC) + kapaP - (h + mu)P 
+% #remove kapaP, so = qP(1-P/betaC) - (h + mu)P
 % dT/dt = dC + (g(P)M)/(M + T) - (rC + gammaM)T
 % dM/dt = aMC + gammaMT - (g(P)M)/(M + T)
 %

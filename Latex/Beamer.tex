@@ -32,7 +32,7 @@
 \definecolor{orangeCoral}{HTML}{FFC996}
 \definecolor{turfGreen}{HTML}{BDD2B6}
 \definecolor{algaeRed}{HTML}{CF0000}
-\definecolor{parrotBlue}{HTML}{A7D0CD}
+\definecolor{parrotBlue}{HTML}{4974A5}
 \setbeamercolor{palette primary}{bg = maincol, fg=white}
 \setbeamercolor{palette secondary}{bg = secondcol, fg=white}
 \setbeamercolor{palette tertiary}{bg=thirdcol, fg=white}
@@ -128,7 +128,7 @@
 \end{itemize}
 \begin{figure}
     \centering
-    \includegraphics[width=0.6\textwidth]{Figures/coral_picture.jpg}
+    \includegraphics[width=0.9\textwidth]{Latex/Figures/figure1.png}
     %\caption{Caption}
     %\label{fig:my_label}
 \end{figure}
@@ -176,39 +176,9 @@
 
 
 %%------------------------Literature Review----------------
-%\section{Literature Review}
-% \begin{frame}{Literature Review}
-%Articles covered:
-%\begin{itemize}
-    %\item Assessing relative resilience potential of coral reefs to inform management$^\cite{01_assesing_relative}$
-    %\item Prioritizing Key Resilience Indicators to Support Coral Reef Management in a Changing Climate$^\cite{03_prioritize}$
-    %\item Model of coral population response to accelerated bleaching and mass mortality in a changing climate$^\cite{02_Riegl_Purkis_Model}$
-    %\item Mathematical Analysis of Coral Reef Models$^\cite{04_mathanalysis}$
-%\end{itemize}
-% \end{frame}
+%\section{Literature Rev
 
-%\subsection{Assessing relative resilience potential of coral reefs to inform management}
-%\begin{frame}{Assessing relative resilience potential of coral reefs to inform management}
-    %\begin{block}{Summary}
-        %\small{This research discusses ecological resilience as a essential part of resilience-based management (RBM) and the use of such assessments to explain resilience potentials of coral reefs in the Northern Mariana Islands (CNMI).}
-    %\end{block}
-   % Why is this article important?
-   % \begin{itemize}
-        %\item Explores and elaborates on factors affecting coral resilience.
-        %\item Acts as a guide to implement ecological resilience assessments.
-        %\item Analyzes inter-island and intra-island connectivity.
-    %\end{itemize}
-%\end{frame}
-
-%\subsection{Prioritizing Key Resilience Indicators to Support Coral Reef Management in a Changing Climate}
-%\begin{frame}{Prioritizing Key Resilience Indicators to Support Coral Reef Management in a Changing Climate}
-    %\begin{block}{Summary}
-        %Empirical selection criteria was created in order to prioritize coral reef management.
-    %\end{block}
-    %Why is this article important?
     %\begin{itemize}
-        %\item Provides data from certified scientists when it comes to resilience of coral reef.
-            %\begin{itemize}
                 %\item Can be used to see which will be focused on when creating our parameters.
             %\end{itemize}
     %\end{itemize}
@@ -292,23 +262,22 @@
     \begin{table}
     \centering
     \vspace{-.5cm}
-    \begin{tabular}{c p{7cm} c}
+    \begin{tabular}{c p{5cm} c c}
         \hline
-        Parameter & Description & Value  \\
+        Parameter & Description & Rate & Units\textsuperscript{\cite{12_noaa_report}\cite{04_mathanalysis}\cite{13_blackwood_hastings_mumby_2010}}\\
         \hline
         \hline
-        $\mu_{1}$ & natural death rate of coral reefs & 0.15\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}}\\
-        $\mu_{2}$ & natural death rate of parrotfish & 0.22\textsuperscript{\cite{12_noaa_report}}\\
-        $a$ & rate that coral is overgrown by macroalgae & 0.1\textsuperscript{\cite{11_zikkah_anggriani_supriatna_2020}}\\ % unknown
-        $r$ & rate that coral recruit to overgrow algal turfs & 10 \textsuperscript{\cite{16_wolanski_richmond_mccook_2004}}\\
-        $g$ & grazing rate that parrotfish graze macroalgae without distinction from algae turfs & 10 \textsuperscript{\cite{16_wolanski_richmond_mccook_2004}}\\
-        $\gamma$ & rate that macroalgae spread vegetative over algal turfs & 0.8\textsuperscript{\cite{11_zikkah_anggriani_supriatna_2020}}\\ % unknown
-        $q$ & intrinsic growth rate for parrotfish & 0.47\textsuperscript{\cite{12_noaa_report}}\\
-        $\beta$ & carrying capacity of parrotfish & 21*\\ % unknown
-        $h$ & harvesting rate for parrotfish & 0.14 \textsuperscript{\cite{12_noaa_report}}\\
-        $\alpha$ & maximum grazing intensity & 1*\\ % unknown
-        $\sigma$ & rate that parrot fish bite coral & 0.01*\\ % unknown
-        \hline
+        $\mu_{1}$ & natural death rate of coral reefs & 0.15\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}} & $year^{-1}$\\ %12
+        $\mu_{2}$ & natural death rate of parrotfish & 0.22\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
+        $a_{0}$ & rate that coral is overgrown by macroalgae & 0.1\textsuperscript{\cite{11_zikkah_anggriani_supriatna_2020}} & $year^{-1}$\\ %13
+        $r$ & rate that coral recruit to overgrow algal turfs & 10\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}} & $year^{-1}$\\ %12
+        %$g$ & grazing rate that parrotfish graze macroalgae without distinction from algae turfs & $\frac{kg}{yrs}$\\
+        $\gamma$ & rate that macroalgae spread vegetative over algal turfs & 0.8\textsuperscript{\cite{11_zikkah_anggriani_supriatna_2020}} & $year^{-1}$\\ %13
+        $q$ & intrinsic growth rate for parrotfish & 0.47\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
+        $\beta$ & carrying capacity of parrotfish & 21* & n/a\\
+        $h$ & harvesting rate for parrotfish & 0.14\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
+        $\alpha$ & maximum grazing intensity & 1* & n/a\\
+        $\sigma$ & rate that parrot fish bite coral & 0.01*& $bites*year^{-1}$\\
     \end{tabular}
     %\caption{Model Parameters}
     %\label{tab:my_label}
@@ -333,8 +302,8 @@
         \node(aboveofT) [noblock, above of = T, node distance = 0.08 cm]{};
         \node(diagonalofT) [noblock, right of = aboveofT, node distance = 3 cm]{};
         \draw[dashed, ->] (P) --node[above]{} (diagonalofT);
-        \draw[line] (P) --node[above]{$\sigma$} (C);
-        \draw[line] (C) --node[left]{$a$} (M);
+        \draw[dashed, ->] (P) --node[above]{$\sigma$} (C);
+        \draw[line] (C) --node[left]{$a(t)$} (M);
         \draw[line] (P) --node[above]{$h$} (rightofP);
         \draw[line] (P) --node[left]{$\mu_{2}$} (aboveofP);
         %\draw[line] (C) --node[left]{$d$} (aboveofC);
@@ -346,7 +315,7 @@
             \draw[line](C) --node[right]{$\mu_{1}$} (T);     
         \end{scope}
         \begin{scope}[transform canvas = {yshift = .1cm}]
-            \draw[line] (M) --node[above]{$g$} (T);
+            \draw[line] (M) --node[above]{$g(P)$} (T);
         \end{scope}
         \begin{scope}[transform canvas = {yshift = -.15cm}]
             \draw[line] (T) --node[below]{$\gamma$} (M);
@@ -358,15 +327,16 @@
 \subsection{Equations}
 \begin{frame}{Differential Equations}
     System of differential equations derived from compartment model:
-    \begin{align}
+    \begin{align*}
         \begin{split}
-            \frac{dC}{dt} &= rTC + \sigma P C- (aM+\mu_{1})C\\
+            \frac{dC}{dt} &= rTC + \sigma PC- (a(t)M+\mu_{1})C\\
             \frac{dP}{dt} &= qP \left( 1-\frac{P}{\beta C} \right) - P \left( h+\mu_{2} \right)\\
             \frac{dT}{dt} &= \mu_{1}C + \frac{g(P)M}{M+T} - T(rC+\gamma M)\\
-            \frac{dM}{dt} &= (aC+ \gamma T)M - \frac{g(P)M}{M+T}
+            \frac{dM}{dt} &= (a(t)C+ \gamma T)M - \frac{g(P)M}{M+T}
             \label{SoODE}
         \end{split}
-    \end{align}
+    \end{align*}
+    where $g(P) = \frac{\alpha P}{\beta}, \quad a(t)=|\frac{a_{0}(9\sin{(\pi x) }+1)}{10}|$.
 \end{frame}
 
 \subsection{Plots}
@@ -405,6 +375,9 @@
         \label{fig:macroalgae_dominant}
     \end{figure}
 \end{frame}
+
+% DFEs, Endemic, R_0 
+
 %----------------------------------------------------
 
 

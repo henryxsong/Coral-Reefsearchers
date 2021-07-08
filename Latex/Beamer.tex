@@ -8,6 +8,8 @@
 \usepackage{wrapfig}
 \usepackage{subfig}
 \usepackage{graphicx}
+\usepackage{mathrsfs}
+\usepackage{animate}
 
 \renewcommand*{\multicolumntoc}{2}
 \setlength{\columnseprule}{1pt}
@@ -135,7 +137,7 @@
 \end{frame}
 
 \subsection{Definitions}
-\begin{frame}{Definitions}
+\begin{frame}{Identify Our Terms}
     \begin{figure}%
         \centering
         \subfloat[\centering Corals\textsuperscript{\cite{img_coral_reef}}]{{\includegraphics[width=4.7cm]{Latex/Figures/coral_reefs.jpg} }}%
@@ -148,7 +150,7 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}{Definitions (Cont.)}
+\begin{frame}{Identify Our Terms (Cont.)}
     \begin{columns}
         \begin{column}{0.5\textwidth}
             \begin{figure}
@@ -232,14 +234,24 @@
 \subsection{Assumptions}
 \begin{frame}{Assumptions}
     \begin{itemize}
-        \item Ecosystem is closed (i.e. no migration of parrot fish).
-        \item Macroalgae is the only predator for coral.
-        \item Rates are measured in year(s).
+        \item Ecosystem:
+        \begin{itemize}
+            \item is closed (i.e. no migration).
+            \item consists of only corals (C), algal turfs (T), and macroalgae (M).
+            \item supports maximum carrying capacity of parrotfish.
+        \end{itemize}
+        \item Macroalgae is the only predator for Coral.
         \item Coral recruit to and overgrow algal turfs\textsuperscript{\cite{04_mathanalysis}}.
         \item Corals are overgrown by macroalgae\textsuperscript{\cite{04_mathanalysis}}.
-        \item Macroalgae colonize dead coral by spreading vegetative over algal turfs\textsuperscript{\cite{04_mathanalysis}}.
-        \item Coral natural death rate is nonexistent (i.e. not from macroalgae overgrowth).
-        \item Algal Turf and Macroalgae do not have a death rate.
+        \item Macroalgae colonize dead coral by spreading vegetative over algal turfs (T)\textsuperscript{\cite{04_mathanalysis}}.
+        \item Corals do not naturally die.
+        % \item Macroalgae is the only predator for Coral.
+        % \item Rates are measured in year(s).
+        % \item Coral recruit to and overgrow Algal Turfs\textsuperscript{\cite{04_mathanalysis}}.
+        % \item Corals are overgrown by Macroalgae\textsuperscript{\cite{04_mathanalysis}}.
+        % \item Macroalgae colonize dead Coral by spreading vegetative over algal turfs\textsuperscript{\cite{04_mathanalysis}}.
+        % \item Coral natural death rate is nonexistent (i.e. not from Macroalgae overgrowth).
+        % \item Algal turf and macroalgae do not have a death rate.
     \end{itemize}
 \end{frame}
 
@@ -260,8 +272,8 @@
 \subsection{Parameters}
 \begin{frame}{Coral Reef Ecosystem Model Parameters}
     \begin{table}
-    \centering
-    \vspace{-.5cm}
+    %\centering
+    \vspace{-.7cm}
     \begin{tabular}{c p{5cm} c c}
         \hline
         Parameter & Description & Rate & Units\textsuperscript{\cite{12_noaa_report}\cite{04_mathanalysis}\cite{13_blackwood_hastings_mumby_2010}}\\
@@ -269,15 +281,15 @@
         \hline
         $\mu_{1}$ & natural death rate of coral reefs & 0.15\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}} & $year^{-1}$\\ %12
         $\mu_{2}$ & natural death rate of parrotfish & 0.22\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
-        $a_{0}$ & rate that coral is overgrown by macroalgae & 0.1\textsuperscript{\cite{11_zikkah_anggriani_supriatna_2020}} & $year^{-1}$\\ %13
         $r$ & rate that coral recruit to overgrow algal turfs & 10\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}} & $year^{-1}$\\ %12
         %$g$ & grazing rate that parrotfish graze macroalgae without distinction from algae turfs & $\frac{kg}{yrs}$\\
         $\gamma$ & rate that macroalgae spread vegetative over algal turfs & 0.8\textsuperscript{\cite{11_zikkah_anggriani_supriatna_2020}} & $year^{-1}$\\ %13
         $q$ & intrinsic growth rate for parrotfish & 0.47\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
-        $\beta$ & carrying capacity of parrotfish & 21* & n/a\\
         $h$ & harvesting rate for parrotfish & 0.14\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
-        $\alpha$ & maximum grazing intensity & 1* & n/a\\
         $\sigma$ & rate that parrot fish bite coral & 0.01*& $bites*year^{-1}$\\
+        $\alpha$ & maximum grazing intensity & 1* & -\\
+        $\beta$ & carrying capacity of parrotfish & 1* & -\\
+        $a_{0}$ & control variable to simulate seasonal changes & 0.99 & - %13
     \end{tabular}
     %\caption{Model Parameters}
     %\label{tab:my_label}
@@ -336,7 +348,15 @@
             \label{SoODE}
         \end{split}
     \end{align*}
-    where $g(P) = \frac{\alpha P}{\beta}, \quad a(t)=|\frac{a_{0}(9\sin{(\pi x) }+1)}{10}|$.
+    where $g(P) = \frac{\alpha P}{\beta}, \quad a(t)=|\frac{a_{0}(9\sin{(\pi x) }+1)}{10}|$.\\ 
+    \quad
+    \begin{center}
+        \textit{Modified from Blackwood Paper\textsuperscript{\cite{13_blackwood_hastings_mumby_2010}}}
+    \end{center}
+\end{frame}
+
+\begin{frame}{Simulating $a$}
+    \includegraphics[]{Latex/Figures/sin_graph_animation.gif}
 \end{frame}
 
 \subsection{Plots}
@@ -376,7 +396,36 @@
     \end{figure}
 \end{frame}
 
-% DFEs, Endemic, R_0 
+\subsection{Disease Free Equilibrium (DFE)}
+\begin{frame}{Disease Free Equilibrium}
+    \begin{align*}
+        C^{0} &= 1 - \frac{\mu_{1}}{r}\\
+        P^{0} &= -\frac{\beta(1 - \frac{\mu_{1}}{r})(h - \mu_{2} - q)}{q}\\
+        T^{0} &= \frac{\mu_{1}}{r}\\
+        M^{0} &= 0 \Longleftarrow \text{our "disease" compartment}
+    \end{align*}
+    \begin{block}{Note}
+    Since C + T + M = 1, if $M^{0} = 0$, then $C^{0} + T^{0} = 1$.
+    \end{block}
+\end{frame}
+
+\subsection{Endemic Equilibrium}
+\begin{frame}{Endemic Equilibrium}
+    \begin{align*}
+        C^{*} &= call you back on this lol\\
+        P^{*} &= \\
+        T^{*} &= \\
+        M^{*} &= 
+    \end{align*}
+\end{frame}
+
+\subsection{Basic Reproduction Number}
+\begin{frame}{Basic Reproduction Number = $\mathscr{R}_{0}$}
+    $$\mathscr{F} = \begin{bmatrix} aCM+\gamma,TM \end{bmatrix} \quad \quad \mathscr{V} = \begin{bmatrix} \frac{g(P)M}{M+T} \end{bmatrix}$$
+    $$\Downarrow \quad \quad \quad \quad \quad \quad \Downarrow$$
+    $$F = \begin{bmatrix} 4x54 \end{bmatrix} \quad V = \begin{bmatrix} 4x54 \end{bmatrix}$$
+    $$\displaystyle {\mathscr{R}}_{0} = \frac{\mu_{1}(a r - a\mu_{1} + \gamma \mu_{1})}{r^{2}g(P)}$$
+\end{frame}
 
 %----------------------------------------------------
 
@@ -391,11 +440,17 @@
             %\item Select a representative species of average resiliency (specifically on Guam) and examine how it will change over time through climate changes.
         %\end{itemize}
         %\item Continue to digest articles and literature relevant to our research.
-        \item Establish our methodology and finalize our mathematical model and assumptions
-        \item Find missing parameter values
+        \item Finish endemic equilibrium calculations.
+        \item Perform sensitivity analysis on parameters.
         \item Refine and improve differential equations to improve dynamics
         % analyze diff eqs
-        \item Application of Education Game Theory on the harvest rate parameter ($h$) to quantify human behavior and the best strategy to protect coral reef sustainability
+        \item Application of Education Game Theory on the harvest rate parameter ($h$) to quantify human behavior and the best strategy to protect coral reef sustainability. These tasks include:
+        \begin{itemize}
+            \item Payoff Matrix
+            \item Dominant and/or mixed equilibrium equations
+            \item Nash Equilibrium/Evolutionarily Stable Strategy
+            \item Replicator Equation
+        \end{itemize}
     \end{itemize}
 \end{frame}
 

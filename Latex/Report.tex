@@ -10,6 +10,7 @@
 \usepackage{tikz}
 \usepackage[tok, page]{appendix}
 \usepackage{listings}
+\usepackage{mathrsfs}
 
 % tikz style stuff
 \usetikzlibrary{arrows}
@@ -28,7 +29,7 @@
 \addbibresource{main.bib}
 
 \title{Effects of Overfishing on Coral Reef Ecosystems\\Coral Reefsearchers}
-\author{Aaron Bumagat, Michelle Luces, Henry Song\\University of Guam}
+\author{Aaron Bumagat, Henry Song, Michelle Luces\\University of Guam}
 \date{\today}
 
 \begin{document}
@@ -77,7 +78,7 @@ The objective of this paper is to analyze how Guam's reef ecosystem will change 
             \draw[line](C) --node[right]{$\mu_{1}$} (T);     
         \end{scope}
         \begin{scope}[transform canvas = {yshift = .1cm}]
-            \draw[line] (M) --node[above]{$g$} (T);
+            \draw[line] (M) --node[above]{$g(P)$} (T);
         \end{scope}
         \begin{scope}[transform canvas = {yshift = -.15cm}]
             \draw[line] (T) --node[below]{$\gamma$} (M);
@@ -87,7 +88,7 @@ The objective of this paper is to analyze how Guam's reef ecosystem will change 
 \end{center}
 
 % assumptions and description of model
-We assume that the (i) system is closed, (ii) time dimensions are measured over one years, and (iii) macroalgae is the only predator for coral. Corals are assumed to (iv) recruit and overgrow algal turfs and that they are overgrown by macroalgae \textsuperscript{\cite{04_mathanalysis}}. Macroalgae are also assumed (v)colonize dead coral by spreading vegetative over algal turfs \textsuperscript{\cite{04_mathanalysis}}. In addition, (vi) the natural death rate of coral is nonexistent and (vii) algal turfs and macroalgae do not have a death rate (see Fig. 1).
+We assume that the (i) system is closed, (ii) it only consists of coral, macroalgae, and algal turfs, and (iii) macroalgae is the only predator for coral. Corals are assumed to (iv) recruit and overgrow algal turfs and that they are overgrown by macroalgae \textsuperscript{\cite{04_mathanalysis}}. Macroalgae are also assumed (v) colonize dead coral by spreading vegetative over algal turfs \textsuperscript{\cite{04_mathanalysis}}. In addition, (vi) corals do not die naturally and (vii) the maximum carrying capacity of parrotfish is equal to 1.
 
 %Represented above is our general compartment model. While this version is a rough draft, it represents the compartments that we wish to include in our model. Included in our model is our $S$ compartment, which represents all susceptible corals, our $E$ compartment representing all exposed corals, our $I$ compartment representing our infected corals, and our $R$ compartment representing recovered corals. While this follows the standard SEIR model layout, we included an $H$ compartment to account for human factors. This is in order to assess how the human factor may directly or indirectly affect the typical "life" cycle of corals. \par
 %The $H$ compartment allows to factor in the human factor to the overall equation, however in order to achieve this, we must implement education game theory. This is in order to model human factors such as education about corals, ignorance, and various other factors. By using education game theory, we are able to visualize which strategy is dominant between humans and corals, and reflect this strategy in our overall compartment model.
@@ -96,23 +97,21 @@ We assume that the (i) system is closed, (ii) time dimensions are measured over 
 C, T, and M are proportions of coral, algal turf, and macroalgae cover on the ocean floor, respectively,  where $C+M+T=1$ to signify the proportion of each population is a selected area. P is the population of the parrotfish that inhabit the coral reef ecosystem in proportion to the maximum carrying capacity. The coral reef dynamics are described as a system of nonlinear differential equations \textsuperscript{\cite{13_blackwood_hastings_mumby_2010}}: 
 \begin{align}
     \begin{split}
-        \frac{dC}{dt} &= rTC + \sigma P C- (aM+\mu_{1})C\\
+        \frac{dC}{dt} &= rTC + \sigma P C- (a(t)M+\mu_{1})C\\
         \frac{dP}{dt} &= qP \left( 1-\frac{P}{\beta C} \right) - P \left( h+\mu_{2} \right)\\
         \frac{dT}{dt} &= \mu_{1}C + \frac{g(P)M}{M+T} - T(rC+\gamma M)\\
-        \frac{dM}{dt} &= (aC+ \gamma T)M - \frac{g(P)M}{M+T}
+        \frac{dM}{dt} &= (a(t)C+ \gamma T)M - \frac{g(P)M}{M+T}
     \end{split}
 \end{align}
 
 where: 
 \begin{align*}
-&g(P) = \frac{\alpha P}{\beta}, \\
+&g(P) = \frac{\alpha P}{\beta}, a(t)=|\frac{a_{0}(9\sin{(\pi t) }+1)}{10}|\\
 and\\
 &\frac{g(P)M}{M + T} \text{ is the proportion of grazing that affects macroalgae} \textsuperscript{\cite{13_blackwood_hastings_mumby_2010}}.
 \end{align*}
 
 %See Table 1 for 
-
-
 
 \subsection{Parameter Values}
 \begin{table}[H]
@@ -124,7 +123,8 @@ and\\
         \hline
         $\mu_{1}$ & natural death rate of coral reefs & 0.15\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}} & $\frac{1}{year}$\\ %12
         $\mu_{2}$ & natural death rate of parrotfish & 0.22\textsuperscript{\cite{12_noaa_report}} & $\frac{1}{year}$\\ %8
-        $a$ & rate that coral is overgrown by macroalgae & 0.1\textsuperscript{\cite{11_zikkah_anggriani_supriatna_2020}} & $\frac{1}{year}$\\ %13
+        $a_{0}$ & rate that coral is overgrown by macroalgae & 0.99 & - \\
+        %\textsuperscript{\cite{11_zikkah_anggriani_supriatna_2020}} & $\frac{1}{year}$\\ %13
         $r$ & rate that coral recruit to overgrow algal turfs & 10\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}} & $\frac{1}{year}$\\ %12
         %$g$ & grazing rate that parrotfish graze macroalgae without distinction from algae turfs & $\frac{kg}{yrs}$\\
         $\gamma$ & rate that macroalgae spread vegetative over algal turfs & 0.8\textsuperscript{\cite{11_zikkah_anggriani_supriatna_2020}} & $\frac{1}{year}$\\ %13
@@ -169,8 +169,36 @@ Using MatLab (See Appendix \ref{appendix:A}), we were able to model the dynamics
 \end{figure}\\
 As we can see in Figures \ref{fig:initial_plot}, \ref{fig:coral_dominant}, \ref{fig:turf_dominant}, \& \ref{fig:macroalgae_dominant}, as the parrot fish population decreases, the macroalgae proportion increases. In addition, as the macroalgae proportion increases, the coral proportion decreases, and subsequently the algal turf proportion decreases as well.\\
 
+\subsection{Disease-Free Equilibrium and $\mathscr{R}_{0}$}
+The disease-free equilibrium is the point at which no disease is present in the system, in which $M^{0} = 0$. The system of equations becomes
+\begin{align*}
+        C^{0} &= 1 - \frac{\mu_{1}}{r}\\
+        P^{0} &= -\frac{\beta(1 - \frac{\mu_{1}}{r})(h - \mu_{2} - q)}{q}\\
+        T^{0} &= \frac{\mu_{1}}{r}\\
+        M^{0} &= 0 
+\end{align*}
+and since C + T + M = 1, if $M^{0} = 0$, then $C^{0} + T^{0} = 1$.Thus, our disease-free equilibrium is at $(1 - \frac{\mu_{1}}{r}, -\frac{\beta(1 - \frac{\mu_{1}}{r})(h - \mu_{2} - q)}{q}, 0, \frac{\mu_{1}}{r})$.
+$$\displaystyle {\mathscr{R}}_{0} = \frac{\mu_{1}(a r - a\mu_{1} + \gamma \mu_{1})}{r^{2}g(P)}$$
 
+\subsection{Endemic Equilibrium}
+\begin{align*}
+        P^{*} &= \beta C \left(\frac{q-(h+\mu_{2})}{q}\right)\\
+        C^{*} &= rTC + \sigma PC - (a(t)M+\mu_{1})C\\
+        T^{*} &= T^{2}(rC+\gamma M) + T(MrC + M^{2} + \mu_{1}C) - \left(\frac{\alpha P}{\beta}M + \mu_{1} CM\right)\\
+        M^{*} &= \frac{\alpha P}{\beta (aC + \gamma T)} - T\\
+\end{align*}
 
+The Endemic Equilibrium tells us at what point will the disease not spread nor will it fully eradicate. Essentially it tells when the disease is stabilized. In order to find the endemic equilibrium, we have to set each differential equal to 0 and solve for each variable. The equations above are not yet finished as $P^{*}$ is the only equation that is in terms of C. Every other equation will need to be computed in terms of C. After finding the equations, the next step would be to substitute the parameters in order to see at what point does each compartment need to be in order to have an Endemic Equilibrium. Note that $C=1-\frac{\mu_{1}}{r}$ 
+
+Calculating $P^{*}$ :
+\begin{align*}
+        \frac{dP}{dT} &= qP\left(1-\frac{P}{\beta C}\right) - P(h + \mu_{2})\\
+        0 &= qP\left(1-\frac{P}{\beta C}\right) - P(h + \mu_{2})\\
+        P(h+ \mu_{2}) &= qP\left(1-\frac{P}{\beta C}\right)\\
+        \frac{(h+ \mu_{2})}{q} &= \left(1-\frac{P}{\beta C}\right)\\
+        \frac{P}{\beta C} &= 1 - \frac{h+\mu_{2}}{q}\\
+        P^{*} &= \beta C \left(\frac{q-(h+\mu_{2})}{q}\right)
+    \end{align*}
 %\subsection{Education Game Theory}
 
 \section{Literature Review}

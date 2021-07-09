@@ -81,32 +81,20 @@
 
 %%------------------Table of Contents---------------------------
 \begin{frame}{Table of Contents}
-    \tableofcontents
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \tableofcontents[sections=1-2]
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \tableofcontents[sections=3-4]
+        \end{column}
+    \end{columns}
 \end{frame}
 
 %%-----------------------Introduction-------------------------
 
 %%--------------------------Background--------------------------
 \section{Background}
-% \begin{frame}{Background}
-%     \begin{itemize}
-%         \item Coral Reefs are large underwater structures composed of the skeletons of colonial marine invertebrates known as coral$^\cite{ross}$.
-%     \end{itemize}
-% \end{frame}
-% \begin{frame}{Background}
-%     \begin{itemize}
-%         \item Coral Reefs are large underwater structures composed of the skeletons of colonial marine invertebrates known as coral$^\cite{ross}$.
-%         \item Climate change is a leading factor for the cause of coral bleaching/death.
-%     \end{itemize}
-% \end{frame}
-% \begin{frame}{Background}
-%     \begin{itemize}
-%         \item Coral Reefs are large underwater structures composed of the skeletons of colonial marine invertebrates known as coral$^\cite{ross}$.
-%         \item Climate change is a leading factor for the cause of coral bleaching/death.
-%         \item Overfishing, temperature changes, and resiliency of coral reef species are factors when it comes to the changes in a reef ecosystem.
-%     \end{itemize}
-% \end{frame}
-
 \subsection{General Background}
 \begin{frame}{Background}
     \begin{itemize}
@@ -168,12 +156,6 @@
             \end{itemize}
         \end{column}
     \end{columns}
-    % \begin{wrapfig}{l}
-    %     \centering
-    %     \includegraphics[width=0.45\textwidth]{Latex/Figures/parrot_fish.jpg}
-    %     \caption{Parrot Fish\textsuperscript{\cite{img_parrot_fish}}}
-    %     \label{fig:my_label}
-    % \end{wrapfig}
 \end{frame}
 
 
@@ -240,10 +222,10 @@
             \item consists of only corals (C), algal turfs (T), and macroalgae (M).
             \item supports maximum carrying capacity of parrotfish.
         \end{itemize}
-        \item Macroalgae is the only predator for coral.
+        \item Macroalgae is the only predator of coral.
         \item Coral recruit to and overgrow algal turfs\textsuperscript{\cite{04_mathanalysis}}.
         \item Corals are overgrown by macroalgae\textsuperscript{\cite{04_mathanalysis}}.
-        \item Macroalgae colonize dead coral by spreading vegetative over algal turfs (T)\textsuperscript{\cite{04_mathanalysis}}.
+        \item Macroalgae colonize dead coral by spreading vegetative over algal turfs\textsuperscript{\cite{04_mathanalysis}}.
         \item Corals do not naturally die.
         % \item Macroalgae is the only predator for Coral.
         % \item Rates are measured in year(s).
@@ -287,8 +269,8 @@
         $q$ & intrinsic growth rate for parrotfish & 0.47\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
         $h$ & harvesting rate for parrotfish & 0.14\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
         $\sigma$ & rate that parrot fish bite coral & 0.01*& $bites*year^{-1}$\\
-        $\alpha$ & maximum grazing intensity & 1* & -\\
-        $\beta$ & carrying capacity of parrotfish & 1* & -\\
+        $\alpha$ & maximum grazing intensity & 1\textsuperscript{\cite{13_blackwood_hastings_mumby_2010}} & -\\
+        $\beta$ & carrying capacity of parrotfish & 1 & -\\
         $a_{0}$ & control variable to simulate seasonal changes & 0.99 & - %13
     \end{tabular}
     %\caption{Model Parameters}
@@ -336,7 +318,7 @@
 \end{center}
 \end{frame}
 
-\subsection{Equations}
+\subsection{Differential Equations}
 \begin{frame}{Differential Equations}
     System of differential equations derived from compartment model:
     \begin{align*}
@@ -348,54 +330,73 @@
             \label{SoODE}
         \end{split}
     \end{align*}
-    where $g(P) = \frac{\alpha P}{\beta}, \quad a(t)=|\frac{a_{0}(9\sin{(\pi x) }+1)}{10}|$.\\ 
+    where $g(P) = \frac{\alpha P}{\beta}, \quad a(t)=|\frac{a_{0}(9\sin{(\pi t) }+1)}{10}|$.\\ 
     \quad
     \begin{center}
-        \textit{Modified from Blackwood Paper\textsuperscript{\cite{13_blackwood_hastings_mumby_2010}}}
+        \textit{Modified from \cite{13_blackwood_hastings_mumby_2010}}
     \end{center}
 \end{frame}
 
-\begin{frame}{Simulating $a$}
-    \includegraphics[]{Latex/Figures/sin_graph_animation.gif}
+\subsection{Plots}
+\begin{frame}{Simulating $a(t)$}
+    \begin{center}
+        $$a(t)= \left|\frac{a_{0}(9\sin{(\pi t) }+1)}{10} \right|$$\\
+        \animategraphics[width=0.85\textwidth, loop, autoplay]{12}{Latex/Figures/sine_graph_animation/frame-}{157}{318}
+    \end{center}
+    
 \end{frame}
 
-\subsection{Plots}
-\begin{frame}{Coral Ecosystem Model Dynamics}
+\begin{frame}{Parameter Changes: $a_{0}$}
+    \begin{center}
+        \animategraphics[width=0.85\textwidth, loop, autoplay]{3}{Latex/Figures/a_animation/frame-}{1}{45}\\
+        Initial Conditions: $C = T = M = \frac{1}{3}$, and $P = \frac{3}{4}$
+    \end{center}
+\end{frame}
+
+\begin{frame}{Parameter Changes: $h$}
+    \begin{center}
+        \animategraphics[width=0.85\textwidth, loop, autoplay]{3}{Latex/Figures/h_animation/frame-}{1}{49}\\
+        Initial Conditions: $C = T = M = \frac{1}{3}$, and $P = \frac{3}{4}$
+    \end{center}
+\end{frame}
+
+\begin{frame}{Compartment Initial Condition Changes}
     \begin{figure}
         \centering
-        \includegraphics[width=0.9\textwidth]{Latex/Figures/initial_matlab_plot.png}
-        \caption{Initial Conditions: $C = T = M = \frac{1}{3}$, and $P = 1$}
+        \includegraphics[width=0.85\textwidth]{Latex/Figures/Graphs/0.3C_0.3T_0.3M.png}
+        \caption{Initial Conditions: $C = T = M = \frac{1}{3}$, and $P = \frac{3}{4}$}
         \label{fig:initial_plot}
     \end{figure}
 \end{frame}
 
-\begin{frame}{Coral Ecosystem Model Dynamics (Cont.)}
+\begin{frame}{Compartment Initial Condition Changes}
     \begin{figure}
         \centering
-        \includegraphics[width=0.9\textwidth]{Latex/Figures/0.5C_0.25T_0.25M.png}
-        \caption{Initial Conditions: $C = \frac{1}{2}$, $T = M = \frac{1}{4}$, and $P = 1$}
+        \includegraphics[width=0.85\textwidth]{Latex/Figures/Graphs/0.5C_0.25T_0.25M.png}
+        \caption{Initial Conditions: $C = \frac{1}{2}$, $T = M = \frac{1}{4}$, and $P = \frac{3}{4}$}
         \label{fig:coral_dominant}
     \end{figure}
 \end{frame}
 
-\begin{frame}{Coral Ecosystem Model Dynamics (Cont.)}
+\begin{frame}{Compartment Initial Condition Changes}
     \begin{figure}
         \centering
-        \includegraphics[width=0.85\textwidth]{Latex/Figures/0.25C_0.5T_0.25M.png}
-        \caption{Initial Conditions: $T = \frac{1}{2}$, $C = M = \frac{1}{4}$, and $P = 1$}
+        \includegraphics[width=0.85\textwidth]{Latex/Figures/Graphs/0.25C_0.5T_0.25M.png}
+        \caption{Initial Conditions: $T = \frac{1}{2}$, $C = M = \frac{1}{4}$, and $P = \frac{3}{4}$}
         \label{fig:turf_dominant}
     \end{figure}
 \end{frame}
 
-\begin{frame}{Coral Ecosystem Model Dynamics (Cont.)}
+\begin{frame}{Compartment Initial Condition Changes}
     \begin{figure}
         \centering
-        \includegraphics[width=0.9\textwidth]{Latex/Figures/0.25C_0.25T_0.5M.png}
-        \caption{Initial Conditions: $M = \frac{1}{2}$, $C = T = \frac{1}{4}$, and $P = 1$}
+        \includegraphics[width=0.85\textwidth]{Latex/Figures/Graphs/0.25C_0.25T_0.5M.png}
+        \caption{Initial Conditions: $M = \frac{1}{2}$, $C = T = \frac{1}{4}$, and $P = \frac{3}{4}$}
         \label{fig:macroalgae_dominant}
     \end{figure}
 \end{frame}
 
+\section{Equilibria}
 \subsection{Disease Free Equilibrium (DFE)}
 \begin{frame}{Disease Free Equilibrium}
     \begin{align*}
@@ -412,26 +413,42 @@
 \subsection{Endemic Equilibrium}
 \begin{frame}{Endemic Equilibrium}
     \begin{align*}
-        C^{*} &= call you back on this lol\\
-        P^{*} &= \\
-        T^{*} &= \\
-        M^{*} &= 
+        P^{*} &= \beta C \left(\frac{q-(h+\mu_{2})}{q} \right)\\
+        C^{*} &= rTC + \sigma PC- (a(t)M+\mu_{1})C\\
+        T^{*} &= T^{2}(rC + \gamma M) + T(rMC + M^{2}+\mu_{1}C) - \left(\frac{\alpha P}{\beta}M + \mu_{1}CM \right)\\
+        M^{*} &= \frac{\alpha P}{\beta(a(t)C+\gamma T)} - T
     \end{align*}
 \end{frame}
 
 \subsection{Basic Reproduction Number}
 \begin{frame}{Basic Reproduction Number = $\mathscr{R}_{0}$}
-    $$\mathscr{F} = \begin{bmatrix} aCM+\gamma,TM \end{bmatrix} \quad \quad \mathscr{V} = \begin{bmatrix} \frac{g(P)M}{M+T} \end{bmatrix}$$
-    $$\Downarrow \quad \quad \quad \quad \quad \quad \Downarrow$$
-    $$F = \begin{bmatrix} 4x54 \end{bmatrix} \quad V = \begin{bmatrix} 4x54 \end{bmatrix}$$
-    $$\displaystyle {\mathscr{R}}_{0} = \frac{\mu_{1}(a r - a\mu_{1} + \gamma \mu_{1})}{r^{2}g(P)}$$
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \begin{align*}
+                \mathscr{F} &= \begin{bmatrix} a(t)CM+\gamma TM \end{bmatrix}\\
+                \Downarrow\\
+                F &= \begin{bmatrix} a(t)C + \gamma T^{0} \end{bmatrix}
+            \end{align*}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{align*}
+                \mathscr{V} &= \begin{bmatrix} \frac{g(P)M}{M+T} \end{bmatrix}\\
+                \Downarrow\\
+                V &= \begin{bmatrix} \frac{g(P)T^{0}}{(M+T)^{2}} \end{bmatrix}
+            \end{align*}
+        \end{column}
+    \end{columns}
+    $$\mathscr{R}_{0} = \rho(\det(FV^{-1} - \lambda I))$$
+    $$\Downarrow$$
+    $$\displaystyle {\mathscr{R}}_{0} = \frac{\mu_{1}(a(t) r - a(t)\mu_{1} + \gamma \mu_{1})}{r^{2}g(P)}$$
 \end{frame}
 
 %----------------------------------------------------
 
 
 %---------------------Plans---------------------
-\section{Plans}
+\section{Closing Remarks}
+\subsection{Future Plans}
 \begin{frame}{Future Plans}
     \begin{itemize}
         %\item Specific ideas:
@@ -442,7 +459,7 @@
         %\item Continue to digest articles and literature relevant to our research.
         \item Finish endemic equilibrium calculations.
         \item Perform sensitivity analysis on parameters.
-        \item Refine and improve differential equations to improve dynamics
+        %\item Refine and improve differential equations to improve dynamics
         % analyze diff eqs
         \item Application of Education Game Theory on the harvest rate parameter ($h$) to quantify human behavior and the best strategy to protect coral reef sustainability. These tasks include:
         \begin{itemize}
@@ -463,13 +480,13 @@
     %Type conclusion here
 %\end{frame}
 
-\section*{Q \& A}
+\subsection{Q \& A}
 \begin{frame}
     \Huge{Questions?}
 \end{frame}
 
 %%-------------------------Acknowledgements----------------
-\section*{Acknowledgements}
+\subsection{Acknowledgements}
 \begin{frame}{Acknowledgements}
     \begin{center}
         Support for the Young Scholars Research Experience in Mathematics (YSREM)  is through the MAA Tensor SUMMA Program. Support for the MAA National Research Experience for Undergraduates Program (NREUP) is provided by the National Science Foundation (Grant Number DMS-1950644). Support for the NSF EPSCoR project, Guam Ecosystems Collaboratorium for Corals and Oceans (GECCO) is provided by the National Science Foundation (Grant Number DMS-1946352). \\
@@ -495,7 +512,7 @@
 
 
 %%----------------------Bibliography-------------------
-\section{Bibliography}
+\subsection{Bibliography}
 \begin{frame}[allowframebreaks]{Bibliography}
     \small{\printbibliography}
     % \nocite{01_assesing_relative}

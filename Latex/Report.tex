@@ -28,7 +28,7 @@
 
 \addbibresource{main.bib}
 
-\title{Effects of Overfishing on Coral Reef Ecosystems\\Coral Reefsearchers}
+\title{Effects of Overfishing on Coral Reef Ecosystems\\\large{Coral Reefsearchers}}
 \author{Aaron Bumagat, Henry Song, Michelle Luces\\University of Guam}
 \date{\today}
 
@@ -65,8 +65,8 @@ The objective of this paper is to analyze how Guam's reef ecosystem will change 
         \node(aboveofT) [noblock, above of = T, node distance = 0.08 cm]{};
         \node(diagonalofT) [noblock, right of = aboveofT, node distance = 3 cm]{};
         \draw[dashed, ->] (P) --node[above]{} (diagonalofT);
-        \draw[line] (P) --node[above]{$\sigma$} (C);
-        \draw[line] (C) --node[left]{$a$} (M);
+        \draw[dashed, ->] (P) --node[above]{$\sigma$} (C);
+        \draw[line] (C) --node[left]{$a(t)$} (M);
         \draw[line] (P) --node[above]{$h$} (rightofP);
         \draw[line] (P) --node[left]{$\mu_{2}$} (aboveofP);
         %\draw[line] (C) --node[left]{$d$} (aboveofC);
@@ -83,7 +83,7 @@ The objective of this paper is to analyze how Guam's reef ecosystem will change 
         \begin{scope}[transform canvas = {yshift = -.15cm}]
             \draw[line] (T) --node[below]{$\gamma$} (M);
         \end{scope}
-        \caption{Flowchart of coral reef ecosystem}
+        %\caption{Flowchart of coral reef ecosystem}
     \end{tikzpicture}
 \end{center}
 
@@ -121,22 +121,21 @@ and\\
         Parameter & Description & Rate & Units\textsuperscript{\cite{12_noaa_report}\cite{04_mathanalysis}\cite{13_blackwood_hastings_mumby_2010}}\\
         \hline
         \hline
-        $\mu_{1}$ & natural death rate of coral reefs & 0.15\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}} & $\frac{1}{year}$\\ %12
-        $\mu_{2}$ & natural death rate of parrotfish & 0.22\textsuperscript{\cite{12_noaa_report}} & $\frac{1}{year}$\\ %8
-        $a_{0}$ & rate that coral is overgrown by macroalgae & 0.99 & - \\
-        %\textsuperscript{\cite{11_zikkah_anggriani_supriatna_2020}} & $\frac{1}{year}$\\ %13
-        $r$ & rate that coral recruit to overgrow algal turfs & 10\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}} & $\frac{1}{year}$\\ %12
+        $\mu_{1}$ & natural death rate of coral reefs & 0.15\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}} & $year^{-1}$\\ %12
+        $\mu_{2}$ & natural death rate of parrotfish & 0.22\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
+        $r$ & rate that coral recruit to overgrow algal turfs & 10\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}} & $year^{-1}$\\ %12
         %$g$ & grazing rate that parrotfish graze macroalgae without distinction from algae turfs & $\frac{kg}{yrs}$\\
-        $\gamma$ & rate that macroalgae spread vegetative over algal turfs & 0.8\textsuperscript{\cite{11_zikkah_anggriani_supriatna_2020}} & $\frac{1}{year}$\\ %13
-        $q$ & intrinsic growth rate for parrotfish & 0.47\textsuperscript{\cite{12_noaa_report}} & $\frac{1}{year}$\\ %8
-        $\beta$ & carrying capacity of parrotfish & 21* & n/a\\
-        $h$ & harvesting rate for parrotfish & 0.14\textsuperscript{\cite{12_noaa_report}} & $\frac{1}{year}$\\ %8
-        $\alpha$ & maximum grazing intensity & 1* & n/a\\
-        $\sigma$ & rate that parrot fish bite coral & 0.01*& $\frac{bites}{year}$\\
+        $\gamma$ & rate that macroalgae spread vegetative over algal turfs & 0.8\textsuperscript{\cite{11_zikkah_anggriani_supriatna_2020}} & $year^{-1}$\\ %13
+        $q$ & intrinsic growth rate for parrotfish & 0.47\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
+        $h$ & harvesting rate for parrotfish & 0.14\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
+        $\sigma$ & rate that parrot fish bite coral & 0.01*& $bites*year^{-1}$\\
+        $\alpha$ & maximum grazing intensity & 1\textsuperscript{\cite{13_blackwood_hastings_mumby_2010}} & -\\
+        $\beta$ & carrying capacity of parrotfish & 1 & -\\
+        $a_{0}$ & control variable to simulate seasonal changes & 0.99 & - %13
         \hline
     \end{tabular}
     \caption{Model Parameters}
-    \label{tab:my_label}
+    \label{tab:parameters}
 \end{table}
 \textit{* = estimated values}
 
@@ -145,25 +144,25 @@ and\\
 Using MatLab (See Appendix \ref{appendix:A}), we were able to model the dynamics using our preliminary rates. This was achieved by changing the C, M, \& T proportions. Below are the graphs that were were able to achieve:\\
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{Latex/Figures/initial_matlab_plot.png}
+    \includegraphics[width=0.7\textwidth]{Latex/Figures/Graphs/0.3C_0.3T_0.3M.png}
     \caption{Initial Conditions: $C = T = M = \frac{1}{3}$, and $P = 1$}
     \label{fig:initial_plot}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{Latex/Figures/0.5C_0.25T_0.25M.png}
+    \includegraphics[width=0.7\textwidth]{Latex/Figures/Graphs/0.5C_0.25T_0.25M.png}
     \caption{Initial Conditions: $C = \frac{1}{2}$, $T = M = \frac{1}{4}$, and $P = 1$}
     \label{fig:coral_dominant}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{Latex/Figures/0.25C_0.5T_0.25M.png}
+    \includegraphics[width=0.7\textwidth]{Latex/Figures/Graphs/0.25C_0.5T_0.25M.png}
     \caption{Initial Conditions: $T = \frac{1}{2}$, $C = M = \frac{1}{4}$, and $P = 1$}
     \label{fig:turf_dominant}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{Latex/Figures/0.25C_0.25T_0.5M.png}
+    \includegraphics[width=0.7\textwidth]{Latex/Figures/Graphs/0.25C_0.25T_0.5M.png}
     \caption{Initial Conditions: $M = \frac{1}{2}$, $C = T = \frac{1}{4}$, and $P = 1$}
     \label{fig:macroalgae_dominant}
 \end{figure}\\

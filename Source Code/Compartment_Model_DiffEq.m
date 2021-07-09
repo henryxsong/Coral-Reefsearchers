@@ -17,6 +17,13 @@ g = @(P) (alpha*P)/beta;
 %sin function of 
 a = @(t) abs((a0*(9*sin(pi*t)+1))/(10));
 
+% Compartment Initial Conditions
+C = 1/4;
+P = 3/4;
+T = 1/4;
+M = 1/2;
+
+
 % set up DFE
 % dC/dt = rTC + sigmaPC - C(aM + d) #ignore sigmaPC for now
 % dP/dt = qP(1-P/betaC) + kapaP - (h + mu)P 
@@ -25,22 +32,14 @@ a = @(t) abs((a0*(9*sin(pi*t)+1))/(10));
 % dM/dt = aMC + gammaMT - (g(P)M)/(M + T)
 %
 % C = y(1), P = y(2), T = y(3), M = y(4)
-f = @(t,y) [r*y(3)*y(1) + sigma*y(2)*y(1) - y(1)*(a(t)*y(4) + mu1),
-            q*y(2)*(1-(y(2)/(beta*y(1)))) - (h+mu2)*y(2), 
-            mu1*y(1) + (g(y(2))*y(4))/(y(4)+y(3)) - (r*y(1) + gamma*y(4))*y(3),
-            a(t) * y(4)*y(1) + gamma*y(4)*y(3) - (g(y(2))*y(4))/(y(4)+y(3)),
-            y(1)+y(3)+y(4)];
-
-C = 1/3;
-P = 3/4;
-T = 1/3;
-M = 1/3;
-        
-  
-% solve with ODE 45
+% f = @(t,y) [r*y(3)*y(1) + sigma*y(2)*y(1) - y(1)*(a(t)*y(4) + mu1),
+%             q*y(2)*(1-(y(2)/(beta*y(1)))) - (h+mu2)*y(2), 
+%             mu1*y(1) +  (g(y(2))*y(4))/(y(4)+y(3)) - (r*y(1) + gamma*y(4))*y(3),
+%             a(t) * y(4)*y(1) + gamma*y(4)*y(3) - (g(y(2))*y(4))/(y(4)+y(3)),
+%             y(1)+y(3)+y(4)];
+            
 [t,ya] = ode45(f, [0 5], [C, P, T, M, 1]);
 
-% graph
 figure
 hold on
 plot(t, ya(:,1), '+-.', 'Color', '#FFC996', 'Linewidth', 2.5)
@@ -48,6 +47,40 @@ plot(t, ya(:,2), 'x-.', 'Color', '#4974A5', 'Linewidth', 2.5)
 plot(t, ya(:,3), 'o-.', 'Color', '#BDD2B6', 'Linewidth', 2.5)
 plot(t, ya(:,4), '*-.', 'Color', '#CF0000', 'Linewidth', 2.5)
 %legend('Coral (C)', 'Algal Turf (T)', 'Macroalgae (M)')
+set(gca, 'FontSize',18);
+ylim([0 1]);
 legend('Coral (C)', 'Parrotfish (P)', 'Algal Turf (T)', 'Macroalgae (M)')
+%text(0.25,0.05,txt, 'FontSize', 18);
 xlabel('Time (Year)')
 ylabel('Proportion of Population')
+  
+% for i = 1:length(t)
+%     a0 = i/length(t);
+%     a = @(t) abs((a0*(9*sin(pi*t)+1))/(10));
+%     f = @(t,y) [r*y(3)*y(1) + sigma*y(2)*y(1) - y(1)*(a(t)*y(4) + mu1),
+%             q*y(2)*(1-(y(2)/(beta*y(1)))) - (h+mu2)*y(2), 
+%             mu1*y(1) + (g(y(2))*y(4))/(y(4)+y(3)) - (r*y(1) + gamma*y(4))*y(3),
+%             a(t) * y(4)*y(1) + gamma*y(4)*y(3) - (g(y(2))*y(4))/(y(4)+y(3)),
+%             y(1)+y(3)+y(4)];
+%     
+%     [t,ya] = ode45(f, [0 5], [C, P, T, M, 1]);
+%     
+%     txt = ['a_0 = ' num2str(a0)];
+%     figure
+%     hold on
+%     plot(t, ya(:,1), '+-.', 'Color', '#FFC996', 'Linewidth', 2.5)
+%     plot(t, ya(:,2), 'x-.', 'Color', '#4974A5', 'Linewidth', 2.5)
+%     plot(t, ya(:,3), 'o-.', 'Color', '#BDD2B6', 'Linewidth', 2.5)
+%     plot(t, ya(:,4), '*-.', 'Color', '#CF0000', 'Linewidth', 2.5)
+%     %legend('Coral (C)', 'Algal Turf (T)', 'Macroalgae (M)')
+%     set(gca, 'FontSize',18);
+%     ylim([0 1]);
+%     legend('Coral (C)', 'Parrotfish (P)', 'Algal Turf (T)', 'Macroalgae (M)')
+%     text(0.25,0.05,txt, 'FontSize', 18);
+%     xlabel('Time (Year)')
+%     ylabel('Proportion of Population')
+% end
+% solve with ODE 45
+
+
+% graph

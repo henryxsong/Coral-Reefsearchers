@@ -50,6 +50,7 @@
 \tikzstyle{blockAlgae} = [rectangle, draw, fill=algaeRed!45, text width = 1.5em, text centered, minimum height = 2em]
 \tikzstyle{blockParrot} = [rectangle, draw, fill=parrotBlue!50, text width = 1.5em, text centered, minimum height = 2em]
 \tikzstyle{line} = [thick, ->, >= stealth]
+\tikzstyle{dline} = [thick, dashed, ->, >= stealth]
 \tikzstyle{noblock} = [rectangle, draw = none]
 
 %%--------------- Title Slide ------------------------------
@@ -294,9 +295,9 @@
         \node(aboveofC) [noblock, above of = C, node distance = 1.5 cm]{};
         \node(belowofP) [noblock, below of = P, node distance = 1.5 cm]{};
         \node(aboveofT) [noblock, above of = T, node distance = 0.08 cm]{};
-        \node(diagonalofT) [noblock, right of = aboveofT, node distance = 3 cm]{};
-        \draw[dashed, ->] (P) --node[above]{} (diagonalofT);
-        \draw[dashed, ->] (P) --node[above]{$\sigma$} (C);
+        \node(diagonalofT) [noblock, right of = aboveofT, node distance = 3.3 cm]{};
+        \draw[dline] (P) --node[above]{} (diagonalofT);
+        \draw[dline] (P) --node[above]{$\sigma$} (C);
         \draw[line] (C) --node[left]{$a(t)$} (M);
         \draw[line] (P) --node[above]{$h$} (rightofP);
         \draw[line] (P) --node[left]{$\mu_{2}$} (aboveofP);

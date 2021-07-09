@@ -8,7 +8,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{biblatex}
 \usepackage{tikz}
-\usepackage[tok, page]{appendix}
+\usepackage[page]{appendix}
 \usepackage{listings}
 \usepackage{mathrsfs}
 
@@ -19,6 +19,7 @@
 \tikzstyle{blockAlgae} = [rectangle, draw, fill=algaeRed!45, text width = 1.5em, text centered, minimum height = 2em]
 \tikzstyle{blockParrot} = [rectangle, draw, fill=parrotBlue!50, text width = 1.5em, text centered, minimum height = 2em]
 \tikzstyle{line} = [thick, ->, >= stealth]
+\tikzstyle{dline} = [thick, dashed, ->, >= stealth]
 \tikzstyle{noblock} = [rectangle, draw = none]
 
 \definecolor{orangeCoral}{HTML}{FFC996}
@@ -63,9 +64,9 @@ The objective of this paper is to analyze how Guam's reef ecosystem will change 
         \node(aboveofC) [noblock, above of = C, node distance = 1.5 cm]{};
         \node(belowofP) [noblock, below of = P, node distance = 1.5 cm]{};
         \node(aboveofT) [noblock, above of = T, node distance = 0.08 cm]{};
-        \node(diagonalofT) [noblock, right of = aboveofT, node distance = 3 cm]{};
-        \draw[dashed, ->] (P) --node[above]{} (diagonalofT);
-        \draw[dashed, ->] (P) --node[above]{$\sigma$} (C);
+        \node(diagonalofT) [noblock, right of = aboveofT, node distance = 3.3 cm]{};
+        \draw[dline] (P) --node[above]{} (diagonalofT);
+        \draw[dline] (P) --node[above]{$\sigma$} (C);
         \draw[line] (C) --node[left]{$a(t)$} (M);
         \draw[line] (P) --node[above]{$h$} (rightofP);
         \draw[line] (P) --node[left]{$\mu_{2}$} (aboveofP);
@@ -131,7 +132,7 @@ and\\
         $\sigma$ & rate that parrot fish bite coral & 0.01*& $bites*year^{-1}$\\
         $\alpha$ & maximum grazing intensity & 1\textsuperscript{\cite{13_blackwood_hastings_mumby_2010}} & -\\
         $\beta$ & carrying capacity of parrotfish & 1 & -\\
-        $a_{0}$ & control variable to simulate seasonal changes & 0.99 & - %13
+        $a_{0}$ & control variable to simulate seasonal changes & 0.99 & - \\%13
         \hline
     \end{tabular}
     \caption{Model Parameters}
@@ -165,7 +166,7 @@ Using MatLab (See Appendix \ref{appendix:A}), we were able to model the dynamics
     \includegraphics[width=0.7\textwidth]{Latex/Figures/Graphs/0.25C_0.25T_0.5M.png}
     \caption{Initial Conditions: $M = \frac{1}{2}$, $C = T = \frac{1}{4}$, and $P = 1$}
     \label{fig:macroalgae_dominant}
-\end{figure}\\
+\end{figure}
 As we can see in Figures \ref{fig:initial_plot}, \ref{fig:coral_dominant}, \ref{fig:turf_dominant}, \& \ref{fig:macroalgae_dominant}, as the parrot fish population decreases, the macroalgae proportion increases. In addition, as the macroalgae proportion increases, the coral proportion decreases, and subsequently the algal turf proportion decreases as well.\\
 
 \subsection{Disease-Free Equilibrium and $\mathscr{R}_{0}$}

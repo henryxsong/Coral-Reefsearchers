@@ -82,7 +82,7 @@ The objective of this paper is to analyze how Guam's reef ecosystem will change 
             \draw[line] (M) --node[above]{$g(P)$} (T);
         \end{scope}
         \begin{scope}[transform canvas = {yshift = -.15cm}]
-            \draw[line] (T) --node[below]{$\gamma$} (M);
+            \draw[line] (T) --node[below]{$\phi$} (M);
         \end{scope}
         %\caption{Flowchart of coral reef ecosystem}
     \end{tikzpicture}
@@ -100,14 +100,14 @@ C, T, and M are proportions of coral, algal turf, and macroalgae cover on the oc
     \begin{split}
         \frac{dC}{dt} &= rTC + \sigma P C- (a(t)M+\mu_{1})C\\
         \frac{dP}{dt} &= qP \left( 1-\frac{P}{\beta C} \right) - P \left( h+\mu_{2} \right)\\
-        \frac{dT}{dt} &= \mu_{1}C + \frac{g(P)M}{M+T} - T(rC+\gamma M)\\
-        \frac{dM}{dt} &= (a(t)C+ \gamma T)M - \frac{g(P)M}{M+T}
+        \frac{dT}{dt} &= \mu_{1}C + \frac{g(P)M}{M+T} - T(rC+\phi M)\\
+        \frac{dM}{dt} &= (a(t)C+ \phi T)M - \frac{g(P)M}{M+T}
     \end{split}
 \end{align}
 
 where: 
 \begin{align*}
-&g(P) = \frac{\alpha P}{\beta}, a(t)=|\frac{a_{0}(9\sin{(\pi t) }+1)}{10}|\\
+&g(P) = \frac{\omega P}{\beta}, a(t)=|\frac{a_{0}(9\sin{(\pi t) }+1)}{10}|\\
 and\\
 &\frac{g(P)M}{M + T} \text{ is the proportion of grazing that affects macroalgae} \textsuperscript{\cite{13_blackwood_hastings_mumby_2010}}.
 \end{align*}
@@ -126,11 +126,11 @@ and\\
         $\mu_{2}$ & natural death rate of parrotfish & 0.22\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
         $r$ & rate that coral recruit to overgrow algal turfs & 10\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}} & $year^{-1}$\\ %12
         %$g$ & grazing rate that parrotfish graze macroalgae without distinction from algae turfs & $\frac{kg}{yrs}$\\
-        $\gamma$ & rate that macroalgae spread vegetative over algal turfs & 0.8\textsuperscript{\cite{11_zikkah_anggriani_supriatna_2020}} & $year^{-1}$\\ %13
+        $\phi$ & rate that macroalgae spread vegetative over algal turfs & 0.8\textsuperscript{\cite{11_zikkah_anggriani_supriatna_2020}} & $year^{-1}$\\ %13
         $q$ & intrinsic growth rate for parrotfish & 0.47\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
         $h$ & harvesting rate for parrotfish & 0.14\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
         $\sigma$ & rate that parrot fish bite coral & 0.01*& $bites*year^{-1}$\\
-        $\alpha$ & maximum grazing intensity & 1\textsuperscript{\cite{13_blackwood_hastings_mumby_2010}} & -\\
+        $\omega$ & maximum grazing intensity & 1\textsuperscript{\cite{13_blackwood_hastings_mumby_2010}} & -\\
         $\beta$ & carrying capacity of parrotfish & 1 & -\\
         $a_{0}$ & control variable to simulate seasonal changes & 0.99 & - \\%13
         \hline
@@ -184,9 +184,9 @@ The basic reproduction number, $\mathscr{R}_{0}$, is defined as the number of se
 \begin{center}
 
 $\mathscr{F} = 
-\begin{bmatrix} aCM + \gamma MT \end{bmatrix}$ and $\mathscr{V} = \begin{bmatrix} \frac{g(P)M}{M+T} \end{bmatrix}$
+\begin{bmatrix} aCM + \phi MT \end{bmatrix}$ and $\mathscr{V} = \begin{bmatrix} \frac{g(P)M}{M+T} \end{bmatrix}$
 
-$\displaystyle {\mathscr{R}}_{0} = \frac{\mu_{1}(a r - a\mu_{1} + \gamma \mu_{1})}{r^{2}g(P)}$
+$\displaystyle {\mathscr{R}}_{0} = \frac{\mu_{1}(a r - a\mu_{1} + \phi \mu_{1})}{r^{2}g(P)}$
 
 \end{center}
 
@@ -194,8 +194,8 @@ $\displaystyle {\mathscr{R}}_{0} = \frac{\mu_{1}(a r - a\mu_{1} + \gamma \mu_{1}
 \begin{align*}
         P^{*} &= \beta C \left(\frac{q-(h+\mu_{2})}{q}\right)\\
         C^{*} &= rTC + \sigma PC - (a(t)M+\mu_{1})C\\
-        T^{*} &= T^{2}(rC+\gamma M) + T(MrC + M^{2} + \mu_{1}C) - \left(\frac{\alpha P}{\beta}M + \mu_{1} CM\right)\\
-        M^{*} &= \frac{\alpha P}{\beta (a(t)C + \gamma T)} - T\\
+        T^{*} &= T^{2}(rC+\phi M) + T(MrC + M^{2} + \mu_{1}C) - \left(\frac{\omega P}{\beta}M + \mu_{1} CM\right)\\
+        M^{*} &= \frac{\omega P}{\beta (a(t)C + \phi T)} - T\\
 \end{align*}
 
 The Endemic Equilibrium tells us at what point will the disease not spread nor will it fully eradicate. Essentially it tells when the disease is stabilized. In order to find the endemic equilibrium, we have to set each differential equal to 0 and solve for each variable. The equations above are not yet finished as $P^{*}$ is the only equation that is in terms of C. Every other equation will need to be computed in terms of C. After finding the equations, the next step would be to substitute the parameters in order to see at what point does each compartment need to be in order to have an Endemic Equilibrium. Note that $C=1-\frac{\mu_{1}}{r}$ 

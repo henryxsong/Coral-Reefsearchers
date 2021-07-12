@@ -54,27 +54,27 @@ g = @(P) (alpha*P)/beta;
 
 %------------------------------------------------------
 %solving Endemic
-% dPdt = q*P*(1-(P/(beta*C))) - P*(h*mu2);
-% P_E = solve(dPdt == 0, P);
-% 
-% dMdt = a*C*M + gamma*T*M - (g*M)/(M+T);
-% M_E = solve(dMdt == 0, M);
-% 
-% dTdt = mu1*C + (g*M)/(M+T) - T*(r*C + gamma*M);
-% T_E = solve(dTdt == 0, T);
-% 
-% P_E = P_E(2);
-% M_E = M_E(2);
-% 
-% M_E = subs(M_E, P, P_E);
-% 
-% % T_E = subs(T_E, M, M_E);
-% % T_E = subs(T_E(1), T, T_E);
-% % T_E = subs(T_E(2), T, T_E);
-% 
-% %dCdt = r*T_E(2)*C + sigma*P_E(2)*C - (a*M_E(2) + mu1)*C - C;
-% dCdt = r*T*C + sigma*P*C - (a*M + mu1)*C - C;
-% C_E = solve(dCdt == 0, C, ReturnConditions = true);
+dPdt = q*P*(1-(P/(beta*C))) - P*(h*mu2);
+P_E = solve(dPdt == 0, P);
+
+dMdt = a*C*M + gamma*T*M - (g*M)/(M+T);
+M_E = solve(dMdt == 0, M);
+
+dTdt = mu1*C + (g*M)/(M+T) - T*(r*C + gamma*M);
+T_E = solve(dTdt == 0, T);
+
+P_E = P_E(2);
+M_E = M_E(2);
+
+M_E = subs(M_E, P, P_E);
+
+% T_E = subs(T_E, M, M_E);
+% T_E = subs(T_E(1), T, T_E);
+% T_E = subs(T_E(2), T, T_E);
+
+%dCdt = r*T_E(2)*C + sigma*P_E(2)*C - (a*M_E(2) + mu1)*C - C;
+dCdt = r*T*C + sigma*P*C - (a*M + mu1)*C - C;
+C_E = solve(dCdt == 0, C, ReturnConditions = true);
 % %------------------------------------------------------
 
 T_E = (mu1 + a*M)/r;

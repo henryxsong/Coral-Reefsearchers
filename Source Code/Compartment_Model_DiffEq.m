@@ -4,8 +4,10 @@
 % Note: In order to use Animation View, function 'f' and variables [t, ya]
 %       must be loaded into the workspace first by running Single View then
 %       commenting out Single View.
+
+
 %--------------------------------------------------------------------------
-%% Parameter Values
+% Parameter Values
 mu1 = 0.15; % mortality rate of coral reefs
 mu2 = 0.22; % natural death rate of parrotfish
 q = 0.47; % intrinsic growth rate for parrotfish
@@ -28,17 +30,25 @@ a = @(t) abs((a0*(9*sin(pi*t)+1))/(10));
 
 
 %--------------------------------------------------------------------------
-%% Compartment Initial Conditions
+% Compartment Initial Conditions
 C = 1/4;
 P = 3/4;
 T = 1/4;
 M = 1/2;
 Prop_Total = C + T + M;
+IC = [C, P, T, M, Prop_Total];
+
+if Prop_Total == 1
+    disp('It works lol')
+else
+    disp('Invalid initial compartment proportions.')
+end
 %--------------------------------------------------------------------------
 
 
 %--------------------------------------------------------------------------
-%% Single View - System of Differential Equations
+% Single View - System of Differential Equations
+
 % dC/dt = rTC + sigmaPC - C(aM + d)
 % dP/dt = qP(1-P/betaC) - (h + mu)P 
 % dT/dt = dC + (g(P)M)/(M + T) - (rC + phiM)T
@@ -51,7 +61,7 @@ f = @(t,y) [r*y(3)*y(1) + sigma*y(2)*y(1) - y(1)*(a(t)*y(4) + mu1),
         a(t) * y(4)*y(1) + phi*y(4)*y(3) - (g(y(2))*y(4))/(y(4)+y(3)),
         y(1)+y(3)+y(4)];
             
-[t,ya] = ode45(f, [0 5], [C, P, T, M, Prop_Total]);
+[t,ya] = ode45(f, [0 5], IC);
 
 figure
 hold on
@@ -70,20 +80,20 @@ ylabel('Proportion of Population')
 
 
 %--------------------------------------------------------------------------
-%% Animation View - System of Differential Equations
-% for i = 1:length(t)
+% Animation View - System of Differential Equations
+for i = 1:length(t)
 %     a0 = i/length(t);
 %     a = @(t) abs((a0*(9*sin(pi*t)+1))/(10));
 %     
-%     % System of Differential Equations
+%    % System of Differential Equations
 %     f = @(t,y) [r*y(3)*y(1) + sigma*y(2)*y(1) - y(1)*(a(t)*y(4) + mu1),
-%             q*y(2)*(1-(y(2)/(beta*y(1)))) - (h+mu2)*y(2), 
-%             mu1*y(1) + (g(y(2))*y(4))/(y(4)+y(3)) - (r*y(1) + phi*y(4))*y(3),
-%             a(t) * y(4)*y(1) + phi*y(4)*y(3) - (g(y(2))*y(4))/(y(4)+y(3)),
-%             y(1)+y(3)+y(4)];
+%        q*y(2)*(1-(y(2)/(beta*y(1)))) - (h+mu2)*y(2), 
+%        mu1*y(1) +  (g(y(2))*y(4))/(y(4)+y(3)) - (r*y(1) + phi*y(4))*y(3),
+%        a(t) * y(4)*y(1) + phi*y(4)*y(3) - (g(y(2))*y(4))/(y(4)+y(3)),
+%        y(1)+y(3)+y(4)];
 %     
 %     % Solve using ODE45
-%     [t,ya] = ode45(f, [0 5], [C, P, T, M, 1]);
+%     [t,ya] = ode45(f, [0 5], IC);
 %     
 %     % Plot
 %     txt = ['a_0 = ' num2str(a0)]; % shows value of param value at iteration
@@ -107,17 +117,16 @@ ylabel('Proportion of Population')
 %     % stored)
 %     fname = append('Frame-', num2str(i)); %file name of current iteration
 %     saveas(fig, fname, 'png'); %save figure as .png
-% end
-%--------------------------------------------------------------------------
-
-
-%--------------------------------------------------------------------------
-%% Sensitivity Analysis
-R0 = -(beta*mu1*(a*(mu1/r - 1) - (mu1*phi)/r))/(P*omega*r);
-param_array = [mu1, mu2, q, omega, sigma, r, phi, beta, a0];
-
-for i = 1:length(param_array)
-    p_
-
 end
 %--------------------------------------------------------------------------
+
+
+% %--------------------------------------------------------------------------
+% % Sensitivity Analysis
+% R0 = -(beta*mu1*(a*(mu1/r - 1) - (mu1*phi)/r))/(P*omega*r);
+% param_array = [mu1, mu2, q, omega, sigma, r, phi, beta, a0];
+% 
+% for i = 1:length(param_array)
+% 
+% end
+% %--------------------------------------------------------------------------

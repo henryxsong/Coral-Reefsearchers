@@ -9,46 +9,46 @@ g = @(P) (omega*P)/beta;
 
 %-----------------------------------------------------
 %solving DFE
-dMdt = a*C*M + phi*T*M - (g*M)/(M+T);
-%M_0 = solve(dMdt == 0, M); % solves for M when dMdt = 0
-%M0 = subs(M0, [C,P,T], [0,0,0]);
-M_0 = 0;
-
-dTdt = mu1*C + (g(P)*M_0)/(M_0+T) - T*(r*C + phi*M_0);
-T_0 = solve(dTdt == 0, T);
-
-%dCdt = r*T_0*C + sigma*P_0*C - (a*M_0 + mu1)*C;
-%C_0 = solve(dCdt == 0, C);
-C_0 = 1 - T_0;
-
-dPdt = q*P*(1-(P/(beta*C))) - P*(h+mu2);
-P_0 = solve(dPdt == 0, P);
-%P_0 = 0;
-%------------------------------------------------------
-
-%------------------------------------------------------
-% % Solving R0
-
-%script F
-sF = [a*C*M + phi*T*M];
-F = jacobian(sF, [M]); % jacobian matrix
-F = subs(F, T, T_0); 
-%F = subs(F, M, 0);
-%F = subs(F, C, C_0);
-
-%script V
-syms G;
-sV = [(g(P)*M)/(M+T)];
-V = jacobian(sV, [M]);
-V = subs(V, M, M_0);
-
-%eigenvalues of F*V^-1
-eigens = eig(F * inv(V));
-
-% basic reproduction number
-R0 = eigens(1);
-R0 = subs(R0, C, C_0);
-R0 = subs(R0, T, T_0);
+% dMdt = a*C*M + phi*T*M - (g*M)/(M+T);
+% %M_0 = solve(dMdt == 0, M); % solves for M when dMdt = 0
+% %M0 = subs(M0, [C,P,T], [0,0,0]);
+% M_0 = 0;
+% 
+% dTdt = mu1*C + (g(P)*M_0)/(M_0+T) - T*(r*C + phi*M_0);
+% T_0 = solve(dTdt == 0, T);
+% 
+% %dCdt = r*T_0*C + sigma*P_0*C - (a*M_0 + mu1)*C;
+% %C_0 = solve(dCdt == 0, C);
+% C_0 = 1 - T_0;
+% 
+% dPdt = q*P*(1-(P/(beta*C))) - P*(h+mu2);
+% P_0 = solve(dPdt == 0, P);
+% %P_0 = 0;
+% %------------------------------------------------------
+% 
+% %------------------------------------------------------
+% % % Solving R0
+% 
+% %script F
+% sF = [a*C*M + phi*T*M];
+% F = jacobian(sF, [M]); % jacobian matrix
+% F = subs(F, T, T_0); 
+% %F = subs(F, M, 0);
+% %F = subs(F, C, C_0);
+% 
+% %script V
+% syms G;
+% sV = [(g(P)*M)/(M+T)];
+% V = jacobian(sV, [M]);
+% V = subs(V, M, M_0);
+% 
+% %eigenvalues of F*V^-1
+% eigens = eig(F * inv(V));
+% 
+% % basic reproduction number
+% R0 = eigens(1);
+% R0 = subs(R0, C, C_0);
+% R0 = subs(R0, T, T_0);
 %------------------------------------------------------
 
 
@@ -76,6 +76,19 @@ R0 = subs(R0, T, T_0);
 % dCdt = r*T*C + sigma*P*C - (a*M + mu1)*C - C;
 % C_E = solve(dCdt == 0, C, ReturnConditions = true);
 % %------------------------------------------------------
+
+%--------------------------------------------------------------------------
+% Sensitivity Analysis
+% R0 = -(beta*mu1*(a*(mu1/r - 1) - (mu1*phi)/r))/(P*omega*r);
+% param_array = [mu1, mu2, q, omega, sigma, r, phi, beta, h];
+% param_values = [0.15, 0.22, 0.47, 1, 0.01, 0.5, 0.8, 1, 0.1];
+% 
+% 
+% for i = 1:length(param_array)
+%     sensAns(i) = diff(R0, param_array(i));
+%     %subsAns(i) = subs(sensAns[i], (param_array), (param_values));
+% end 
+%--------------------------------------------------------------------------
 
 % T_E = (mu1 + a*M)/r;
 % 

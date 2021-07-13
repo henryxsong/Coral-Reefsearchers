@@ -33,11 +33,11 @@ f = @(t,y) [r*y(3)*y(1) + sigma*y(2)*y(1) - y(1)*(a(t)*y(4) + mu1),
 C = 1/3;
 P = 0.75;
 T = 1/3;
-M = 0;
+M = 1/3;
         
   
 % solve with ODE 45
-[t,ya] = ode45(f, [0 5], [C, P, T, M, 1]);
+[t,ya] = ode45(f, [0 1], [C, P, T, M, 1]);
 
 % graph
 figure

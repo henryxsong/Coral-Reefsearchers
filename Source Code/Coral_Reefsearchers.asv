@@ -64,11 +64,10 @@ legend('Coral (C)', 'Parrotfish (P)', 'Algal Turf (T)', 'Macroalgae (M)')
 %text(0.25,0.05,txt, 'FontSize', 18);
 xlabel('Time (Year)')
 ylabel('Proportion of Population')
-%%
-%---------------------------------------------------------------
+%--------------------------------------------------------------------------
 
 
-%---------------------------------------------------------------
+%--------------------------------------------------------------------------
 %% Compartment - Animation View - System of Differential Equations
 clear; % Clears workspace
 clc; % Clears Command Window
@@ -151,7 +150,6 @@ for i = 1:length(const_t)
     %saveas(fig, fname, 'png'); %save figure as .png
 end
 %---------------------------------------------------------------
-%%
 %--------------------------------------------------------------------------
 
 
@@ -180,38 +178,13 @@ C_0 = 1 - T_0;
 dPdt = q*P*(1-(P/(beta*C))) - P*(h+mu2);
 P_0 = solve(dPdt == 0, P);
 P_0 = subs(P_0, C, C_0);
-%%
+
 %--------------------------------------------------------------------------
 
 
 %--------------------------------------------------------------------------
 %% R0
-clear; % Clears workspace
-clc; % Clears Command Window
-
-%---------------------------------------------
-% Symbolic Definitions
-syms C P T M mu1 mu2 q omega sigma beta r h phi g a t
-% g = g(P), a = a(t)
-
-g = @(P) (omega*P)/beta; %grazing intensity 'g'
-
-%a = @(t) abs((0.9*(9*sin(pi*t)+1))/(10)); %sin function of a(t)
-%---------------------------------------------
-
-%---------------------------------------------
-% DFE
-M_0 = 0;
-
-dTdt = mu1*C + (g(P)*M_0)/(M_0+T) - T*(r*C + phi*M_0);
-T_0 = solve(dTdt == 0, T);
-
-C_0 = 1 - T_0;
-
-dPdt = q*P*(1-(P/(beta*C))) - P*(h+mu2);
-P_0 = solve(dPdt == 0, P);
-P_0 = subs(P_0, C, C_0);
-%---------------------------------------------
+%Note: RUN 'DISEASE FREE EQUILIBRIUM' SECTION FIRST
 
 %---------------------------------------------
 % R0
@@ -239,7 +212,6 @@ R0 = subs(R0, P, P_0(2));
 % Plot R0
 
 %---------------------------------------------
-%%
 %--------------------------------------------------------------------------
 
 
@@ -263,10 +235,10 @@ h_var = 0:0.001:1;
 
 figure
 hold on
-ezplot(herd_immunity_equation)
-plot([herd_immunity_point(1), herd_immunity_point(2)], 'o')
-plot([herd_immunity_point(1), herd_immunity_point(1)], [0, herd_immunity_point(1), herd_immunity_point(2)], 'k-'])
-plot([0, herd_immunity_point(1)], [herd_immunity_point(2), herd_immunity_point(2)], 'k-')
+fplot(herd_immunity_equation, [0 1])
+plot(herd_immunity_point(1), herd_immunity_point(2), 'o')
+plot([herd_immunity_point(1), herd_immunity_point(1)], [0, herd_immunity_point(2)], 'r-')
+plot([0, herd_immunity_point(1)], [herd_immunity_point(2), herd_immunity_point(2)], 'r-')
 xlim([0 1]);
 ylim([0 2]);
 
@@ -274,7 +246,6 @@ set(gca, 'FontSize',18);
 title('Herd Immunity');
 xlabel('h')
 ylabel('R_0')
-%%
 %--------------------------------------------------------------------------
 
 
@@ -282,15 +253,20 @@ ylabel('R_0')
 %% Sensitivity Analysis
 % Note: MUST RUN 'R0' SECTION FIRST
 
-param_array = [mu1, mu2, q, omega, sigma, r, phi, beta, h];
-param_values = [0.15, 0.22, 0.47, 1, 0.01, 0.5, 0.8, 1, 0.1];
-
+param_array = [mu1, mu2, q, omega, sigma, r, phi, beta, h, a];
+param_values = [0.15, 0.22, 0.47, 1, 0.01, 0.5, 0.8, 1, 0.1, 0.5];
+subs_ans = [];
 
 for i = 1:length(param_array)
-    sensAns(i) = diff(R0, param_array(i));
-    %subsAns(i) = subs(sensAns[i], (param_array), (param_values));
+    R0_diff = diff(R0, param_array(i));
+    %sens_analysis = cat(1, sens_analysis, diff(R0, param_array(i)));
+    for j = 1:length(param_array)
+        R0_diff = subs(R0_diff, param_array(j), param_values(j));
+    end
+    subs_ans = cat(1, subs_ans, param_arr
+    subs_ans = cat(1, subs_ans, double(R0_diff));
 end 
-%%
+
 %--------------------------------------------------------------------------
 
 
@@ -314,16 +290,16 @@ a = @(t) abs((0.9*(9*sin(pi*t)+1))/(10)); %sin function of a(t)
 T_E = (mu1 + a*M)/r;
 
 C_E = 1 - (T+M);
-C_E = subs(C_E, T, T_E);
+C_E = subs(C_E, T, T_E)
 
 P_E = (beta*C*(q-(h+mu2)))/q;
-P_E = subs(P_E, C, C_E);
+P_E = subs(P_E, C, C_E)
 
 M_E = (omega*P)/(beta*(a*C+phi*T))-T - M;
 M_E = subs(M_E, P, P_E);
 M_E = subs(M_E, C, C_E);
 M_E = subs(M_E, T, T_E);
-M_E_equation = solve(M_E == 0, M);
+M_E_equation = solve(M_E == 0, M)
 %---------------------------------------------
 
 %---------------------------------------------
@@ -336,7 +312,8 @@ M_E_Value = M_E_equation;
 for i = 1:length(param_array)
     M_E_Value = subs(M_E_Value, param_array(i), param_values(i));
 end
-%%
+
+disp(M_E_Value)
 %--------------------------------------------------------------------------
 
 

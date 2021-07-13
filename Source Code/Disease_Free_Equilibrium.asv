@@ -1,62 +1,122 @@
-syms C P T M mu1 mu2 q alpha sigma r h gamma beta g a t
+syms C P T M mu1 mu2 q omega sigma beta r h phi g a t
 % g = g(P), a = a(t)
 
 %grazing intensity 'g'
-%g = @(P) (alpha*P)/beta;
+g = @(P) (omega*P)/beta;
 
 %sin function of 
 %a = @(t) abs((0.9*(9*sin(pi*t)+1))/(10));
 
 %-----------------------------------------------------
 %solving DFE
-dMdt = a*C*M + gamma*T*M - (g*M)/(M+T);
-M_0 = solve(dMdt == 0, M); % solves for M when dMdt = 0
-%M0 = subs(M0, [C,P,T], [0,0,0]);
-
-dPdt = q*P*(1-(P/(beta*C))) - P*(h*mu2);
-P_0 = solve(dPdt == 0, P);
-
-dTdt = mu1*C + (g*M_0(1))/(M_0(1)+T) - T*(r*C + gamma*M_0(1));
-T_0 = solve(dTdt == 0, T);
-
-dCdt = r*T_0*C + sigma*P_0(2)*C - (a*M_0(1) + mu1)*C;
-C_0 = solve(dCdt == 0, C);
+% dMdt = a*C*M + phi*T*M - (g*M)/(M+T);
+% %M_0 = solve(dMdt == 0, M); % solves for M when dMdt = 0
+% %M0 = subs(M0, [C,P,T], [0,0,0]);
+% M_0 = 0;
+% 
+% dTdt = mu1*C + (g(P)*M_0)/(M_0+T) - T*(r*C + phi*M_0);
+% T_0 = solve(dTdt == 0, T);
+% 
+% %dCdt = r*T_0*C + sigma*P_0*C - (a*M_0 + mu1)*C;
+% %C_0 = solve(dCdt == 0, C);
+% C_0 = 1 - T_0;
+% 
+% dPdt = q*P*(1-(P/(beta*C))) - P*(h+mu2);
+% P_0 = solve(dPdt == 0, P);
+% %P_0 = 0;
+% %------------------------------------------------------
+% 
+% %------------------------------------------------------
+% % % Solving R0
+% 
+% %script F
+% sF = [a*C*M + phi*T*M];
+% F = jacobian(sF, [M]); % jacobian matrix
+% F = subs(F, T, T_0); 
+% %F = subs(F, M, 0);
+% %F = subs(F, C, C_0);
+% 
+% %script V
+% syms G;
+% sV = [(g(P)*M)/(M+T)];
+% V = jacobian(sV, [M]);
+% V = subs(V, M, M_0);
+% 
+% %eigenvalues of F*V^-1
+% eigens = eig(F * inv(V));
+% 
+% % basic reproduction number
+% R0 = eigens(1);
+% R0 = subs(R0, C, C_0);
+% R0 = subs(R0, T, T_0);
 %------------------------------------------------------
 
 
 %------------------------------------------------------
 %solving Endemic
-dMdt = a*C*M + gamma*T*M - (g*M)/(M+T);
-dPdt = q*P*(1-(P/(beta*C))) - P*(h*mu2);
-dTdt = mu1*C + (g*M)/(M+T) - T*(r*C + gamma*M);
-dCdt = r*T*C + sigma*P*C - (a*M + mu1)*C;
+% dPdt = q*P*(1-(P/(beta*C))) - P*(h*mu2);
+% P_E = solve(dPdt == 0, P);
+% 
+% dMdt = a*C*M + phi*T*M - (g*M)/(M+T);
+% M_E = solve(dMdt == 0, M);
+% 
+% dTdt = mu1*C + (g*M)/(M+T) - T*(r*C + phi*M);
+% T_E = solve(dTdt == 0, T);
+% 
+% P_E = P_E(2);
+% M_E = M_E(2);
+% 
+% M_E = subs(M_E, P, P_E);
+% 
+% % T_E = subs(T_E, M, M_E);
+% % T_E = subs(T_E(1), T, T_E);
+% % T_E = subs(T_E(2), T, T_E);
+% 
+% %dCdt = r*T_E(2)*C + sigma*P_E(2)*C - (a*M_E(2) + mu1)*C - C;
+% dCdt = r*T*C + sigma*P*C - (a*M + mu1)*C - C;
+% C_E = solve(dCdt == 0, C, ReturnConditions = true);
+% %------------------------------------------------------
 
-M_E = solve(dMdt == 0, M);
-P_E = solve(dPdt == 0, P);
-T_E = solve(dTdt == 0, T);
-C_E = solve(dCdt == 0, C, ReturnConditions = true);
-%------------------------------------------------------
 
+%--------------------------------------------------------------------------
+% Sensitivity Analysis
+% R0 = -(beta*mu1*(a*(mu1/r - 1) - (mu1*phi)/r))/(P*omega*r);
+% param_array = [mu1, mu2, q, omega, sigma, r, phi, beta, h];
+% param_values = [0.15, 0.22, 0.47, 1, 0.01, 0.5, 0.8, 1, 0.1];
+% 
+% 
+% for i = 1:length(param_array)
+%     sensAns(i) = diff(R0, param_array(i));
+%     %subsAns(i) = subs(sensAns[i], (param_array), (param_values));
+% end 
+%--------------------------------------------------------------------------
 
-% scriptF
-% F: Jacobian matrix of script F
-% scriptVi
-% V: Jacobial matrix of script VI
-% the largest absolute eigenvalue of F*inverse(V) is the basic reproduction
-% number
+T_E = (mu1 + a*M)/r;
 
-%script F
-sF = [beta * S * I, 0];
-F = jacobian(sF, [S I]); % jacobian matrix
-F = subs(F, S, S0); %S0 = Pi/mu
-F = subs(F, I, 0);
+C_E = 1 - (T+M);
+C_E = subs(C_E, T, T_E);
 
-%script V
-% sV = [(sigma+mu)*E, (gamma + mu)*I-sigma*E];
-% V = jacobian(sV, [E I]);
+P_E = (beta*C*(q-(h+mu2)))/q;
+P_E = subs(P_E, C, C_E);
+%testP = (beta*(1-((mu1+a*M)/r) + M)*(q-(h+mu2)))/(q);
 
-%eigenvalues of F*V^-1
-% eigens = eig(F * inv(V));
+M_E = (omega*P)/(beta*(a*C+phi*T))-T - M;
+M_E = subs(M_E, P, P_E);
+M_E = subs(M_E, C, C_E);
+M_E = subs(M_E, T, T_E);
+%testM = (omega*(beta*(1-(mu1+a*M)/r + M)*(q-(h+mu2))))/(q*beta*(a*(1-((mu1+a*M)/r + M))) + phi*((mu1+a*M)/r)) - (mu1+a*M)/r;
+ansM = solve(M_E == 0, M);
+ansM_latex = latex(ansM);
 
-% basic reproduction number
-% R0 = eigen(2);
+% My quadratic equation
+a_quad = a^2*q*phi + a*q*phi*r - a^(3)*q - 2*a^(2)*q*r - a*g*r^(2);
+b_quad = a*q*(r^2) + (a^2)*q*r + (mu1)*q*phi*r + 2*a*mu1*q*phi - 2*(a^2)*mu1*q - 2*a*mu1*q*r + a*omega*q*r - a*omega*h*r - a*omega*mu2*r + omega*q*(r^2);
+c_quad = ;
+
+% Dr. Choi's quadratic equation
+% a_quad = a*q*(a+r-phi)*(a+r)^2;
+% b_quad = (a+r)*(2*a*q*(a+r-phi)*(r-mu1) - r*(omega*(a+r)*(q-h-mu2) - a*q*(a+r) + g*mu1*phi));
+% c_quad = a*q*(a+r-phi)*(r-mu1)^2 + r*(omega*(a+r)*(g-h-mu2) - a*q*(a+r) + q*mu1*phi)*(r-mu1) - q*phi*r^2*(mu1+a);
+% quad_quad = [((-b_quad)+((b_quad^2-4*a_quad*c_quad))^0.5)/(2*a_quad); ((-b_quad)-((b_quad^2-4*a_quad*c_quad))^0.5)/(2*a_quad)];
+
+quad_ans = solve(M^2*a_quad + M*b_quad + c_quad == 0, M);

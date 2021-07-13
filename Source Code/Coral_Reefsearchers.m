@@ -217,7 +217,7 @@ R0 = subs(R0, P, P_0(2));
 
 %--------------------------------------------------------------------------
 %% Herd Immunity
-% Note: MUST RUN 'R0' SECTION FIRST
+% Note: MUST RUN 'DISEASE FREE EQUILIBRIUM' & 'R0' SECTION FIRST
 param_array = [mu1, mu2, q, omega, sigma, r, beta, a, phi]; %when a0 =
 % 0.99
 param_values = [0.15, 0.22, 0.9, 1, 0.01, 0.5, 1, 0.5, 0.8]; %a(t) = 0.5

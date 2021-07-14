@@ -171,7 +171,7 @@ and\\
 
 % graphs
 \subsection{Graphs}
-Using MatLab (See Appendix \ref{appendix:A}), we were able to model the dynamics using our preliminary rates. This was achieved by changing the C, M, \& T proportions. Below are the graphs that were were able to achieve:\\
+Using MatLab (See Appendix \ref{appendix:B1}), we were able to model the dynamics using our preliminary rates. This was achieved by changing the C, M, \& T proportions. Below are the graphs that were were able to achieve:\\
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{Latex/Figures/Graphs/0.3C_0.3T_0.3M.png}
@@ -208,7 +208,7 @@ The disease-free equilibrium is the point at which no disease is present in the 
 \end{align*}
 and since C + T + M = 1, if $M^{0} = 0$, then $C^{0} + T^{0} = 1$.Thus, our disease-free equilibrium is at $(1 - \frac{\mu_{1}}{r}, -\frac{\beta(1 - \frac{\mu_{1}}{r})(h - \mu_{2} - q)}{q}, 0, \frac{\mu_{1}}{r})$.
 
-The basic reproduction number, $\mathscr{R}_{0}$, is defined as the number of secondary infections. For our model, macroalgae is considered to be our infection compartment. Thus, 
+The basic reproduction number, $\mathscr{R}_{0}$, is a metric used to describe the contagiousness or transmissibility of infectious agents $^{\cite{delamater_street_leslie_yang_jacobsen_2019}}$, i.e. the number of secondary infections. For our model, macroalgae is considered to be our infection compartment. Thus, 
 
 \begin{center}
 
@@ -221,9 +221,11 @@ $\displaystyle {\mathscr{R}}_{0} = \frac{\mu_{1}(a r - a\mu_{1} + \phi \mu_{1})}
 
 \subsection{Endemic Equilibrium}
 \begin{align*}
+        C^{*} &= 1-T-M \\
+        % rTC + \sigma PC - (a(t)M+\mu_{1})C\\
         P^{*} &= \beta C \left(\frac{q-(h+\mu_{2})}{q}\right)\\
-        C^{*} &= rTC + \sigma PC - (a(t)M+\mu_{1})C\\
-        T^{*} &= T^{2}(rC+\phi M) + T(MrC + M^{2} + \mu_{1}C) - \left(\frac{\omega P}{\beta}M + \mu_{1} CM\right)\\
+        T^{*} &= \frac{\mu_{1} + a(t)M}{r} \\
+        %T^{2}(rC+\phi M) + T(MrC + M^{2} + \mu_{1}C) - \left(\frac{\omega P}{\beta}M + \mu_{1} CM\right)\\
         M^{*} &= \frac{\omega P}{\beta (a(t)C + \phi T)} - T\\
 \end{align*}
 
@@ -238,7 +240,51 @@ Calculating $P^{*}$ :
         \frac{P}{\beta C} &= 1 - \frac{h+\mu_{2}}{q}\\
         P^{*} &= \beta C \left(\frac{q-(h+\mu_{2})}{q}\right)
     \end{align*}
-%\subsection{Education Game Theory}
+
+\subsection{Sensitivity Analysis}
+Sensitivity analysis determines the maximum impact of each parameter on the basic reproduction number equation. This process is calculated by performing the partial derivative on the $\mathscr{R}_0$ equation with respect to each parameter value, and substituting the values for the remaining parameter variables. Below is the general equation to calculate sensitivity analysis: \\
+\begin{align*}
+    lol I dont remember the equation, I'll put in tomorrow
+\end{align*}
+
+Utilizing MatLab (Appendix \ref{appendix:B6}), we were able to automate the calculation process, giving us the corresponding sensitivity analysis for each parameter variable. 
+\begin{table}[H]
+        \centering
+        \begin{tabular}{|c|c|}
+            \hline
+            Parameter & $S_{A}$ \\
+            \hline
+            \hline
+            $\mu_{1}$ & \colorbox{yellow}{\textbf{8.3513}}\\
+            \hline
+            $\mu_{2}$ & \colorbox{yellow}{\textbf{5.2819}}\\
+            \hline
+            $q$ & -3.5962\\
+            \hline
+            $\omega$ & -0.7923\\
+            \hline
+            $\sigma$ & 0.0000\\
+            \hline
+            $r$ & -2.5054\\
+            \hline
+            $\phi$ & 0.4029\\
+            \hline
+            $\beta$ & 0.0000\\
+            \hline
+            $h$ & \colorbox{yellow}{\textbf{5.2819}}\\
+            \hline
+            $a$ & 0.9400\\
+            \hline
+        \end{tabular}
+        \caption{Sensitivity Analysis}
+        \label{tab:sens_analysis}
+    \end{table}
+    
+    The larger the sensitivity analysis value, the higher the impact the parameter has on our basic reproduction number equation. The highlighted values ($\mu_{1}, \mu_{2}$, and $h$) have the largest sensitivity analysis values, and have the most impact on our basic reproduction number equation, respectively. \par
+    The natural death rate of corals ($\mu_{1}$) represents the largest impact, and rightfully so, with a sensitivity analysis value of 8.3513. Due to the dynamics between corals, algal turfs, and macroalgae, the death of corals directly impacts algal turfs. However, the natural death accounts for all factors of coral deaths, including but not limited to bleaching, disease, damage, and so forth. The more corals that die, the more surface area get converted into algal turfs and subsequently gives way for algal turfs to convert into macroalgae. As such, this rate carries the greatest impact on our overall basic reproduction number equation. \par
+    The natural death rate of parrotfish ($\mu_{2}$) and the harvest rate of parrotfish due to fishing ($h$) both share the second highest sensitivity analysis value of 5.2819. This presents a unique perspective, as the analysis indicates that there is no difference between natural death and human-driven death. Both simply represent the removal of live parrotfish from the ecosystem rather than the means of removal, and as such are equal. This is significant as our model depicts parrotfish as the primary grazers of macroalgae, and we have acknowledged that macroalgae overgrowth has a negative impact on the ecosystem. When the parrotfish population is adequate, the proportion of macroalgae will be kept in control. However, with the removal of parrotfish from the ecosystem from death or fishing, the macroalgae will have the opportunity to grow unchecked. Thus, the impact of overfishing parrotfish will undeniably affect the dynamics of the ecosystem, and will allow macroalgae to dominate while corals whither away.
+    
+%\subsection{Harvesting Game Theory}
 
 \section{Literature Review}
 Throughout this week, our group has dedicated a large portion of time to reviewing scholarly articles and research publications relevant to our areas of research. This aspect of performing our research is crucial as, through literature review, we are able to gather information, techniques, methods, data, results, and many other variables that we are able to use in our own research. \par
@@ -256,20 +302,68 @@ Our faculty mentors have graciously provided several research publications relat
 These articles provide valuable insight in various areas of coral reef research from parameters and conditions to modeling and application. In particular, each of these papers gave us insight on how other researchers approached their problems, how they created and modified their methods, and how they produced results based on their models and equations. 
 
 \section{Acknowledgements}
-Support for the Young Scholars Research Experience in Mathematics (YSREM)  is through the MAA Tensor SUMMA Program. Support for the MAA National Research Experience for Undergraduates Program (NREUP) is provided by the National Science Foundation (Grant Number DMS-1950644). Support for the NSF EPSCoR project, Guam Ecosystems Collaboratorium for Corals and Oceans (GECCO) is provided by the National Science Foundation (Grant Number DMS-1946352).
+Support for the Young Scholars Research Experience in Mathematics (YSREM)  is through the MAA Tensor SUMMA Program. Support for the MAA National Research Experience for Undergraduates Program (NREUP) is provided by the National Science Foundation (Grant Number DMS-1950644). Support for the NSF EPSCoR project, Guam Ecosystems Collaboratorium for Corals and Oceans (GECCO) is provided by the National Science Foundation (Grant Number DMS-1946352). \par
 Special thanks to Dr. Bastian Bentlage, our faculty mentors (Dr. JaeYong Choi, Dr. HyunJu Oh, \& Dr. Leslie Aquino), and our Research Assistants (Jaron Bautista \& Regina-Mae Dominguez).
 
 \newpage
 \appendix
+    {\huge \textbf{Appendix}}
+    \section{Step-by-Step Calculations}
+    \subsection{Disease Free Equilibrium}
+    \subsection{Endemic Equilibrium}
+    \subsection{Basic Reproduction Number: $\mathscr{R}_0$}
+    \subsection{Game Theory}
+    
     \section{MatLab Code}
-        \label{appendix:A}
-        Below is the MatLab code used to calculate and verify the process of calculating $\mathscr{R}_{0}$:
+        \subsection{Static Compartment Model Visualization}
+        \label{appendix:B1}
+        This script represents our MatLab implementation of visualizing our compartment model and dynamics using our known and estimated parameters. The code implements ODE45 in order to calculate our system of differential equations, and plots the results:
         \begin{center}
-            \lstinputlisting[language=Matlab]{./Source Code/Coral_Reefsearchers.m}
-            %\lstinputlisting[language=Matlab, firstline = 1, lastline = 10]{./Source Code/Coral_Reefsearchers.m}
-
+            %\lstinputlisting[language=Matlab]{./Source Code/Coral_Reefsearchers.m}
+            \lstinputlisting[language=Matlab, firstline = 5, lastline = 66]{./Source Code/Coral_Reefsearchers.m}
         \end{center}
-        \subsection{Test}
+        
+        \subsection{Dynamic Compartment Model Visualization}
+        \label{appendix:B2}
+        Similarly to our Static Compartment Model Visualization (Appendix \ref{appendix:B1}) script, this script visualizes and models our system of differential equations using ODE45. However, this differs from the previous in that it allows for parameter simulations, and subsequently able to create a frame-by-frame animation of the changes:
+        \begin{center}
+            \lstinputlisting[language=Matlab, firstline = 71, lastline = 151]{./Source Code/Coral_Reefsearchers.m}
+        \end{center}
+        
+        \subsection{Disease Free Equilibrium}
+        \label{appendix:B3}
+        This script utilizes MatLab's symbolic toolbox feature to calculate our disease free equilibrium equations:
+        \begin{center}
+            \lstinputlisting[language=Matlab, firstline = 157, lastline = 180]{./Source Code/Coral_Reefsearchers.m}
+        \end{center}
+        
+        \subsection{Basic Reproduction Number: $\mathscr{R}_0$}
+        \label{appendix:B4}
+        Using our disease free equilibrium equations (Appendix \ref{appendix:B3}), we are then able to set-up and calculate our basic reproduction number ($\mathscr{R}_0$), which depicts the equilibrium of the system:
+        \begin{center}
+            \lstinputlisting[language=Matlab, firstline = 185, lastline = 207]{./Source Code/Coral_Reefsearchers.m}
+        \end{center}
+        
+        \subsection{Threshold}
+        \label{appendix:B5}
+        This script uses our disease free equilibrium (Appendix \ref{appendix:B3}) and our basic reproduction number (Appendix \ref{appendix:B4}) to calculate our harvesting rate threshold, beyond which the system would become unstable:
+        \begin{center}
+            \lstinputlisting[language=Matlab, firstline = 218, lastline = 248]{./Source Code/Coral_Reefsearchers.m}
+        \end{center}
+        
+        \subsection{Sensitivity Analysis}
+        This script analyzes the impact of each parameter on our basic reproduction number equation by taking the partial derivative and substituting the variables with parameter values:
+        \label{appendix:B6}
+        \begin{center}
+            \lstinputlisting[language=Matlab, firstline = 253, lastline = 268]{./Source Code/Coral_Reefsearchers.m}
+        \end{center}
+        
+        \subsection{Endemic Equilibrium}
+        \label{appendix:B7}
+        This script calculates the endemic equilibrium of our system of differential equations:        
+        \begin{center}
+            \lstinputlisting[language=Matlab, firstline = 273, lastline = 315]{./Source Code/Coral_Reefsearchers.m}
+        \end{center}
 \newpage
 % \bibliography{main}
 % \bibliographystyle{plain}

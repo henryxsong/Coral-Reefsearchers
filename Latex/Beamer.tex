@@ -427,7 +427,12 @@
 \end{frame}
 
 \subsection{Basic Reproduction Number}
-\begin{frame}{Basic Reproduction Number = $\mathscr{R}_{0}$}
+\begin{frame}{Basic Reproduction Number, $\mathscr{R}_{0}$}
+
+    \begin{block}{Definition}
+        A metric used to describe the contagiousness or transmissibility of infectious agents$^{\cite{delamater_street_leslie_yang_jacobsen_2019}}$, i.e. the number of secondary infections
+    \end{block}
+    
     \begin{columns}
         \begin{column}{0.5\textwidth}
             \begin{align*}
@@ -446,10 +451,9 @@
     \end{columns}
     $$\mathscr{R}_{0} = \rho(\det(FV^{-1} - \lambda I))$$
     $$\Downarrow$$
-    $$\displaystyle {\mathscr{R}}_{0} = - \frac{\beta \mu_{1}q(a(\frac{\mu_{1}}{r}-1)-\frac{\mu_{1}}{r})}{\omega r (\beta h (\frac{\mu_{1}}{r}-1) + \beta \mu_{2} (\frac{\mu_{1}}{r}-1) - \beta q(\frac{\mu_{1}}{r}-1))}$$
+    $\displaystyle {\mathscr{R}}_{0} = - \frac{\beta \mu_{1}q(a(\frac{\mu_{1}}{r}-1)-\frac{\mu_{1}}{r})}{\omega r (\beta h (\frac{\mu_{1}}{r}-1) + \beta \mu_{2} (\frac{\mu_{1}}{r}-1) - \beta q(\frac{\mu_{1}}{r}-1))}$
 \end{frame}
 
-% sensitivity analysis
 \subsection{Sensitivity Analysis}
 \begin{frame}{Sensitivity Analysis}
     \begin{table}[H]
@@ -459,9 +463,9 @@
             Parameter & $S_{A}$ \\
             \hline
             \hline
-            $\mu_{1}$ & 8.3513\\
+            $\mu_{1}$ & \colorbox{yellow}{\textbf{8.3513}}\\
             \hline
-            $\mu_{2}$ & 5.2819\\
+            $\mu_{2}$ & \colorbox{yellow}{\textbf{5.2819}}\\
             \hline
             $q$ & -3.5962\\
             \hline
@@ -475,29 +479,35 @@
             \hline
             $\beta$ & 0\\
             \hline
-            $h$ & 5.2819\\
+            $h$ & \colorbox{yellow}{\textbf{5.2819}}\\
             \hline
-            $a$ & 0.94
+            $a$ & 0.94\\
             \hline
         \end{tabular}
         \caption{Sensitivity Analysis}
         \label{tab:sens_analysis}
     \end{table}
 \end{frame}
+
 \begin{frame}{Threshold}
     \begin{columns}
-        \begin{column}{0.5 \textwidth}
-            % R0 graph
+        \begin{column}{0.55 \textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=\textwidth]{Latex/Figures/Graphs/threshold.png}
+                \caption{Threshold Analysis}
+                \label{fig:threshold}
+            \end{figure}
         \end{column}
-        \begin{column}{0.5 \textwidth}
-           $h = q + \mu_{2} + \frac{\mu_{1}q(a \mu_{1} - ar - \phi \mu_{1})}{\omega r(r-\mu_{1}}$ 
+        \begin{column}{0.45 \textwidth}
+           $h = q + \mu_{2} + \frac{\mu_{1}q(a \mu_{1} - ar - \phi \mu_{1})}{\omega r(r-\mu_{1})}$ 
         \end{column}
     \end{columns}
 \end{frame}
 
 \section{Harvesting Game Theory}
 \begin{frame}{Frame Title}
-    
+    % expected payoff eq
 \end{frame}
 
 %----------------------------------------------------
@@ -514,16 +524,16 @@
             %\item Select a representative species of average resiliency (specifically on Guam) and examine how it will change over time through climate changes.
         %\end{itemize}
         %\item Continue to digest articles and literature relevant to our research.
-        \item Finish endemic equilibrium calculations.
-        \item Perform sensitivity analysis on parameters.
+        %\item Finish endemic equilibrium calculations.
+        %\item Perform sensitivity analysis on parameters.
         %\item Refine and improve differential equations to improve dynamics
         % analyze diff eqs
         \item Application of Education Game Theory on the harvest rate parameter ($h$) to quantify human behavior and the best strategy to protect coral reef sustainability. These tasks include:
         \begin{itemize}
-            \item Payoff Matrix
+            %\item Payoff Matrix
             \item Dominant and/or mixed equilibrium equations
             \item Nash Equilibrium/Evolutionarily Stable Strategy
-            \item Replicator Equation
+            %\item Replicator Equation
         \end{itemize}
     \end{itemize}
 \end{frame}

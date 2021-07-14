@@ -18,7 +18,7 @@ phi = 0.8; %rate that macroalgae spread vegetative over algal turfs
 beta = 1; % carrying capacity
 
 a0 = 0.99; % rate that coral is overgrown by macroalgae
-h = 0.1; %<----CONTROL VARIABLE FOR GAME THEORY
+h = 0.317429; %<----CONTROL VARIABLE FOR GAME THEORY
 
 %grazing intensity 'g'
 g = @(P) (omega*P)/beta;
@@ -29,10 +29,10 @@ a = @(t) abs((a0*(9*sin(pi*t)+1))/(10));
 
 %---------------------------------------------
 % Compartment Initial Conditions
-C = 1/4;
+C = 3/5;
 P = 3/4;
-T = 1/4;
-M = 1/2;
+T = 1/5;
+M = 1/5;
 Prop_Total = C + T + M;
 IC = [C, P, T, M, Prop_Total];
 %---------------------------------------------
@@ -48,7 +48,7 @@ f = @(t,y) [r*y(3)*y(1) + sigma*y(2)*y(1) - y(1)*(a(t)*y(4) + mu1),
         mu1*y(1) +  (g(y(2))*y(4))/(y(4)+y(3)) - (r*y(1) + phi*y(4))*y(3),
         a(t) * y(4)*y(1) + phi*y(4)*y(3) - (g(y(2))*y(4))/(y(4)+y(3)),
         y(1)+y(3)+y(4)];
-            
+
 [t,ya] = ode45(f, [0 5], IC);
 
 figure
@@ -108,11 +108,11 @@ IC = [C, P, T, M, Prop_Total]; %Initial Conditions array
        mu1*y(1) +  (g(y(2))*y(4))/(y(4)+y(3)) - (r*y(1) + phi*y(4))*y(3),
        a(t) * y(4)*y(1) + phi*y(4)*y(3) - (g(y(2))*y(4))/(y(4)+y(3)),
        y(1)+y(3)+y(4)];
-    
+
     % Solve using ODE45
     [t,ya] = ode45(f, [0 5], IC);
     const_t = t; % constant used since t changes each time ode45 is calculated
-    
+
 for i = 1:length(const_t)
     h = i/length(const_t); %variable to animate
 
@@ -122,28 +122,28 @@ for i = 1:length(const_t)
        mu1*y(1) +  (g(y(2))*y(4))/(y(4)+y(3)) - (r*y(1) + phi*y(4))*y(3),
        a(t) * y(4)*y(1) + phi*y(4)*y(3) - (g(y(2))*y(4))/(y(4)+y(3)),
        y(1)+y(3)+y(4)];
-    
+
     % Solve using ODE45
     [t,ya] = ode45(f, [0 5], IC);
-    
+
     % Plot
     txt = ['h = ' num2str(h)]; % shows value of param value at iteration
-    
+
     fig = figure;
     hold on
     plot(t, ya(:,1), '+-.', 'Color', '#FFC996', 'Linewidth', 2.5)
     plot(t, ya(:,2), 'x-.', 'Color', '#4974A5', 'Linewidth', 2.5)
     plot(t, ya(:,3), 'o-.', 'Color', '#BDD2B6', 'Linewidth', 2.5)
     plot(t, ya(:,4), '*-.', 'Color', '#CF0000', 'Linewidth', 2.5)
-    
+
     set(gca, 'FontSize',18); % sets axis & legend font size to 18
     ylim([0 1]); % sets y-axis limit to always be 0-1
     legend('Coral (C)','Parrotfish (P)','Algal Turf (T)','Macroalgae (M)')
     text(0.25,0.05,txt, 'FontSize', 18); % displays text on plot
-    
+
     xlabel('Time (Year)')
     ylabel('Proportion of Population')
-    
+
     % automatically save figure into root directory (where this .m file is
     % stored)
     fname = append('Frame-', num2str(i)); %file name of current iteration
@@ -178,7 +178,6 @@ C_0 = 1 - T_0;
 dPdt = q*P*(1-(P/(beta*C))) - P*(h+mu2);
 P_0 = solve(dPdt == 0, P);
 P_0 = subs(P_0, C, C_0);
-
 %--------------------------------------------------------------------------
 
 
@@ -186,8 +185,6 @@ P_0 = subs(P_0, C, C_0);
 %% R0
 %Note: RUN 'DISEASE FREE EQUILIBRIUM' SECTION FIRST
 
-%---------------------------------------------
-% R0
 %script F
 sF = [a*C*M + phi*T*M];
 F = jacobian(sF, [M]); % jacobian matrix
@@ -206,12 +203,6 @@ R0 = eigens(1);
 R0 = subs(R0, T, T_0);
 R0 = subs(R0, C, C_0);
 R0 = subs(R0, P, P_0(2));
-%---------------------------------------------
-
-%---------------------------------------------
-% Plot R0
-
-%---------------------------------------------
 %--------------------------------------------------------------------------
 
 
@@ -222,23 +213,24 @@ param_array = [mu1, mu2, q, omega, sigma, r, beta, a, phi]; %when a0 =
 % 0.99
 param_values = [0.15, 0.22, 0.9, 1, 0.01, 0.5, 1, 0.5, 0.8]; %a(t) = 0.5
 
-herd_immunity_equation = R0;
-herd_immunity_value = solve(R0 == 1, h);
+hi_equation = R0;
+hi_value = solve(R0 == 1, h);
+
 for i = 1:length(param_array)
-    herd_immunity_equation = subs(herd_immunity_equation, param_array(i), param_values(i));
-    herd_immunity_value = subs(herd_immunity_value, param_array(i), param_values(i));
+    hi_equation = subs(hi_equation, param_array(i), param_values(i));
+    hi_value = subs(hi_value, param_array(i), param_values(i));
 end
 
-herd_immunity_point = [double(herd_immunity_value), 1];
+hi_point = [double(hi_value), 1];
 
 h_var = 0:0.001:1;
 
 figure
 hold on
-fplot(herd_immunity_equation, [0 1])
-plot(herd_immunity_point(1), herd_immunity_point(2), 'o')
-plot([herd_immunity_point(1), herd_immunity_point(1)], [0, herd_immunity_point(2)], 'r-')
-plot([0, herd_immunity_point(1)], [herd_immunity_point(2), herd_immunity_point(2)], 'r-')
+fplot(hi_equation, [0 1])
+plot(hi_point(1), hi_point(2), 'o')
+plot([hi_point(1), hi_point(1)], [0, hi_point(2)], 'r-')
+plot([0, hi_point(1)], [hi_point(2), hi_point(2)], 'r-')
 xlim([0 1]);
 ylim([0 2]);
 
@@ -251,7 +243,7 @@ ylabel('R_0')
 
 %--------------------------------------------------------------------------
 %% Sensitivity Analysis
-% Note: MUST RUN 'R0' SECTION FIRST
+% Note: MUST RUN 'DISEASE FREE EQUILIBRIUM' & 'R0' SECTION FIRST
 
 param_array = [mu1, mu2, q, omega, sigma, r, phi, beta, h, a];
 param_values = [0.15, 0.22, 0.47, 1, 0.01, 0.5, 0.8, 1, 0.1, 0.5];
@@ -271,8 +263,8 @@ end
 
 %--------------------------------------------------------------------------
 %% Endemic Equilibrium
-clear; % Clears workspace
-clc; % Clears Command Window
+%clear; % Clears workspace
+%clc; % Clears Command Window
 
 %---------------------------------------------
 % Symbolic Definitions
@@ -281,7 +273,7 @@ syms C P T M mu1 mu2 q omega sigma beta r h phi g a t
 
 g = @(P) (omega*P)/beta; %grazing intensity 'g'
 
-a = @(t) abs((0.9*(9*sin(pi*t)+1))/(10)); %sin function of a(t)
+% a = @(t) abs((0.9*(9*sin(pi*t)+1))/(10)); %sin function of a(t)
 %---------------------------------------------
 
 %---------------------------------------------
@@ -302,8 +294,8 @@ M_E_equation = solve(M_E == 0, M)
 %---------------------------------------------
 
 %---------------------------------------------
-% Value
-param_array = [mu1, mu2, q, omega, sigma, r, phi, beta, h, t];
+% Calculates M_E Value by substitution
+param_array = [mu1, mu2, q, omega, sigma, r, phi, beta, h, a];
 param_values = [0.15, 0.22, 0.47, 1, 0.01, 0.5, 0.8, 1, 0.1, 0.5];
 
 M_E_Value = M_E_equation;
@@ -316,3 +308,48 @@ disp(M_E_Value)
 %--------------------------------------------------------------------------
 
 
+%--------------------------------------------------------------------------
+%% Game Theory
+syms K h_pop O
+
+E_equation = -K - (g(P)*(1-h)*M)/(M + T)
+E_equation = subs(E_equation, P, P_E)
+E_equaiton = subs(E_equation, T, T_E)
+E_equation = subs(E_equation, M, M_E_equation(1))
+%E_equation = subs(E_equation, h, h_pop);
+
+% temp = E_F - E_NF;
+% nash_equilibrium = solve(temp == 0, h)
+
+temp = diff(diff(E_equation, h), h)
+% temp = diff(temp, h)
+temp1 = temp;
+temp1 = subs(temp1, T, T_E);
+temp1 = subs(temp1, M, M_E_equation(1));
+
+param_array = [mu1, mu2, q, omega, sigma, r, phi, beta, h, a];
+param_values = [0.15, 0.22, 0.47, 1, 0.01, 0.5, 0.8, 1, 0.1, 0.5];
+
+for i = 1:length(param_array)
+    temp1 = subs(temp1, param_array(i), param_values(i));
+end
+
+%temp1 = subs(temp1, M, M_E_Value(1));
+
+lol = K -(g(P)*M)/(M+T);
+lol = subs(lol, P, P_E)
+lol = subs(lol, T, T_E)
+lol = subs(lol, M, M_E_equation(2))
+
+lol = solve(lol == 0, h);
+
+param_array = [mu1, mu2, q, omega, sigma, r, phi, beta, h, a];
+param_values = [0.15, 0.22, 0.47, 1, 0.01, 0.5, 0.8, 1, 0.1, 0.5];
+
+for i = 1:length(param_array)
+    lol = subs(lol, param_array(i), param_values(i));
+end
+
+fplot(lol);
+xlim([0 1]);
+ylim([0 1]);

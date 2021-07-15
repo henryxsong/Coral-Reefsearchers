@@ -244,7 +244,8 @@ Calculating $P^{*}$ :
 \subsection{Sensitivity Analysis}
 Sensitivity analysis determines the maximum impact of each parameter on the basic reproduction number equation. This process is calculated by performing the partial derivative on the $\mathscr{R}_0$ equation with respect to each parameter value, and substituting the values for the remaining parameter variables. Below is the general equation to calculate sensitivity analysis: \\
 \begin{align*}
-    lol I dont remember the equation, I'll put in tomorrow
+    S_{\lambda} &=  \frac{\Delta \mathscr{R}_0}{\mathscr{R}_0} \\
+    where \lamda is a parameter in the quantity \mathscr{R}_0.
 \end{align*}
 
 Utilizing MatLab (Appendix \ref{appendix:B6}), we were able to automate the calculation process, giving us the corresponding sensitivity analysis for each parameter variable. 
@@ -314,7 +315,7 @@ Special thanks to Dr. Bastian Bentlage, our faculty mentors (Dr. JaeYong Choi, D
     \subsection{Basic Reproduction Number: $\mathscr{R}_0$}
     \subsection{Game Theory}
     
-    \section{MatLab Code}
+    \section{MatLab Scripts}
         \subsection{Static Compartment Model Visualization}
         \label{appendix:B1}
         This script represents our MatLab implementation of visualizing our compartment model and dynamics using our known and estimated parameters. The code implements ODE45 in order to calculate our system of differential equations, and plots the results:
@@ -341,28 +342,28 @@ Special thanks to Dr. Bastian Bentlage, our faculty mentors (Dr. JaeYong Choi, D
         \label{appendix:B4}
         Using our disease free equilibrium equations (Appendix \ref{appendix:B3}), we are then able to set-up and calculate our basic reproduction number ($\mathscr{R}_0$), which depicts the equilibrium of the system:
         \begin{center}
-            \lstinputlisting[language=Matlab, firstline = 185, lastline = 207]{./Source Code/Coral_Reefsearchers.m}
+            \lstinputlisting[language=Matlab, firstline = 185, lastline = 206]{./Source Code/Coral_Reefsearchers.m}
         \end{center}
         
         \subsection{Threshold}
         \label{appendix:B5}
         This script uses our disease free equilibrium (Appendix \ref{appendix:B3}) and our basic reproduction number (Appendix \ref{appendix:B4}) to calculate our harvesting rate threshold, beyond which the system would become unstable:
         \begin{center}
-            \lstinputlisting[language=Matlab, firstline = 218, lastline = 248]{./Source Code/Coral_Reefsearchers.m}
+            \lstinputlisting[language=Matlab, firstline = 210, lastline = 240]{./Source Code/Coral_Reefsearchers.m}
         \end{center}
         
         \subsection{Sensitivity Analysis}
         This script analyzes the impact of each parameter on our basic reproduction number equation by taking the partial derivative and substituting the variables with parameter values:
         \label{appendix:B6}
         \begin{center}
-            \lstinputlisting[language=Matlab, firstline = 253, lastline = 268]{./Source Code/Coral_Reefsearchers.m}
+            \lstinputlisting[language=Matlab, firstline = 245, lastline = 260]{./Source Code/Coral_Reefsearchers.m}
         \end{center}
         
         \subsection{Endemic Equilibrium}
         \label{appendix:B7}
         This script calculates the endemic equilibrium of our system of differential equations:        
         \begin{center}
-            \lstinputlisting[language=Matlab, firstline = 273, lastline = 315]{./Source Code/Coral_Reefsearchers.m}
+            \lstinputlisting[language=Matlab, firstline = 265, lastline = 307]{./Source Code/Coral_Reefsearchers.m}
         \end{center}
 \newpage
 % \bibliography{main}

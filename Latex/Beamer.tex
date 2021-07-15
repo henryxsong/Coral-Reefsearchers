@@ -254,9 +254,10 @@
 
 \subsection{Parameters}
 \begin{frame}{Coral Reef Ecosystem Model Parameters}
+\hspace{-7cm}
     \begin{table}
     %\centering
-    \vspace{-.7cm}
+    \vspace{-1cm}
     \begin{tabular}{c p{5cm} c c}
         \hline
         Parameter & Description & Rate & Units\textsuperscript{\cite{12_noaa_report}\cite{04_mathanalysis}\cite{13_blackwood_hastings_mumby_2010}}\\
@@ -334,7 +335,7 @@
     where $g(P) = \frac{\omega P}{\beta}, \quad a(t)=|\frac{a_{0}(9\sin{(\pi t) }+1)}{10}|$.\\ 
     \quad
     \begin{center}
-        \textit{Modified from \cite{13_blackwood_hastings_mumby_2010}}
+        {\small \textit{Modified from \cite{13_blackwood_hastings_mumby_2010}}}
     \end{center}
 \end{frame}
 
@@ -416,23 +417,42 @@
     \scalebox{0.9}{\parbox{.5\textwidth}{%
     \begin{align*}
         T^{*} &= \frac{\mu_{1} + a(t)M^{*}}{r} \\
-        C^{*} &= 1-(T^{*} + M^{*}) \\
+        C^{*} %&= 1-(T^{*} + M^{*}) \\
         &= 1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*} \right)\\
-        P^{*} &= \beta C^{*} \left(\frac{q-(h+\mu_{2})}{q} \right) \\
+        P^{*} %&= \beta C^{*} \left(\frac{q-(h+\mu_{2})}{q} \right) \\
         &= \beta \left(1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*} \right) \right) \left(\frac{q-(h+\mu_{2})}{q} \right)\\
-        M^{*} &= \frac{\omega P^{*}}{\beta(a(t)C^{*}+\phi T^{*})} - T^{*} \\
-        &= \frac{\omega \left(\beta \left(1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*} \right) \right) \left(\frac{q-(h+\mu_{2})}{q} \right) \right)}{\beta(a(t) \left(1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*} \right) \right)+\phi \left(\frac{\mu_{1} + a(t)M^{*}}{r} \right))} - \frac{\mu_{1} + a(t)M^{*}}{r}
+        M^{*} &= \frac{\omega (\beta \left(1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*} \right) \right) \left(\frac{q-(h+\mu_{2})}{q} \right))}{\beta(a(t)(1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*}) \right)+\phi \frac{\mu_{1} + a(t)M^{*}}{r})} - \frac{\mu_{1} + a(t)M^{*}}{r} \\
     \end{align*}
     }}
+\end{frame}
+
+
+\begin{frame}{Endemic Equilibrium Cont.}
+Calculation for M^{*}
+
+$$\frac{-e \pm \sqrt{e^2 - 4df}}{2d},$$ where
+\begin{align*}
+ d &= (a(t)q-2a(t)r+r \phi ) - q(r^{2}+a(t)^{3})\\
+ e &= a(t)q(r(r-2\mu_{1}+a(t))-2\mu_{1}(a(t)+\phi )) +  r(q(\phi \mu_{1} + r \omega ) - \\ & \ \ \  \omega(hr+a(t) \mu_{2} + r\mu_{2})\\
+ f &= -qr^{2} \omega +qr\mu_{1} \omega + hr^{2} \omega - hr\mu_{1} \omega + r^2 \mu_{2} \omega - r \mu_{1} \mu_{2} \omega + a(t)qr \mu_{1} - \\ & \ \ \  a(t)q\mu_{1}^{2} +q\phi \mu_{1}^{2}
+\end{align*}
+
+    %0 &= M^{2}((aq-2ar+r \phi ) - q(r^{2}+a^{3})) + M(aq(r(r-2\mu_{1}+a)-2\mu_{1}(a+\phi )) +  r(q(\phi \mu_{1} + r \omega ) - \omega(hr+a \mu_{2} + r\mu_{2})) + 
+    %(-qr^{2} \omega +qr\mu_{1} \omega + hr^{2} \omega - hr\mu_{1} \omega + r^2 \mu_{2} \omega - r \mu_{1} \mu_{2} \omega + aqr \mu_{1} - aq\mu_{1}^{2} +q\phi \mu_{1}^{2})    
 \end{frame}
 
 \subsection{Basic Reproduction Number}
 \begin{frame}{Basic Reproduction Number, $\mathscr{R}_{0}$}
 
     \begin{block}{Definition}
-        A metric used to describe the contagiousness or transmissibility of infectious agents$^{\cite{delamater_street_leslie_yang_jacobsen_2019}}$, i.e. the number of secondary infections
+        The rate that macroalgae overgrows coral ?
+        
+        %A metric used to describe the contagiousness or transmissibility of infectious agents $^{\cite{delamater_street_leslie_yang_jacobsen_2019}}$, i.e. the number of secondary infections
     \end{block}
     
+\end{frame}
+
+\begin{frame}{Basic Reproduction Number, $\mathscr{R}_{0}$}
     \begin{columns}
         \begin{column}{0.5\textwidth}
             \begin{align*}
@@ -451,6 +471,7 @@
     \end{columns}
     $$\mathscr{R}_{0} = \rho(\det(FV^{-1} - \lambda I))$$
     $$\Downarrow$$
+    \centering
     $\displaystyle {\mathscr{R}}_{0} = - \frac{\beta \mu_{1}q(a(\frac{\mu_{1}}{r}-1)-\frac{\mu_{1}}{r})}{\omega r (\beta h (\frac{\mu_{1}}{r}-1) + \beta \mu_{2} (\frac{\mu_{1}}{r}-1) - \beta q(\frac{\mu_{1}}{r}-1))}$
 \end{frame}
 
@@ -489,26 +510,90 @@
     \end{table}
 \end{frame}
 
-\begin{frame}{Threshold}
-    \begin{columns}
-        \begin{column}{0.55 \textwidth}
-            \begin{figure}
-                \centering
-                \includegraphics[width=\textwidth]{Latex/Figures/Graphs/threshold.png}
-                \caption{Threshold Analysis}
-                \label{fig:threshold}
-            \end{figure}
-        \end{column}
-        \begin{column}{0.45 \textwidth}
-           $h = q + \mu_{2} + \frac{\mu_{1}q(a \mu_{1} - ar - \phi \mu_{1})}{\omega r(r-\mu_{1})}$ 
-        \end{column}
-    \end{columns}
-\end{frame}
+
 
 \section{Harvesting Game Theory}
-\begin{frame}{Frame Title}
-    % expected payoff eq
+\begin{frame}{Harvesting Game}
+Game of Harvesting 
+\begin{itemize}
+    \item \textbf{Player: } Individual
+    \item \textbf{Strategy: } 
+        \begin{itemize}
+            \item Proportion of Individual Harvesting (h)
+        \end{itemize}
+\end{itemize}
 \end{frame}
+
+
+\subsection{Harvesting Threshold}
+\begin{frame}{Harvesting Threshold}
+    \begin{center}
+    $h = q + \mu_{2} + \frac{\mu_{1}q(a \mu_{1} - ar - \phi \mu_{1})}{\omega r(r-\mu_{1})}$ \\
+
+    \begin{align*}
+    h_{pop} &< h_{HI}: \text{"disease" dies off} \\
+    h_{pop} &> h_{HI}: endemic
+    \end{align*}
+    \end{center}
+\end{frame}
+
+\begin{frame}{Harvesting Threshold Graph}
+    \begin{figure}
+        \centering
+        \includegraphics[width = 0.8\textwidth]{Latex/Figures/Graphs/threshold.png}
+        \caption{Threshold Analysis}
+        \label{fig:threshold}
+    \end{figure}
+\end{frame}
+
+\subsection{Expected Payoff - Harvesting}
+\begin{frame}{Expected Payoff - Harvesting}
+    Let h $\epsilon$ [0,1] be the harvesting proportion of an individual.
+    \begin{center}
+    $\displaystyle {E(h, h_{pop}) = -hC_{h} - \left( \frac{h}{h + \mu_{2}} \cdot \frac{g(P^{*})(1-h)M^{*}}{M^{*} + T^{*}} \right) C_{i}}$ \\
+    
+    \vspace{0.6cm}
+    
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{c|c}
+             Symbol & Definition \\
+             \hline
+             E(h, h_{pop}) & Expected payoff \\
+             C_{h} & Cost of harvesting \\
+             C_{i} & Cost of coral infection \\
+        \end{tabular}
+        %\caption{Caption}
+        \label{tab:my_label}
+    \end{table}
+    \end{center}
+\end{frame}
+
+\begin{frame}{Expected Payoff - Harvesting}
+    \begin{center}
+    $\displaystyle {E(h, h_{pop}) = -hC^{h} - \frac{h}{h + \mu_{2}} \cdot \frac{g(P^{*})(1-h)M^{*}}{M^{*} + T^{*}}}$ \\
+    
+    \vspace{0.6cm}
+    
+    where $C^{h} = \frac{C_{h}}{C_{i}}$
+    \end{center}
+\end{frame}
+
+\begin{frame}{Expected Payoff - Harvesting}
+
+$E(h, h_{pop})$ is a convex function since 
+$\frac{\partial^{2}E(h, h_{pop})}{\partial h^{2}} > 0$ \\
+
+\vspace{0.6cm}
+
+$\displaystyle {\frac{\partial ^ {2} E}{\partial h^{2}} = \frac{2 \omega P \mu{2} (M+T)^{2} (\mu_{1} +1}{\beta(h(M+T) + \mu_{2}(M+T))^{3}} > 0}$
+
+
+%$\frac{\partial^{2} E}{\partial h^{2}} = \frac{2 \omega P \mu_{2} (M+T)^{2} (\mu_{1}+1}{\beta(h(M+T) + \mu_{2}(M+T))^{3}}$}
+
+\end{frame}
+
+
 
 %----------------------------------------------------
 
@@ -528,11 +613,11 @@
         %\item Perform sensitivity analysis on parameters.
         %\item Refine and improve differential equations to improve dynamics
         % analyze diff eqs
-        \item Application of Education Game Theory on the harvest rate parameter ($h$) to quantify human behavior and the best strategy to protect coral reef sustainability. These tasks include:
+        \item Continue application of Harvesting Game Theory on the harvest rate parameter ($h$) to quantify human behavior and the best strategy to protect coral reef sustainability. These tasks include:
         \begin{itemize}
             %\item Payoff Matrix
-            \item Dominant and/or mixed equilibrium equations
-            \item Nash Equilibrium/Evolutionarily Stable Strategy
+            %\item Dominant and/or mixed equilibrium equations
+            \item Nash Equilibrium %/Evolutionarily Stable Strategy
             %\item Replicator Equation
         \end{itemize}
     \end{itemize}

@@ -114,7 +114,7 @@ IC = [C, P, T, M, Prop_Total]; %Initial Conditions array
     const_t = t; % constant used since t changes each time ode45 is calculated
 
 for i = 1:length(const_t)
-    h = i/length(const_t); %variable to animate
+    phi = (length(const_t)+1-i)/length(const_t); %variable to animate
 
    % System of Differential Equations
     f = @(t,y) [r*y(3)*y(1) + sigma*y(2)*y(1) - y(1)*(a(t)*y(4) + mu1),
@@ -127,7 +127,7 @@ for i = 1:length(const_t)
     [t,ya] = ode45(f, [0 5], IC);
 
     % Plot
-    txt = ['h = ' num2str(h)]; % shows value of param value at iteration
+    txt = ['phi = ' num2str(phi)]; % shows value of param value at iteration
 
     fig = figure;
     hold on
@@ -321,19 +321,21 @@ param_values = [0.15, 0.22, 0.47, 1, 0.01, 0.5, 0.8, 1, 0.5];
 % sample = simplify(second);
 
 K = (h/(h+mu2))*((((omega*P)/beta)*M)/(M+T)) - K
-K = solve(K == 0, h)
 K = subs(K, P, P_E)
 for i = 1:length(param_array)
     K = subs(K, param_array(i), param_values(i));
 end
 
 K = subs(K, T, T_E)
-K = solve(K == 0, h)
 for i = 1:length(param_array)
     K = subs(K, param_array(i), param_values(i));
 end
 
-K = subs(K, M, M_E_Value(1))
+for i = 1:length(param_array)
+    M_E_equation = subs(M_E_equation, param_array(i), param_values(i));
+end
+
+K = subs(K, M, M_E_equation(2))
 for i = 1:length(param_array)
     K = subs(K, param_array(i), param_values(i));
 end
@@ -350,4 +352,4 @@ solution = solve(K == 0, h)
 figure
 fplot(solution)
 xlim([0 1])
-ylim([0 2])
+ylim([0 1])

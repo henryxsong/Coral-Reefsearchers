@@ -78,7 +78,7 @@ The objective of this paper is to analyze how Guam's reef ecosystem will change 
 %\section{Objectives}
 
 
-\section{Modeling}
+\section{Mathematical Model}
 \subsection{Coral Reef Ecosystem Model}
 \begin{center}
     \begin{tikzpicture}{node distance = 1cm, auto}
@@ -212,26 +212,23 @@ The basic reproduction number, $\mathscr{R}_{0}$, is a metric used to describe t
 
 \begin{center}
 
-$\mathscr{F} = 
-\begin{bmatrix} aCM + \phi MT \end{bmatrix}$ and $\mathscr{V} = \begin{bmatrix} \frac{g(P)M}{M+T} \end{bmatrix}$
-
 $\displaystyle {\mathscr{R}}_{0} = \frac{\mu_{1}(a r - a\mu_{1} + \phi \mu_{1})}{r^{2}g(P)}$
 
 \end{center}
 
 \subsection{Endemic Equilibrium}
 \begin{align*}
-        C^{*} &= 1-T-M \\
-        % rTC + \sigma PC - (a(t)M+\mu_{1})C\\
-        P^{*} &= \beta C \left(\frac{q-(h+\mu_{2})}{q}\right)\\
-        T^{*} &= \frac{\mu_{1} + a(t)M}{r} \\
-        %T^{2}(rC+\phi M) + T(MrC + M^{2} + \mu_{1}C) - \left(\frac{\omega P}{\beta}M + \mu_{1} CM\right)\\
-        M^{*} &= \frac{\omega P}{\beta (a(t)C + \phi T)} - T\\
+        T^{*} &= \frac{\mu_{1} + a(t)M^{*}}{r} \\
+        C^{*} %&= 1-(T^{*} + M^{*}) \\
+        &= 1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*} \right)\\
+        P^{*} %&= \beta C^{*} \left(\frac{q-(h+\mu_{2})}{q} \right) \\
+        &= \beta \left(1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*} \right) \right) \left(\frac{q-(h+\mu_{2})}{q} \right)\\
+        M^{*} &= \frac{\omega (\beta \left(1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*} \right) \right) \left(\frac{q-(h+\mu_{2})}{q} \right))}{\beta(a(t)(1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*}) \right)+\phi \frac{\mu_{1} + a(t)M^{*}}{r})} - \frac{\mu_{1} + a(t)M^{*}}{r} \\
 \end{align*}
 
-The Endemic Equilibrium tells us at what point will the disease not spread nor will it fully eradicate. Essentially it tells when the disease is stabilized. In order to find the endemic equilibrium, we have to set each differential equal to 0 and solve for each variable. The equations above are not yet finished as $P^{*}$ is the only equation that is in terms of C. Every other equation will need to be computed in terms of C. After finding the equations, the next step would be to substitute the parameters in order to see at what point does each compartment need to be in order to have an Endemic Equilibrium. Note that $C=1-\frac{\mu_{1}}{r}$ 
+The Endemic Equilibrium determines at what point will the disease not spread nor will it fully eradicate. Essentially it tells when the disease is stabilized. In order to find the endemic equilibrium, we have to set each differential equal to 0 and solve for each variable. The equations above are in terms of M as M is considered our disease. After finding the equations, the next step would be to substitute the parameters in order to see at what point does each compartment need to be in order to have an Endemic Equilibrium. The endemic will be used in the Game Theory part of the research. 
 
-Calculating $P^{*}$ :
+Example of Calculating $P^{*}$ :
 \begin{align*}
         \frac{dP}{dT} &= qP\left(1-\frac{P}{\beta C}\right) - P(h + \mu_{2})\\
         0 &= qP\left(1-\frac{P}{\beta C}\right) - P(h + \mu_{2})\\
@@ -285,7 +282,7 @@ Utilizing MatLab (Appendix \ref{appendix:B6}), we were able to automate the calc
     The natural death rate of corals ($\mu_{1}$) represents the largest impact, and rightfully so, with a sensitivity analysis value of 8.3513. Due to the dynamics between corals, algal turfs, and macroalgae, the death of corals directly impacts algal turfs. However, the natural death accounts for all factors of coral deaths, including but not limited to bleaching, disease, damage, and so forth. The more corals that die, the more surface area get converted into algal turfs and subsequently gives way for algal turfs to convert into macroalgae. As such, this rate carries the greatest impact on our overall basic reproduction number equation. \par
     The natural death rate of parrotfish ($\mu_{2}$) and the harvest rate of parrotfish due to fishing ($h$) both share the second highest sensitivity analysis value of 5.2819. This presents a unique perspective, as the analysis indicates that there is no difference between natural death and human-driven death. Both simply represent the removal of live parrotfish from the ecosystem rather than the means of removal, and as such are equal. This is significant as our model depicts parrotfish as the primary grazers of macroalgae, and we have acknowledged that macroalgae overgrowth has a negative impact on the ecosystem. When the parrotfish population is adequate, the proportion of macroalgae will be kept in control. However, with the removal of parrotfish from the ecosystem from death or fishing, the macroalgae will have the opportunity to grow unchecked. Thus, the impact of overfishing parrotfish will undeniably affect the dynamics of the ecosystem, and will allow macroalgae to dominate while corals whither away.
     
-%\subsection{Harvesting Game Theory}
+\section{Harvesting Game Theory}
 
 \section{Literature Review}
 Throughout this week, our group has dedicated a large portion of time to reviewing scholarly articles and research publications relevant to our areas of research. This aspect of performing our research is crucial as, through literature review, we are able to gather information, techniques, methods, data, results, and many other variables that we are able to use in our own research. \par
@@ -313,7 +310,36 @@ Special thanks to Dr. Bastian Bentlage, our faculty mentors (Dr. JaeYong Choi, D
     \subsection{Disease Free Equilibrium}
     \subsection{Endemic Equilibrium}
     \subsection{Basic Reproduction Number: $\mathscr{R}_0$}
+    
+    $\mathscr{F} = 
+    \begin{bmatrix} aCM + \phi MT \end{bmatrix}$ and $\mathscr{V} = \begin{bmatrix} \frac{g(P)M}{M+T} \end{bmatrix}$
+    
+    $F = \begin{bmatrix}
+    a(t)C + \phi T^{0}
+    \end{bmatrix}$
+    
+    $V = \begin{bmatrix}
+    \frac{g(P)T^{0}}{(M+T)^{2}}
+    \end{bmatrix}$
+    
+    \begin{center}
+    $FV^{-1} = \begin{bmatrix}
+    \frac{aC^{0}T^{0} + \phi (T^{0})^{2}}{g(P^{0})}
+    \end{bmatrix}$
+    
+    $\mathscr{R}_{0} = \frac{\mu_{1}(a r - a\mu_{1} + \phi \mu_{1})}{r^{2}g(P^{0})}$
+    \end{center}
+    
+    \subsection{Herd Immunity}
+    $\mathscr{R}_{0} = \frac{\mu_{1}(a r - a\mu_{1} + \phi \mu_{1})}{r^{2}g(P^{0})} = 1$
+    
+    $h_{HI} = q - \mu_{2} + \frac{\mu_{1}q(a(\mu_{1}-r)-\phi \mu_{1}}{\omega r (r-\mu_{1}}$
+    
     \subsection{Game Theory}
+    Expected Payoff: 
+    \begin{align*}
+        E (h, h_{pop}) &= -hC^{h} - \frac{h}{h+\mu_{2}} \frac{g(P)(1-h)M}{M+T}
+    \end{align*}
     
     \section{MatLab Scripts}
         \subsection{Static Compartment Model Visualization}

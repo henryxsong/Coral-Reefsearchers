@@ -147,7 +147,7 @@ for i = 1:length(const_t)
     % automatically save figure into root directory (where this .m file is
     % stored)
     fname = append('Frame-', num2str(i)); %file name of current iteration
-    %saveas(fig, fname, 'png'); %save figure as .png
+    saveas(fig, fname, 'png'); %save figure as .png
 end
 %---------------------------------------------------------------
 %--------------------------------------------------------------------------
@@ -211,7 +211,7 @@ R0 = subs(R0, P, P_0(2));
 % Note: MUST RUN 'DISEASE FREE EQUILIBRIUM' & 'R0' SECTION FIRST
 param_array = [mu1, mu2, q, omega, sigma, r, beta, a, phi]; %when a0 =
 % 0.99
-param_values = [0.15, 0.22, 0.9, 1, 0.01, 0.5, 1, 0.5, 0.8]; %a(t) = 0.5
+param_values = [0.15, 0.22, 0.47, 1, 0.01, 0.5, 1, 0.5, 0.8]; %a(t) = 0.5
 
 hi_equation = R0;
 hi_value = solve(R0 == 1, h);
@@ -310,46 +310,44 @@ disp(M_E_Value)
 
 %--------------------------------------------------------------------------
 %% Game Theory
-syms K h_pop O
+syms K h_pop
 
-E_equation = -K - (g(P)*(1-h)*M)/(M + T)
-E_equation = subs(E_equation, P, P_E)
-E_equaiton = subs(E_equation, T, T_E)
-E_equation = subs(E_equation, M, M_E_equation(1))
-%E_equation = subs(E_equation, h, h_pop);
+param_array = [mu1, mu2, q, omega, sigma, r, phi, beta, a];
+param_values = [0.15, 0.22, 0.47, 1, 0.01, 0.5, 0.8, 1, 0.5];
 
-% temp = E_F - E_NF;
-% nash_equilibrium = solve(temp == 0, h)
+% sample = ((h)/(h+mu2))*((g(P)*(1-h)*M)/(M+T));
+% first = diff(sample, h);
+% second = diff(first, h);
+% sample = simplify(second);
 
-temp = diff(diff(E_equation, h), h)
-% temp = diff(temp, h)
-temp1 = temp;
-temp1 = subs(temp1, T, T_E);
-temp1 = subs(temp1, M, M_E_equation(1));
-
-param_array = [mu1, mu2, q, omega, sigma, r, phi, beta, h, a];
-param_values = [0.15, 0.22, 0.47, 1, 0.01, 0.5, 0.8, 1, 0.1, 0.5];
-
+K = (h/(h+mu2))*((((omega*P)/beta)*M)/(M+T)) - K
+K = solve(K == 0, h)
+K = subs(K, P, P_E)
 for i = 1:length(param_array)
-    temp1 = subs(temp1, param_array(i), param_values(i));
+    K = subs(K, param_array(i), param_values(i));
 end
 
-%temp1 = subs(temp1, M, M_E_Value(1));
-
-lol = K -(g(P)*M)/(M+T);
-lol = subs(lol, P, P_E)
-lol = subs(lol, T, T_E)
-lol = subs(lol, M, M_E_equation(2))
-
-lol = solve(lol == 0, h);
-
-param_array = [mu1, mu2, q, omega, sigma, r, phi, beta, h, a];
-param_values = [0.15, 0.22, 0.47, 1, 0.01, 0.5, 0.8, 1, 0.1, 0.5];
-
+K = subs(K, T, T_E)
+K = solve(K == 0, h)
 for i = 1:length(param_array)
-    lol = subs(lol, param_array(i), param_values(i));
+    K = subs(K, param_array(i), param_values(i));
 end
 
-fplot(lol);
-xlim([0 1]);
-ylim([0 1]);
+K = subs(K, M, M_E_Value(1))
+for i = 1:length(param_array)
+    K = subs(K, param_array(i), param_values(i));
+end
+
+% K = solve(K == 0, h)
+
+
+% for i = 1:length(param_array)
+%     K = subs(K, param_array(i), param_values(i));
+% end
+%
+solution = solve(K == 0, h)
+
+figure
+fplot(solution)
+xlim([0 1])
+ylim([0 2])

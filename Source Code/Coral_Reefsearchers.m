@@ -207,7 +207,7 @@ R0 = subs(R0, P, P_0(2));
 
 
 %--------------------------------------------------------------------------
-%% Herd Immunity
+%% Threshold
 % Note: MUST RUN 'DISEASE FREE EQUILIBRIUM' & 'R0' SECTION FIRST
 param_array = [mu1, mu2, q, omega, sigma, r, beta, a, phi]; %when a0 =
 % 0.99
@@ -229,9 +229,9 @@ figure
 hold on
 fplot(hi_equation, [0 1])
 plot(hi_point(1), hi_point(2), 'o')
-plot([hi_point(1), hi_point(1)], [0, hi_point(2)], 'r-')
-plot([0, hi_point(1)], [hi_point(2), hi_point(2)], 'r-')
-xlim([0 1]);
+plot([hi_point(1), hi_point(1)], [0, hi_point(2)], 'r--')
+plot([0, hi_point(1)], [hi_point(2), hi_point(2)], 'r--')
+xlim([0 0.4]);
 ylim([0 2]);
 
 set(gca, 'FontSize',18);
@@ -310,6 +310,7 @@ disp(M_E_Value)
 
 %--------------------------------------------------------------------------
 %% Game Theory
+% Note: MUST RUN 'ENDEMIC EQUILIBRIUM' FIRST
 syms K h_pop
 
 param_array = [mu1, mu2, q, omega, sigma, r, phi, beta, a];
@@ -320,36 +321,43 @@ param_values = [0.15, 0.22, 0.47, 1, 0.01, 0.5, 0.8, 1, 0.5];
 % second = diff(first, h);
 % sample = simplify(second);
 
-K = (h/(h+mu2))*((((omega*P)/beta)*M)/(M+T)) - K
-K = subs(K, P, P_E)
+n_e = -C + (h*omega*P*M)/(beta*(h+mu1)*(M+T))
+n_e = subs(n_e, P, P_E)
+n_e = simplify(n_e)
+% for i = 1:length(param_array)
+%     K = subs(K, param_array(i), param_values(i));
+% end
+% 
+n_e = subs(n_e, T, T_E)
+n_e = simplify(n_e)
+% for i = 1:length(param_array)
+%     K = subs(K, param_array(i), param_values(i));
+% end
+% 
+% for i = 1:length(param_array)
+%     M_E_equation = subs(M_E_equation, param_array(i), param_values(i));
+% end
+% 
+n_e = subs(n_e, M, M_E_equation(1))
+n_e = simplify(n_e)
+
 for i = 1:length(param_array)
-    K = subs(K, param_array(i), param_values(i));
+    n_e = subs(n_e, param_array(i), param_values(i));
 end
 
-K = subs(K, T, T_E)
-for i = 1:length(param_array)
-    K = subs(K, param_array(i), param_values(i));
-end
+n_e = simplify(n_e, 'Steps', 50)
 
-for i = 1:length(param_array)
-    M_E_equation = subs(M_E_equation, param_array(i), param_values(i));
-end
-
-K = subs(K, M, M_E_equation(2))
-for i = 1:length(param_array)
-    K = subs(K, param_array(i), param_values(i));
-end
-
-% K = solve(K == 0, h)
-
+%n_e_solution = solve(n_e == 0, h)
+%n_e_solution = solve(n_e == 0, h, 'Real', true)
+n_e_solution = solve(n_e == 0, h, 'IgnoreAnalyticConstraints', true)
+%n_e_solution = vpasolve(n_e == 0, h)
 
 % for i = 1:length(param_array)
 %     K = subs(K, param_array(i), param_values(i));
 % end
 %
-solution = solve(K == 0, h)
 
-figure
-fplot(solution)
+fplot(n_e_solution)
 xlim([0 1])
 ylim([0 1])
+%

@@ -15,6 +15,7 @@
 \setlength{\columnseprule}{1pt}
 
 \setbeamertemplate{bibliography item}{\insertbiblabel}
+\AtNextBibliography{\scriptsize}
 
 \RequirePackage{currfile} 
 \setbeamertemplate{caption}[numbered]
@@ -223,7 +224,7 @@
             \item consists of only corals (C), algal turfs (T), and macroalgae (M).
             \item supports maximum carrying capacity of parrotfish.
         \end{itemize}
-        \item Macroalgae is the only predator of coral.
+        \item Macroalgae is the only predator of corals.
         \item Coral recruit to and overgrow algal turfs\textsuperscript{\cite{04_mathanalysis}}.
         \item Corals are overgrown by macroalgae\textsuperscript{\cite{04_mathanalysis}}.
         \item Macroalgae colonize dead coral by spreading vegetative over algal turfs\textsuperscript{\cite{04_mathanalysis}}.
@@ -362,6 +363,20 @@
     \end{center}
 \end{frame}
 
+% \begin{frame}{Parameter Changes: $r$}
+%     \begin{center}
+%         \animategraphics[width=0.85\textwidth, loop, autoplay]{3}{Latex/Figures/r_animation/Frame-}{1}{49}\\
+%         Initial Conditions: $C = T = M = \frac{1}{3}$, and $P = \frac{3}{4}$
+%     \end{center}
+% \end{frame}
+
+\begin{frame}{Parameter Changes: $\phi$}
+    \begin{center}
+        \animategraphics[width=0.85\textwidth, loop, autoplay]{3}{Latex/Figures/phi_animation/Frame-}{1}{49}\\
+        Initial Conditions: $C = T = M = \frac{1}{3}$, and $P = \frac{3}{4}$
+    \end{center}
+\end{frame}
+
 \begin{frame}{Compartment Initial Condition Changes}
     \begin{figure}
         \centering
@@ -421,38 +436,32 @@
         &= 1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*} \right)\\
         P^{*} %&= \beta C^{*} \left(\frac{q-(h+\mu_{2})}{q} \right) \\
         &= \beta \left(1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*} \right) \right) \left(\frac{q-(h+\mu_{2})}{q} \right)\\
-        M^{*} &= \frac{\omega (\beta \left(1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*} \right) \right) \left(\frac{q-(h+\mu_{2})}{q} \right))}{\beta(a(t)(1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*}) \right)+\phi \frac{\mu_{1} + a(t)M^{*}}{r})} - \frac{\mu_{1} + a(t)M^{*}}{r} \\
+    %M^{*} &= \frac{\omega (\beta \left(1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*} \right) \right) \left(\frac{q-(h+\mu_{2})}{q} \right))}{\beta(a(t)(1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*}) \right)+\phi \frac{\mu_{1} + a(t)M^{*}}{r})} - \frac{\mu_{1} + a(t)M^{*}}{r} \\
     \end{align*}
     }}
 \end{frame}
 
 
 \begin{frame}{Endemic Equilibrium Cont.}
-Calculation for M^{*}
+Calculation for $M^{*}$:
 
-$$\frac{-e \pm \sqrt{e^2 - 4df}}{2d},$$ where
+$$\frac{-e \pm \sqrt{e^2 - 4df}}{2d}$$, where
 \begin{align*}
- d &= (a(t)q-2a(t)r+r \phi ) - q(r^{2}+a(t)^{3})\\
- e &= a(t)q(r(r-2\mu_{1}+a(t))-2\mu_{1}(a(t)+\phi )) +  r(q(\phi \mu_{1} + r \omega ) - \\ & \ \ \  \omega(hr+a(t) \mu_{2} + r\mu_{2})\\
- f &= -qr^{2} \omega +qr\mu_{1} \omega + hr^{2} \omega - hr\mu_{1} \omega + r^2 \mu_{2} \omega - r \mu_{1} \mu_{2} \omega + a(t)qr \mu_{1} - \\ & \ \ \  a(t)q\mu_{1}^{2} +q\phi \mu_{1}^{2}
+    d &= (a(t)q-2a(t)r+r \phi ) - q(r^{2}+a(t)^{3})\\
+    e &= a(t)q(r(r-2\mu_{1}+a(t))-2\mu_{1}(a(t)+\phi )) +  r(q(\phi \mu_{1} + r \omega ) - \\ & \ \ \  \omega(hr+a(t) \mu_{2} + r\mu_{2})\\
+    f &= -qr^{2} \omega +qr\mu_{1} \omega + hr^{2} \omega - hr\mu_{1} \omega + r^2 \mu_{2} \omega - r \mu_{1} \mu_{2} \omega + a(t)qr \mu_{1} - \\ & \ \ \  a(t)q\mu_{1}^{2} +q\phi \mu_{1}^{2}
 \end{align*}
 
-    %0 &= M^{2}((aq-2ar+r \phi ) - q(r^{2}+a^{3})) + M(aq(r(r-2\mu_{1}+a)-2\mu_{1}(a+\phi )) +  r(q(\phi \mu_{1} + r \omega ) - \omega(hr+a \mu_{2} + r\mu_{2})) + 
-    %(-qr^{2} \omega +qr\mu_{1} \omega + hr^{2} \omega - hr\mu_{1} \omega + r^2 \mu_{2} \omega - r \mu_{1} \mu_{2} \omega + aqr \mu_{1} - aq\mu_{1}^{2} +q\phi \mu_{1}^{2})    
 \end{frame}
 
 \subsection{Basic Reproduction Number}
-\begin{frame}{Basic Reproduction Number, $\mathscr{R}_{0}$}
-
+\begin{frame}{Basic Reproduction Number: $\mathscr{R}_{0}$}
     \begin{block}{Definition}
-        The rate that macroalgae overgrows coral ?
-        
-        %A metric used to describe the contagiousness or transmissibility of infectious agents $^{\cite{delamater_street_leslie_yang_jacobsen_2019}}$, i.e. the number of secondary infections
+        A metric used to describe the contagiousness or transmissibility of infectious agents\textsuperscript{\cite{delamater_street_leslie_yang_jacobsen_2019}}, i.e. the number of secondary infections
     \end{block}
-    
 \end{frame}
 
-\begin{frame}{Basic Reproduction Number, $\mathscr{R}_{0}$}
+\begin{frame}{Basic Reproduction Number: $\mathscr{R}_{0}$}
     \begin{columns}
         \begin{column}{0.5\textwidth}
             \begin{align*}
@@ -472,51 +481,66 @@ $$\frac{-e \pm \sqrt{e^2 - 4df}}{2d},$$ where
     $$\mathscr{R}_{0} = \rho(\det(FV^{-1} - \lambda I))$$
     $$\Downarrow$$
     \centering
-    $\displaystyle {\mathscr{R}}_{0} = - \frac{\beta \mu_{1}q(a(\frac{\mu_{1}}{r}-1)-\frac{\mu_{1}}{r})}{\omega r (\beta h (\frac{\mu_{1}}{r}-1) + \beta \mu_{2} (\frac{\mu_{1}}{r}-1) - \beta q(\frac{\mu_{1}}{r}-1))}$
+    $\displaystyle {\mathscr{R}}_{0} = - \frac{\beta \mu_{1}q(a(t)(\frac{\mu_{1}}{r}-1)-\frac{\mu_{1}}{r})}{\omega r (\beta h (\frac{\mu_{1}}{r}-1) + \beta \mu_{2} (\frac{\mu_{1}}{r}-1) - \beta q(\frac{\mu_{1}}{r}-1))}$
 \end{frame}
 
 \subsection{Sensitivity Analysis}
-\begin{frame}{Sensitivity Analysis}
-    \begin{table}[H]
-        \centering
-        \begin{tabular}{|c|c|}
-        \hline
-            Parameter & $S_{A}$ \\
-            \hline
-            \hline
-            $\mu_{1}$ & \colorbox{yellow}{\textbf{8.3513}}\\
-            \hline
-            $\mu_{2}$ & \colorbox{yellow}{\textbf{5.2819}}\\
-            \hline
-            $q$ & -3.5962\\
-            \hline
-            $\omega$ & -0.7923\\
-            \hline
-            $\sigma$ & 0\\
-            \hline
-            $r$ & -2.5054\\
-            \hline
-            $\phi$ & 0.4029\\
-            \hline
-            $\beta$ & 0\\
-            \hline
-            $h$ & \colorbox{yellow}{\textbf{5.2819}}\\
-            \hline
-            $a$ & 0.94\\
-            \hline
-        \end{tabular}
-        \caption{Sensitivity Analysis}
-        \label{tab:sens_analysis}
-    \end{table}
+\begin{frame}{Sensitivity Analysis for $\mathscr{R}_0$}
+    \begin{columns}
+        \begin{column}{0.6\textwidth}
+        \small
+            % \begin{block}{Sensitivity Analysis for $\mathscr{R}_0$}
+            The Sensitivity Analysis for $\mathscr{R}_0$ determines the most influential parameters affecting $\mathscr{R}_0$. It is defined by
+                $$S_{\lambda} = \frac{\frac{\Delta \mathscr{R}_{0}}{\mathscr{R}_{0}}}{\frac{\Delta x}{x}} = \frac{\lambda}{\mathscr{R}_{0}} \cdot \frac{\partial \mathscr{R}_{0}}{\partial \lambda}$$ \\
+                where $\lambda$ is a parameter in the quantity $\mathscr{R}_{0}$
+            % \end{block} 
+        \end{column}
+        \begin{column}{0.4\textwidth}
+            \begin{table}[H]
+                \centering
+                \begin{tabular}{|c|c|}
+                \hline
+                    $\lambda$ & $S_{\lambda}$ \\
+                    \hline
+                    \hline
+                    $\mu_{1}$ & \colorbox{yellow}{\textbf{8.3513}}\\
+                    \hline
+                    $\mu_{2}$ & \colorbox{yellow}{\textbf{5.2819}}\\
+                    \hline
+                    $q$ & -3.5962\\
+                    \hline
+                    $\omega$ & -0.7923\\
+                    \hline
+                    $\sigma$ & 0\\
+                    \hline
+                    $r$ & -2.5054\\
+                    \hline
+                    $\phi$ & 0.4029\\
+                    \hline
+                    $\beta$ & 0\\
+                    \hline
+                    $h$ & \colorbox{yellow}{\textbf{5.2819}}\\
+                    \hline
+                    $a(t)$ & 0.94\\
+                    \hline
+                \end{tabular}
+                \caption{Sensitivity Analysis}
+                \label{tab:sens_analysis}
+            \end{table}
+        \end{column}
+    \end{columns}
+    
+    
 \end{frame}
 
 
 
 \section{Harvesting Game Theory}
+
 \begin{frame}{Harvesting Game}
 Game of Harvesting 
 \begin{itemize}
-    \item \textbf{Player: } Individual
+    \item \textbf{Player:} Individual
     \item \textbf{Strategy: } 
         \begin{itemize}
             \item Proportion of Individual Harvesting (h)
@@ -524,44 +548,53 @@ Game of Harvesting
 \end{itemize}
 \end{frame}
 
-
 \subsection{Harvesting Threshold}
 \begin{frame}{Harvesting Threshold}
+    \begin{block}{Definition (Harvesting Threshold)}
+        The rate at which parrotfish can be harvested in order for macroalgae growth to become stable in the ecosystem. 
+    \end{block}
+    
+    \vspace{0.5cm}
+    
+    When $\mathscr{R}_{0} = 1$,
     \begin{center}
-    $h = q + \mu_{2} + \frac{\mu_{1}q(a \mu_{1} - ar - \phi \mu_{1})}{\omega r(r-\mu_{1})}$ \\
-
-    \begin{align*}
-    h_{pop} &< h_{HI}: \text{"disease" dies off} \\
-    h_{pop} &> h_{HI}: endemic
-    \end{align*}
+    
+    $\displaystyle{h_{TH} = q - \mu_{2} + \frac{\mu_{1}q(a(t) \mu_{1} - a(t)r - \phi \mu_{1})}{\omega r(r-\mu_{1})}}$ \\
     \end{center}
+    \begin{align*}
+    h_{pop} &< h_{TH}: \text{Macroalgae growth is stable} \\
+    h_{pop} &> h_{TH}: \text{Macroalgae growth is unstable}
+    \end{align*}
 \end{frame}
 
 \begin{frame}{Harvesting Threshold Graph}
     \begin{figure}
         \centering
-        \includegraphics[width = 0.8\textwidth]{Latex/Figures/Graphs/threshold.png}
+        \includegraphics[width = 0.9\textwidth]{Latex/Figures/Graphs/threshold_graph.png}
         \caption{Threshold Analysis}
         \label{fig:threshold}
     \end{figure}
+    \begin{center}
+        When $\mathscr{R}_0 = 1$, $h = 0.1312$.
+    \end{center}
 \end{frame}
 
 \subsection{Expected Payoff - Harvesting}
 \begin{frame}{Expected Payoff - Harvesting}
-    Let h $\epsilon$ [0,1] be the harvesting proportion of an individual.
+    Let h $\in$ [0,1] be the proportion at which an individual can harvest parrotfish.
     \begin{center}
-    $\displaystyle {E(h, h_{pop}) = -hC_{h} - \left( \frac{h}{h + \mu_{2}} \cdot \frac{g(P^{*})(1-h)M^{*}}{M^{*} + T^{*}} \right) C_{i}}$ \\
+    $\displaystyle {E(h, h_{pop}) = -hC_{h} - \left( \frac{h_{pop}}{h_{pop} + \mu_{2}} \cdot \frac{g(P^{*})(1-h)M^{*}}{M^{*} + T^{*}} \right) C_{D}}$ \\
     
     \vspace{0.6cm}
     
     \begin{table}[H]
         \centering
-        \begin{tabular}{c|c}
+        \begin{tabular}{c|p{8cm}}
              Symbol & Definition \\
              \hline
-             E(h, h_{pop}) & Expected payoff for an individual to harvest based on the harvesting rate of the population \\
-             C_{h} & Cost of harvesting \\
-             C_{i} & Cost of coral infection \\
+             $E(h, h_{pop})$ & Expected payoff for an individual to harvest based on the harvesting rate of the population \\
+             $C_{h}$ & Cost of harvesting \\
+             $C_{D}$ & Cost of coral disease \\
         \end{tabular}
         %\caption{Caption}
         \label{tab:my_label}
@@ -571,11 +604,11 @@ Game of Harvesting
 
 \begin{frame}{Expected Payoff - Harvesting}
     \begin{center}
-    $\displaystyle {E(h, h_{pop}) = -hC^{h} - \frac{h}{h + \mu_{2}} \cdot \frac{g(P^{*})(1-h)M^{*}}{M^{*} + T^{*}}}$ \\
+    $\displaystyle {E(h, h_{pop}) = -hC^{h} - \frac{h_{pop}}{h_{pop} + \mu_{2}} \cdot \frac{g(P^{*})(1-h)M^{*}}{M^{*} + T^{*}}}$ \\
     
     \vspace{0.6cm}
     
-    where $C^{h} = \frac{C_{h}}{C_{i}}$
+    where $C^{h} = \frac{C_{h}}{C_{D}}$
     \end{center}
 \end{frame}
 
@@ -584,18 +617,43 @@ Game of Harvesting
 $E(h, h_{pop})$ is a convex function since 
 $\frac{\partial^{2}E(h, h_{pop})}{\partial h^{2}} > 0$ \\
 
+$$\displaystyle {\frac{\partial ^ {2} E}{\partial h^{2}} = \frac{2 \omega P \mu{2} (M+T)^{2} (\mu_{1} +1)}{\beta(h(M+T) + \mu_{2}(M+T))^{3}} > 0}$$
 \vspace{0.6cm}
 
-$\displaystyle {\frac{\partial ^ {2} E}{\partial h^{2}} = \frac{2 \omega P \mu{2} (M+T)^{2} (\mu_{1} +1}{\beta(h(M+T) + \mu_{2}(M+T))^{3}} > 0}$
-
-
-%$\frac{\partial^{2} E}{\partial h^{2}} = \frac{2 \omega P \mu_{2} (M+T)^{2} (\mu_{1}+1}{\beta(h(M+T) + \mu_{2}(M+T))^{3}}$}
+Thus, $E$ achieves a maximum value at $h = 0$ or $h=1.$
 
 \end{frame}
 
-\begin{frame}{Nash Equilibrium}
+\subsection{Nash Equilibrium}
+\begin{frame}{What is Nash Equilibrium?}
+    \begin{block}{Definition\textsuperscript{\cite{nash_definition}}}
+        \begin{itemize}
+            \item The Nash equilibrium is a decision-making theorem within game theory that states a player can achieve the desired outcome by not deviating from their initial strategy.
+            \item Each player's strategy is optimal when considering the decisions of other players. Every player wins because everyone gets the outcome they desire.
+            %\item A common Nash equilibrium problem is the prisoner's dilemma game.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Nash Equilibrium - Harvesting}
+    To obtain the Nash Equilibrium, we let $E(0, h_{pop}) = E(1, h_{pop})$, where \\
+    \begin{align*}
+        E(0, h_{pop}) &= -\frac{h_{pop}}{h_{pop} + \mu_{2}} \cdot \frac{g(P^{*})(1-h)M^{*}}{M^{*} + T^{*}} \\
+        E(1, h_{pop}) &= -C^{h}
+    \end{align*}
+    $$\Downarrow$$
     
+    
+    
+    % $E(0, h_{pop}) = -\frac{h_{pop}}{h_{pop} + \mu_{2}} \cdot \frac{g(P^{*})(1-h)M^{*}}{M^{*} + T^{*}}$ 
+    
+    % $E(1, h_{pop}) = -C^{h}$ \\
+    
+    $$\frac{h_{pop}}{h_{pop} + \mu_{2}} \cdot \frac{g(P^{*})(1-h)M^{*}}{M^{*} + T^{*}} = C^{h}$$
+    %\end{align*}  
+    % h = 
 \end{frame}
+
 
 %----------------------------------------------------
 
@@ -619,7 +677,7 @@ $\displaystyle {\frac{\partial ^ {2} E}{\partial h^{2}} = \frac{2 \omega P \mu{2
         \begin{itemize}
             %\item Payoff Matrix
             %\item Dominant and/or mixed equilibrium equations
-            \item Nash Equilibrium %/Evolutionarily Stable Strategy
+            \item continue solving for the Nash Equilibrium %/Evolutionarily Stable Strategy
             %\item Replicator Equation
         \end{itemize}
     \end{itemize}
@@ -668,18 +726,7 @@ $\displaystyle {\frac{\partial ^ {2} E}{\partial h^{2}} = \frac{2 \omega P \mu{2
 %%----------------------Bibliography-------------------
 \subsection{Bibliography}
 \begin{frame}[allowframebreaks]{Bibliography}
-    \small{\printbibliography}
-    % \nocite{01_assesing_relative}
-    % \nocite{02_Riegl_Purkis_Model}
-    % \nocite{03_prioritize}
-    % \nocite{05_quintero_machuca_cotto_bradley_ríos-soto_2016}
-    % \nocite{06_yong_herrera_castillo-chavez_2016}
-    % \nocite{07_bauch_earn_2004}
-    % \nocite{12_noaa_report}
-    % \nocite{13_blackwood_hastings_mumby_2010}
-    % \nocite{14_mumby_hastings_edwards_2007}
-    % \nocite{15_blackwood_okasaki_archer_matt_sherman_montovan_2018}
-    % \nocite{16_wolanski_richmond_mccook_2004}
+    \printbibliography
 \end{frame}
 
 

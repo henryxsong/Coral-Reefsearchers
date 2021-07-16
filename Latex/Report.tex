@@ -208,7 +208,7 @@ The disease-free equilibrium is the point at which no disease is present in the 
 \end{align*}
 and since C + T + M = 1, if $M^{0} = 0$, then $C^{0} + T^{0} = 1$.Thus, our disease-free equilibrium is at $(1 - \frac{\mu_{1}}{r}, -\frac{\beta(1 - \frac{\mu_{1}}{r})(h - \mu_{2} - q)}{q}, 0, \frac{\mu_{1}}{r})$.
 
-The basic reproduction number, $\mathscr{R}_{0}$, is a metric used to describe the contagiousness or transmissibility of infectious agents $^{\cite{delamater_street_leslie_yang_jacobsen_2019}}$, i.e. the number of secondary infections. For our model, macroalgae is considered to be our infection compartment. Thus, 
+The basic reproduction number, $\mathscr{R}_{0}$, is a metric used to describe the contagiousness or transmissibility of infectious agents\textsuperscript{\cite{delamater_street_leslie_yang_jacobsen_2019}}, i.e. the number of secondary infections. For our model, macroalgae is considered to be our infection compartment. Thus, 
 
 \begin{center}
 
@@ -240,10 +240,11 @@ Example of Calculating $P^{*}$ :
 
 \subsection{Sensitivity Analysis}
 Sensitivity analysis determines the maximum impact of each parameter on the basic reproduction number equation. This process is calculated by performing the partial derivative on the $\mathscr{R}_0$ equation with respect to each parameter value, and substituting the values for the remaining parameter variables. Below is the general equation to calculate sensitivity analysis: \\
-\begin{align*}
-    S_{\lambda} &=  \frac{\Delta \mathscr{R}_0}{\mathscr{R}_0} \\
-    where \lamda is a parameter in the quantity \mathscr{R}_0.
-\end{align*}
+\begin{center}
+    $S_{\lambda} = \frac{\frac{\Delta \mathscr{R}_{0}}{\mathscr{R}_{0}}}{\frac{\Delta x}{x}} = \frac{\lambda}{\mathscr{R}_{0}} \cdot \frac{\partial \mathscr{R}_{0}}{\partial \lambda}$ \\
+    where $\lambda$ is a parameter in the quantity $\mathscr{R}_{0}$
+\end{center}
+%where $\lambda$ is a parameter in the quantity $\mathscr{R}_{0}$.
 
 Utilizing MatLab (Appendix \ref{appendix:B6}), we were able to automate the calculation process, giving us the corresponding sensitivity analysis for each parameter variable. 
 \begin{table}[H]
@@ -329,11 +330,6 @@ Special thanks to Dr. Bastian Bentlage, our faculty mentors (Dr. JaeYong Choi, D
     
     $\mathscr{R}_{0} = \frac{\mu_{1}(a r - a\mu_{1} + \phi \mu_{1})}{r^{2}g(P^{0})}$
     \end{center}
-    
-    \subsection{Herd Immunity}
-    $\mathscr{R}_{0} = \frac{\mu_{1}(a r - a\mu_{1} + \phi \mu_{1})}{r^{2}g(P^{0})} = 1$
-    
-    $h_{HI} = q - \mu_{2} + \frac{\mu_{1}q(a(\mu_{1}-r)-\phi \mu_{1}}{\omega r (r-\mu_{1}}$
     
     \subsection{Game Theory}
     Expected Payoff: 

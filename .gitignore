@@ -11,6 +11,7 @@
 *.log
 *.xml
 *.gz
+*.out
 Report.pdf
 Source Code/ineqplot.m
 Source Code/useless.m

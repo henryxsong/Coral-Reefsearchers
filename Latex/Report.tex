@@ -58,7 +58,7 @@
 
 \addbibresource{main.bib}
 
-\title{Effects of Overfishing on Coral Reef Ecosystems\\\large{Coral Reefsearchers}}
+\title{Mathematical Model and Analysis of the Effects of Overfishing on Coral Reef Ecosystems\\\large{Coral Reefsearchers}}
 \author{Aaron Bumagat, Henry Song, Michelle Luces\\University of Guam}
 \date{\today}
 
@@ -66,7 +66,7 @@
 \maketitle
 % tulai
 \section{Introduction}
-Coral reefs play a crucial role in the marine's ecosystem as it serves a purpose for an abundance of marine life. Additionally, healthy coral reefs benefit the economy as it provides jobs and businesses through tourism. Unfortunately, in the recent years the health of coral reefs have been declining due to several factors. According to a 2008 world coral reef status report, it predicts that 15\% of all coral are in danger of disappearing within 10-20 years, and 20\% within 20-40 years \textsuperscript{\cite{05_quintero_machuca_cotto_bradley_ríos-soto_2016}}. 
+Coral reefs play a crucial role in the marine's ecosystem as it serves a purpose for an abundance of marine life. Additionally, healthy coral reefs benefit the economy as it provides jobs and businesses through tourism and local fisheries. Unfortunately, in the recent years the health of coral reefs have been declining due to several factors. According to a 2008 world coral reef status report, it predicts that 15\% of all coral are in danger of disappearing within 10-20 years, and 20\% within 20-40 years \textsuperscript{\cite{05_quintero_machuca_cotto_bradley_ríos-soto_2016}}. 
 
 With climate change rates increasing, one of the prevalent factors affecting coral reefs is rising sea temperatures, which leads to mass bleaching of corals. Other destructive environmental factors include ocean acidification, nutrient flow from run-off \textsuperscript{\cite{05_quintero_machuca_cotto_bradley_ríos-soto_2016}}. Another factor that contributes to the decline of healthy coral reefs are due to human activities, such as exploitative fishing practices or pollution \textsuperscript{\cite{04_mathanalysis}}. 
 
@@ -125,12 +125,12 @@ We assume that the (i) system is closed, (ii) it only consists of coral, macroal
 
 \subsection{Differential Equations}
 C, T, and M are proportions of coral, algal turf, and macroalgae cover on the ocean floor, respectively,  where $C+M+T=1$ to signify the proportion of each population is a selected area. P is the population of the parrotfish that inhabit the coral reef ecosystem in proportion to the maximum carrying capacity. The coral reef dynamics are described as a system of nonlinear differential equations \textsuperscript{\cite{13_blackwood_hastings_mumby_2010}}: 
-\begin{align}
+\begin{align*}
     \frac{dC}{dt} &= rTC + \sigma P C- (a(t)M+\mu_{1})C \label{eq:dCdt}\\
     \frac{dP}{dt} &= qP \left( 1-\frac{P}{\beta C} \right) - P \left( h+\mu_{2} \right) \label{eq:dPdt}\\
     \frac{dT}{dt} &= \mu_{1}C + \frac{g(P)M}{M+T} - T(rC+\phi M) \label{eq:dTdt}\\
     \frac{dM}{dt} &= (a(t)C+ \phi T)M - \frac{g(P)M}{M+T} \label{eq:dMdt}
-\end{align}
+\end{align*}
 
 where: 
 \begin{align*}
@@ -199,37 +199,38 @@ As we can see in Figures \ref{fig:initial_plot}, \ref{fig:coral_dominant}, \ref{
 \section{Equilibria Analysis}
 \subsection{Disease-Free Equilibrium}
 The disease-free equilibrium, or DFE, is the point at which no disease is present in the system. Typically, this method is performed on disease modeling, however can be adapted to other types of modeling as well. In our model, we classify macroalgae (M) as our "disease" compartment, and since the system is disease free, we set $M^{0} = 0$. Below is the result of our DFE calculations (detailed in Appendix \ref{appendix:A1}):
-\begin{align}
+\begin{align*}
         C^{0} &= 1 - \frac{\mu_{1}}{r} \label{eq:C0}\\
         P^{0} &= -\frac{\beta(1 - \frac{\mu_{1}}{r})(h - \mu_{2} - q)}{q} \label{eq:P0}\\
         T^{0} &= \frac{\mu_{1}}{r} \label{eq:T0}\\
         M^{0} &= 0 \label{eq:M0}
-\end{align}
+\end{align*}
 Since our model was set-up so as $C+T+M=1$ and since $M^{0} = 0$, then we conclude that $C^{0} + T^{0} = 1$. Thus, our disease-free equilibrium is $(1 - \frac{\mu_{1}}{r}, -\frac{\beta(1 - \frac{\mu_{1}}{r})(h - \mu_{2} - q)}{q}, 0, \frac{\mu_{1}}{r})$.
 
 \subsection{Basic Reproduction Number: $\mathscr{R}_{0}$}
-The basic reproduction number, $\mathscr{R}_{0}$, is a metric used to describe the contagiousness or transmissibility of infectious agents\textsuperscript{\cite{delamater_street_leslie_yang_jacobsen_2019}}. In essence, this equation measures the number of secondary infections. Since our model is not disease-based, we conclude that our $\mathscr{R}_{0}$ symbolizes the rate at which stable. Our model recognizes macroalgae (M) as our infectious compartment. By using our disease-free equilibrium equations, we are able to calculate our $\mathscr{R}_{0}$ equation (detailed in Appendix \ref{appendix:A3}): 
-\begin{equation}\label{eq:R0}
+The basic reproduction number, $\mathscr{R}_{0}$, is a metric used to describe the contagiousness or transmissibility of infectious agents\textsuperscript{\cite{delamater_street_leslie_yang_jacobsen_2019}}. In essence, this equation measures the number of secondary infections. Since our model is not disease-based, we conclude that our $\mathscr{R}_{0}$ symbolizes the rate at which macroalgae spreads after the initial macroalgae overgrowth. Our model recognizes macroalgae (M) as our infectious compartment. By using our disease-free equilibrium equations, we are able to calculate our $\mathscr{R}_{0}$ equation (detailed in Appendix \ref{appendix:A3}): 
+\begin{equation*}\label{eq:R0}
     \displaystyle {\mathscr{R}}_{0} = \frac{\mu_{1}(a r - a\mu_{1} + \phi \mu_{1})}{r^{2}g(P)}
-\end{equation}
+\end{equation*}
 
 \subsection{Endemic Equilibrium}
 The Endemic Equilibrium determines at what point will the disease not spread nor will it fully eradicate. Essentially it tells when the disease is stabilized. In order to find the endemic equilibrium, we have to set each differential equal to 0 and solve for each variable. The equations above are in terms of M as M is considered our disease, as shown below (detailed in Appendix \ref{appendix:A2}):
-\begin{align}
+\begin{align*}
         T^{*} &= \frac{\mu_{1} + a(t)M^{*}}{r} \label{eq:T*}\\
         C^{*} %&= 1-(T^{*} + M^{*}) \\
         &= 1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*} \right) \label{eq:C*}\\
         P^{*} %&= \beta C^{*} \left(\frac{q-(h+\mu_{2})}{q} \right) \\
         &= \beta \left(1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*} \right) \right) \left(\frac{q-(h+\mu_{2})}{q} \right) \label{eq:P*}\\
         M^{*} &= \frac{\omega (\beta \left(1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*} \right) \right) \left(\frac{q-(h+\mu_{2})}{q} \right))}{\beta(a(t)(1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*}) \right)+\phi \frac{\mu_{1} + a(t)M^{*}}{r})} - \frac{\mu_{1} + a(t)M^{*}}{r} \label{eq:M*}
-\end{align}
+\end{align*}
+
 While not a disease model, the endemic equilibrium equations are significant in our research project as it is essential in order to perform game theory on our model. 
 
 \subsection{Sensitivity Analysis}
 Sensitivity analysis determines the maximum impact of each parameter on the basic reproduction number equation. This process is calculated by performing the partial derivative on the $\mathscr{R}_0$ equation(\ref{eq:R0}) with respect to each parameter value, and substituting the values for the remaining parameter variables. Below is the general equation to calculate sensitivity analysis: \\
-\begin{equation}\label{eq:sens_analysis}
+\begin{equation*}\label{eq:sens_analysis}
         S_{\lambda} = \frac{\frac{\Delta \mathscr{R}_{0}}{\mathscr{R}_{0}}}{\frac{\Delta x}{x}} = \frac{\lambda}{\mathscr{R}_{0}} \cdot \frac{\partial \mathscr{R}_{0}}{\partial \lambda}
-\end{equation}
+\end{equation*}
 \begin{center}
     where $\lambda$ is a parameter in the quantity $\mathscr{R}_{0}$
 \end{center}
@@ -270,7 +271,7 @@ Utilizing MatLab (Appendix \ref{appendix:B6}), we were able to automate the calc
     
     The larger the sensitivity analysis value, the higher the impact the parameter has on our basic reproduction number equation. The highlighted values ($\mu_{1}, \mu_{2}$, and $h$) have the largest sensitivity analysis values, and have the most impact on our basic reproduction number equation, respectively. \par
     The natural death rate of corals ($\mu_{1}$) represents the largest impact, and rightfully so, with a sensitivity analysis value of 8.3513. Due to the dynamics between corals, algal turfs, and macroalgae, the death of corals directly impacts algal turfs. However, the natural death accounts for all factors of coral deaths, including but not limited to bleaching, disease, damage, and so forth. The more corals that die, the more surface area get converted into algal turfs and subsequently gives way for algal turfs to convert into macroalgae. As such, this rate carries the greatest impact on our overall basic reproduction number equation. \par
-    The natural death rate of parrotfish ($\mu_{2}$) and the harvest rate of parrotfish due to fishing ($h$) both share the second highest sensitivity analysis value of 5.2819. This presents a unique perspective, as the analysis indicates that there is no difference between natural death and human-driven death. Both simply represent the removal of live parrotfish from the ecosystem rather than the means of removal, and as such are equal. This is significant as our model depicts parrotfish as the primary grazers of macroalgae, and we have acknowledged that macroalgae overgrowth has a negative impact on the ecosystem. When the parrotfish population is adequate, the proportion of macroalgae will be kept in control. However, with the removal of parrotfish from the ecosystem from death or fishing, the macroalgae will have the opportunity to grow unchecked. Thus, the impact of overfishing parrotfish will undeniably affect the dynamics of the ecosystem, and will allow macroalgae to dominate while corals whither away.
+    The natural death rate of parrotfish ($\mu_{2}$) and the harvest rate of parrotfish due to fishing ($h$) both share the second highest sensitivity analysis value of 5.2819. This presents a unique perspective, as the analysis indicates that there is no difference between natural death and hu1man-driven death. Both simply represent the removal of live parrotfish from the ecosystem rather than the means of removal, and as such are equal. This is significant as our model depicts parrotfish as the primary grazers of macroalgae, and we have acknowledged that macroalgae overgrowth has a negative impact on the ecosystem. When the parrotfish population is adequate, the proportion of macroalgae will be kept in control. However, with the removal of parrotfish from the ecosystem from death or fishing, the macroalgae will have the opportunity to grow unchecked. Thus, the impact of overfishing parrotfish will undeniably affect the dynamics of the ecosystem, and will allow macroalgae to dominate while corals whither away.
     
 \section{Harvesting Game Theory}
 One of the primary objectives of our research is to implement game theory to our project. Game theory is essentially "a theoretical framework to conceive social situations among competing players and produce optimal decision-making of independent and competing actors in a strategic setting."\textsuperscript{\cite{game_theory_definition}}. By taking into account strategies, we can apply game theory to predict outcomes. \par
@@ -280,9 +281,9 @@ In our project, we apply education game theory to our $h$ parameter, or the harv
 The first step in performing game theory is isolating our parameter, in this case $h$, from our basic reproduction number equation (\ref{eq:R0}). By isolating our parameter when $\mathscr{R}_0 = 1$, we are able to find our harvesting threshold, which is the rate at which parrotfish can be harvested in order for macroalgae growth to become stable in the ecosystem:\\
 \\
 When $\mathscr{R}_{0} = 1$,
-\begin{equation}\label{eq:h_TH}
+\begin{equation*}\label{eq:h_TH}
     \displaystyle{h_{TH} = q - \mu_{2} + \frac{\mu_{1}q(a(t) \mu_{1} - a(t)r - \phi \mu_{1})}{\omega r(r-\mu_{1})}}
-\end{equation}
+\end{equation*}
 Furthermore, we are able to plot our harvesting threshold against our $\mathscr{R}_{0}$ equation, giving us the figure below.
 \begin{figure}[H]
     \centering
@@ -298,9 +299,9 @@ We can see from Figure \ref{fig:threshold_graph} that when $\mathscr{R}_{0} = 1$
 
 \subsection{Expected Payoff}
 In terms of game theory, an expected payoff is an equation representing the benefit of the player's decision. In our game, expected payoff is the proportion at which an individual can harvest parrotfish. As such, we create the following expected payoff equation based on our compartment model:
-\begin{equation}\label{eq:initial_payoff}
+\begin{equation*}\label{eq:initial_payoff}
     \displaystyle {E(h, h_{pop}) = -hC_{h} - \left( \frac{h_{pop}}{h_{pop} + \mu_{2}} \cdot \frac{g(P^{*})(1-h)M^{*}}{M^{*} + T^{*}} \right) C_{D}}
-\end{equation}
+\end{equation*}
 where
 \begin{table}[H]
     \centering
@@ -316,14 +317,14 @@ where
 \end{table}
 and $h \in [0,1]$. \\
 We can further simplify by dividing the equation by $C_{D}$, giving us 
-\begin{equation}\label{eq:payoff}
+\begin{equation*}\label{eq:payoff}
     \displaystyle {E(h, h_{pop}) = -hC^{h} - \frac{h_{pop}}{h_{pop} + \mu_{2}} \cdot \frac{g(P^{*})(1-h)M^{*}}{M^{*} + T^{*}}}
-\end{equation}
+\end{equation*}
 where $C^{h} = \frac{C_{h}}{C_{D}}$. \\ \par
 In order to confirm that a Nash equilibrium exists for our expected payoff equation (\ref{eq:payoff}), we must find the second partial derivative of our expected payoff equation with respect to $h$. If $\frac{\partial^{2}E(h, h_{pop})}{\partial h^{2}} > 0$, then we can confirm through the convex function that $E$ achieves a maximum value at $h=0$ and $h=1$. \par
-\begin{equation}\label{eq:nash_partial_deriv}
-    \displaystyle {\frac{\partial ^ {2} E}{\partial h^{2}} = \frac{2 \omega P \mu{2} (M+T)^{2} (\mu_{1} +1)}{\beta(h(M+T) + \mu_{2}(M+T))^{3}} > 0}
-\end{equation}
+\begin{equation*}\label{eq:nash_partial_deriv}
+    \displaystyle {\frac{\partial ^ {2} E}{\partial h^{2}} = \frac{2 \omega P^{*} \mu{2} (M^{*}+T^{*})^{2} (\mu_{1} +1)}{\beta(h(M^{*}+T^{*}) + \mu_{2}(M^{*}+T^{*}))^{3}} > 0}
+\end{equation*}
 We find that the second partial derivative of our expected payoff equation with respect to $h$ is indeed greater than 0, and thus a valid solution.
 
 \subsection{Nash Equilibrium}
@@ -333,24 +334,27 @@ In the case of our harvesting game theory, we can obtain the Nash equilibrium by
     E(0, h_{pop}) = E(1, h_{pop})
 \end{equation*}
 By substituting in $E(0, h_{pop})$ and $E(1, h_{pop})$, we create the following equation:
-\begin{equation}\label{eq:unsimplified_nash}
+\begin{equation*}\label{eq:unsimplified_nash}
     \frac{h_{pop}}{h_{pop} + \mu_{2}} \cdot \frac{g(P^{*})(1-h)M^{*}}{M^{*} + T^{*}} = C^{h}
-\end{equation}
+\end{equation*}
 
-\section{Literature Review}
-Throughout this week, our group has dedicated a large portion of time to reviewing scholarly articles and research publications relevant to our areas of research. This aspect of performing our research is crucial as, through literature review, we are able to gather information, techniques, methods, data, results, and many other variables that we are able to use in our own research. \par
-Our faculty mentors have graciously provided several research publications related to the overall study coral reef ecosystems in order to stimulate creativity in creating our own research topic. These papers are as follow:
-\begin{itemize}
-    \item Assessing relative resilience potential of coral reefs to inform management\textsuperscript{\cite{01_assesing_relative}}
-    \item Model of coral population response to accelerated bleaching and mass mortality in a changing climate\textsuperscript{\cite{02_Riegl_Purkis_Model}}
-    \item Prioritizing Key Resilience Indicators to Support Coral Reef Management in a Changing Climate\textsuperscript{\cite{03_prioritize}}
-    \item Mathematical analysis of coral reef models\textsuperscript{\cite{04_mathanalysis}}
-    \item A Mathematical Model of Coral Reef Response to Destructive Fishing Practices with Predator-Prey Interactions\textsuperscript{\cite{05_quintero_machuca_cotto_bradley_ríos-soto_2016}}
-    \item From bee species aggregation to models of disease avoidance: The Ben-Hur effect\textsuperscript{\cite{06_yong_herrera_castillo-chavez_2016}}
-    \item Vaccination and the theory of games\textsuperscript{\cite{07_bauch_earn_2004}}
-    \item The effect of fishing on hysteresis in Caribbean coral reefs \textsuperscript{\cite{13_blackwood_hastings_mumby_2010}}
-\end{itemize}
-These articles provide valuable insight in various areas of coral reef research from parameters and conditions to modeling and application. In particular, each of these papers gave us insight on how other researchers approached their problems, how they created and modified their methods, and how they produced results based on their models and equations. 
+\section{Conclusion}
+
+
+%\section{Literature Review}
+%Throughout this week, our group has dedicated a large portion of time to reviewing scholarly articles and research publications relevant to our areas of research. This aspect of performing our research is crucial as, through literature review, we are able to gather information, techniques, methods, data, results, and many other variables that we are able to use in our own research. \par
+%Our faculty mentors have graciously provided several research publications related to the overall study coral reef ecosystems in order to stimulate creativity in creating our own research topic. These papers are as follow:
+%\begin{itemize}
+    %\item Assessing relative resilience potential of coral reefs to inform management\textsuperscript{\cite{01_assesing_relative}}
+    %\item Model of coral population response to accelerated bleaching and mass mortality in a changing climate\textsuperscript{\cite{02_Riegl_Purkis_Model}}
+    %\item Prioritizing Key Resilience Indicators to Support Coral Reef Management in a Changing Climate\textsuperscript{\cite{03_prioritize}}
+    %\item Mathematical analysis of coral reef models\textsuperscript{\cite{04_mathanalysis}}
+    %\item A Mathematical Model of Coral Reef Response to Destructive Fishing Practices with Predator-Prey Interactions\textsuperscript{\cite{05_quintero_machuca_cotto_bradley_ríos-soto_2016}}
+    %\item From bee species aggregation to models of disease avoidance: The Ben-Hur effect\textsuperscript{\cite{06_yong_herrera_castillo-chavez_2016}}
+    %\item Vaccination and the theory of games\textsuperscript{\cite{07_bauch_earn_2004}}
+    %\item The effect of fishing on hysteresis in Caribbean coral reefs \textsuperscript{\cite{13_blackwood_hastings_mumby_2010}}
+%\end{itemize}
+%These articles provide valuable insight in various areas of coral reef research from parameters and conditions to modeling and application. In particular, each of these papers gave us insight on how other researchers approached their problems, how they created and modified their methods, and how they produced results based on their models and equations. 
 
 \section{Acknowledgements}
 Support for the Young Scholars Research Experience in Mathematics (YSREM)  is through the MAA Tensor SUMMA Program. Support for the MAA National Research Experience for Undergraduates Program (NREUP) is provided by the National Science Foundation (Grant Number DMS-1950644). Support for the NSF EPSCoR project, Guam Ecosystems Collaboratorium for Corals and Oceans (GECCO) is provided by the National Science Foundation (Grant Number DMS-1946352). \par
@@ -452,7 +456,29 @@ Special thanks to Dr. Bastian Bentlage, our faculty mentors (Dr. JaeYong Choi, D
                 \end{equation*}
         \end{itemize}
         
-    By substituting all our $E^{*}$ equations into $M^{*}$ (i.e. $P^{*}$, $T^{*}$, and $C^{*}$), and performing algebraic simplification, we are able to find our $M^{*}$ value in terms of parameters, which can then be substituted to calculate a value. The general equation of $M^{*}$ is below:
+    By substituting all our $E^{*}$ equations into $M^{*}$ (i.e. $P^{*}$, $T^{*}$, and $C^{*}$), we are able to find an equation in terms of parameters, which can then be substituted into calculate a value. So, we get
+    \begin{align*}
+        M^{*} &= \frac{\beta \omega(1-\frac{\mu_{1} + a(t)M^{*}}{r}-M^{*})(q - h - \mu_{2})}{\beta q (\frac{a(t)(r-\mu_{1}-a(t)M^{*}-rM^{*}}{r}) + \frac{\phi(\mu_{1} + a(t)M^{*})}{r})} - \frac{\mu_{1} + a(t)M^{*}}{r} \\
+        &= \frac{\omega(1-\frac{\mu_{1} + a(t)M^{*}}{r}-M^{*})(q - h - \mu_{2})}{q (\frac{a(t)(r-\mu_{1}-a(t)M^{*}-rM^{*}}{r}) + \frac{\phi(\mu_{1} + a(t)M^{*})}{r}} - \frac{\mu_{1} + a(t)M^{*}}{r} \\
+        &= \frac{r\omega (q-h-\mu_{2})((r-\mu_{1})-(a(t) + r)M^{*} - (\mu_{1} + a(t)M^{*}q((a(t)r - a \mu_{1} + \phi \mu_{1}) + (-(a(t))^{2} - a(t)r + \phi a(t))M^{*})}{rq((a(t)r - a(t) \mu_{1} + \phi \mu_{1}) + (-(a(t))^{2} - a(t)r + \phi a(t))M^{*})} \\
+    \end{align*}
+    
+    % idk how to make this part look better
+    \begin{center}
+        $rq(a(t)r-a(t)\mu_{1} + \phi \mu_{1})M^{*} + rq(-(a(t))^{2} - a(t)r + \phi a(t))(M^{*})^{2} = r \omega (q - h - \mu_{2})(r - \mu_{1}) - r \omega(q-h-\mu_{2})(a(t)+r)M^{*} - q \mu_{1}(a(t)r-a(t) \mu_{1} + \phi \mu_{1}) - q(a(t)(a(t)r-a(t) \mu_{1} + \phi \mu_{1}) + \mu_{1}(-(a(t))^{2}-a(t)r+\phi a(t)))M^{*} - a(t)q(-a^{2}-a(t)r+ \phi a(t))(M^{*})^{2}$ \\ 
+    \end{center}
+    
+    By isolating all $M^{*}$ terms on one side, we obtain
+    \begin{align*}
+        (M^{*})^{2}&[a(t)q(a+r)(-a(t)-r+\phi)] +  \\ 
+        M^{*}&[q(a(t) - a(t) \mu_{1} + \phi \mu_{1})(a(t) + r) + r \omega (q-h-\mu_{2})(a(t) +r)] +  \\
+        &[-r \omega(q - h - \mu_{2})(r - \mu_{1}) + q \mu_{1}(a(t)r - a(t) \mu_{1} + \phi \mu_{1}] \\
+        &= 0
+    \end{align*}
+    
+    %and performing algebraic simplification, 
+    
+    Thus, the general equation of $M^{*}$ is
     \begin{align*}
         d &= (a(t)q-2a(t)r+r \phi ) - q(r^{2}+a(t)^{3})\\
         e &= a(t)q(r(r-2\mu_{1}+a(t))-2\mu_{1}(a(t)+\phi )) +  r(q(\phi \mu_{1} + r \omega ) - \\ & \ \ \  \omega(hr+a(t) \mu_{2} + r\mu_{2})\\
@@ -466,7 +492,7 @@ Special thanks to Dr. Bastian Bentlage, our faculty mentors (Dr. JaeYong Choi, D
         Firstly, we will set-up our $\mathscr{F}$ and $\mathscr{V}$ matrices, which are:
         \begin{align*}
             \mathscr{F} &= \begin{bmatrix}
-                            aCM + \phi MT
+                            a(t)CM + \phi MT
                           \end{bmatrix}\\
             \mathscr{V} &= \begin{bmatrix}
                             \frac{g(P)M}{M+T}
@@ -490,7 +516,7 @@ Special thanks to Dr. Bastian Bentlage, our faculty mentors (Dr. JaeYong Choi, D
                 \frac{g(P)T^{0}}{(M^{0}+T^{0})^{2}}
               \end{bmatrix}
         $$\\
-        (Note: Since we are simply using a 1x1 $\mathscr{F}$ and $\mathscr{V}$, performing a Jacobian matrix operation is equivalent to performing a single partial derivative operation with respect to $M$.)
+        (Note: Since we are simply using a 1 $\times$ 1 $\mathscr{F}$ and $\mathscr{V}$, performing a Jacobian matrix operation is equivalent to performing a single partial derivative operation with respect to $M$.)
         After calculating for $F$ and $V$, we will calculate the inverse of $V$ by taking the reciprocal of $V$:
         $$V = \begin{bmatrix}
                 \frac{g(P)T^{0}}{(M^{0}+T^{0})^{2}}

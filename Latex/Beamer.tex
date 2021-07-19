@@ -55,7 +55,7 @@
 \tikzstyle{noblock} = [rectangle, draw = none]
 
 %%--------------- Title Slide ------------------------------
-\title[]{Effects of Overfishing on Coral Reef Ecosystems}
+\title[]{Mathematical Model and Analysis of the Effects of Overfishing on Coral Reef Ecosystems}
 \subtitle{Coral Reefsearchers}
 \author{Aaron Bumagat, Michelle Luces, Henry Song }
 \institute{University of Guam}
@@ -264,13 +264,13 @@
         Parameter & Description & Rate & Units\textsuperscript{\cite{12_noaa_report}\cite{04_mathanalysis}\cite{13_blackwood_hastings_mumby_2010}}\\
         \hline
         \hline
-        $\mu_{1}$ & natural death rate of coral reefs & 0.15\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}} & $year^{-1}$\\ %12
-        $\mu_{2}$ & natural death rate of parrotfish & 0.22\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
-        $r$ & rate that coral recruit to overgrow algal turfs & 10\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}} & $year^{-1}$\\ %12
+        $\mu_{1}$ & natural death rate of coral reefs & \colorbox{yellow}{0.15}\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}} & $year^{-1}$\\ %12
+        $\mu_{2}$ & natural death rate of parrotfish & \colorbox{yellow}{0.22}\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
+        $r$ & rate that coral recruit to overgrow algal turfs & \colorbox{yellow}{10}\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}} & $year^{-1}$\\ %12
         %$g$ & grazing rate that parrotfish graze macroalgae without distinction from algae turfs & $\frac{kg}{yrs}$\\
         $\phi$ & rate that macroalgae spread vegetative over algal turfs & 0.8\textsuperscript{\cite{11_zikkah_anggriani_supriatna_2020}} & $year^{-1}$\\ %13
-        $q$ & intrinsic growth rate for parrotfish & 0.47\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
-        $h$ & harvesting rate for parrotfish & 0.14\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
+        $q$ & intrinsic growth rate for parrotfish & \colorbox{yellow}{0.47}\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
+        $h$ & harvesting rate for parrotfish & \colorbox{yellow}{0.14}\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
         $\sigma$ & rate that parrot fish bite coral & 0.01*& $bites*year^{-1}$\\
         $\omega$ & maximum grazing intensity & 1\textsuperscript{\cite{13_blackwood_hastings_mumby_2010}} & -\\
         $\beta$ & carrying capacity of parrotfish & 1 & -\\
@@ -280,6 +280,7 @@
     %\label{tab:my_label}
 \end{table}
 * = \textit{estimated value}
+% highlighted values are Guam data
 \end{frame}
 
 \subsection{Compartment Model}
@@ -617,10 +618,10 @@ Game of Harvesting
 $E(h, h_{pop})$ is a convex function since 
 $\frac{\partial^{2}E(h, h_{pop})}{\partial h^{2}} > 0$ \\
 
-$$\displaystyle {\frac{\partial ^ {2} E}{\partial h^{2}} = \frac{2 \omega P \mu{2} (M+T)^{2} (\mu_{1} +1)}{\beta(h(M+T) + \mu_{2}(M+T))^{3}} > 0}$$
+$$\displaystyle {\frac{\partial ^ {2} E}{\partial h^{2}} = \frac{2 \omega P \mu{2} (M^{*}+T^{*})^{2} (\mu_{1} +1)}{\beta(h(M^{*}+T^{*}) + \mu_{2}(M^{*}+T^{*}))^{3}} > 0}$$
 \vspace{0.6cm}
 
-Thus, $E$ achieves a maximum value at $h = 0$ or $h=1.$
+Thus, $E$ achieves a maximum value at $h = 0$ or $h=1$.
 
 \end{frame}
 
@@ -650,13 +651,29 @@ Thus, $E$ achieves a maximum value at $h = 0$ or $h=1.$
     % $E(1, h_{pop}) = -C^{h}$ \\
     
     $$\frac{h_{pop}}{h_{pop} + \mu_{2}} \cdot \frac{g(P^{*})(1-h)M^{*}}{M^{*} + T^{*}} = C^{h}$$
-    %\end{align*}  
-    % h = 
+
+\end{frame}
+
+\begin{frame}{Nash Equilibrium - Harvesting}
+    $h = $ \\
+    $\Delta E = E(1, h_{pop}) - E(0, h_{pop})$ \\
+    $\Delta E < 0$: harvest more \\
+    $\Delta E > 0$: harvest less
+\end{frame}
+
+\begin{frame}{Nash Equilibrium Graph}
+    
 \end{frame}
 
 
 %----------------------------------------------------
 
+%---------------------Conclusion---------------------
+\section{Conclusion}
+\begin{frame}{Conclusion}
+    Type conclusion here
+\end{frame}
+%----------------------------------------------------
 
 %---------------------Plans---------------------
 \section{Closing Remarks}
@@ -685,12 +702,6 @@ Thus, $E$ achieves a maximum value at $h = 0$ or $h=1.$
 
 %----------------------------------------------------
 
-
-%---------------------Conclusion---------------------
-%\section{Conclusion}
-%\begin{frame}{Conclusion}
-    %Type conclusion here
-%\end{frame}
 
 \subsection{Q \& A}
 \begin{frame}

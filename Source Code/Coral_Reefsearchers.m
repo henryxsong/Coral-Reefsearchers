@@ -235,7 +235,7 @@ xlim([0 0.4]);
 ylim([0 2]);
 
 set(gca, 'FontSize',18);
-title('Herd Immunity');
+title('Harvesting Threshold');
 xlabel('h')
 ylabel('R_0')
 %--------------------------------------------------------------------------
@@ -258,13 +258,25 @@ for i = 1:length(param_array)
     sens_analysis = cat(1, sens_analysis, double(R0_diff));
     %subs_ans = cat(1, subs_ans, [param_array(i) double(R0_diff)]);
 end 
+
+temp_R0 = symfun(R0, h);
+hx_values = 1:0.4:25;
+
+figure
+hold on
+for i = 1:25
+   fplot(temp_R0(hx_values))
+   xlim([0 0.4]);
+   ylim([0 2]);
+end
+
 %--------------------------------------------------------------------------
 
 
 %--------------------------------------------------------------------------
 %% Endemic Equilibrium
-%clear; % Clears workspace
-%clc; % Clears Command Window
+clear; % Clears workspace
+clc; % Clears Command Window
 
 %---------------------------------------------
 % Symbolic Definitions
@@ -281,16 +293,16 @@ g = @(P) (omega*P)/beta; %grazing intensity 'g'
 T_E = (mu1 + a*M)/r;
 
 C_E = 1 - (T+M);
-C_E = subs(C_E, T, T_E)
+C_E = subs(C_E, T, T_E);
 
 P_E = (beta*C*(q-(h+mu2)))/q;
-P_E = subs(P_E, C, C_E)
+P_E = subs(P_E, C, C_E);
 
 M_E = (omega*P)/(beta*(a*C+phi*T))-T - M;
 M_E = subs(M_E, P, P_E);
 M_E = subs(M_E, C, C_E);
 M_E = subs(M_E, T, T_E);
-M_E_equation = solve(M_E == 0, M)
+M_E_equation = solve(M_E == 0, M);
 %---------------------------------------------
 
 %---------------------------------------------
@@ -304,7 +316,7 @@ for i = 1:length(param_array)
     M_E_Value = subs(M_E_Value, param_array(i), param_values(i));
 end
 
-disp(M_E_Value)
+%disp(M_E_Value)
 %--------------------------------------------------------------------------
 
 
@@ -316,62 +328,76 @@ syms K h_pop
 param_array = [mu1, mu2, q, omega, sigma, r, phi, beta, a];
 param_values = [0.15, 0.22, 0.47, 1, 0.01, 0.5, 0.8, 1, 0.5];
 
-% sample = ((h)/(h+mu2))*((g(P)*(1-h)*M)/(M+T));
-% first = diff(sample, h);
-% second = diff(first, h);
-% sample = simplify(second);
+n_e = -C + (h*omega*P*M)/(beta*(h+mu1)*(M+T));
+n_e = subs(n_e, P, P_E);
+n_e = simplify(n_e);
 
-n_e = -C + (h*omega*P*M)/(beta*(h+mu1)*(M+T))
-n_e = subs(n_e, P, P_E)
-n_e = simplify(n_e)
-% for i = 1:length(param_array)
-%     K = subs(K, param_array(i), param_values(i));
-% end
-% 
-n_e = subs(n_e, T, T_E)
-n_e = simplify(n_e)
-% for i = 1:length(param_array)
-%     K = subs(K, param_array(i), param_values(i));
-% end
-% 
-% for i = 1:length(param_array)
-%     M_E_equation = subs(M_E_equation, param_array(i), param_values(i));
-% end
-% 
-n_e = subs(n_e, M, M_E_equation(1))
-n_e = simplify(n_e)
+n_e = subs(n_e, T, T_E);
+n_e = simplify(n_e);
+
+n_e = subs(n_e, M, M_E_equation(1));
+n_e = simplify(n_e);
 
 for i = 1:length(param_array)
     n_e = subs(n_e, param_array(i), param_values(i));
 end
 
-n_e = simplify(n_e, 'Steps', 50)
+n_e = simplify(n_e, 'Steps', 50);
 
-n_e_solution = solve(n_e == 0, h)
+n_e_solution = solve(n_e == 0, h);
 %n_e_solution = solve(n_e == 0, h, 'Real', true)
 %n_e_solution = solve(n_e == 0, h, 'IgnoreAnalyticConstraints', true)
 %n_e_solution = vpasolve(n_e == 0, h)
 
-% for i = 1:length(param_array)
-%     K = subs(K, param_array(i), param_values(i));
-% end
-%
+% test_space = 0:0.0001:0.01;
+% test = symfun(n_e_solution(3), C);
+% test_mat = [];
+% 
+% test_mat = real(double(test(test_space)))
 
-fplot(n_e_solution(3)) %sol #3 gives nash graph
-fplot(n_e_solution(3) > 0, 'r')
+hold on
+%area(transpose(test_mat))
+fplot(n_e_solution(3), 'LineWidth', 5, 'Color', '#000000') %sol #3 gives nash graph
+legend('Nash Equilibrium')
+
 title("Nash Equilibrium")
-xlim([0 0.015])
-ylim([0 0.2])
-set(gca, 'FontSize',18)
-xlabel("C^{h}")
-ylabel("h_{pop}")
+xlim([0 0.01])
+ylim([0.06 0.2])
+set(gca, 'FontSize',16)
+xticks([0 0.002 0.004 0.006 0.008 0.00913609 0.01])
+xticklabels({'0' '0.002' '0.004' '0.006' '0.008' 'C_{max}' '0.01'})
+yticks([0.06 0.08 0.1 0.12 0.131157 0.14 0.16 0.18 0.2])
+yticklabels({'0.06' '0.08' '0.1' '0.12' 'h_{TH}' '0.14' '0.16' '0.18' '0.2'})
+xlabel("Relative Cost of Fishing: C = C_{h}/C_{D}")
+ylabel("Harvest Rate of Population: h_{pop}")
 
-delta_E = @(C, h) ((h)/(h+mu2))*(((omega*P)/)/());
-E_0 = symfun(n_e_solution(3), C)
-E_1 = symfun(n_e_solution(3), C)
+
+% TEst Stuffies
+delta_E = @(C, h) (50000*h*(h - 1/4)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2) - h + 2237/5000)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2)/2 - h/2 + 1283/5000))/(2209*(h + 3/20)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2) - h + 2707/5000)) - C;
+
+% E_0 = symfun(n_e_solution(3), C)
+% E_1 = symfun(n_e_solution(3), C)
 
 %            [Cost, h_pop]
-test_point = [0.005 0.1];
-if 
+test_point = [0.00 0.2];
+if delta_E(test_point(1), test_point(2)) > 0
+    disp('Fish')
+    disp(delta_E(test_point(1), test_point(2)))
+end
+if delta_E(test_point(1), test_point(2)) < 0
+    disp('Dont Fish')
+    disp(delta_E(test_point(1), test_point(2)))
+end
 
+% E_0 = @(h) (50000*h*(h - 1/4)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2) - h + 2237/5000)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2)/2 - h/2 + 1283/5000))/(2209*(h + 3/20)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2) - h + 2707/5000));
+% E_1 = @(C) C;
+% 
+% if E_1(test_point(1)) > E_0(test_point(2)) 
+%     disp('Fish')
+%     disp(E_1(test_point(1)) > E_0(test_point(2)) )
+% end
+% if E_1(test_point(1)) < E_0(test_point(2))
+%     disp('Dont Fish')
+%     disp(E_1(test_point(1)) < E_0(test_point(2)))
+% end
 %

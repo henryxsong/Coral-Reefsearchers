@@ -347,9 +347,9 @@ end
 
 n_e = simplify(n_e, 'Steps', 50)
 
-%n_e_solution = solve(n_e == 0, h)
+n_e_solution = solve(n_e == 0, h)
 %n_e_solution = solve(n_e == 0, h, 'Real', true)
-n_e_solution = solve(n_e == 0, h, 'IgnoreAnalyticConstraints', true)
+%n_e_solution = solve(n_e == 0, h, 'IgnoreAnalyticConstraints', true)
 %n_e_solution = vpasolve(n_e == 0, h)
 
 % for i = 1:length(param_array)
@@ -357,7 +357,21 @@ n_e_solution = solve(n_e == 0, h, 'IgnoreAnalyticConstraints', true)
 % end
 %
 
-fplot(n_e_solution)
-xlim([0 1])
-ylim([0 1])
+fplot(n_e_solution(3)) %sol #3 gives nash graph
+fplot(n_e_solution(3) > 0, 'r')
+title("Nash Equilibrium")
+xlim([0 0.015])
+ylim([0 0.2])
+set(gca, 'FontSize',18)
+xlabel("C^{h}")
+ylabel("h_{pop}")
+
+delta_E = @(C, h) ((h)/(h+mu2))*(((omega*P)/)/());
+E_0 = symfun(n_e_solution(3), C)
+E_1 = symfun(n_e_solution(3), C)
+
+%            [Cost, h_pop]
+test_point = [0.005 0.1];
+if 
+
 %

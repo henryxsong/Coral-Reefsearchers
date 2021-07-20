@@ -497,3 +497,25 @@ elseif E_1(test_point(1)) < E_0(test_point(2))
     disp(E_0(test_point(2)))
 end
 %
+
+
+%% a(t) animation
+for i = 1:50
+   a0 = i/50;
+   
+   a = @(t) abs((a0*(9*sin(pi*t)+1))/(10));
+   
+   txt = ['a_{0} = ' num2str(a0)];
+   
+   fig = figure
+   hold on
+   fplot(a, '--', 'Linewidth', 2)
+   
+   set(gca, 'FontSize',18); % sets axis & legend font size to 18
+   text(0.05,0.85,txt, 'FontSize', 18); % displays text on plot
+   xlim([0 1])
+   ylim([0 1])
+   
+   fname = append('Frame-', num2str(i)); %file name of current iteration
+   saveas(fig, fname, 'png'); %save figure as .png
+end

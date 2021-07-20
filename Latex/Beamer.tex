@@ -88,7 +88,7 @@
             \tableofcontents[sections=1-2]
         \end{column}
         \begin{column}{0.5\textwidth}
-            \tableofcontents[sections=3-4]
+            \tableofcontents[sections=3-5]
         \end{column}
     \end{columns}
 \end{frame}
@@ -128,7 +128,7 @@
 
 \subsection{Definitions}
 \begin{frame}{Identify Our Terms}
-\vspace{-0.5cm}
+\vspace{-0.2cm}
     \begin{figure}%
         \centering
         \subfloat[\centering Corals\textsuperscript{\cite{img_coral_reef}}]{{\includegraphics[width=4.7cm]{Latex/Figures/coral_reefs.jpg} }}%
@@ -269,7 +269,7 @@
         $\mu_{2}$ & natural death rate of parrotfish & \colorbox{yellow}{0.22}\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
         $r$ & rate that coral recruit to overgrow algal turfs & \colorbox{yellow}{10}\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}} & $year^{-1}$\\ %12
         %$g$ & grazing rate that parrotfish graze macroalgae without distinction from algae turfs & $\frac{kg}{yrs}$\\
-        $\phi$ & rate that macroalgae spread vegetative over algal turfs & 0.8\textsuperscript{\cite{11_zikkah_anggriani_supriatna_2020}} & $year^{-1}$\\ %13
+        $\phi$ & rate that macroalgae spread vegetative over algal turfs & 0.8\textsuperscript{\cite{04_mathanalysis}} & $year^{-1}$\\ %13
         $q$ & intrinsic growth rate for parrotfish & \colorbox{yellow}{0.47}\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
         $h$ & harvesting rate for parrotfish & \colorbox{yellow}{0.14}\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
         $\sigma$ & rate that parrot fish bite coral & 0.01*& $bites \cdot year^{-1}$\\
@@ -683,35 +683,37 @@ Thus, $E$ achieves a maximum value at $h = 0$ or $h=1$.
 \begin{frame}{Nash Equilibrium - Harvesting}
     To obtain the Nash Equilibrium, we let $E(0, h_{pop}) = E(1, h_{pop})$, where \\
     \begin{align*}
-        E(0, h_{pop}) &= -\frac{h_{pop}}{h_{pop} + \mu_{2}} \cdot \frac{g(P^{*})(1-h)M^{*}}{M^{*} + T^{*}} \\
+        E(0, h_{pop}) &= -\frac{h_{pop}}{h_{pop} + \mu_{2}} \cdot \frac{g(P^{*})M^{*}}{M^{*} + T^{*}} \\
         E(1, h_{pop}) &= -C^{h}
     \end{align*}
     $$\Downarrow$$
     
-    $$\frac{h_{pop}}{h_{pop} + \mu_{2}} \cdot \frac{g(P^{*})(1-h)M^{*}}{M^{*} + T^{*}} = C^{h}$$
+    $$\frac{h_{pop}}{h_{pop} + \mu_{2}} \cdot \frac{g(P^{*})M^{*}}{M^{*} + T^{*}} = C^{h}$$
 
 \end{frame}
-
-\begin{frame}{Nash Equilibrium - Harvesting}
-    \begin{align*}
-        h &= equation\\
-        \Delta E &= E(1, h_{pop}) - E(0, h_{pop}) \\
-        \Delta E &< 0: \text{harvest} \\
-        \Delta E &> 0: \text{do not harvest}
-    \end{align*}
-    % $h = $ \\
-    % $\Delta E = E(1, h_{pop}) - E(0, h_{pop})$ \\
-    % $\Delta E < 0$: harvest \\
-    % $\Delta E > 0$: do not harvest
-\end{frame}
+            
 
 \begin{frame}{Nash Equilibrium Graph}
-    \begin{figure}
-        \centering
-        \includegraphics[width = 0.8\textwidth]{Latex/Figures/Graphs/nash_1.png}
-        \caption{Nash Equilibrium Graph}
-        \label{fig:NE_Graph}
-    \end{figure}
+    \begin{columns}
+        \begin{column}{0.7\textwidth}
+            \hspace{0.5cm}
+            \begin{figure}
+                \centering
+                \includegraphics[width = \textwidth]{Latex/Figures/Graphs/nash_1.png}
+                \caption{Nash Equilibrium Graph}
+                \label{fig:NE_Graph}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.2\textwidth}
+            \hspace{-1.3cm}
+            \begin{align*}
+                %h &= equation\\
+                \Delta E &= E(1, h_{pop}) - E(0, h_{pop}) \\
+                \Delta E &< 0: \text{Harvest} \\
+                \Delta E &> 0: \text{Do Not Harvest}
+            \end{align*}
+        \end{column}
+    \end{columns}
 \end{frame}
 
 
@@ -759,7 +761,7 @@ Thus, $E$ achieves a maximum value at $h = 0$ or $h=1$.
             %\item continue solving for the Nash Equilibrium %/Evolutionary Stable Strategy
             %\item Replicator Equation
         %\end{itemize}
-    \end{itemize}
+    \end{itemize} 
 \end{frame}
 
 %----------------------------------------------------

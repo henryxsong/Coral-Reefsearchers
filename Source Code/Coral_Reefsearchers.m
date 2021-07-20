@@ -238,6 +238,115 @@ set(gca, 'FontSize',18);
 title('Harvesting Threshold');
 xlabel('h')
 ylabel('R_0')
+
+
+% changes in mu1
+param_array = [mu2, q, omega, sigma, r, phi, beta, a];
+param_values = [0.22, 0.47, 1, 0.01, 0.5, 0.8, 1, 0.5];
+
+figure
+hold on
+temp_R0 = R0;
+mu1_value1 = 0.05;
+temp_R0 = subs(temp_R0, mu1, mu1_value1);
+for j = 1:length(param_array)
+    temp_R0 = subs(temp_R0, param_array(j), param_values(j));
+end
+fplot(temp_R0)
+
+temp_R0 = R0;
+mu1_value2 = 0.1;
+temp_R0 = subs(temp_R0, mu1, mu1_value2);
+for j = 1:length(param_array)
+    temp_R0 = subs(temp_R0, param_array(j), param_values(j));
+end
+fplot(temp_R0)
+
+temp_R0 = R0;
+mu1_value3 = 0.15;
+temp_R0 = subs(temp_R0, mu1, mu1_value3);
+for j = 1:length(param_array)
+    temp_R0 = subs(temp_R0, param_array(j), param_values(j));
+end
+fplot(temp_R0)
+
+temp_R0 = R0;
+mu1_value4 = 0.2;
+temp_R0 = subs(temp_R0, mu1, mu1_value4);
+for j = 1:length(param_array)
+    temp_R0 = subs(temp_R0, param_array(j), param_values(j));
+end
+fplot(temp_R0)
+
+temp_R0 = R0;
+mu1_value5 = 0.25;
+temp_R0 = subs(temp_R0, mu1, mu1_value5);
+for j = 1:length(param_array)
+    temp_R0 = subs(temp_R0, param_array(j), param_values(j));
+end
+fplot(temp_R0)
+
+txt = [num2str(mu1_value3) '*'];
+set(gca, 'FontSize',18);
+leg = legend({num2str(mu1_value1), num2str(mu1_value2), txt, num2str(mu1_value4), num2str(mu1_value5)},'Position',[0.77 0.2 0.1 0.2])
+xlim([0 0.27]);
+ylim([0 2]);
+title('Changes in \mu_{1}')
+title(leg, '\mu_{1} Value')
+xlabel('h')
+ylabel('R_{0}')
+hold off
+
+% changes in mu2
+param_array = [mu1, q, omega, sigma, r, phi, beta, a];
+param_values = [0.15, 0.47, 1, 0.01, 0.5, 0.8, 1, 0.5];
+
+figure
+hold on
+temp_R0 = R0;
+mu2_value1 = 0.132;
+temp_R0 = subs(temp_R0, mu2, mu2_value1);
+for j = 1:length(param_array)
+    temp_R0 = subs(temp_R0, param_array(j), param_values(j));
+end
+fplot(temp_R0)
+
+temp_R0 = R0;
+mu2_value2 = 0.176;
+temp_R0 = subs(temp_R0, mu2, mu2_value2);
+for j = 1:length(param_array)
+    temp_R0 = subs(temp_R0, param_array(j), param_values(j));
+end
+fplot(temp_R0)
+
+temp_R0 = R0;
+mu2_value3 = 0.22;
+temp_R0 = subs(temp_R0, mu2, mu2_value3);
+for j = 1:length(param_array)
+    temp_R0 = subs(temp_R0, param_array(j), param_values(j));
+end
+fplot(temp_R0)
+
+temp_R0 = R0;
+mu2_value4 = 0.264;
+temp_R0 = subs(temp_R0, mu2, mu2_value4);
+for j = 1:length(param_array)
+    temp_R0 = subs(temp_R0, param_array(j), param_values(j));
+end
+fplot(temp_R0)
+
+temp_R0 = R0;
+mu2_value5 = 0.308;
+temp_R0 = subs(temp_R0, mu2, mu2_value5);
+for j = 1:length(param_array)
+    temp_R0 = subs(temp_R0, param_array(j), param_values(j));
+end
+fplot(temp_R0)
+
+legend(num2str(mu1_value1), num2str(mu1_value2), num2str(mu1_value3), num2str(mu1_value4), num2str(mu1_value5))
+xlim([0 0.27]);
+ylim([0 2]);
+hold off
 %--------------------------------------------------------------------------
 
 
@@ -258,18 +367,6 @@ for i = 1:length(param_array)
     sens_analysis = cat(1, sens_analysis, double(R0_diff));
     %subs_ans = cat(1, subs_ans, [param_array(i) double(R0_diff)]);
 end 
-
-temp_R0 = symfun(R0, h);
-hx_values = 1:0.4:25;
-
-figure
-hold on
-for i = 1:25
-   fplot(temp_R0(hx_values))
-   xlim([0 0.4]);
-   ylim([0 2]);
-end
-
 %--------------------------------------------------------------------------
 
 
@@ -349,18 +446,12 @@ n_e_solution = solve(n_e == 0, h);
 %n_e_solution = solve(n_e == 0, h, 'IgnoreAnalyticConstraints', true)
 %n_e_solution = vpasolve(n_e == 0, h)
 
-% test_space = 0:0.0001:0.01;
-% test = symfun(n_e_solution(3), C);
-% test_mat = [];
-% 
-% test_mat = real(double(test(test_space)))
-
 hold on
 %area(transpose(test_mat))
 fplot(n_e_solution(3), 'LineWidth', 5, 'Color', '#000000') %sol #3 gives nash graph
-legend('Nash Equilibrium')
+legend('NE')
 
-title("Nash Equilibrium")
+% title("Nash Equilibrium")
 xlim([0 0.01])
 ylim([0.06 0.2])
 set(gca, 'FontSize',16)
@@ -373,31 +464,32 @@ ylabel("Harvest Rate of Population: h_{pop}")
 
 
 % TEst Stuffies
-delta_E = @(C, h) (50000*h*(h - 1/4)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2) - h + 2237/5000)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2)/2 - h/2 + 1283/5000))/(2209*(h + 3/20)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2) - h + 2707/5000)) - C;
-
-% E_0 = symfun(n_e_solution(3), C)
-% E_1 = symfun(n_e_solution(3), C)
+% delta_E = @(C, h) (50000*h*(h - 1/4)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2) - h + 2237/5000)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2)/2 - h/2 + 1283/5000))/(2209*(h + 3/20)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2) - h + 2707/5000)) - C;
 
 %            [Cost, h_pop]
-test_point = [0.00 0.2];
-if delta_E(test_point(1), test_point(2)) > 0
-    disp('Fish')
-    disp(delta_E(test_point(1), test_point(2)))
-end
-if delta_E(test_point(1), test_point(2)) < 0
-    disp('Dont Fish')
-    disp(delta_E(test_point(1), test_point(2)))
-end
-
-% E_0 = @(h) (50000*h*(h - 1/4)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2) - h + 2237/5000)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2)/2 - h/2 + 1283/5000))/(2209*(h + 3/20)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2) - h + 2707/5000));
-% E_1 = @(C) C;
-% 
-% if E_1(test_point(1)) > E_0(test_point(2)) 
+test_point = [0.004 0.008];
+% if delta_E(test_point(1), test_point(2)) < 0
 %     disp('Fish')
-%     disp(E_1(test_point(1)) > E_0(test_point(2)) )
+%     disp(delta_E(test_point(1), test_point(2)))
 % end
-% if E_1(test_point(1)) < E_0(test_point(2))
+% if delta_E(test_point(1), test_point(2)) > 0
 %     disp('Dont Fish')
-%     disp(E_1(test_point(1)) < E_0(test_point(2)))
+%     disp(delta_E(test_point(1), test_point(2)))
 % end
+
+E_0 = @(h) (50000*h*(h - 1/4)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2) - h + 2237/5000)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2)/2 - h/2 + 1283/5000))/(2209*(h + 3/20)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2) - h + 2707/5000));
+E_1 = @(C) C;
+
+if test_point(1) < E_0(test_point(2)) 
+    disp('Fish')
+    disp('E_1 < E_0')
+    disp(test_point(1))
+    disp(E_0(test_point(2)))
+end
+if test_point(1) > E_0(test_point(2))
+    disp('Dont Fish')
+    disp('E_1 > E_0')
+    disp(test_point(1))
+    disp(E_0(test_point(2)))
+end
 %

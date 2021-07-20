@@ -591,7 +591,7 @@ Game of Harvesting
     \item \textbf{Player:} Individual
     \item \textbf{Strategy: } 
         \begin{itemize}
-            \item Proportion of Individual Harvesting (h)
+            \item Proportion of Individual Harvesting ($h$) based on the rate the population is harvesting ($h_{pop}$)
         \end{itemize}
 \end{itemize}
 \end{frame}
@@ -688,12 +688,6 @@ Thus, $E$ achieves a maximum value at $h = 0$ or $h=1$.
     \end{align*}
     $$\Downarrow$$
     
-    
-    
-    % $E(0, h_{pop}) = -\frac{h_{pop}}{h_{pop} + \mu_{2}} \cdot \frac{g(P^{*})(1-h)M^{*}}{M^{*} + T^{*}}$ 
-    
-    % $E(1, h_{pop}) = -C^{h}$ \\
-    
     $$\frac{h_{pop}}{h_{pop} + \mu_{2}} \cdot \frac{g(P^{*})(1-h)M^{*}}{M^{*} + T^{*}} = C^{h}$$
 
 \end{frame}
@@ -703,7 +697,7 @@ Thus, $E$ achieves a maximum value at $h = 0$ or $h=1$.
         h &= equation\\
         \Delta E &= E(1, h_{pop}) - E(0, h_{pop}) \\
         \Delta E &< 0: \text{harvest} \\
-        \Delta E &> 0: do not harvest
+        \Delta E &> 0: \text{do not harvest}
     \end{align*}
     % $h = $ \\
     % $\Delta E = E(1, h_{pop}) - E(0, h_{pop})$ \\
@@ -732,10 +726,11 @@ Thus, $E$ achieves a maximum value at $h = 0$ or $h=1$.
             \begin{itemize}
                 \item A higher $a_{0}$ will result in higher macroalgae growth over corals, especially over warmer months of the year.
                 \item A higher $h$ will result in the increased dominance of macroalgae in the ecosystem.
+                \item A lower $\phi$ will result in decreased proportion of macroalgae and increase in algal turfs, and subsequently corals.
             \end{itemize}
         \item<3-> Our sensitivity analysis indicates that our coral death rate ($\mu_{1}$), parrotfish natural death rate ($\mu_{2}$), and harvesting rate ($h$) have the largest impact on our basic reproduction number.
         \item<4-> The maximum harvest rate without cost is approximately 0.131157 (13.1157\%) of the parrot fish population. 
-        \item<5-> As the relative cost of fishing increases, the harvesting threshold decreases until it reaches the maximum cost.
+        \item<5-> According to our harvesting game theory, as the relative cost of fishing increases, the harvesting threshold decreases until it reaches the maximum cost.
     \end{itemize}
 \end{frame}
 %----------------------------------------------------
@@ -746,7 +741,7 @@ Thus, $E$ achieves a maximum value at $h = 0$ or $h=1$.
 \begin{frame}{Future Research}
     \begin{itemize}
     \item Find data from Guam sources to give a more accurate representation of the changes on Guam's Reef Ecosystem. 
-    \item Application of game theory on $\phi$ parameter.
+    \item Application of game theory on $\phi$ parameter control measures.
     \item Incorporate more elements of coral reef ecosystems (i.e. other types of plant and aquatic life) to our compartment model.
         %\item Specific ideas:
         %\begin{itemize}

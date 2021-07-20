@@ -446,50 +446,55 @@ n_e_solution = solve(n_e == 0, h);
 %n_e_solution = solve(n_e == 0, h, 'IgnoreAnalyticConstraints', true)
 %n_e_solution = vpasolve(n_e == 0, h)
 
-hold on
-%area(transpose(test_mat))
-fplot(n_e_solution(3), 'LineWidth', 5, 'Color', '#000000') %sol #3 gives nash graph
-legend('NE')
-
+% hold on
+% fplot(n_e_solution(3), 'LineWidth', 5, 'Color', '#000000') %sol #3 gives nash graph
+% legend('NE')
+% xlim([0 0.1])
+% ylim([0 0.2])
+% 
 % title("Nash Equilibrium")
-xlim([0 0.01])
-ylim([0.06 0.2])
-set(gca, 'FontSize',16)
-xticks([0 0.002 0.004 0.006 0.008 0.00913609 0.01])
-xticklabels({'0' '0.002' '0.004' '0.006' '0.008' 'C_{max}' '0.01'})
-yticks([0.06 0.08 0.1 0.12 0.131157 0.14 0.16 0.18 0.2])
-yticklabels({'0.06' '0.08' '0.1' '0.12' 'h_{TH}' '0.14' '0.16' '0.18' '0.2'})
-xlabel("Relative Cost of Fishing: C = C_{h}/C_{D}")
-ylabel("Harvest Rate of Population: h_{pop}")
+% xlim([0 0.01])
+% ylim([0.06 0.2])
+% set(gca, 'FontSize',16)
+% xticks([0 0.002 0.004 0.006 0.008 0.00913609 0.01])
+% xticklabels({'0' '0.002' '0.004' '0.006' '0.008' 'C_{max}' '0.01'})
+% yticks([0.06 0.08 0.1 0.12 0.131157 0.14 0.16 0.18 0.2])
+% yticklabels({'0.06' '0.08' '0.1' '0.12' 'h_{TH}' '0.14' '0.16' '0.18' '0.2'})
+% xlabel("Relative Cost of Fishing: C = C_{h}/C_{D}")
+% ylabel("Harvest Rate of Population: h_{pop}")
 
 
 % TEst Stuffies
-% delta_E = @(C, h) (50000*h*(h - 1/4)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2) - h + 2237/5000)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2)/2 - h/2 + 1283/5000))/(2209*(h + 3/20)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2) - h + 2707/5000)) - C;
+E_0 = ((-h)/(h+mu2))*((g(P)*M)/(M+T));
+E_0 = subs(E_0, P, P_E);
+E_0 = simplify(E_0);
+
+E_0 = subs(E_0, T, T_E);
+E_0 = simplify(E_0);
+
+E_0 = subs(E_0, M, M_E_equation(1));
+E_0 = simplify(E_0);
+
+for i = 1:length(param_array)
+    E_0 = subs(E_0, param_array(i), param_values(i));
+end
 
 %            [Cost, h_pop]
-test_point = [0.004 0.008];
-% if delta_E(test_point(1), test_point(2)) < 0
-%     disp('Fish')
-%     disp(delta_E(test_point(1), test_point(2)))
-% end
-% if delta_E(test_point(1), test_point(2)) > 0
-%     disp('Dont Fish')
-%     disp(delta_E(test_point(1), test_point(2)))
-% end
+test_point = [0.002 0.3];
 
-E_0 = @(h) (50000*h*(h - 1/4)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2) - h + 2237/5000)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2)/2 - h/2 + 1283/5000))/(2209*(h + 3/20)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2) - h + 2707/5000));
-E_1 = @(C) C;
 
-if test_point(1) < E_0(test_point(2)) 
-    disp('Fish')
-    disp('E_1 < E_0')
-    disp(test_point(1))
-    disp(E_0(test_point(2)))
-end
-if test_point(1) > E_0(test_point(2))
+E_0 = @(h) -(50000*h*(h - 1/4)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2) - h + 2237/5000)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2)/2 - h/2 + 1283/5000))/(2209*(h + 3/20)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2) - h + 2707/5000))
+E_1 = @(C) -C;
+
+if E_1(test_point(1)) > E_0(test_point(2)) 
     disp('Dont Fish')
     disp('E_1 > E_0')
-    disp(test_point(1))
+    disp(E_1(test_point(1)))
+    disp(E_0(test_point(2)))
+elseif E_1(test_point(1)) < E_0(test_point(2))
+    disp('Fish')
+    disp('E_1 < E_0')
+    disp(E_1(test_point(1)))
     disp(E_0(test_point(2)))
 end
 %

@@ -681,8 +681,13 @@ $\frac{\partial^{2}E(h, h_{pop})}{\partial h^{2}} > 0$ \\
 $$\displaystyle {\frac{\partial ^ {2} E}{\partial h^{2}} = \frac{2 \omega P \mu{2} (M^{*}+T^{*})^{2} (\mu_{1} +1)}{\beta(h(M^{*}+T^{*}) + \mu_{2}(M^{*}+T^{*}))^{3}} > 0}$$
 \vspace{0.6cm}
 
-Thus, $E$ achieves a maximum value at $h = 0$ or $h=1$.
-
+Thus, $E$ achieves a maximum value at $h = 0$ or $h=1$.\\
+\begin{align*}
+    %h &= equation\\
+    \Delta E &= E(1, h_{pop}) - E(0, h_{pop}) \\
+    \Delta E &< 0: \text{Harvest} \\
+    \Delta E &> 0: \text{Do Not Harvest}
+\end{align*}
 \end{frame}
 
 \subsection{Nash Equilibrium}
@@ -710,26 +715,12 @@ Thus, $E$ achieves a maximum value at $h = 0$ or $h=1$.
             
 
 \begin{frame}{Nash Equilibrium Graph}
-    \begin{columns}
-        \begin{column}{0.7\textwidth}
-            \hspace{0.5cm}
-            \begin{figure}
-                \centering
-                \includegraphics[width = \textwidth]{Latex/Figures/Graphs/nash_1.png}
-                \caption{Nash Equilibrium Graph}
-                \label{fig:NE_Graph}
-            \end{figure}
-        \end{column}
-        \begin{column}{0.2\textwidth}
-            \hspace{-1.3cm}
-            \begin{align*}
-                %h &= equation\\
-                \Delta E &= E(1, h_{pop}) - E(0, h_{pop}) \\
-                \Delta E &< 0: \text{Harvest} \\
-                \Delta E &> 0: \text{Do Not Harvest}
-            \end{align*}
-        \end{column}
-    \end{columns}
+    \begin{figure}
+        \centering
+        \includegraphics[width = 0.85\textwidth]{Latex/Figures/Graphs/nash_1.png}
+        \caption{Nash Equilibrium Graph}
+        \label{fig:NE_Graph}
+    \end{figure}
 \end{frame}
 
 

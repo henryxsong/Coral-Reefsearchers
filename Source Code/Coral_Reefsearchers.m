@@ -252,7 +252,7 @@ temp_R0 = subs(temp_R0, mu1, mu1_value1);
 for j = 1:length(param_array)
     temp_R0 = subs(temp_R0, param_array(j), param_values(j));
 end
-fplot(temp_R0)
+fplot(temp_R0, 'Linewidth', 3)
 
 temp_R0 = R0;
 mu1_value2 = 0.1;
@@ -260,7 +260,7 @@ temp_R0 = subs(temp_R0, mu1, mu1_value2);
 for j = 1:length(param_array)
     temp_R0 = subs(temp_R0, param_array(j), param_values(j));
 end
-fplot(temp_R0)
+fplot(temp_R0, 'Linewidth', 3)
 
 temp_R0 = R0;
 mu1_value3 = 0.15;
@@ -268,7 +268,7 @@ temp_R0 = subs(temp_R0, mu1, mu1_value3);
 for j = 1:length(param_array)
     temp_R0 = subs(temp_R0, param_array(j), param_values(j));
 end
-fplot(temp_R0)
+fplot(temp_R0, 'Linewidth', 3)
 
 temp_R0 = R0;
 mu1_value4 = 0.2;
@@ -276,7 +276,7 @@ temp_R0 = subs(temp_R0, mu1, mu1_value4);
 for j = 1:length(param_array)
     temp_R0 = subs(temp_R0, param_array(j), param_values(j));
 end
-fplot(temp_R0)
+fplot(temp_R0, 'Linewidth', 3)
 
 temp_R0 = R0;
 mu1_value5 = 0.25;
@@ -284,8 +284,9 @@ temp_R0 = subs(temp_R0, mu1, mu1_value5);
 for j = 1:length(param_array)
     temp_R0 = subs(temp_R0, param_array(j), param_values(j));
 end
-fplot(temp_R0)
+fplot(temp_R0, 'Linewidth', 3)
 
+%yline(1, 'r--', 'Linewidth', 1.5)
 txt = [num2str(mu1_value3) '*'];
 set(gca, 'FontSize',18);
 leg = legend({num2str(mu1_value1), num2str(mu1_value2), txt, num2str(mu1_value4), num2str(mu1_value5)},'Position',[0.77 0.2 0.1 0.2])
@@ -309,7 +310,7 @@ temp_R0 = subs(temp_R0, mu2, mu2_value1);
 for j = 1:length(param_array)
     temp_R0 = subs(temp_R0, param_array(j), param_values(j));
 end
-fplot(temp_R0)
+fplot(temp_R0, 'Linewidth', 3)
 
 temp_R0 = R0;
 mu2_value2 = 0.176;
@@ -317,7 +318,7 @@ temp_R0 = subs(temp_R0, mu2, mu2_value2);
 for j = 1:length(param_array)
     temp_R0 = subs(temp_R0, param_array(j), param_values(j));
 end
-fplot(temp_R0)
+fplot(temp_R0, 'Linewidth', 3)
 
 temp_R0 = R0;
 mu2_value3 = 0.22;
@@ -325,7 +326,7 @@ temp_R0 = subs(temp_R0, mu2, mu2_value3);
 for j = 1:length(param_array)
     temp_R0 = subs(temp_R0, param_array(j), param_values(j));
 end
-fplot(temp_R0)
+fplot(temp_R0, 'Linewidth', 3)
 
 temp_R0 = R0;
 mu2_value4 = 0.264;
@@ -333,7 +334,7 @@ temp_R0 = subs(temp_R0, mu2, mu2_value4);
 for j = 1:length(param_array)
     temp_R0 = subs(temp_R0, param_array(j), param_values(j));
 end
-fplot(temp_R0)
+fplot(temp_R0, 'Linewidth', 3)
 
 temp_R0 = R0;
 mu2_value5 = 0.308;
@@ -341,8 +342,9 @@ temp_R0 = subs(temp_R0, mu2, mu2_value5);
 for j = 1:length(param_array)
     temp_R0 = subs(temp_R0, param_array(j), param_values(j));
 end
-fplot(temp_R0)
+fplot(temp_R0, 'Linewidth', 3)
 
+yline(1, 'r--', 'Linewidth', 1.5)
 legend(num2str(mu1_value1), num2str(mu1_value2), num2str(mu1_value3), num2str(mu1_value4), num2str(mu1_value5))
 xlim([0 0.27]);
 ylim([0 2]);
@@ -412,15 +414,12 @@ M_E_Value = M_E_equation;
 for i = 1:length(param_array)
     M_E_Value = subs(M_E_Value, param_array(i), param_values(i));
 end
-
-%disp(M_E_Value)
 %--------------------------------------------------------------------------
 
 
 %--------------------------------------------------------------------------
 %% Game Theory
 % Note: MUST RUN 'ENDEMIC EQUILIBRIUM' FIRST
-syms K h_pop
 
 param_array = [mu1, mu2, q, omega, sigma, r, phi, beta, a];
 param_values = [0.15, 0.22, 0.47, 1, 0.01, 0.5, 0.8, 1, 0.5];
@@ -446,22 +445,22 @@ n_e_solution = solve(n_e == 0, h);
 %n_e_solution = solve(n_e == 0, h, 'IgnoreAnalyticConstraints', true)
 %n_e_solution = vpasolve(n_e == 0, h)
 
-% hold on
-% fplot(n_e_solution(3), 'LineWidth', 5, 'Color', '#000000') %sol #3 gives nash graph
-% legend('NE')
-% xlim([0 0.1])
-% ylim([0 0.2])
-% 
-% title("Nash Equilibrium")
-% xlim([0 0.01])
-% ylim([0.06 0.2])
-% set(gca, 'FontSize',16)
-% xticks([0 0.002 0.004 0.006 0.008 0.00913609 0.01])
-% xticklabels({'0' '0.002' '0.004' '0.006' '0.008' 'C_{max}' '0.01'})
-% yticks([0.06 0.08 0.1 0.12 0.131157 0.14 0.16 0.18 0.2])
-% yticklabels({'0.06' '0.08' '0.1' '0.12' 'h_{TH}' '0.14' '0.16' '0.18' '0.2'})
-% xlabel("Relative Cost of Fishing: C = C_{h}/C_{D}")
-% ylabel("Harvest Rate of Population: h_{pop}")
+hold on
+fplot(n_e_solution(3), 'LineWidth', 5, 'Color', '#000000') %sol #3 gives nash graph
+legend('NE')
+xlim([0 0.1])
+ylim([0 0.2])
+
+%title("Nash Equilibrium")
+xlim([0 0.01])
+ylim([0.06 0.2])
+set(gca, 'FontSize',16)
+xticks([0 0.002 0.004 0.006 0.008 0.00913609 0.01])
+xticklabels({'0' '0.002' '0.004' '0.006' '0.008' 'C_{max}' '0.01'})
+yticks([0.06 0.08 0.1 0.12 0.131157 0.14 0.16 0.18 0.2])
+yticklabels({'0.06' '0.08' '0.1' '0.12' 'h_{TH}' '0.14' '0.16' '0.18' '0.2'})
+xlabel("Relative Cost of Harvesting: C = C_{h}/C_{D}")
+ylabel("Harvest Rate of Population: h_{pop}")
 
 
 % TEst Stuffies
@@ -480,7 +479,7 @@ for i = 1:length(param_array)
 end
 
 %            [Cost, h_pop]
-test_point = [0.002 0.3];
+test_point = [0.002, 0.1];
 
 
 E_0 = @(h) -(50000*h*(h - 1/4)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2) - h + 2237/5000)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2)/2 - h/2 + 1283/5000))/(2209*(h + 3/20)*((h^2 - (2237*h)/2500 + 6152849/25000000)^(1/2) - h + 2707/5000))

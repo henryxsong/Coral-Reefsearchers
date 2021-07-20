@@ -110,13 +110,13 @@
 \subsection{General Question}
 \begin{frame}{Our Question}
 \begin{itemize}
-    \item General Question: How will Guam's reef ecosystem change over the coming decades?
+    \item General Question: How will Guam's reef ecosystem change over time?
 \end{itemize}
 \begin{center}
     $\Downarrow$
 \end{center}
 \begin{itemize}
-    \item Specific Question: How will overfishing affect Guam's coral reef ecosystem in the upcoming decades?
+    \item Specific Question: How will overfishing affect Guam's coral reef ecosystem over time?
 \end{itemize}
 \begin{figure}
     \centering
@@ -128,6 +128,7 @@
 
 \subsection{Definitions}
 \begin{frame}{Identify Our Terms}
+\vspace{-0.5cm}
     \begin{figure}%
         \centering
         \subfloat[\centering Corals\textsuperscript{\cite{img_coral_reef}}]{{\includegraphics[width=4.7cm]{Latex/Figures/coral_reefs.jpg} }}%
@@ -255,31 +256,61 @@
 
 \subsection{Parameters}
 \begin{frame}{Coral Reef Ecosystem Model Parameters}
-\hspace{-7cm}
-    \begin{table}
-    %\centering
-    \vspace{-1cm}
+\scalebox{0.9}{\begin{minipage}{1.20\textwidth}
+\begin{table}
+    \centering
+    \hspace{-0.7cm}
     \begin{tabular}{c p{5cm} c c}
         \hline
         Parameter & Description & Rate & Units\textsuperscript{\cite{12_noaa_report}\cite{04_mathanalysis}\cite{13_blackwood_hastings_mumby_2010}}\\
         \hline
         \hline
-        $\mu_{1}$ & natural death rate of coral reefs & \colorbox{yellow}{0.15}\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}} & $year^{-1}$\\ %12
+        $\mu_{1}$ & death rate of coral reefs & \colorbox{yellow}{0.15}\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}} & $year^{-1}$\\ %12
         $\mu_{2}$ & natural death rate of parrotfish & \colorbox{yellow}{0.22}\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
         $r$ & rate that coral recruit to overgrow algal turfs & \colorbox{yellow}{10}\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}} & $year^{-1}$\\ %12
         %$g$ & grazing rate that parrotfish graze macroalgae without distinction from algae turfs & $\frac{kg}{yrs}$\\
         $\phi$ & rate that macroalgae spread vegetative over algal turfs & 0.8\textsuperscript{\cite{11_zikkah_anggriani_supriatna_2020}} & $year^{-1}$\\ %13
         $q$ & intrinsic growth rate for parrotfish & \colorbox{yellow}{0.47}\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
         $h$ & harvesting rate for parrotfish & \colorbox{yellow}{0.14}\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
-        $\sigma$ & rate that parrot fish bite coral & 0.01*& $bites*year^{-1}$\\
+        $\sigma$ & rate that parrot fish bite coral & 0.01*& $bites \cdot year^{-1}$\\
         $\omega$ & maximum grazing intensity & 1\textsuperscript{\cite{13_blackwood_hastings_mumby_2010}} & -\\
         $\beta$ & carrying capacity of parrotfish & 1 & -\\
         $a_{0}$ & control variable to simulate seasonal changes & 0.99 & - %13
     \end{tabular}
     %\caption{Model Parameters}
     %\label{tab:my_label}
+    
 \end{table}
-* = \textit{estimated value}
+* = \textit{estimated value}\\
+\colorbox{yellow}{\#} = \textit{Guam Data}
+\end{minipage}}
+
+% \hspace{-7cm}
+%     \begin{table}
+%     %\centering
+%     \vspace{-1cm}
+%     \begin{tabular}{c p{5cm} c c}
+%         \hline
+%         Parameter & Description & Rate & Units\textsuperscript{\cite{12_noaa_report}\cite{04_mathanalysis}\cite{13_blackwood_hastings_mumby_2010}}\\
+%         \hline
+%         \hline
+%         $\mu_{1}$ & death rate of coral reefs & \colorbox{yellow}{0.15}\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}} & $year^{-1}$\\ %12
+%         $\mu_{2}$ & natural death rate of parrotfish & \colorbox{yellow}{0.22}\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
+%         $r$ & rate that coral recruit to overgrow algal turfs & \colorbox{yellow}{10}\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}} & $year^{-1}$\\ %12
+%         %$g$ & grazing rate that parrotfish graze macroalgae without distinction from algae turfs & $\frac{kg}{yrs}$\\
+%         $\phi$ & rate that macroalgae spread vegetative over algal turfs & 0.8\textsuperscript{\cite{11_zikkah_anggriani_supriatna_2020}} & $year^{-1}$\\ %13
+%         $q$ & intrinsic growth rate for parrotfish & \colorbox{yellow}{0.47}\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
+%         $h$ & harvesting rate for parrotfish & \colorbox{yellow}{0.14}\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
+%         $\sigma$ & rate that parrot fish bite coral & 0.01*& $bites \cdot year^{-1}$\\
+%         $\omega$ & maximum grazing intensity & 1\textsuperscript{\cite{13_blackwood_hastings_mumby_2010}} & -\\
+%         $\beta$ & carrying capacity of parrotfish & 1 & -\\
+%         $a_{0}$ & control variable to simulate seasonal changes & 0.99 & - %13
+%     \end{tabular}
+%     %\caption{Model Parameters}
+%     %\label{tab:my_label}
+% \end{table}
+% * = \textit{estimated value}\\
+% \colorbox{yellow}{#} = \textit{Guam Data}
 % highlighted values are Guam data
 \end{frame}
 
@@ -343,9 +374,12 @@
 
 \subsection{Plots}
 \begin{frame}{Simulating $a(t)$}
+    \vspace{-1cm}
     \begin{center}
         $$a(t)= \left|\frac{a_{0}(9\sin{(\pi t) }+1)}{10} \right|$$\\
-        \animategraphics[width=0.85\textwidth, loop, autoplay]{12}{Latex/Figures/sine_graph_animation/frame-}{157}{318}
+        \animategraphics[width=0.85\textwidth, loop, autoplay]{12}{Latex/Figures/sine_graph_animation/frame-}{157}{318} \\
+        \vspace{0.5cm}
+        \textit{Plotted using Desmos}
     \end{center}
     
 \end{frame}
@@ -433,8 +467,10 @@
     \scalebox{0.9}{\parbox{.5\textwidth}{%
     \begin{align*}
         T^{*} &= \frac{\mu_{1} + a(t)M^{*}}{r} \\
+        &\\
         C^{*} %&= 1-(T^{*} + M^{*}) \\
         &= 1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*} \right)\\
+        &\\
         P^{*} %&= \beta C^{*} \left(\frac{q-(h+\mu_{2})}{q} \right) \\
         &= \beta \left(1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*} \right) \right) \left(\frac{q-(h+\mu_{2})}{q} \right)\\
     %M^{*} &= \frac{\omega (\beta \left(1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*} \right) \right) \left(\frac{q-(h+\mu_{2})}{q} \right))}{\beta(a(t)(1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*}) \right)+\phi \frac{\mu_{1} + a(t)M^{*}}{r})} - \frac{\mu_{1} + a(t)M^{*}}{r} \\
@@ -458,6 +494,9 @@ $$\frac{-e \pm \sqrt{e^2 - 4df}}{2d}$$, where
 \subsection{Basic Reproduction Number}
 \begin{frame}{Basic Reproduction Number: $\mathscr{R}_{0}$}
     \begin{block}{Definition}
+        \begin{itemize}
+            \item 
+        \end{itemize}
         A metric used to describe the contagiousness or transmissibility of infectious agents\textsuperscript{\cite{delamater_street_leslie_yang_jacobsen_2019}}, i.e. the number of secondary infections
     \end{block}
 \end{frame}
@@ -572,12 +611,9 @@ Game of Harvesting
     \begin{figure}
         \centering
         \includegraphics[width = 0.9\textwidth]{Latex/Figures/Graphs/threshold_graph.png}
-        \caption{Threshold Analysis}
+        \caption{When $\mathscr{R}_0 = 1$, $h = 0.1312$}
         \label{fig:threshold}
     \end{figure}
-    \begin{center}
-        When $\mathscr{R}_0 = 1$, $h = 0.1312$.
-    \end{center}
 \end{frame}
 
 \subsection{Expected Payoff - Harvesting}
@@ -629,7 +665,7 @@ Thus, $E$ achieves a maximum value at $h = 0$ or $h=1$.
 \begin{frame}{What is Nash Equilibrium?}
     \begin{block}{Definition\textsuperscript{\cite{nash_definition}}}
         \begin{itemize}
-            \item The Nash equilibrium is a decision-making theorem within game theory that states a player can achieve the desired outcome by not deviating from their initial strategy.
+            \item The \textbf{Nash equilibrium} is a decision-making theorem within game theory that states a player can achieve the desired outcome by not deviating from their initial strategy.
             \item Each player's strategy is optimal when considering the decisions of other players. Every player wins because everyone gets the outcome they desire.
             %\item A common Nash equilibrium problem is the prisoner's dilemma game.
         \end{itemize}
@@ -655,31 +691,55 @@ Thus, $E$ achieves a maximum value at $h = 0$ or $h=1$.
 \end{frame}
 
 \begin{frame}{Nash Equilibrium - Harvesting}
-    $h = $ \\
-    $\Delta E = E(1, h_{pop}) - E(0, h_{pop})$ \\
-    $\Delta E < 0$: harvest more \\
-    $\Delta E > 0$: harvest less
+    \begin{align*}
+        h &= equation\\
+        \Delta E &= E(1, h_{pop}) - E(0, h_{pop}) \\
+        \Delta E &< 0: \text{harvest} \\
+        \Delta E &> 0: do not harvest
+    \end{align*}
+    % $h = $ \\
+    % $\Delta E = E(1, h_{pop}) - E(0, h_{pop})$ \\
+    % $\Delta E < 0$: harvest \\
+    % $\Delta E > 0$: do not harvest
 \end{frame}
 
 \begin{frame}{Nash Equilibrium Graph}
-    
+    \begin{figure}
+        \centering
+        \includegraphics[width = 0.8\textwidth]{Latex/Figures/Graphs/nash_1.png}
+        \caption{Nash Equilibrium Graph}
+        \label{fig:NE_Graph}
+    \end{figure}
 \end{frame}
 
 
 %----------------------------------------------------
 
 %---------------------Conclusion---------------------
-\section{Conclusion}
-\begin{frame}{Conclusion}
-    Type conclusion here
+\section{Discussion}
+\begin{frame}{Discussion}
+    \begin{itemize}
+        \item<1-> Overfishing can have a detrimental impact on coral reef ecosystems.
+        \item<2-> Based on our mathematical model:
+            \begin{itemize}
+                \item A higher $a_{0}$ will result in higher macroalgae growth over corals, especially over warmer months of the year.
+                \item A higher $h$ will result in the increased dominance of macroalgae in the ecosystem.
+            \end{itemize}
+        \item<3-> Our sensitivity analysis indicates that our coral death rate ($\mu_{1}$), parrotfish natural death rate ($\mu_{2}$), and harvesting rate ($h$) have the largest impact on our basic reproduction number.
+        \item<4-> The maximum harvest rate without cost is approximately 0.131157 (13.1157\%) of the parrot fish population. 
+        \item<5-> As the relative cost of fishing increases, the harvesting threshold decreases until it reaches the maximum cost.
+    \end{itemize}
 \end{frame}
 %----------------------------------------------------
 
 %---------------------Plans---------------------
 \section{Closing Remarks}
-\subsection{Future Plans}
-\begin{frame}{Future Plans}
+\subsection{Future Research}
+\begin{frame}{Future Research}
     \begin{itemize}
+    \item Find data from Guam sources to give a more accurate representation of the changes on Guam's Reef Ecosystem. 
+    \item Application of game theory on $\phi$ parameter.
+    \item Incorporate more elements of coral reef ecosystems (i.e. other types of plant and aquatic life) to our compartment model.
         %\item Specific ideas:
         %\begin{itemize}
            % \item How will a specific coral species change throughout the upcoming decades on Guam?
@@ -689,14 +749,13 @@ Thus, $E$ achieves a maximum value at $h = 0$ or $h=1$.
         %\item Finish endemic equilibrium calculations.
         %\item Perform sensitivity analysis on parameters.
         %\item Refine and improve differential equations to improve dynamics
-        % analyze diff eqs
-        \item Continue application of Harvesting Game Theory on the harvest rate parameter ($h$) to quantify human behavior and the best strategy to protect coral reef sustainability. These tasks include:
-        \begin{itemize}
+        %\item Continue application of Harvesting Game Theory on the harvest rate parameter ($h$) to quantify human behavior and the best strategy to protect coral reef sustainability. These tasks include:
+        %\begin{itemize}
             %\item Payoff Matrix
             %\item Dominant and/or mixed equilibrium equations
-            \item continue solving for the Nash Equilibrium %/Evolutionarily Stable Strategy
+            %\item continue solving for the Nash Equilibrium %/Evolutionary Stable Strategy
             %\item Replicator Equation
-        \end{itemize}
+        %\end{itemize}
     \end{itemize}
 \end{frame}
 
@@ -705,7 +764,9 @@ Thus, $E$ achieves a maximum value at $h = 0$ or $h=1$.
 
 \subsection{Q \& A}
 \begin{frame}
-    \Huge{Questions?}
+    \begin{center}
+        \Huge{Questions or Comments?}
+    \end{center}
 \end{frame}
 
 %%-------------------------Acknowledgements----------------
@@ -744,7 +805,9 @@ Thus, $E$ achieves a maximum value at $h = 0$ or $h=1$.
 %%---------------Thank you/Questions----------------------
 
 \begin{frame}
-    \Huge{Thank you!}
+    \begin{center}
+        \Huge{Thank you!}
+    \end{center}
 \end{frame}
 
 

@@ -281,8 +281,8 @@
     %\label{tab:my_label}
     
 \end{table}
-* = \textit{estimated value}\\
-\colorbox{yellow}{\#} = \textit{Guam Data}
+\small{* = \textit{estimated value}}\\
+\small{\colorbox{yellow}{\#} = \textit{Guam Data}}
 \end{minipage}}
 
 % \hspace{-7cm}
@@ -480,14 +480,30 @@
 
 
 \begin{frame}{Endemic Equilibrium Cont.}
-Calculation for $M^{*}$:
-
-$$\frac{-e \pm \sqrt{e^2 - 4df}}{2d}$$, where
-\begin{align*}
-    d &= (a(t)q-2a(t)r+r \phi ) - q(r^{2}+a(t)^{3})\\
-    e &= a(t)q(r(r-2\mu_{1}+a(t))-2\mu_{1}(a(t)+\phi )) +  r(q(\phi \mu_{1} + r \omega ) - \\ & \ \ \  \omega(hr+a(t) \mu_{2} + r\mu_{2})\\
-    f &= -qr^{2} \omega +qr\mu_{1} \omega + hr^{2} \omega - hr\mu_{1} \omega + r^2 \mu_{2} \omega - r \mu_{1} \mu_{2} \omega + a(t)qr \mu_{1} - \\ & \ \ \  a(t)q\mu_{1}^{2} +q\phi \mu_{1}^{2}
-\end{align*}
+Calculation for $M^{*}$:\\
+\begin{equation*}
+    \frac{-e \pm \sqrt{e^2 - 4df}}{2d}
+\end{equation*}
+where
+\begin{multline*}
+    d = (a(t)q-2a(t)r+r \phi ) - q(r^{2}+a(t)^{3})\\
+\end{multline*}
+\vspace{-1.5cm}
+\begin{multline*}
+    e = a(t)q(r(r-2\mu_{1}+a(t))-2\mu_{1}(a(t)+\phi )) \\
+    + r(q(\phi \mu_{1} + r \omega ) - \omega(hr+a(t) \mu_{2} + r\mu_{2})
+\end{multline*}
+\vspace{-1cm}
+\begin{multline*}
+    f = -qr^{2} \omega +qr\mu_{1} \omega + hr^{2} \omega - hr\mu_{1} \omega + r^2 \mu_{2} \omega\\
+    - r \mu_{1} \mu_{2} \omega + a(t)qr \mu_{1} -  a(t)q\mu_{1}^{2} +q\phi \mu_{1}^{2}
+\end{multline*}
+% \begin{align*}
+%     d &= (a(t)q-2a(t)r+r \phi ) - q(r^{2}+a(t)^{3})\\
+%     e &= a(t)q(r(r-2\mu_{1}+a(t))-2\mu_{1}(a(t)+\phi ))
+%     + r(q(\phi \mu_{1} + r \omega ) -   \omega(hr+a(t) \mu_{2} + r\mu_{2})\\
+%     f &= -qr^{2} \omega +qr\mu_{1} \omega + hr^{2} \omega - hr\mu_{1} \omega + r^2 \mu_{2} \omega - r \mu_{1} \mu_{2} \omega + a(t)qr \mu_{1} -  a(t)q\mu_{1}^{2} +q\phi \mu_{1}^{2}
+% \end{align*}
 
 \end{frame}
 
@@ -495,8 +511,8 @@ $$\frac{-e \pm \sqrt{e^2 - 4df}}{2d}$$, where
 \begin{frame}{Basic Reproduction Number: $\mathscr{R}_{0}$}
     \begin{block}{Definition}
         \begin{itemize}
-            \item A metric used to describe the contagiousness or transmissibility of infectious agents\textsuperscript{\cite{delamater_street_leslie_yang_jacobsen_2019}}, i.e. the number of secondary infections % general def
-            \item rate at which macroalgae spreads after the initial macroalgae overgrowth % def in terms of our model
+            \item A metric used to describe the contagiousness or transmissibility of infectious agents\textsuperscript{\cite{delamater_street_leslie_yang_jacobsen_2019}}, i.e. the number of secondary infections. % general def
+            \item $\mathscr{R}_{0}$ is the rate at which macroalgae spreads after the initial macroalgae overgrowth. % def in terms of our model
         \end{itemize}
         
     \end{block}
@@ -618,7 +634,7 @@ Game of Harvesting
 \begin{frame}{Harvesting Threshold Graph}
     \begin{figure}
         \centering
-        \includegraphics[width = 0.9\textwidth]{Latex/Figures/Graphs/threshold_graph.png}
+        \includegraphics[width = 0.85\textwidth]{Latex/Figures/Graphs/threshold_graph.png}
         \caption{When $\mathscr{R}_0 = 1$, $h = 0.1312$}
         \label{fig:threshold}
     \end{figure}
@@ -731,8 +747,13 @@ Thus, $E$ achieves a maximum value at $h = 0$ or $h=1$.
                 \item A lower $\phi$ will result in decreased proportion of macroalgae and increase in algal turfs, and subsequently corals.
             \end{itemize}
         \item<3-> Our sensitivity analysis indicates that our coral death rate ($\mu_{1}$), parrotfish natural death rate ($\mu_{2}$), and harvesting rate ($h$) have the largest impact on our basic reproduction number.
-        \item<4-> The maximum harvest rate without cost is approximately 0.131157 (13.1157\%) of the parrot fish population. 
-        \item<5-> According to our harvesting game theory, as the relative cost of fishing increases, the harvesting threshold decreases until it reaches the maximum cost.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Discussion}
+    \begin{itemize}
+        \item<1-> The maximum harvest rate without cost is approximately 0.131157 (13.1157\%) of the parrot fish population. 
+        \item<2-> According to our harvesting game theory, as the relative cost of fishing increases, the harvesting threshold decreases until it reaches the maximum cost.
     \end{itemize}
 \end{frame}
 %----------------------------------------------------

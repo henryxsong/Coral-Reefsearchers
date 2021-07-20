@@ -227,11 +227,11 @@ h_var = 0:0.001:1;
 
 figure
 hold on
-fplot(hi_equation, [0 1])
-plot(hi_point(1), hi_point(2), 'o')
-plot([hi_point(1), hi_point(1)], [0, hi_point(2)], 'r--')
-plot([0, hi_point(1)], [hi_point(2), hi_point(2)], 'r--')
-xlim([0 0.4]);
+fplot(hi_equation, [0 1], 'Linewidth', 2)
+plot(hi_point(1), hi_point(2), 'o', 'MarkerFaceColor', 'r', 'Linewidth', 2)
+plot([hi_point(1), hi_point(1)], [0, hi_point(2)], 'r--', 'Linewidth', 2)
+plot([0, hi_point(1)], [hi_point(2), hi_point(2)], 'r--', 'Linewidth', 2)
+xlim([0 0.3]);
 ylim([0 2]);
 
 set(gca, 'FontSize',18);

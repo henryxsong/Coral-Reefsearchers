@@ -173,25 +173,25 @@ Using MatLab (See Appendix \ref{appendix:B1}), we were able to model the dynamic
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{Latex/Figures/Graphs/0.3C_0.3T_0.3M.png}
-    \caption{Initial Conditions: $C = T = M = \frac{1}{3}$, and $P = 1$}
+    \caption{Initial Conditions: $C = T = M = \frac{1}{3}$, and $P = \frac{3}{4}$}
     \label{fig:initial_plot}
 \end{figure}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{Latex/Figures/Graphs/0.5C_0.25T_0.25M.png}
-    \caption{Initial Conditions: $C = \frac{1}{2}$, $T = M = \frac{1}{4}$, and $P = 1$}
+    \caption{Initial Conditions: $C = \frac{1}{2}$, $T = M = \frac{1}{4}$, and $P = \frac{3}{4}$}
     \label{fig:coral_dominant}
 \end{figure}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{Latex/Figures/Graphs/0.25C_0.5T_0.25M.png}
-    \caption{Initial Conditions: $T = \frac{1}{2}$, $C = M = \frac{1}{4}$, and $P = 1$}
+    \caption{Initial Conditions: $T = \frac{1}{2}$, $C = M = \frac{1}{4}$, and $P = \frac{3}{4}$}
     \label{fig:turf_dominant}
 \end{figure}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{Latex/Figures/Graphs/0.25C_0.25T_0.5M.png}
-    \caption{Initial Conditions: $M = \frac{1}{2}$, $C = T = \frac{1}{4}$, and $P = 1$}
+    \caption{Initial Conditions: $M = \frac{1}{2}$, $C = T = \frac{1}{4}$, and $P = \frac{3}{4}$}
     \label{fig:macroalgae_dominant}
 \end{figure}
 As we can see in Figures \ref{fig:initial_plot}, \ref{fig:coral_dominant}, \ref{fig:turf_dominant}, \& \ref{fig:macroalgae_dominant}, as the parrot fish population decreases, the macroalgae proportion increases. In addition, as the macroalgae proportion increases, the coral proportion decreases, and subsequently the algal turf proportion decreases as well.\\
@@ -210,7 +210,7 @@ Since our model was set-up so as $C+T+M=1$ and since $M^{0} = 0$, then we conclu
 \subsection{Basic Reproduction Number: $\mathscr{R}_{0}$}
 The basic reproduction number, $\mathscr{R}_{0}$, is a metric used to describe the contagiousness or transmissibility of infectious agents\textsuperscript{\cite{delamater_street_leslie_yang_jacobsen_2019}}. In essence, this equation measures the number of secondary infections. Since our model is not disease-based, we conclude that our $\mathscr{R}_{0}$ symbolizes the rate at which macroalgae spreads after the initial macroalgae overgrowth. Our model recognizes macroalgae (M) as our infectious compartment. By using our disease-free equilibrium equations, we are able to calculate our $\mathscr{R}_{0}$ equation (detailed in Appendix \ref{appendix:A3}): 
 \begin{equation*}\label{eq:R0}
-    \displaystyle {\mathscr{R}}_{0} = \frac{\mu_{1}(a r - a\mu_{1} + \phi \mu_{1})}{r^{2}g(P)}
+    \displaystyle {\mathscr{R}}_{0} = - \frac{\beta \mu_{1}q(a(t)(\frac{\mu_{1}}{r}-1)-\frac{\mu_{1}}{r})}{\omega r (\beta h (\frac{\mu_{1}}{r}-1) + \beta \mu_{2} (\frac{\mu_{1}}{r}-1) - \beta q(\frac{\mu_{1}}{r}-1))}
 \end{equation*}
 
 \subsection{Endemic Equilibrium}
@@ -564,7 +564,7 @@ Special thanks to Dr. Bastian Bentlage, our faculty mentors (Dr. JaeYong Choi, D
         \end{equation*}
         Typically, $\mathscr{R}_{0}$ will be the largest of all eigenvalues, however since we only have one eigenvalue, the singular eigenvalue will be our $\mathscr{R}_{0}$. After substituting in $C^{0}$, $T^{0}$, and $P^{0}$, our $\mathscr{R}_{0}$ is
         \begin{equation*}
-            \mathscr{R}_{0} = \frac{\mu_{1}(a r - a\mu_{1} + \phi \mu_{1})}{r^{2}g(P^{0})}
+            \displaystyle {\mathscr{R}}_{0} = - \frac{\beta \mu_{1}q(a(t)(\frac{\mu_{1}}{r}-1)-\frac{\mu_{1}}{r})}{\omega r (\beta h (\frac{\mu_{1}}{r}-1) + \beta \mu_{2} (\frac{\mu_{1}}{r}-1) - \beta q(\frac{\mu_{1}}{r}-1))}
         \end{equation*}
 
 
@@ -602,7 +602,7 @@ Special thanks to Dr. Bastian Bentlage, our faculty mentors (Dr. JaeYong Choi, D
         \label{appendix:B4}
         Using our disease free equilibrium equations (Appendix \ref{appendix:B3}), we are then able to set-up and calculate our basic reproduction number ($\mathscr{R}_0$), which depicts the equilibrium of the system:
         \begin{center}
-            \lstinputlisting[language=Matlab, firstline = 185, lastline = 206]{./Source Code/Coral_Reefsearchers.m}
+            \lstinputlisting[language=Matlab, firstline = 185, lastline = 205]{./Source Code/Coral_Reefsearchers.m}
         \end{center}
         
         \subsection{Threshold}
@@ -616,14 +616,21 @@ Special thanks to Dr. Bastian Bentlage, our faculty mentors (Dr. JaeYong Choi, D
         This script analyzes the impact of each parameter on our basic reproduction number equation by taking the partial derivative and substituting the variables with parameter values:
         \label{appendix:B6}
         \begin{center}
-            \lstinputlisting[language=Matlab, firstline = 245, lastline = 260]{./Source Code/Coral_Reefsearchers.m}
+            \lstinputlisting[language=Matlab, firstline = 356, lastline = 371]{./Source Code/Coral_Reefsearchers.m}
         \end{center}
         
         \subsection{Endemic Equilibrium}
         \label{appendix:B7}
         This script calculates the endemic equilibrium of our system of differential equations:        
         \begin{center}
-            \lstinputlisting[language=Matlab, firstline = 265, lastline = 307]{./Source Code/Coral_Reefsearchers.m}
+            \lstinputlisting[language=Matlab, firstline = 376, lastline = 416]{./Source Code/Coral_Reefsearchers.m}
+        \end{center}
+        
+        \subsection{Game Theory}
+        \label{appendix:B8}
+        This script performs calculates and plots our nash equilibrium graph for our harvesting game theory:        
+        \begin{center}
+            \lstinputlisting[language=Matlab, firstline = 421, lastline = 463]{./Source Code/Coral_Reefsearchers.m}
         \end{center}
 \newpage
 % \bibliography{main}

@@ -359,9 +359,10 @@
     \begin{align*}
         \begin{split}
             \frac{dC}{dt} &= rTC + \sigma PC- (a(t)M+\mu_{1})C\\
-            \frac{dP}{dt} &= qP \left( 1-\frac{P}{\beta C} \right) - P \left( h+\mu_{2} \right)\\
+            %\frac{dP}{dt} &= qP \left( 1-\frac{P}{\beta C} \right) - P \left( h+\mu_{2} \right)\\
             \frac{dT}{dt} &= \mu_{1}C + \frac{g(P)M}{M+T} - T(rC+\phi M)\\
-            \frac{dM}{dt} &= (a(t)C+ \phi T)M - \frac{g(P)M}{M+T}
+            \frac{dM}{dt} &= (a(t)C+ \phi T)M - \frac{g(P)M}{M+T}\\
+            \frac{dP}{dt} &= qP \left( 1-\frac{P}{\beta C} \right) - P \left( h+\mu_{2} \right)
             \label{SoODE}
         \end{split}
     \end{align*}
@@ -374,28 +375,33 @@
 
 \subsection{Plots}
 \begin{frame}{Simulating $a(t)$}
+    \vspace{-0.3cm}
+    $$a(t)= \left|\frac{a_{0}(9\sin{(\pi t) }+1)}{10} \right|$$
     \vspace{-0.5cm}
-    \begin{center}
-        $$a(t)= \left|\frac{a_{0}(9\sin{(\pi t) }+1)}{10} \right|$$\\
-        \animategraphics[width=0.8\textwidth, loop, autoplay, palindrome]{5}{Latex/Figures/matlab_a_animation/Frame-}{1}{50} \\
-        \vspace{0.3cm}
-        % \textit{Plotted using Desmos}
-    \end{center}
-    
+    \begin{figure}
+        \centering
+        \animategraphics[width=0.75\textwidth, loop, autoplay, palindrome]{5}{Latex/Figures/matlab_a_animation/Frame-}{1}{50}
+        \caption{Amplitude of $a(t)$ as $a_{0}$ changes}
+        \label{fig:matlab_a_animation}
+    \end{figure}
 \end{frame}
 
 \begin{frame}{Parameter Changes: $a_{0}$}
-    \begin{center}
-        \animategraphics[width=0.85\textwidth, loop, autoplay]{3}{Latex/Figures/a_animation/frame-}{1}{45}\\
-        Initial Conditions: $C = T = M = \frac{1}{3}$, and $P = \frac{3}{4}$
-    \end{center}
+    \begin{figure}
+        \centering
+        \animategraphics[width=0.85\textwidth, loop, autoplay]{3}{Latex/Figures/a_animation/frame-}{1}{45}
+        \caption{Initial Conditions: $C = T = M = \frac{1}{3}$, and $P = \frac{3}{4}$}
+        \label{fig:a_animation}
+    \end{figure}
 \end{frame}
 
 \begin{frame}{Parameter Changes: $h$}
-    \begin{center}
-        \animategraphics[width=0.85\textwidth, loop, autoplay]{3}{Latex/Figures/h_animation/frame-}{1}{49}\\
-        Initial Conditions: $C = T = M = \frac{1}{3}$, and $P = \frac{3}{4}$
-    \end{center}
+    \begin{figure}
+        \centering
+        \animategraphics[width=0.85\textwidth, loop, autoplay]{3}{Latex/Figures/h_animation/frame-}{1}{49}
+        \caption{Initial Conditions: $C = T = M = \frac{1}{3}$, and $P = \frac{3}{4}$}
+        \label{fig:h_animation}
+    \end{figure}
 \end{frame}
 
 % \begin{frame}{Parameter Changes: $r$}
@@ -406,10 +412,12 @@
 % \end{frame}
 
 \begin{frame}{Parameter Changes: $\phi$}
-    \begin{center}
-        \animategraphics[width=0.85\textwidth, loop, autoplay]{3}{Latex/Figures/phi_animation/Frame-}{1}{49}\\
-        Initial Conditions: $M = \frac{1}{2}$, $C = T = \frac{1}{4}$, and $P = \frac{3}{4}$
-    \end{center}
+    \begin{figure}
+        \centering
+        \animategraphics[width=0.85\textwidth, loop, autoplay]{3}{Latex/Figures/phi_animation/Frame-}{1}{49}
+        \caption{Initial Conditions: $M = \frac{1}{2}$, $C = T = \frac{1}{4}$, and $P = \frac{3}{4}$}
+        \label{fig:phi_animation}
+    \end{figure}
 \end{frame}
 
 \begin{frame}{Compartment Initial Condition Changes}
@@ -450,27 +458,51 @@
 
 \section{Equilibria}
 \subsection{Disease Free Equilibrium}
-\begin{frame}{Disease Free Equilibrium (DFE)}
-    \begin{align*}
-        C^{0} &= 1 - \frac{\mu_{1}}{r}\\
-        P^{0} &= -\frac{\beta(1 - \frac{\mu_{1}}{r})(h - \mu_{2} - q)}{q}\\
-        T^{0} &= \frac{\mu_{1}}{r}\\
-        M^{0} &= 0 \Longleftarrow \text{our "disease" compartment}
-    \end{align*}
-    \begin{block}{Note}
-    Since C + T + M = 1, if $M^{0} = 0$, then $C^{0} + T^{0} = 1$.
+\begin{frame}{Disease Free Equilibrium}
+    \begin{block}{Definition}
+        \begin{itemize}
+            \item The disease-free equilibrium is the point at which no disease is present in the system.
+            \item In our model, we classify macroalgae (M) as our "disease" compartment, and since the system is disease free, we set $M^{0} = 0$.
+        \end{itemize}
     \end{block}
 \end{frame}
+
+\begin{frame}{Disease Free Equilibrium}
+    \begin{align*}
+        C^{0} &= 1 - \frac{\mu_{1}}{r}\\
+        %P^{0} &= -\frac{\beta(1 - \frac{\mu_{1}}{r})(h - \mu_{2} - q)}{q}\\
+        T^{0} &= \frac{\mu_{1}}{r}\\
+        M^{0} &= 0\\
+        P^{0} &= -\frac{\beta(1 - \frac{\mu_{1}}{r})(h - \mu_{2} - q)}{q}\\
+        %\Longleftarrow \text{our "disease" compartment}
+    \end{align*}
+    %\begin{block}{Note}
+    %Since C + T + M = 1, if $M^{0} = 0$, then $C^{0} + T^{0} = 1$.
+    %\end{block}
+\end{frame}
+
+\begin{frame}{Endemic Equilibrium}
+    \begin{block}{Definition}
+        \begin{itemize}
+            \item The Endemic Equilibrium determines at what point will the disease not spread nor will it fully eradicate.
+            \item In order to find the endemic equilibrium, we have to set each differential equal to 0 and solve for each variable.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
 
 \subsection{Endemic Equilibrium}
 \begin{frame}{Endemic Equilibrium}
     \scalebox{0.9}{\parbox{.5\textwidth}{%
     \begin{align*}
-        T^{*} &= \frac{\mu_{1} + a(t)M^{*}}{r} \\
-        &\\
         C^{*} %&= 1-(T^{*} + M^{*}) \\
         &= 1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*} \right)\\
         &\\
+        T^{*} &= \frac{\mu_{1} + a(t)M^{*}}{r} \\
+        &\\
+        %C^{*} %&= 1-(T^{*} + M^{*}) \\
+        %&= 1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*} \right)\\
+        %&\\
         P^{*} %&= \beta C^{*} \left(\frac{q-(h+\mu_{2})}{q} \right) \\
         &= \beta \left(1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*} \right) \right) \left(\frac{q-(h+\mu_{2})}{q} \right)\\
     %M^{*} &= \frac{\omega (\beta \left(1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*} \right) \right) \left(\frac{q-(h+\mu_{2})}{q} \right))}{\beta(a(t)(1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*}) \right)+\phi \frac{\mu_{1} + a(t)M^{*}}{r})} - \frac{\mu_{1} + a(t)M^{*}}{r} \\
@@ -482,20 +514,20 @@
 \begin{frame}{Endemic Equilibrium Cont.}
 Calculation for $M^{*}$:\\
 \begin{equation*}
-    \frac{-e \pm \sqrt{e^2 - 4df}}{2d}
+    \frac{-k \pm \sqrt{k^2 - 4jn}}{2j}
 \end{equation*}
 where
 \begin{multline*}
-    d = (a(t)q-2a(t)r+r \phi ) - q(r^{2}+a(t)^{3})\\
+    j = (a(t)q-2a(t)r+r \phi ) - q(r^{2}+a(t)^{3})\\
 \end{multline*}
 \vspace{-1.5cm}
 \begin{multline*}
-    e = a(t)q(r(r-2\mu_{1}+a(t))-2\mu_{1}(a(t)+\phi )) \\
+    k = a(t)q(r(r-2\mu_{1}+a(t))-2\mu_{1}(a(t)+\phi )) \\
     + r(q(\phi \mu_{1} + r \omega ) - \omega(hr+a(t) \mu_{2} + r\mu_{2})
 \end{multline*}
 \vspace{-1cm}
 \begin{multline*}
-    f = -qr^{2} \omega +qr\mu_{1} \omega + hr^{2} \omega - hr\mu_{1} \omega + r^2 \mu_{2} \omega\\
+    n = -qr^{2} \omega +qr\mu_{1} \omega + hr^{2} \omega - hr\mu_{1} \omega + r^2 \mu_{2} \omega\\
     - r \mu_{1} \mu_{2} \omega + a(t)qr \mu_{1} -  a(t)q\mu_{1}^{2} +q\phi \mu_{1}^{2}
 \end{multline*}
 % \begin{align*}
@@ -512,7 +544,7 @@ where
     \begin{block}{Definition}
         \begin{itemize}
             \item A metric used to describe the contagiousness or transmissibility of infectious agents\textsuperscript{\cite{delamater_street_leslie_yang_jacobsen_2019}}, i.e. the number of secondary infections. % general def
-            \item $\mathscr{R}_{0}$ is the rate at which macroalgae spreads after the initial macroalgae overgrowth. % def in terms of our model
+            \item $\mathscr{R}_{0}$ is defined as the expected number of secondary cases produced a single macroalgae (M) in a completely coral (C) population. % def in terms of our model
         \end{itemize}
         
     \end{block}
@@ -538,7 +570,7 @@ where
     $$\mathscr{R}_{0} = \rho(\det(FV^{-1} - \lambda I))$$
     $$\Downarrow$$
     \centering
-    $\displaystyle {\mathscr{R}}_{0} = - \frac{\beta \mu_{1}q(a(t)(\frac{\mu_{1}}{r}-1)-\frac{\mu_{1}}{r})}{\omega r (\beta h (\frac{\mu_{1}}{r}-1) + \beta \mu_{2} (\frac{\mu_{1}}{r}-1) - \beta q(\frac{\mu_{1}}{r}-1))}$
+    $\displaystyle {\mathscr{R}}_{0} = \frac{\beta \mu_{1}q(a(t)(1 - \frac{\mu_{1}}{r}) + \frac{\mu_{1}}{r})}{\omega r (\beta h (\frac{\mu_{1}}{r}-1) + \beta \mu_{2} (\frac{\mu_{1}}{r}-1) - \beta q(\frac{\mu_{1}}{r}-1))}$
 \end{frame}
 
 \subsection{Sensitivity Analysis}
@@ -549,7 +581,7 @@ where
             % \begin{block}{Sensitivity Analysis for $\mathscr{R}_0$}
             The Sensitivity Analysis for $\mathscr{R}_0$ determines the most influential parameters affecting $\mathscr{R}_0$. It is defined by
                 $$S_{\lambda} = \frac{\frac{\Delta \mathscr{R}_{0}}{\mathscr{R}_{0}}}{\frac{\Delta x}{x}} = \frac{\lambda}{\mathscr{R}_{0}} \cdot \frac{\partial \mathscr{R}_{0}}{\partial \lambda}$$ \\
-                where $\lambda$ is a parameter in the quantity $\mathscr{R}_{0}$
+                where $\lambda$ is a parameter in the quantity $\mathscr{R}_{0}$.
             % \end{block} 
         \end{column}
         \begin{column}{0.4\textwidth}
@@ -615,7 +647,7 @@ Game of Harvesting
 \subsection{Harvesting Threshold}
 \begin{frame}{Harvesting Threshold}
     \begin{block}{Definition (Harvesting Threshold)}
-        The rate at which parrotfish can be harvested in order for macroalgae growth to become stable in the ecosystem. 
+        The proportion of parrotfish that can be harvested in order for macroalgae growth maintain stability in the ecosystem. 
     \end{block}
     
     \vspace{0.5cm}
@@ -626,8 +658,8 @@ Game of Harvesting
     $\displaystyle{h_{TH} = q - \mu_{2} + \frac{\mu_{1}q(a(t) \mu_{1} - a(t)r - \phi \mu_{1})}{\omega r(r-\mu_{1})}}$ \\
     \end{center}
     \begin{align*}
-    h_{pop} &< h_{TH}: \text{Macroalgae growth is stable} \\
-    h_{pop} &> h_{TH}: \text{Macroalgae growth is unstable}
+    h_{pop} &< h_{TH}: \text{Macroalgae growth is stable.} \\
+    h_{pop} &> h_{TH}: \text{Macroalgae growth is unstable.}
     \end{align*}
 \end{frame}
 
@@ -655,7 +687,7 @@ Game of Harvesting
              \hline
              $E(h, h_{pop})$ & Expected payoff for an individual to harvest based on the harvesting rate of the population \\
              $C_{h}$ & Cost of harvesting \\
-             $C_{D}$ & Cost of coral disease \\
+             $C_{D}$ & Cost of coral disease (ex. less protection from storms)\\
         \end{tabular}
         %\caption{Caption}
         \label{tab:my_label}
@@ -683,10 +715,9 @@ $$\displaystyle {\frac{\partial ^ {2} E}{\partial h^{2}} = \frac{2 \omega P \mu{
 
 Thus, $E$ achieves a maximum value at $h = 0$ or $h=1$.\\
 \begin{align*}
-    %h &= equation\\
     \Delta E &= E(1, h_{pop}) - E(0, h_{pop}) \\
-    \Delta E &< 0: \text{Harvest} \\
-    \Delta E &> 0: \text{Do Not Harvest}
+    \Delta E &> 0: \text{Harvest} \\
+    \Delta E &< 0: \text{Do Not Harvest}
 \end{align*}
 \end{frame}
 
@@ -702,7 +733,7 @@ Thus, $E$ achieves a maximum value at $h = 0$ or $h=1$.\\
 \end{frame}
 
 \begin{frame}{Nash Equilibrium - Harvesting}
-    To obtain the Nash Equilibrium, we let $E(0, h_{pop}) = E(1, h_{pop})$, where \\
+    To obtain the Nash Equilibrium, we find $h_{NE}$ such that $E(0, h_{pop}) = E(1, h_{pop})$. \\
     \begin{align*}
         E(0, h_{pop}) &= -\frac{h_{pop}}{h_{pop} + \mu_{2}} \cdot \frac{g(P^{*})M^{*}}{M^{*} + T^{*}} \\
         E(1, h_{pop}) &= -C^{h}
@@ -714,7 +745,7 @@ Thus, $E$ achieves a maximum value at $h = 0$ or $h=1$.\\
 \end{frame}
             
 
-\begin{frame}{Nash Equilibrium Graph}
+\begin{frame}{Nash Equilibrium - Graph}
     \begin{figure}
         \centering
         \includegraphics[width = 0.85\textwidth]{Latex/Figures/Graphs/nash_1.png}
@@ -743,8 +774,8 @@ Thus, $E$ achieves a maximum value at $h = 0$ or $h=1$.\\
 
 \begin{frame}{Discussion}
     \begin{itemize}
-        \item<1-> The maximum harvest rate without cost is approximately 0.131157 (13.1157\%) of the parrot fish population. 
-        \item<2-> According to our harvesting game theory, as the relative cost of fishing increases, the harvesting threshold decreases until it reaches the maximum cost.
+        \item<1-> The maximum harvest proportion without cost is approximately 0.131157 (13.1157\%) of the parrot fish population. 
+        \item<2-> According to our harvesting game theory, as the relative cost of fishing increases, the harvesting Nash equilibrium decreases until it reaches the maximum cost.
     \end{itemize}
 \end{frame}
 %----------------------------------------------------
@@ -754,7 +785,7 @@ Thus, $E$ achieves a maximum value at $h = 0$ or $h=1$.\\
 \subsection{Future Research}
 \begin{frame}{Future Research}
     \begin{itemize}
-    \item Find data from Guam sources to give a more accurate representation of the changes on Guam's Reef Ecosystem. 
+    \item Collect data from Guam sources to give a more accurate representation of the changes on Guam's Reef Ecosystem. 
     \item Application of game theory on $\phi$ parameter control measures.
     \item Incorporate more elements of coral reef ecosystems (i.e. other types of plant and aquatic life) to our compartment model.
         %\item Specific ideas:
@@ -776,15 +807,7 @@ Thus, $E$ achieves a maximum value at $h = 0$ or $h=1$.\\
     \end{itemize} 
 \end{frame}
 
-%----------------------------------------------------
 
-
-\subsection{Q \& A}
-\begin{frame}
-    \begin{center}
-        \Huge{Questions or Comments?}
-    \end{center}
-\end{frame}
 
 %%-------------------------Acknowledgements----------------
 \subsection{Acknowledgements}
@@ -792,7 +815,7 @@ Thus, $E$ achieves a maximum value at $h = 0$ or $h=1$.\\
     \begin{center}
         Support for the Young Scholars Research Experience in Mathematics (YSREM)  is through the MAA Tensor SUMMA Program. Support for the MAA National Research Experience for Undergraduates Program (NREUP) is provided by the National Science Foundation (Grant Number DMS-1950644). Support for the NSF EPSCoR project, Guam Ecosystems Collaboratorium for Corals and Oceans (GECCO) is provided by the National Science Foundation (Grant Number DMS-1946352). \\
     \vspace{.2cm}
-    \small{Special thanks to the UOG Marine Laboratory(Dr. Bastian Bentlage and Ms. Grace McDermott), our faculty mentors (Dr. JaeYong Choi, Dr. HyunJu Oh, \& Dr. Leslie Aquino), and our Research Assistants (Jaron Bautista \& Regina-Mae Dominguez).}
+    \small{Special thanks to the UOG Marine Laboratory(Dr. Bastian Bentlage and Ms. Grace McDermott), our faculty mentors (Dr. JaeYong Choi, Dr. Hyunju Oh, \& Dr. Leslie Aquino), and our Research Assistants (Jaron Bautista \& Regina-Mae Dominguez).}
     
     \begin{figure}
         \includegraphics[width = 0.20\textwidth]{Figures/MAA_logo_PMS286.jpg}
@@ -809,7 +832,14 @@ Thus, $E$ achieves a maximum value at $h = 0$ or $h=1$.\\
     \end{center}
 \end{frame}
 
+%----------------------------------------------------
 
+\subsection{Q \& A}
+\begin{frame}
+    \begin{center}
+        \Huge{Questions or Comments?}
+    \end{center}
+\end{frame}
 
 
 %%----------------------Bibliography-------------------

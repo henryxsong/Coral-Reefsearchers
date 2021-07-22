@@ -238,6 +238,7 @@ set(gca, 'FontSize',18);
 title('Harvesting Threshold');
 xlabel('h')
 ylabel('R_0')
+hold off
 
 
 % changes in mu1
@@ -252,7 +253,10 @@ temp_R0 = subs(temp_R0, mu1, mu1_value1);
 for j = 1:length(param_array)
     temp_R0 = subs(temp_R0, param_array(j), param_values(j));
 end
+mu1_sol1 = solve(temp_R0 == 1, h);
 fplot(temp_R0, 'Linewidth', 3)
+
+
 
 temp_R0 = R0;
 mu1_value2 = 0.1;
@@ -260,6 +264,7 @@ temp_R0 = subs(temp_R0, mu1, mu1_value2);
 for j = 1:length(param_array)
     temp_R0 = subs(temp_R0, param_array(j), param_values(j));
 end
+mu1_sol2 = solve(temp_R0 == 1, h);
 fplot(temp_R0, 'Linewidth', 3)
 
 temp_R0 = R0;
@@ -268,6 +273,7 @@ temp_R0 = subs(temp_R0, mu1, mu1_value3);
 for j = 1:length(param_array)
     temp_R0 = subs(temp_R0, param_array(j), param_values(j));
 end
+mu1_sol3 = solve(temp_R0 == 1, h);
 fplot(temp_R0, 'Linewidth', 3)
 
 temp_R0 = R0;
@@ -276,6 +282,7 @@ temp_R0 = subs(temp_R0, mu1, mu1_value4);
 for j = 1:length(param_array)
     temp_R0 = subs(temp_R0, param_array(j), param_values(j));
 end
+mu1_sol4 = solve(temp_R0 == 1, h);
 fplot(temp_R0, 'Linewidth', 3)
 
 temp_R0 = R0;
@@ -284,13 +291,26 @@ temp_R0 = subs(temp_R0, mu1, mu1_value5);
 for j = 1:length(param_array)
     temp_R0 = subs(temp_R0, param_array(j), param_values(j));
 end
+mu1_sol5 = solve(temp_R0 == 1, h);
 fplot(temp_R0, 'Linewidth', 3)
 
-%yline(1, 'r--', 'Linewidth', 1.5)
+plot(double(mu1_sol2), 1, 'o', 'MarkerFaceColor', 'r', 'Linewidth', 2)
+plot(double(mu1_sol3), 1, 'o', 'MarkerFaceColor', 'r', 'Linewidth', 2)
+plot(double(mu1_sol4), 1, 'o', 'MarkerFaceColor', 'r', 'Linewidth', 2)
+plot(double(mu1_sol1), 1, 'o', 'MarkerFaceColor', 'r', 'Linewidth', 2)
+
+plot([double(mu1_sol2), double(mu1_sol2)], [0, 1], 'r--', 'Linewidth', 2)
+plot([double(mu1_sol3), double(mu1_sol3)], [0, 1], 'r--', 'Linewidth', 2)
+plot([double(mu1_sol4), double(mu1_sol4)], [0, 1], 'r--', 'Linewidth', 2)
+plot([double(mu1_sol1), double(mu1_sol1)], [0, 1], 'r--', 'Linewidth', 2)
+
+yline(1, 'r--', 'Linewidth', 1.5)
 txt = [num2str(mu1_value3) '*'];
 set(gca, 'FontSize',18);
 leg = legend({num2str(mu1_value1), num2str(mu1_value2), txt, num2str(mu1_value4), num2str(mu1_value5)},'Position',[0.77 0.2 0.1 0.2])
-xlim([0 0.27]);
+
+
+xlim([0 0.3]);
 ylim([0 2]);
 title('Changes in \mu_{1}')
 title(leg, '\mu_{1} Value')
@@ -447,20 +467,18 @@ n_e_solution = solve(n_e == 0, h);
 
 hold on
 fplot(n_e_solution(3), 'LineWidth', 5, 'Color', '#000000') %sol #3 gives nash graph
-legend('NE')
-xlim([0 0.1])
-ylim([0 0.2])
+legend('h_{NE}')
 
 %title("Nash Equilibrium")
-xlim([0 0.01])
+xlim([0 0.012])
 ylim([0.06 0.2])
 set(gca, 'FontSize',16)
-xticks([0 0.002 0.004 0.006 0.008 0.00913609 0.01])
-xticklabels({'0' '0.002' '0.004' '0.006' '0.008' 'C_{max}' '0.01'})
+xticks([0 0.002 0.004 0.006 0.00913609 0.012])
+xticklabels({'0' '0.002' '0.004' '0.006' 'C_{max}' '0.012'})
 yticks([0.06 0.08 0.1 0.12 0.131157 0.14 0.16 0.18 0.2])
 yticklabels({'0.06' '0.08' '0.1' '0.12' 'h_{TH}' '0.14' '0.16' '0.18' '0.2'})
 xlabel("Relative Cost of Harvesting: C = C_{h}/C_{D}")
-ylabel("Harvest Rate of Population: h_{pop}")
+ylabel("Harvest Proportion of Population: h_{pop}")
 
 
 % TEst Stuffies
@@ -513,6 +531,8 @@ for i = 1:50
    
    set(gca, 'FontSize',18); % sets axis & legend font size to 18
    text(0.05,0.85,txt, 'FontSize', 18); % displays text on plot
+   xlabel('Time (year)')
+   ylabel('a(t)')
    xlim([0 1])
    ylim([0 1])
    

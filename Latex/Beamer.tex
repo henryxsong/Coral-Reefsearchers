@@ -259,8 +259,8 @@
 \scalebox{0.9}{\begin{minipage}{1.20\textwidth}
 \begin{table}
     \centering
-    \hspace{-0.7cm}
-    \begin{tabular}{c p{5cm} c c}
+    \hspace{-0.9cm}
+    \begin{tabular}{c p{5.5cm} c c}
         \hline
         Parameter & Description & Rate & Units\textsuperscript{\cite{12_noaa_report}\cite{04_mathanalysis}\cite{13_blackwood_hastings_mumby_2010}}\\
         \hline
@@ -272,7 +272,7 @@
         $\phi$ & rate that macroalgae spread vegetative over algal turfs & 0.8\textsuperscript{\cite{04_mathanalysis}} & $year^{-1}$\\ %13
         $q$ & intrinsic growth rate for parrotfish & \colorbox{yellow}{0.47}\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
         $h$ & harvesting rate for parrotfish & \colorbox{yellow}{0.14}\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
-        $\sigma$ & rate that parrot fish bite coral & 0.01*& $bites \cdot year^{-1}$\\
+        $\sigma$ & rate that parrot fish bite coral\textsuperscript{\cite{mcdermott_2021}}  & 0.01*& $bites \cdot year^{-1}$\\
         $\omega$ & maximum grazing intensity & 1\textsuperscript{\cite{13_blackwood_hastings_mumby_2010}} & -\\
         $\beta$ & carrying capacity of parrotfish & 1 & -\\
         $a_{0}$ & control variable to simulate seasonal changes & 0.99 & - %13
@@ -420,41 +420,41 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}{Compartment Initial Condition Changes}
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.85\textwidth]{Latex/Figures/Graphs/0.3C_0.3T_0.3M.png}
-        \caption{Initial Conditions: $C = T = M = \frac{1}{3}$, and $P = \frac{3}{4}$}
-        \label{fig:initial_plot}
-    \end{figure}
-\end{frame}
+% \begin{frame}{Compartment Initial Condition Changes}
+%     \begin{figure}
+%         \centering
+%         \includegraphics[width=0.85\textwidth]{Latex/Figures/Graphs/0.3C_0.3T_0.3M.png}
+%         \caption{Initial Conditions: $C = T = M = \frac{1}{3}$, and $P = \frac{3}{4}$}
+%         \label{fig:initial_plot}
+%     \end{figure}
+% \end{frame}
 
-\begin{frame}{Compartment Initial Condition Changes}
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.85\textwidth]{Latex/Figures/Graphs/0.5C_0.25T_0.25M.png}
-        \caption{Initial Conditions: $C = \frac{1}{2}$, $T = M = \frac{1}{4}$, and $P = \frac{3}{4}$}
-        \label{fig:coral_dominant}
-    \end{figure}
-\end{frame}
+% \begin{frame}{Compartment Initial Condition Changes}
+%     \begin{figure}
+%         \centering
+%         \includegraphics[width=0.85\textwidth]{Latex/Figures/Graphs/0.5C_0.25T_0.25M.png}
+%         \caption{Initial Conditions: $C = \frac{1}{2}$, $T = M = \frac{1}{4}$, and $P = \frac{3}{4}$}
+%         \label{fig:coral_dominant}
+%     \end{figure}
+% \end{frame}
 
-\begin{frame}{Compartment Initial Condition Changes}
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.85\textwidth]{Latex/Figures/Graphs/0.25C_0.5T_0.25M.png}
-        \caption{Initial Conditions: $T = \frac{1}{2}$, $C = M = \frac{1}{4}$, and $P = \frac{3}{4}$}
-        \label{fig:turf_dominant}
-    \end{figure}
-\end{frame}
+% \begin{frame}{Compartment Initial Condition Changes}
+%     \begin{figure}
+%         \centering
+%         \includegraphics[width=0.85\textwidth]{Latex/Figures/Graphs/0.25C_0.5T_0.25M.png}
+%         \caption{Initial Conditions: $T = \frac{1}{2}$, $C = M = \frac{1}{4}$, and $P = \frac{3}{4}$}
+%         \label{fig:turf_dominant}
+%     \end{figure}
+% \end{frame}
 
-\begin{frame}{Compartment Initial Condition Changes}
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.85\textwidth]{Latex/Figures/Graphs/0.25C_0.25T_0.5M.png}
-        \caption{Initial Conditions: $M = \frac{1}{2}$, $C = T = \frac{1}{4}$, and $P = \frac{3}{4}$}
-        \label{fig:macroalgae_dominant}
-    \end{figure}
-\end{frame}
+% \begin{frame}{Compartment Initial Condition Changes}
+%     \begin{figure}
+%         \centering
+%         \includegraphics[width=0.85\textwidth]{Latex/Figures/Graphs/0.25C_0.25T_0.5M.png}
+%         \caption{Initial Conditions: $M = \frac{1}{2}$, $C = T = \frac{1}{4}$, and $P = \frac{3}{4}$}
+%         \label{fig:macroalgae_dominant}
+%     \end{figure}
+% \end{frame}
 
 \section{Equilibria}
 \subsection{Disease Free Equilibrium}
@@ -511,7 +511,7 @@
 \end{frame}
 
 
-\begin{frame}{Endemic Equilibrium Cont.}
+\begin{frame}{Endemic Equilibrium}
 Calculation for $M^{*}$:\\
 \begin{equation*}
     \frac{-k \pm \sqrt{k^2 - 4jn}}{2j}
@@ -546,7 +546,19 @@ where
             \item A metric used to describe the contagiousness or transmissibility of infectious agents\textsuperscript{\cite{delamater_street_leslie_yang_jacobsen_2019}}, i.e. the number of secondary infections. % general def
             \item $\mathscr{R}_{0}$ is defined as the expected number of secondary cases produced a single macroalgae (M) in a completely coral (C) population. % def in terms of our model
         \end{itemize}
-        
+    \end{block}
+\end{frame}
+
+\begin{frame}{Basic Reproduction Number: Next Generation Matrix}
+    \begin{block}{Definition}
+        \begin{itemize}
+            \item $i$ : Set of infectious compartments {M}
+            \item $\mathscr{F}_{i}$ : Rate of new infections in compartment i
+            \item $\mathscr{V}_{i}$ : Rate of transfer individuals out of compartment $i$ minus rate into compartment $i$
+            \item F : Jacobian Matrix($\mathscr{F}_i$)
+            \item V : Jacobian Matrix($\mathscr{V}_i$)
+            \item $FV^{-1}$ : Next Generation Matrix
+        \end{itemize}
     \end{block}
 \end{frame}
 
@@ -627,9 +639,28 @@ where
         \caption{Effects of various $\mu_{1}$ values on $\mathscr{R}_{0}$}
         \label{fig:mu1_sens_analysis}
     \end{figure}
+    \vspace{-0.6cm}
+    \begin{center}
+        \scriptsize * = our harvesting threshold($h_{TH}$)
+    \end{center}
 \end{frame}
 
-
+\begin{frame}{Sensitivity Analysis for $\mathscr{R}_{0}^{\mu_1}$}
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{c|c}
+             $\mu_{1}$ & $h_{TH}$ \\
+             \hline
+             0.05 & 0.223\\
+             0.1 & 0.1842\\
+             0.15 & 0.1312\\
+             0.2 & 0.0557\\
+             0.25 & n/a\\
+        \end{tabular}
+        \caption{$h_{TH}$ when $\mathscr{R}_{0}=1$ while $\mu_{1}$ changes}
+        \label{tab:mu1_sens_analysis_values}
+    \end{table}
+\end{frame}
 
 \section{Harvesting Game Theory}
 
@@ -639,7 +670,7 @@ Game of Harvesting
     \item \textbf{Player:} Individual
     \item \textbf{Strategy: } 
         \begin{itemize}
-            \item Proportion of Individual Harvesting ($h$) based on the rate the population is harvesting ($h_{pop}$)
+            \item Proportion of Individual Harvesting ($h$) based on the proportion the population is harvesting ($h_{pop}$)
         \end{itemize}
 \end{itemize}
 \end{frame}
@@ -750,6 +781,7 @@ Thus, $E$ achieves a maximum value at $h = 0$ or $h=1$.\\
         \centering
         \includegraphics[width = 0.85\textwidth]{Latex/Figures/Graphs/nash_1.png}
         \caption{Nash Equilibrium Graph}
+        % C_max = 0.009
         \label{fig:NE_Graph}
     \end{figure}
 \end{frame}

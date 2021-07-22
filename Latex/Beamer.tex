@@ -102,22 +102,17 @@
     \begin{itemize}
         \item<1-> Coral Reefs are large underwater structures composed of the skeletons of colonial marine invertebrates known as coral\textsuperscript{\cite{ross}}.
          \item<2-> They play a crucial role in the marine ecosystem's biodiversity along with other functions, such as coastal defense from storms and economic benefits from tourism or local fisheries\textsuperscript{\cite{04_mathanalysis}}.
-         \item<3-> According to the 2008 State of the Coral Reef Ecosystems of Guam report, Guam’s coral reef resources are both economically and culturally important, providing numerous goods and services for the residents of Guam, including cultural/traditional use, tourism, recreation, fisheries, and shoreline/infrastructure protection \textsuperscript{\cite{guamwebsite}}.
-         \item<4-> Factors that affect coral reefs include climate change, coral reef resilience\textsuperscript{\cite{02_Riegl_Purkis_Model}}, and exploitative fishing practices\textsuperscript{\cite{05_quintero_machuca_cotto_bradley_ríos-soto_2016}}.
+         %\item<3-> According to the 2008 State of the Coral Reef Ecosystems of Guam report, Guam’s coral reef resources are both economically and culturally important, providing numerous goods and services for the residents of Guam, including cultural/traditional use, tourism, recreation, fisheries, and shoreline/infrastructure protection \textsuperscript{\cite{guamwebsite}}.
+         \item<3-> Factors that affect coral reefs include climate change, coral reef resilience\textsuperscript{\cite{02_Riegl_Purkis_Model}}, and exploitative fishing practices\textsuperscript{\cite{05_quintero_machuca_cotto_bradley_ríos-soto_2016}}.
     \end{itemize}
 \end{frame}
 
 \subsection{General Question}
 \begin{frame}{Our Question}
 \begin{itemize}
-    \item General Question: How will Guam's reef ecosystem change over time?
-\end{itemize}
-\begin{center}
-    $\Downarrow$
-\end{center}
-\begin{itemize}
     \item Specific Question: How will overfishing affect Guam's coral reef ecosystem over time?
 \end{itemize}
+\quad
 \begin{figure}
     \centering
     \includegraphics[width=0.9\textwidth]{Latex/Figures/figure1.png}
@@ -154,7 +149,7 @@
         \begin{column}{0.5\textwidth}
             \begin{itemize}
                 \item Parrot fish are common reef fish found in many tropical reefs\textsuperscript{\cite{13_blackwood_hastings_mumby_2010}} and are known to feed on algal turfs and macroalgae.
-                \item Their bites on corals have been shown to improve and promote coral growth.
+                \item Their bites on corals have been shown to improve and promote coral growth\textsuperscript{\cite{mcdermott_2021}}.
                 \item Parrot fish are one of the most overfished reef fish in the Caribbean, and potentially on Guam as well\textsuperscript{\cite{13_blackwood_hastings_mumby_2010}}.
             \end{itemize}
         \end{column}
@@ -260,7 +255,7 @@
 \begin{table}
     \centering
     \hspace{-0.9cm}
-    \begin{tabular}{c p{5.5cm} c c}
+    \begin{tabular}{c p{5cm} c c}
         \hline
         Parameter & Description & Rate & Units\textsuperscript{\cite{12_noaa_report}\cite{04_mathanalysis}\cite{13_blackwood_hastings_mumby_2010}}\\
         \hline
@@ -272,7 +267,7 @@
         $\phi$ & rate that macroalgae spread vegetative over algal turfs & 0.8\textsuperscript{\cite{04_mathanalysis}} & $year^{-1}$\\ %13
         $q$ & intrinsic growth rate for parrotfish & \colorbox{yellow}{0.47}\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
         $h$ & harvesting rate for parrotfish & \colorbox{yellow}{0.14}\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
-        $\sigma$ & rate that parrot fish bite coral\textsuperscript{\cite{mcdermott_2021}}  & 0.01*& $bites \cdot year^{-1}$\\
+        $\sigma$ & rate that parrot fish bite coral & 0.01*& $bites \cdot year^{-1}$\\
         $\omega$ & maximum grazing intensity & 1\textsuperscript{\cite{13_blackwood_hastings_mumby_2010}} & -\\
         $\beta$ & carrying capacity of parrotfish & 1 & -\\
         $a_{0}$ & control variable to simulate seasonal changes & 0.99 & - %13
@@ -354,7 +349,7 @@
 \end{frame}
 
 \subsection{Differential Equations}
-\begin{frame}{Differential Equations}
+\begin{frame}{Differential Equations {\small(Modified from \cite{13_blackwood_hastings_mumby_2010})}}
     System of differential equations derived from compartment model:
     \begin{align*}
         \begin{split}
@@ -366,11 +361,11 @@
             \label{SoODE}
         \end{split}
     \end{align*}
-    where $g(P) = \frac{\omega P}{\beta}, \quad a(t)=|\frac{a_{0}(9\sin{(\pi t) }+1)}{10}|$.\\ 
+    where $\displaystyle g(P) = \frac{\omega P}{\beta}, \quad a(t)=\left|\frac{a_{0}(9\sin{(\pi t) }+1)}{10}\right|$.\\ 
     \quad
-    \begin{center}
-        {\small \textit{Modified from \cite{13_blackwood_hastings_mumby_2010}}}
-    \end{center}
+%    \begin{center}
+%        {\small \textit{Modified from \cite{13_blackwood_hastings_mumby_2010}}}
+%    \end{center}
 \end{frame}
 
 \subsection{Plots}
@@ -471,8 +466,11 @@
     \begin{align*}
         C^{0} &= 1 - \frac{\mu_{1}}{r}\\
         %P^{0} &= -\frac{\beta(1 - \frac{\mu_{1}}{r})(h - \mu_{2} - q)}{q}\\
+        \\
         T^{0} &= \frac{\mu_{1}}{r}\\
+        \\
         M^{0} &= 0\\
+        \\
         P^{0} &= -\frac{\beta(1 - \frac{\mu_{1}}{r})(h - \mu_{2} - q)}{q}\\
         %\Longleftarrow \text{our "disease" compartment}
     \end{align*}
@@ -585,6 +583,49 @@ where
     $\displaystyle {\mathscr{R}}_{0} = \frac{\beta \mu_{1}q(a(t)(1 - \frac{\mu_{1}}{r}) + \frac{\mu_{1}}{r})}{\omega r (\beta h (\frac{\mu_{1}}{r}-1) + \beta \mu_{2} (\frac{\mu_{1}}{r}-1) - \beta q(\frac{\mu_{1}}{r}-1))}$
 \end{frame}
 
+
+
+\section{Harvesting Game Theory}
+
+\begin{frame}{Harvesting Game}
+Game of Harvesting 
+\begin{itemize}
+    \item \textbf{Player:} Individual
+    \item \textbf{Strategy: } 
+        \begin{itemize}
+            \item Proportion of Individual Harvesting ($h$) based on the proportion the population is harvesting ($h_{pop}$)
+        \end{itemize}
+\end{itemize}
+\end{frame}
+
+\subsection{Harvesting Threshold}
+\begin{frame}{Harvesting Threshold}
+    \begin{block}{Definition (Harvesting Threshold)}
+        The proportion of parrotfish that can be harvested in order for macroalgae growth to maintain stability in the ecosystem. 
+    \end{block}
+    
+    \vspace{0.5cm}
+    
+    When $\mathscr{R}_{0} = 1$,
+    \begin{center}
+    
+    $\displaystyle{h_{TH} = q - \mu_{2} + \frac{\mu_{1}q(a(t) \mu_{1} - a(t)r - \phi \mu_{1})}{\omega r(r-\mu_{1})}}$ \\
+    \end{center}
+    \begin{align*}
+    h_{pop} &< h_{TH}: \text{Macroalgae growth is stable.} \\
+    h_{pop} &> h_{TH}: \text{Macroalgae growth is unstable.}
+    \end{align*}
+\end{frame}
+
+\begin{frame}{Harvesting Threshold Graph}
+    \begin{figure}
+        \centering
+        \includegraphics[width = 0.85\textwidth]{Latex/Figures/Graphs/threshold_graph.png}
+        \caption{When $\mathscr{R}_0 = 1$, $h = 0.1312$}
+        \label{fig:threshold}
+    \end{figure}
+\end{frame}
+
 \subsection{Sensitivity Analysis}
 \begin{frame}{Sensitivity Analysis for $\mathscr{R}_0$}
     \begin{columns}
@@ -662,47 +703,6 @@ where
     \end{table}
 \end{frame}
 
-\section{Harvesting Game Theory}
-
-\begin{frame}{Harvesting Game}
-Game of Harvesting 
-\begin{itemize}
-    \item \textbf{Player:} Individual
-    \item \textbf{Strategy: } 
-        \begin{itemize}
-            \item Proportion of Individual Harvesting ($h$) based on the proportion the population is harvesting ($h_{pop}$)
-        \end{itemize}
-\end{itemize}
-\end{frame}
-
-\subsection{Harvesting Threshold}
-\begin{frame}{Harvesting Threshold}
-    \begin{block}{Definition (Harvesting Threshold)}
-        The proportion of parrotfish that can be harvested in order for macroalgae growth maintain stability in the ecosystem. 
-    \end{block}
-    
-    \vspace{0.5cm}
-    
-    When $\mathscr{R}_{0} = 1$,
-    \begin{center}
-    
-    $\displaystyle{h_{TH} = q - \mu_{2} + \frac{\mu_{1}q(a(t) \mu_{1} - a(t)r - \phi \mu_{1})}{\omega r(r-\mu_{1})}}$ \\
-    \end{center}
-    \begin{align*}
-    h_{pop} &< h_{TH}: \text{Macroalgae growth is stable.} \\
-    h_{pop} &> h_{TH}: \text{Macroalgae growth is unstable.}
-    \end{align*}
-\end{frame}
-
-\begin{frame}{Harvesting Threshold Graph}
-    \begin{figure}
-        \centering
-        \includegraphics[width = 0.85\textwidth]{Latex/Figures/Graphs/threshold_graph.png}
-        \caption{When $\mathscr{R}_0 = 1$, $h = 0.1312$}
-        \label{fig:threshold}
-    \end{figure}
-\end{frame}
-
 \subsection{Expected Payoff - Harvesting}
 \begin{frame}{Expected Payoff - Harvesting}
     Let h $\in$ [0,1] be the proportion at which an individual can harvest parrotfish.
@@ -716,7 +716,7 @@ Game of Harvesting
         \begin{tabular}{c|p{8cm}}
              Symbol & Definition \\
              \hline
-             $E(h, h_{pop})$ & Expected payoff for an individual to harvest based on the harvesting rate of the population \\
+             $E(h, h_{pop})$ & Expected payoff for an individual to harvest based on the harvesting proportion of the population \\
              $C_{h}$ & Cost of harvesting \\
              $C_{D}$ & Cost of coral disease (ex. less protection from storms)\\
         \end{tabular}
@@ -817,7 +817,7 @@ Thus, $E$ achieves a maximum value at $h = 0$ or $h=1$.\\
 \subsection{Future Research}
 \begin{frame}{Future Research}
     \begin{itemize}
-    \item Collect data from Guam sources to give a more accurate representation of the changes on Guam's Reef Ecosystem. 
+    \item Collect data from Guam sources to more accurately model Guam's Reef Ecosystem.
     \item Application of game theory on $\phi$ parameter control measures.
     \item Incorporate more elements of coral reef ecosystems (i.e. other types of plant and aquatic life) to our compartment model.
         %\item Specific ideas:
@@ -847,7 +847,7 @@ Thus, $E$ achieves a maximum value at $h = 0$ or $h=1$.\\
     \begin{center}
         Support for the Young Scholars Research Experience in Mathematics (YSREM)  is through the MAA Tensor SUMMA Program. Support for the MAA National Research Experience for Undergraduates Program (NREUP) is provided by the National Science Foundation (Grant Number DMS-1950644). Support for the NSF EPSCoR project, Guam Ecosystems Collaboratorium for Corals and Oceans (GECCO) is provided by the National Science Foundation (Grant Number DMS-1946352). \\
     \vspace{.2cm}
-    \small{Special thanks to the UOG Marine Laboratory(Dr. Bastian Bentlage and Ms. Grace McDermott), our faculty mentors (Dr. JaeYong Choi, Dr. Hyunju Oh, \& Dr. Leslie Aquino), and our Research Assistants (Jaron Bautista \& Regina-Mae Dominguez).}
+    \small{Special thanks to the UOG Marine Laboratory (Dr. Laurie Raymundo, Dr. Bastian Bentlage \& Ms. Grace McDermott), our faculty mentors (Dr. JaeYong Choi, Dr. Hyunju Oh, \& Dr. Leslie Aquino), and our Research Assistants (Jaron Bautista \& Regina-Mae Dominguez).}
     
     \begin{figure}
         \includegraphics[width = 0.20\textwidth]{Figures/MAA_logo_PMS286.jpg}

@@ -59,7 +59,7 @@
 \subtitle{Coral Reefsearchers}
 \author{Aaron Bumagat, Michelle Luces, Henry Song }
 \institute{University of Guam}
-\date{\today} 
+\date{\today\\GECCO 2021 Final Preentation} 
 
 
 \begin{document}
@@ -107,7 +107,7 @@
     \end{itemize}
 \end{frame}
 
-\subsection{General Question}
+\subsection{Question}
 \begin{frame}{Our Question}
 \begin{itemize}
     \item Specific Question: How will overfishing affect Guam's coral reef ecosystem over time?
@@ -257,12 +257,12 @@
     \hspace{-0.9cm}
     \begin{tabular}{c p{5cm} c c}
         \hline
-        Parameter & Description & Rate & Units\textsuperscript{\cite{12_noaa_report}\cite{04_mathanalysis}\cite{13_blackwood_hastings_mumby_2010}}\\
+        Parameter & Description & Value & Units\textsuperscript{\cite{12_noaa_report}\cite{04_mathanalysis}\cite{13_blackwood_hastings_mumby_2010}}\\
         \hline
         \hline
         $\mu_{1}$ & death rate of coral reefs & \colorbox{yellow}{0.15}\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}} & $year^{-1}$\\ %12
         $\mu_{2}$ & natural death rate of parrotfish & \colorbox{yellow}{0.22}\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
-        $r$ & rate that coral recruit to overgrow algal turfs & \colorbox{yellow}{10}\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}} & $year^{-1}$\\ %12
+        $r$ & rate that coral recruit to overgrow algal turfs & \colorbox{yellow}{0.5}\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}} & $year^{-1}$\\ %12
         %$g$ & grazing rate that parrotfish graze macroalgae without distinction from algae turfs & $\frac{kg}{yrs}$\\
         $\phi$ & rate that macroalgae spread vegetative over algal turfs & 0.8\textsuperscript{\cite{04_mathanalysis}} & $year^{-1}$\\ %13
         $q$ & intrinsic growth rate for parrotfish & \colorbox{yellow}{0.47}\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
@@ -482,8 +482,8 @@
 \begin{frame}{Endemic Equilibrium}
     \begin{block}{Definition}
         \begin{itemize}
-            \item The Endemic Equilibrium determines at what point will the disease not spread nor will it fully eradicate.
-            \item In order to find the endemic equilibrium, we have to set each differential equal to 0 and solve for each variable.
+            \item The Endemic Equilibrium determines at what point will the disease not spread nor will it be fully eradicate.
+            \item In order to find the endemic equilibrium, we have to set each differential equation equal to 0 and solve for each respective compartment variable.
         \end{itemize}
     \end{block}
 \end{frame}
@@ -542,7 +542,7 @@ where
     \begin{block}{Definition}
         \begin{itemize}
             \item A metric used to describe the contagiousness or transmissibility of infectious agents\textsuperscript{\cite{delamater_street_leslie_yang_jacobsen_2019}}, i.e. the number of secondary infections. % general def
-            \item $\mathscr{R}_{0}$ is defined as the expected number of secondary cases produced a single macroalgae (M) in a completely coral (C) population. % def in terms of our model
+            \item $\mathscr{R}_{0}$ is defined as the expected number of secondary cases produced by a single macroalgae (M) in a completely coral (C) population. % def in terms of our model
         \end{itemize}
     \end{block}
 \end{frame}
@@ -550,8 +550,8 @@ where
 \begin{frame}{Basic Reproduction Number: Next Generation Matrix}
     \begin{block}{Definition}
         \begin{itemize}
-            \item $i$ : Set of infectious compartments {M}
-            \item $\mathscr{F}_{i}$ : Rate of new infections in compartment i
+            \item $i$ : Set of infectious compartments \{M\}
+            \item $\mathscr{F}_{i}$ : Rate of new infections in compartment $i$
             \item $\mathscr{V}_{i}$ : Rate of transfer individuals out of compartment $i$ minus rate into compartment $i$
             \item F : Jacobian Matrix($\mathscr{F}_i$)
             \item V : Jacobian Matrix($\mathscr{V}_i$)
@@ -587,16 +587,6 @@ where
 
 \section{Harvesting Game Theory}
 
-\begin{frame}{Harvesting Game}
-Game of Harvesting 
-\begin{itemize}
-    \item \textbf{Player:} Individual
-    \item \textbf{Strategy: } 
-        \begin{itemize}
-            \item Proportion of Individual Harvesting ($h$) based on the proportion the population is harvesting ($h_{pop}$)
-        \end{itemize}
-\end{itemize}
-\end{frame}
 
 \subsection{Harvesting Threshold}
 \begin{frame}{Harvesting Threshold}
@@ -703,6 +693,17 @@ Game of Harvesting
     \end{table}
 \end{frame}
 
+\begin{frame}{Harvesting Game}
+Game of Harvesting 
+\begin{itemize}
+    \item \textbf{Player:} Individual
+    \item \textbf{Strategy: } 
+        \begin{itemize}
+            \item Proportion of Individual Harvesting ($h$) based on the proportion the population is harvesting ($h_{pop}$)
+        \end{itemize}
+\end{itemize}
+\end{frame}
+
 \subsection{Expected Payoff - Harvesting}
 \begin{frame}{Expected Payoff - Harvesting}
     Let h $\in$ [0,1] be the proportion at which an individual can harvest parrotfish.
@@ -718,7 +719,7 @@ Game of Harvesting
              \hline
              $E(h, h_{pop})$ & Expected payoff for an individual to harvest based on the harvesting proportion of the population \\
              $C_{h}$ & Cost of harvesting \\
-             $C_{D}$ & Cost of coral disease (ex. less protection from storms)\\
+             $C_{D}$ & Cost of coral disease (i.e. less protection from storms)\\
         \end{tabular}
         %\caption{Caption}
         \label{tab:my_label}
@@ -806,7 +807,7 @@ Thus, $E$ achieves a maximum value at $h = 0$ or $h=1$.\\
 
 \begin{frame}{Discussion}
     \begin{itemize}
-        \item<1-> The maximum harvest proportion without cost is approximately 0.131157 (13.1157\%) of the parrot fish population. 
+        \item<1-> The maximum sustainable harvest proportion is approximately 0.131157 (13.1157\%) of the parrot fish population. 
         \item<2-> According to our harvesting game theory, as the relative cost of fishing increases, the harvesting Nash equilibrium decreases until it reaches the maximum cost.
     \end{itemize}
 \end{frame}

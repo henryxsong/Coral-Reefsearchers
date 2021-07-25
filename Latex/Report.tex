@@ -11,6 +11,7 @@
 \usepackage[page]{appendix}
 \usepackage{listings}
 \usepackage{mathrsfs}
+\usepackage{subfig}
 
 % tikz style stuff
 \usetikzlibrary{arrows}
@@ -118,40 +119,42 @@ The objective of this paper is to analyze how Guam's reef ecosystem will change 
 \end{center}
 
 % assumptions and description of model
-We assume that the (i) system is closed, (ii) it only consists of coral, macroalgae, and algal turfs, and (iii) macroalgae is the only predator for coral. Corals are assumed to (iv) recruit and overgrow algal turfs and that they are overgrown by macroalgae \textsuperscript{\cite{04_mathanalysis}}. Macroalgae are also assumed (v) colonize dead coral by spreading vegetative over algal turfs \textsuperscript{\cite{04_mathanalysis}}. In addition, (vi) corals do not die naturally and (vii) the maximum carrying capacity of parrotfish is equal to 1.
+We assume that the ecosystem is  (i) closed, (ii) consists of only corals, algal turfs, and macroalgae, and (iii) supports the maximum carrying capacity of parrotfish. We also assume that (iv) macroalage is the only predator of corals, that (v) corals recruit and overgrow algal turfs\textsuperscript{\cite{04_mathanalysis}}, that (vi) they are overgrown by macroalgae \textsuperscript{\cite{04_mathanalysis}}, and that (vii) macroalgae colonize dead coral by spreading vegetative over algal turfs \textsuperscript{\cite{04_mathanalysis}}. Lastly, we assume that (vii) corals do not naturally die. Since corals have a natural life span of potentially thousands of years, we assume that they simply do not die naturally\textsuperscript{\cite{bentlage_2021}}. Rather, we still do take into consideration coral death by other means such as bleaching and disease. 
 
 %Represented above is our general compartment model. While this version is a rough draft, it represents the compartments that we wish to include in our model. Included in our model is our $S$ compartment, which represents all susceptible corals, our $E$ compartment representing all exposed corals, our $I$ compartment representing our infected corals, and our $R$ compartment representing recovered corals. While this follows the standard SEIR model layout, we included an $H$ compartment to account for human factors. This is in order to assess how the human factor may directly or indirectly affect the typical "life" cycle of corals. \par
 %The $H$ compartment allows to factor in the human factor to the overall equation, however in order to achieve this, we must implement education game theory. This is in order to model human factors such as education about corals, ignorance, and various other factors. By using education game theory, we are able to visualize which strategy is dominant between humans and corals, and reflect this strategy in our overall compartment model.
 
 \subsection{Differential Equations}
-C, T, and M are proportions of coral, algal turf, and macroalgae cover on the ocean floor, respectively,  where $C+M+T=1$ to signify the proportion of each population is a selected area. P is the population of the parrotfish that inhabit the coral reef ecosystem in proportion to the maximum carrying capacity. The coral reef dynamics are described as a system of nonlinear differential equations \textsuperscript{\cite{13_blackwood_hastings_mumby_2010}}: 
-\begin{align*}
-    \frac{dC}{dt} &= rTC + \sigma P C- (a(t)M+\mu_{1})C \label{eq:dCdt}\\
-    \frac{dP}{dt} &= qP \left( 1-\frac{P}{\beta C} \right) - P \left( h+\mu_{2} \right) \label{eq:dPdt}\\
-    \frac{dT}{dt} &= \mu_{1}C + \frac{g(P)M}{M+T} - T(rC+\phi M) \label{eq:dTdt}\\
-    \frac{dM}{dt} &= (a(t)C+ \phi T)M - \frac{g(P)M}{M+T} \label{eq:dMdt}
-\end{align*}
+C, T, and M are proportions of coral, algal turf, and macroalgae cover on the ocean floor, respectively, and P is the population of the parrotfish that inhabit the coral reef ecosystem in proportion to the maximum carrying capacity. Since we assume that the ecosystem only consists corals, algal turfs, and macroalgae, we conclude that $C+T+M=1$ such that they make up 100\% of the ecosystem. Parrotfish are excluded from this dynamic as they do not require ocean floor surface area to survive. Rather, they exist in the water column above. As such, the coral reef dynamics are described as a system of nonlinear differential equations \textsuperscript{\cite{13_blackwood_hastings_mumby_2010}}: 
 
-where: 
+\begin{align}
+    \frac{dC}{dt} &= rTC + \sigma P C- (a(t)M+\mu_{1})C \label{eq:dCdt}\\
+    \frac{dT}{dt} &= \mu_{1}C + \frac{g(P)M}{M+T} - T(rC+\phi M) \label{eq:dTdt} \\ 
+    \frac{dM}{dt} &= (a(t)C+ \phi T)M - \frac{g(P)M}{M+T} \label{eq:dMdt}\\
+    \frac{dP}{dt} &= qP \left( 1-\frac{P}{\beta C} \right) - P \left( h+\mu_{2} \right) \label{eq:diff_eqs}
+\end{align}
+
+where 
 \begin{align*}
 &g(P) = \frac{\omega P}{\beta}, a(t)=|\frac{a_{0}(9\sin{(\pi t) }+1)}{10}|\\
-and\\
+\text{and} \\
 &\frac{g(P)M}{M + T} \text{ is the proportion of grazing that affects macroalgae} \textsuperscript{\cite{13_blackwood_hastings_mumby_2010}}.
 \end{align*}
 
 %See Table 1 for 
 
 \subsection{Parameter Values}
+In order to properly model our ecosystem, we analyzed various sources to compile parameters to use. Most of our sources are annual, or yearly, rates, and as our model is designed to use proportions, our parameters must also be values between 0 - 1. For example, our harvesting rate, $h$, is 0.14 per year, meaning 14\% of the proportion of parrotfish are harvest per year. These are all our parameter variables, definitions, and values:
 \begin{table}[H]
     \centering
     \begin{tabular}{c p{9cm} c c}
         \hline
-        Parameter & Description & Rate & Units\textsuperscript{\cite{12_noaa_report}\cite{04_mathanalysis}\cite{13_blackwood_hastings_mumby_2010}}\\
+        Parameter & Description & Value & Units\textsuperscript{\cite{12_noaa_report}\cite{04_mathanalysis}\cite{13_blackwood_hastings_mumby_2010}}\\
         \hline
         \hline
         $\mu_{1}$ & natural death rate of coral reefs & \colorbox{yellow}{0.15}\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}} & $year^{-1}$\\ %12
         $\mu_{2}$ & natural death rate of parrotfish & \colorbox{yellow}{0.22}\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
-        $r$ & rate that coral recruit to overgrow algal turfs & \colorbox{yellow}{10}\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}} & $year^{-1}$\\ %12
+        $r$ & rate that coral recruit to overgrow algal turfs & \colorbox{yellow}{0.5}\textsuperscript{\cite{16_wolanski_richmond_mccook_2004}} & $year^{-1}$\\ %12
         %$g$ & grazing rate that parrotfish graze macroalgae without distinction from algae turfs & $\frac{kg}{yrs}$\\
         $\phi$ & rate that macroalgae spread vegetative over algal turfs & 0.8\textsuperscript{\cite{04_mathanalysis}} & $year^{-1}$\\ %13
         $q$ & intrinsic growth rate for parrotfish & \colorbox{yellow}{0.47}\textsuperscript{\cite{12_noaa_report}} & $year^{-1}$\\ %8
@@ -164,75 +167,126 @@ and\\
     \end{tabular}
     \caption{Model Parameters}
     \label{tab:parameters}
-\end{table}
-\textit{* = estimated values}
+\end{table}\\
+\textit{* = estimated values}\\
+\textit{\colorbox{yellow}{\#} = Guam specific parameters}
 
 % graphs
 \subsection{Graphs}
-Using MatLab (See Appendix \ref{appendix:B1}), we were able to model the dynamics using our preliminary rates. This was achieved by changing the C, M, \& T proportions. Below are the graphs that were were able to achieve:\\
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.7\textwidth]{Latex/Figures/Graphs/0.3C_0.3T_0.3M.png}
-    \caption{Initial Conditions: $C = T = M = \frac{1}{3}$, and $P = \frac{3}{4}$}
-    \label{fig:initial_plot}
+Utilizing Matlab, we are able to visualize our compartment model both by changing initial conditions and by changing parameter values, as shown below.
+\subsubsection{Initial Condition Variations}
+We were able to model the dynamics using our preliminary rates. This was achieved by changing the C, M, \& T proportions. Below are the graphs that were were able to achieve:\\
+\begin{figure}[H]%
+        \centering
+        \subfloat[\centering IC: $C = T = M = \frac{1}{3}$, and $P = \frac{3}{4}$]{{\includegraphics[width=0.45\textwidth]{Latex/Figures/Graphs/0.3C_0.3T_0.3M.png} }}%
+        \quad
+        \subfloat[\centering IC: $C = \frac{1}{2}$, $T = M = \frac{1}{4}$, and $P = \frac{3}{4}$]{{\includegraphics[width=0.45\textwidth]{Latex/Figures/Graphs/0.5C_0.25T_0.25M.png} }}%
+        \\
+        \subfloat[\centering IC: $T = \frac{1}{2}$, $C = M = \frac{1}{4}$, and $P = \frac{3}{4}$]{{\includegraphics[width=0.45\textwidth]{Latex/Figures/Graphs/0.25C_0.5T_0.25M.png} }}%
+        \quad
+        \subfloat[\centering IC: $M = \frac{1}{2}$, $C = T = \frac{1}{4}$, and $P = \frac{3}{4}$]{{\includegraphics[width=0.45\textwidth]{Latex/Figures/Graphs/0.25C_0.25T_0.5M.png} }}%
+        \caption{Varied Initial Conditions (IC) using Parameter Values}%
+        \label{fig:IC_graphs}%
 \end{figure}
-\begin{figure}[H]
+As we can see in Figures \ref{fig:IC_graphs}.a, \ref{fig:IC_graphs}.b, \ref{fig:IC_graphs}.c, and \ref{fig:IC_graphs}.c, as the parrot fish population decreases, the macroalgae proportion increases. In addition, as the macroalgae proportion increases, the coral proportion decreases, and subsequently the algal turf proportion decreases as well.\\
+
+\subsubsection{Parameter Variation: $a_{0}$}
+Furthermore, we also analyzed the response of our model in response to changes in parameter values. The first of which we analyzed was with our seasonal simulation parameter: $a_{0}$.\\
+\begin{figure}[H]%
     \centering
-    \includegraphics[width=0.7\textwidth]{Latex/Figures/Graphs/0.5C_0.25T_0.25M.png}
-    \caption{Initial Conditions: $C = \frac{1}{2}$, $T = M = \frac{1}{4}$, and $P = \frac{3}{4}$}
-    \label{fig:coral_dominant}
+    \subfloat[\centering $a_{0} = 0.02$]{{\includegraphics[width=0.45\textwidth]{Latex/Figures/a_animation/frame-1.png} }}%
+    \quad
+    \subfloat[\centering $a_{0} = 0.31$]{{\includegraphics[width=0.45\textwidth]{Latex/Figures/a_animation/frame-14.png} }}%
+    \\
+    \subfloat[\centering $a_{0} = 0.6$]{{\includegraphics[width=0.45\textwidth]{Latex/Figures/a_animation/frame-27.png} }}%
+    \quad
+    \subfloat[\centering $a_{0} = 1$]{{\includegraphics[width=0.45\textwidth]{Latex/Figures/a_animation/frame-45.png} }}%
+    \caption{Various $a_{0}$ values with IC: $C=T=M=\frac{1}{3}$ \& $P = \frac{3}{4}$}%
+    \label{fig:a_graphs}%
 \end{figure}
-\begin{figure}[H]
+From Figures \ref{fig:a_graphs}.a, \ref{fig:a_graphs}.b, \ref{fig:a_graphs}.c, and \ref{fig:a_graphs}.d, we find that taking into consideration seasonal growth bursts of macroalgae does indeed have a significant effect on our model. As the control parameter, $a_{0}$, increases, the proportion of macroalgae also significantly increases.\\
+
+\subsubsection{Parameter Variation: $h$}
+Analysis of our harvesting rate, $h$, has shown us that the model dynamics is significantly influenced by the harvesting rate of parrotfish. Below are graphical visualizations of our ecosystem proportions at various harvesting rates:\\
+\begin{figure}[H]%
     \centering
-    \includegraphics[width=0.7\textwidth]{Latex/Figures/Graphs/0.25C_0.5T_0.25M.png}
-    \caption{Initial Conditions: $T = \frac{1}{2}$, $C = M = \frac{1}{4}$, and $P = \frac{3}{4}$}
-    \label{fig:turf_dominant}
+    \subfloat[\centering $h = 0.02$]{{\includegraphics[width=0.45\textwidth]{Latex/Figures/h_animation/frame-1.png} }}%
+    \quad
+    \subfloat[\centering $h = 0.31$]{{\includegraphics[width=0.45\textwidth]{Latex/Figures/h_animation/frame-15.png} }}%
+    \\
+    \subfloat[\centering $h = 0.59$]{{\includegraphics[width=0.45\textwidth]{Latex/Figures/h_animation/frame-29.png} }}%
+    \quad
+    \subfloat[\centering $h = 1$]{{\includegraphics[width=0.45\textwidth]{Latex/Figures/h_animation/frame-49.png} }}%
+    \caption{Various $h$ values with IC: $C=T=M=\frac{1}{3}$ \& $P = \frac{3}{4}$}%
+    \label{fig:h_graphs}%
 \end{figure}
-\begin{figure}[H]
+From Figures \ref{fig:h_graphs}.a, \ref{fig:h_graphs}.b, \ref{fig:h_graphs}.c, and \ref{fig:h_graphs}.d, we find that the $h$ determines the state of the ecosystem, and as our harvesting rate increases, the ecosystem free-falls deeper into a morbidly macroalgae dominant ecosystem.\\
+
+\subsubsection{Parameter Variation: $\phi$}
+Analysis of the rate at which macroalgae spread vegetative over algal turfs, $\phi$, has shown us that the model dynamics  suggest the parameter may have a larger impact than suggested:\\
+\begin{figure}[H]%
     \centering
-    \includegraphics[width=0.7\textwidth]{Latex/Figures/Graphs/0.25C_0.25T_0.5M.png}
-    \caption{Initial Conditions: $M = \frac{1}{2}$, $C = T = \frac{1}{4}$, and $P = \frac{3}{4}$}
-    \label{fig:macroalgae_dominant}
+    \subfloat[\centering $\phi = 1$]{{\includegraphics[width=0.45\textwidth]{Latex/Figures/phi_animation/Frame-1.png} }}%
+    \quad
+    \subfloat[\centering $\phi = 0.59$]{{\includegraphics[width=0.45\textwidth]{Latex/Figures/phi_animation/Frame-21.png} }}%
+    \\
+    \subfloat[\centering $\phi = 0.31$]{{\includegraphics[width=0.45\textwidth]{Latex/Figures/phi_animation/Frame-35.png} }}%
+    \quad
+    \subfloat[\centering $\phi = 0.02$]{{\includegraphics[width=0.45\textwidth]{Latex/Figures/phi_animation/Frame-49.png} }}%
+    \caption{Various $\phi$ values with IC: $M = \frac{1}{2}$, $C = T = \frac{1}{4}$, \& $P = \frac{3}{4}$}%
+    \label{fig:phi_graphs}%
 \end{figure}
-As we can see in Figures \ref{fig:initial_plot}, \ref{fig:coral_dominant}, \ref{fig:turf_dominant}, \& \ref{fig:macroalgae_dominant}, as the parrot fish population decreases, the macroalgae proportion increases. In addition, as the macroalgae proportion increases, the coral proportion decreases, and subsequently the algal turf proportion decreases as well.\\
+From Figures \ref{fig:phi_graphs}.a, \ref{fig:phi_graphs}.b, \ref{fig:phi_graphs}.c, and \ref{fig:phi_graphs}.d, we find that a decreasing $\phi$ results in an increased proportion of algal turfs, and subsequently will lead to an increased proportion of corals, as algal turfs are capable of recruiting corals. This parameter can be an excellent candidate to apply game theory in terms of control measures such as coastal and/or algal cleanups. \\
+
 
 \section{Equilibria Analysis}
 \subsection{Disease-Free Equilibrium}
 The disease-free equilibrium, or DFE, is the point at which no disease is present in the system. Typically, this method is performed on disease modeling, however can be adapted to other types of modeling as well. In our model, we classify macroalgae (M) as our "disease" compartment, and since the system is disease free, we set $M^{0} = 0$. Below is the result of our DFE calculations (detailed in Appendix \ref{appendix:A1}):
+
 \begin{align*}
-        C^{0} &= 1 - \frac{\mu_{1}}{r} \label{eq:C0}\\
-        P^{0} &= -\frac{\beta(1 - \frac{\mu_{1}}{r})(h - \mu_{2} - q)}{q} \label{eq:P0}\\
-        T^{0} &= \frac{\mu_{1}}{r} \label{eq:T0}\\
-        M^{0} &= 0 \label{eq:M0}
+        C^{0} &= 1 - \frac{\mu_{1}}{r} 
+        \label{eq:C0} \\
+        T^{0} &= \frac{\mu_{1}}{r} 
+        \label{eq:T0} \\
+        M^{0} &= 0 
+        \label{eq:M0} \\
+        P^{0} &= -\frac{\beta(1 - \frac{\mu_{1}}{r})(h - \mu_{2} - q)}{q}
+        \label{eq:P0}
 \end{align*}
+
 Since our model was set-up so as $C+T+M=1$ and since $M^{0} = 0$, then we conclude that $C^{0} + T^{0} = 1$. Thus, our disease-free equilibrium is $(1 - \frac{\mu_{1}}{r}, -\frac{\beta(1 - \frac{\mu_{1}}{r})(h - \mu_{2} - q)}{q}, 0, \frac{\mu_{1}}{r})$.
 
-\subsection{Basic Reproduction Number: $\mathscr{R}_{0}$}
-The basic reproduction number, $\mathscr{R}_{0}$, is a metric used to describe the contagiousness or transmissibility of infectious agents\textsuperscript{\cite{delamater_street_leslie_yang_jacobsen_2019}}. In essence, this equation measures the number of secondary infections. Since our model is not disease-based, we conclude that our $\mathscr{R}_{0}$ symbolizes the rate at which macroalgae spreads after the initial macroalgae overgrowth. Our model recognizes macroalgae (M) as our infectious compartment. By using our disease-free equilibrium equations, we are able to calculate our $\mathscr{R}_{0}$ equation (detailed in Appendix \ref{appendix:A3}): 
-\begin{equation*}\label{eq:R0}
-    \displaystyle {\mathscr{R}}_{0} = - \frac{\beta \mu_{1}q(a(t)(\frac{\mu_{1}}{r}-1)-\frac{\mu_{1}}{r})}{\omega r (\beta h (\frac{\mu_{1}}{r}-1) + \beta \mu_{2} (\frac{\mu_{1}}{r}-1) - \beta q(\frac{\mu_{1}}{r}-1))}
-\end{equation*}
-
 \subsection{Endemic Equilibrium}
-The Endemic Equilibrium determines at what point will the disease not spread nor will it fully eradicate. Essentially it tells when the disease is stabilized. In order to find the endemic equilibrium, we have to set each differential equal to 0 and solve for each variable. The equations above are in terms of M as M is considered our disease, as shown below (detailed in Appendix \ref{appendix:A2}):
+The endemic equilibrium determines the point at which the disease will not spread nor will it fully eradicate. Essentially, it indicates when the disease is stabilized. In order to find the endemic equilibrium, we set each differential equal to 0 and solve for each variable. The equations are in terms of M (our disease compartment), as shown below (detailed in Appendix \ref{appendix:A2}):
+
 \begin{align*}
-        T^{*} &= \frac{\mu_{1} + a(t)M^{*}}{r} \label{eq:T*}\\
-        C^{*} %&= 1-(T^{*} + M^{*}) \\
-        &= 1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*} \right) \label{eq:C*}\\
-        P^{*} %&= \beta C^{*} \left(\frac{q-(h+\mu_{2})}{q} \right) \\
-        &= \beta \left(1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*} \right) \right) \left(\frac{q-(h+\mu_{2})}{q} \right) \label{eq:P*}\\
-        M^{*} &= \frac{\omega (\beta \left(1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*} \right) \right) \left(\frac{q-(h+\mu_{2})}{q} \right))}{\beta(a(t)(1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*}) \right)+\phi \frac{\mu_{1} + a(t)M^{*}}{r})} - \frac{\mu_{1} + a(t)M^{*}}{r} \label{eq:M*}
+        C^{*} &= 1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*} \right)  
+        \label{eq:C*} \\
+        T^{*} &= \frac{\mu_{1} + a(t)M^{*}}{r} 
+        \label{eq:T*} \\
+        M^{*} &= \frac{\omega (\beta \left(1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*} \right) \right) \left(\frac{q-(h+\mu_{2})}{q} \right))}{\beta(a(t)(1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*}) \right)+\phi \frac{\mu_{1} + a(t)M^{*}}{r})} - \frac{\mu_{1} + a(t)M^{*}}{r} 
+        \label{eq:M*} \\
+        P^{*} &= \beta \left(1- \left(\frac{\mu_{1} + a(t)M^{*}}{r} + M^{*} \right) \right) \left(\frac{q-(h+\mu_{2})}{q} \right) 
+        \label{eq:P*}
 \end{align*}
 
 While not a disease model, the endemic equilibrium equations are significant in our research project as it is essential in order to perform game theory on our model. 
 
+\subsection{Basic Reproduction Number: $\mathscr{R}_{0}$}
+The basic reproduction number, $\mathscr{R}_{0}$, is a metric used to describe the contagiousness or transmissibility of infectious agents\textsuperscript{\cite{delamater_street_leslie_yang_jacobsen_2019}}. In essence, this equation measures the number of secondary infections. Since our model is not disease-based, we conclude that our $\mathscr{R}_{0}$ symbolizes the rate at which macroalgae spreads after the initial macroalgae overgrowth. Our model recognizes macroalgae (M) as our infectious compartment. By using our disease-free equilibrium equations, we are able to calculate our $\mathscr{R}_{0}$ equation (detailed in Appendix \ref{appendix:A3}): 
+\begin{equation}
+    \displaystyle {\mathscr{R}}_{0} = \frac{\beta \mu_{1}q(a(t)(1 - \frac{\mu_{1}}{r}) + \frac{\mu_{1}}{r})}{\omega r (\beta h (\frac{\mu_{1}}{r}-1) + \beta \mu_{2} (\frac{\mu_{1}}{r}-1) - \beta q(\frac{\mu_{1}}{r}-1))}
+    \label{eq:R0}
+\end{equation}
+
 \subsection{Sensitivity Analysis}
-Sensitivity analysis determines the maximum impact of each parameter on the basic reproduction number equation. This process is calculated by performing the partial derivative on the $\mathscr{R}_0$ equation(\ref{eq:R0}) with respect to each parameter value, and substituting the values for the remaining parameter variables. Below is the general equation to calculate sensitivity analysis: \\
-\begin{equation*}\label{eq:sens_analysis}
+Sensitivity analysis determines the maximum impact of each parameter on the basic reproduction number equation. This process is calculated by performing the partial derivative on the $\mathscr{R}_0$ equation (\ref{eq:R0}) with respect to each parameter value, and substituting the values for the remaining parameter variables. Below is the general equation to calculate sensitivity analysis: \\
+\begin{equation*}
         S_{\lambda} = \frac{\frac{\Delta \mathscr{R}_{0}}{\mathscr{R}_{0}}}{\frac{\Delta x}{x}} = \frac{\lambda}{\mathscr{R}_{0}} \cdot \frac{\partial \mathscr{R}_{0}}{\partial \lambda}
+        \label{eq:sens_analysis}
 \end{equation*}
 \begin{center}
-    where $\lambda$ is a parameter in the quantity $\mathscr{R}_{0}$
+    where $\lambda$ is a parameter in the quantity $\mathscr{R}_{0}$.
 \end{center}
 %where $\lambda$ is a parameter in the quantity $\mathscr{R}_{0}$.
 
@@ -267,98 +321,158 @@ Utilizing MatLab (Appendix \ref{appendix:B6}), we were able to automate the calc
         \end{tabular}
         \caption{Sensitivity Analysis}
         \label{tab:sens_analysis}
-    \end{table}
+\end{table}
     
-    The larger the sensitivity analysis value, the higher the impact the parameter has on our basic reproduction number equation. The highlighted values ($\mu_{1}, \mu_{2}$, and $h$) have the largest sensitivity analysis values, and have the most impact on our basic reproduction number equation, respectively. \par
-    The natural death rate of corals ($\mu_{1}$) represents the largest impact, and rightfully so, with a sensitivity analysis value of 8.3513. Due to the dynamics between corals, algal turfs, and macroalgae, the death of corals directly impacts algal turfs. However, the natural death accounts for all factors of coral deaths, including but not limited to bleaching, disease, damage, and so forth. The more corals that die, the more surface area get converted into algal turfs and subsequently gives way for algal turfs to convert into macroalgae. As such, this rate carries the greatest impact on our overall basic reproduction number equation. \par
-    The natural death rate of parrotfish ($\mu_{2}$) and the harvest rate of parrotfish due to fishing ($h$) both share the second highest sensitivity analysis value of 5.2819. This presents a unique perspective, as the analysis indicates that there is no difference between natural death and hu1man-driven death. Both simply represent the removal of live parrotfish from the ecosystem rather than the means of removal, and as such are equal. This is significant as our model depicts parrotfish as the primary grazers of macroalgae, and we have acknowledged that macroalgae overgrowth has a negative impact on the ecosystem. When the parrotfish population is adequate, the proportion of macroalgae will be kept in control. However, with the removal of parrotfish from the ecosystem from death or fishing, the macroalgae will have the opportunity to grow unchecked. Thus, the impact of overfishing parrotfish will undeniably affect the dynamics of the ecosystem, and will allow macroalgae to dominate while corals whither away.
+The larger the sensitivity analysis value, the higher the impact the parameter has on our basic reproduction number equation. The highlighted values ($\mu_{1}, \mu_{2}$, and $h$) have the largest sensitivity analysis values, and have the most impact on our basic reproduction number equation, respectively. \par
+The natural death rate of corals ($\mu_{1}$) represents the largest impact, and rightfully so, with a sensitivity analysis value of 8.3513. Due to the dynamics between corals, algal turfs, and macroalgae, the death of corals directly impacts algal turfs. However, the natural death accounts for all factors of coral deaths, including but not limited to bleaching, disease, damage, and so forth. The more corals that die, the more surface area get converted into algal turfs and subsequently gives way for algal turfs to convert into macroalgae. As such, this rate carries the greatest impact on our overall basic reproduction number equation. \par
+The natural death rate of parrotfish ($\mu_{2}$) and the harvest rate of parrotfish due to fishing ($h$) both share the second highest sensitivity analysis value of 5.2819. This presents a unique perspective, as the analysis indicates that there is no difference between natural death and hu1man-driven death. Both simply represent the removal of live parrotfish from the ecosystem rather than the means of removal, and as such are equal. This is significant as our model depicts parrotfish as the primary grazers of macroalgae, and we have acknowledged that macroalgae overgrowth has a negative impact on the ecosystem. When the parrotfish population is adequate, the proportion of macroalgae will be kept in control. However, with the removal of parrotfish from the ecosystem from death or fishing, the macroalgae will have the opportunity to grow unchecked. Thus, the impact of overfishing parrotfish will undeniably affect the dynamics of the ecosystem, and will allow macroalgae to dominate while corals whither away.
     
-\section{Harvesting Game Theory}
-One of the primary objectives of our research is to implement game theory to our project. Game theory is essentially "a theoretical framework to conceive social situations among competing players and produce optimal decision-making of independent and competing actors in a strategic setting."\textsuperscript{\cite{game_theory_definition}}. By taking into account strategies, we can apply game theory to predict outcomes. \par
-In our project, we apply education game theory to our $h$ parameter, or the harvest rate of parrotfish. Our goal is to best predict an individual's choice towards the harvesting of parrotfish in response to the population's choice towards the harvesting of parrotfish. As such, we adapt the concept of education game theory and apply it to our Game of Harvesting. 
+% changes in mu1
+Since the coral death rate ($\mu_{1}$) had the largest influence on $\mathscr{R}_0$, we wanted to observe how modify the value of $\mu_{1}$ would affect the harvesting threshold. 
 
-\subsection{Harvesting Threshold}
-The first step in performing game theory is isolating our parameter, in this case $h$, from our basic reproduction number equation (\ref{eq:R0}). By isolating our parameter when $\mathscr{R}_0 = 1$, we are able to find our harvesting threshold, which is the rate at which parrotfish can be harvested in order for macroalgae growth to become stable in the ecosystem:\\
-\\
-When $\mathscr{R}_{0} = 1$,
-\begin{equation*}\label{eq:h_TH}
-    \displaystyle{h_{TH} = q - \mu_{2} + \frac{\mu_{1}q(a(t) \mu_{1} - a(t)r - \phi \mu_{1})}{\omega r(r-\mu_{1})}}
-\end{equation*}
-Furthermore, we are able to plot our harvesting threshold against our $\mathscr{R}_{0}$ equation, giving us the figure below.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{Latex/Figures/Graphs/threshold_graph.png}
-    \caption{Threshold Analysis}
+    \includegraphics[width = 0.7\textwidth]{Latex/Figures/Graphs/mu1_sens_analysis.png}
+    \caption{Changes in $\mu_{1}$}
+    \label{fig:mu1}
+\end{figure}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c}
+        $\mu_{1}$ & $h_{TH}$ \\
+        \hline
+        0.05 & 0.223\\
+        0.1 & 0.1842\\
+        0.15 & 0.1312\\
+        0.2 & 0.0557\\
+        0.25 & n/a\\
+    \end{tabular}
+    \caption{$h_{TH}$ when $\mathscr{R}_{0}=1$ while $\mu_{1}$ changes}
+    \label{tab:mu1_sens_analysis_values}
+\end{table}
+
+Figure \ref{fig:mu1} shows how each curve changes as $\mu_{1}$ changes. Table \ref{tab:mu1_sens_analysis_values} shows the values of $\mu_{1}$ with the respective $h_{TH}$ values when $\mathscr{R}_{0} = 1$. Evidently, as $\mu_{1}$ increases, the harvesting threshold decreases. In other words, more parrotfish is needed for the system to maintain stability. Since the coral proportion is decreasing, the macroalgae proportion would increase and more parrotfish would be needed to control the overgrowth of macroalgae, thus resulting in a lower harvesting threshold ($h_{TH}$).
+    
+\section{Harvesting Game Theory}
+One of the primary objectives of our research is to implement game theory to our model. Game theory is essentially "a theoretical framework to conceive social situations among competing players and produce optimal decision-making of independent and competing actors in a strategic setting."\textsuperscript{\cite{game_theory_definition}}. By taking into account strategies, we can apply game theory to predict outcomes. \par
+In our project, we apply education game theory to the harvesting rate of parrotfish, $h$. Our goal is to predict the best strategy for an individual's choice to harvest ($h$) in response to the proportion that the population is harvesting parrotfish ($h_{pop}$). As such, we adapt the concept of education game theory and apply it to our Game of Harvesting. 
+
+\subsection{Harvesting Threshold}
+From the basic reproduction number, we are able to obtain the harvesting threshold ($h_{TH}$), which we defined as the proportion of parrotfish that can be harvested in order for macroalgae growth to maintain stability in the ecosystem. \\
+\\
+When $\mathscr{R}_{0} = 1$,
+\begin{equation*}
+    \displaystyle{h_{TH} = q - \mu_{2} + \frac{\mu_{1}q(a(t) \mu_{1} - a(t)r - \phi \mu_{1})}{\omega r(r-\mu_{1})}}
+    \label{eq:h_TH}
+\end{equation*}
+Furthermore, we are able to plot our harvesting threshold against our $\mathscr{R}_{0}$ equation, giving us the figure below.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{Latex/Figures/Graphs/threshold_graph.png}
+    \caption{Harvesting Threshold}
     \label{fig:threshold_graph}
 \end{figure}
-We can see from Figure \ref{fig:threshold_graph} that when $\mathscr{R}_{0} = 1$, $h=0.1312$. This point represents our threshold. According to Drieche and Wattmough\textsuperscript{\cite{bible}}, any point ($h$ value) above the threshold will result in an unstable system, and any point ($h$ value) below the threshold will be stable.
+
+Figure \ref{fig:threshold_graph} shows that when $\mathscr{R}_{0} = 1$, $h=0.1312$. This point represents the harvesting threshold, which we defined as the proportion of parrotfish that can be harvested in order for macroalgae growth to maintain stability in the ecosystem. According to Drieche and Wattmough\textsuperscript{\cite{bible}}, when $\mathscr{R}_{0} < 1$ (i.e. any point below the threshold), the system will be stable. Similarly, when $\mathscr{R}_{0} > 1$ (i.e. any point above the threshold), the system will be unstable. Applying this theorem to our model, we obtain 
+
 \begin{align*}
     h_{pop} &< h_{TH}: \text{Macroalgae growth is stable} \\
-    h_{pop} &> h_{TH}: \text{Macroalgae growth is unstable}
+    h_{pop} &> h_{TH}: \text{Macroalgae growth is unstable.}
 \end{align*}
 
 \subsection{Expected Payoff}
-In terms of game theory, an expected payoff is an equation representing the benefit of the player's decision. In our game, expected payoff is the proportion at which an individual can harvest parrotfish. As such, we create the following expected payoff equation based on our compartment model:
-\begin{equation*}\label{eq:initial_payoff}
-    \displaystyle {E(h, h_{pop}) = -hC_{h} - \left( \frac{h_{pop}}{h_{pop} + \mu_{2}} \cdot \frac{g(P^{*})(1-h)M^{*}}{M^{*} + T^{*}} \right) C_{D}}
-\end{equation*}
+In game theory, an expected payoff is an equation representing the cost of the player's decision. According to our game, an individual's payoff to harvest is given by
+
+% expected payoff is the proportion at which an individual can harvest parrotfish. As such, we create the following expected payoff equation based on our compartment model:
+
+%\begin{equation*}\label{eq:initial_payoff}
+    %\displaystyle {E(h, h_{pop}) = -hC_{h} - \left( \frac{h_{pop}}{h_{pop} + %\mu_{2}} \cdot \frac{g(P^{*})(1-h)M^{*}}{M^{*} + T^{*}} \right) C_{D}}
+%\end{equation*}
+
+\begin{equation}
+    \displaystyle {E(h, h_{pop}) = -hC^{h} - \frac{h_{pop}}{h_{pop} + \mu_{2}} \cdot \frac{g(P^{*})(1-h)M^{*}}{M^{*} + T^{*}}}
+    \label{eq:payoff}
+\end{equation} 
+
 where
+
 \begin{table}[H]
     \centering
     \begin{tabular}{c|p{9cm}}
          Symbol & Definition \\
          \hline
-         $E(h, h_{pop})$ & Expected payoff for an individual to harvest based on the harvesting rate of the population \\
-         $C_{h}$ & Cost of harvesting \\
-         $C_{D}$ & Cost of coral disease \\
+         $C^{h}$ & cost for an individual to harvest relative to the cost of coral disease \\
+         $\frac{h_{pop}}{h_{pop} + \mu_{2}}$ & the probability that parrotfish will be harvested by the population \\
+         $\frac{g(P^{*})(1-h)M^{*}}{M^{*} + T^{*}}$ & the probability that macroalgae (M) will transition to algal turf (T)
+         %$C_{h}$ & Cost of harvesting \\
+         %$C_{D}$ & Cost of coral disease \\
     \end{tabular}
     %\caption{Caption}
     \label{tab:payoff_eq_params}
 \end{table}
-and $h \in [0,1]$ is the proportion at which an individual can harvest
-parrotfish. \\
-We can further simplify by dividing the equation by $C_{D}$, giving us 
-\begin{equation*}\label{eq:payoff}
-    \displaystyle {E(h, h_{pop}) = -hC^{h} - \frac{h_{pop}}{h_{pop} + \mu_{2}} \cdot \frac{g(P^{*})(1-h)M^{*}}{M^{*} + T^{*}}}
+
+and $h \in [0,1]$ is the proportion at which an individual can harvest parrotfish. \\
+
+%We can further simplify by dividing the equation by $C_{D}$, giving us 
+
+%where $C^{h} = \frac{C_{h}}{C_{D}}$. \\ \par
+
+In order to confirm that a Nash equilibrium exists for our expected payoff equation (\ref{eq:payoff}), we must determine the concavity by finding the second partial derivative of our expected payoff equation with respect to $h$. Thus, 
+
+\begin{equation*}
+    \displaystyle {\frac{\partial ^ {2} E}{\partial h^{2}} = \frac{2 \omega P^{*} \mu{2} (M^{*}+T^{*})^{2} (\mu_{1} +1)}{\beta(h(M^{*}+T^{*}) + \mu_{2}(M^{*}+T^{*}))^{3}}}.
+    \label{eq:nash_partial_deriv}
 \end{equation*}
-where $C^{h} = \frac{C_{h}}{C_{D}}$. \\ \par
-In order to confirm that a Nash equilibrium exists for our expected payoff equation (\ref{eq:payoff}), we must find the second partial derivative of our expected payoff equation with respect to $h$. If $\frac{\partial^{2}E(h, h_{pop})}{\partial h^{2}} > 0$, then we can confirm through the convex function that $E$ achieves a maximum value at $h=0$ and $h=1$. \par
-\begin{equation*}\label{eq:nash_partial_deriv}
-    \displaystyle {\frac{\partial ^ {2} E}{\partial h^{2}} = \frac{2 \omega P^{*} \mu{2} (M^{*}+T^{*})^{2} (\mu_{1} +1)}{\beta(h(M^{*}+T^{*}) + \mu_{2}(M^{*}+T^{*}))^{3}} > 0}
+
+Since $\frac{\partial^{2}E(h, h_{pop})}{\partial h^{2}} > 0$, $E(h, h_{pop})$ is a convex function that achieves a maximum value at $h=0$ and $h=1$. Furthermore, we can determine the best strategy for an individual based on the results of
+
+\begin{equation*}
+    \Delta E = E(1, h_{pop}) - E(0, h_{pop}),
 \end{equation*}
-We find that the second partial derivative of our expected payoff equation with respect to $h$ is indeed greater than 0, and thus a valid solution.
+
+where if
+
+\begin{align*}
+    \Delta E &> 0: \text{Harvest} \\
+    \Delta E &< 0: \text{Do not harvest}.
+\end{align*}
+
+% We find that the second partial derivative of our expected payoff equation with respect to $h$ is indeed greater than 0, and thus a valid solution.
 
 \subsection{Nash Equilibrium}
 The Nash equilibrium, named after mathematician John Nash, is a decision-making theorem within game theory that states a player can achieve the desired outcome by not deviating from their initial strategy, and thus, each player's strategy is optimal when considering the decision of other players\textsuperscript{\cite{nash_definition}}. \par
-In the case of our harvesting game theory, we can obtain the Nash equilibrium by setting our payoff equations equal to each other:
+
+% In the case of our harvesting game theory, we can obtain 
+Since the maximum is obtained at $h=0$ or $h=1$, we are able to find the Nash equilibrium ($h_{NE}$) by setting our payoff equations equal to each other:
 \begin{equation*}
     E(0, h_{pop}) = E(1, h_{pop})
 \end{equation*}
 By substituting in $E(0, h_{pop})$ and $E(1, h_{pop})$, we create the following equation:
 \begin{equation*}\label{eq:unsimplified_nash}
-    \frac{h_{pop}}{h_{pop} + \mu_{2}} \cdot \frac{g(P^{*})(1-h)M^{*}}{M^{*} + T^{*}} = C^{h}
+    \frac{h_{pop}}{h_{pop} + \mu_{2}} \cdot \frac{g(P^{*})(1-h)M^{*}}{M^{*} + T^{*}} = C^{h}.
 \end{equation*}
-
-
 
 \begin{figure}[H]
     \centering
     \includegraphics[width = 0.8\textwidth] {Latex/Figures/Graphs/nash_1.png}
     \caption{Nash Equilibrium Graph}
-    \label{fig:my_label}
+    \label{fig:NE_Graph}
 \end{figure}
 
+Figure \ref{fig:NE_Graph} represents an individual's best strategy based on the relative cost of harvesting, $C^{h}$ and the harvest proportion of the population, $h_{pop}$. The graph reveals that an individual's best strategy reaches a maximum relative cost at 0.009. That is to say that an individual should not harvest past a relative cost of 0.009. According to our harvesting game theory, as the relative cost of fishing increases, the harvesting Nash equilibrium decreases until it reaches the maximum cost. As such, as the the relative cost of harvesting increases, the harvest proportion of the population decreases, and by virtue of this analysis, the individual should also harvest less.
 
 \section{Discussion}
-Our model was adopted from Blackwood, Hastings, and Mumby (2010) to study the effects of overfishing on Guam's coral reef ecosystems. In order to apply this model to Guam's coral reef ecosystem, we used several parameters based on the available data for Guam. The other parameter values utilized were models that were adopted from Blackwood, Hastings, and Mumby (2010). From our analysis, there were several parameters that had an impact on the dynamics of our model. The parameter to account for seasonal changes, $a_{0}$, showed a direct proportion to macroalgae growth. As $a_{0}$ increases, the rate that macroalgae overgrows on coral increases as well. The harvesting rate $h$ exhibited a similar behavior. A higher harvesting rate will result in the increased dominance of macroalgae in the ecosystem. Alternatively,  the rate that macroalgae spread vegetative over algal turfs, $\phi$, 
+Our model was adopted from Blackwood, Hastings, and Mumby (2010) to study the effects of overfishing on Guam's coral reef ecosystems. In order to apply this model to Guam's coral reef ecosystem, we used several parameters based on the available data for Guam. The other parameter values utilized were models that were adopted from Blackwood, Hastings, and Mumby (2010). From our analysis, there were several parameters that had an impact on the dynamics of our model. The parameter to account for seasonal changes, $a_{0}$, showed a direct proportion to macroalgae growth. As $a_{0}$ increases, the rate that macroalgae overgrows on coral increases as well. The harvesting rate $h$ exhibited a similar behavior. A higher harvesting rate resulted in an increased dominance of macroalgae in the ecosystem. Alternatively,  the rate that macroalgae spread vegetative over algal turfs, $\phi$, showed a decrease in the proportion of macroalgae and an increase in algal turfs, and subsequently corals.
+
+Through basic reproduction number, it revealed that the harvesting threshold was approximately 0.131157, meaning if more than 13.1157\% of the parrotfish population was harvested, the macroalgae growth will be unstable. Through further analysis of the basic reproduction number, we determined what parameters made an influence on our $\mathscr{R}_{0}$ and to what extent. Furthermore, it tells us how these parameters affect the harvesting threshold. We found that the coral death rate ($\mu_{1}$) had the biggest influence and increasing the coral death rate in $\mathscr{R}_{0}$ would result in a smaller harvesting threshold. As $\mu_{1}$ increased, the harvesting threshold decreased to the endemic case of the ecosystem, where macroalgae growth is unstable. Additionally, the parrotfish natural death rate ($mu_{2}$) and harvesting rate ($h$) had the second biggest influence on $\mathscr{R}_{0}$.
+
+Through harvesting game theory, we found that harvesting parrotfish was the best strategy so long as the harvest proportion of the population and relative cost were within the harvesting threshold line. We concluded that as the relative cost of fishing increases, the harvesting threshold decreases until it reaches the maximum relative cost.
 
 
-%A lower $\phi$ will result in decreased proportion of macroalgae and increase in algal turfs, and subsequently corals.
-
-%Our sensitivity analysis indicates that our coral death rate ($\mu_{1}$), parrotfish natural death rate ($\mu_{2}$), and harvesting rate ($h$) have the largest impact on our basic reproduction number.
-%The maximum harvest rate without cost is approximately 0.131157 (13.1157\%) of the parrot fish population. 
-%According to our harvesting game theory, as the relative cost of fishing increases, the harvesting threshold decreases until it reaches the maximum cost.
-
+\section{Future Research}
+Due to the limited nature of available sources, certain parameters were adapted from other scholarly articles. To further continue this research, we intend to fully utilize local (Guam) parameter values in our model. Furthermore, we intend to introduce more elements of a coral reef ecosystem, such as other types of plant and aquatic life, into our model to more accurately represent a realistic coral reef ecosystem. Lastly, we intend to extend the application of game theory to the rate at which macroalgae spread vegetative over algal turfs, $\phi$, to determine the best strategy for control measures such as coastal and/or algal cleanups. 
 %\section{Literature Review}
 %Throughout this week, our group has dedicated a large portion of time to reviewing scholarly articles and research publications relevant to our areas of research. This aspect of performing our research is crucial as, through literature review, we are able to gather information, techniques, methods, data, results, and many other variables that we are able to use in our own research. \par
 %Our faculty mentors have graciously provided several research publications related to the overall study coral reef ecosystems in order to stimulate creativity in creating our own research topic. These papers are as follow:
@@ -376,7 +490,7 @@ Our model was adopted from Blackwood, Hastings, and Mumby (2010) to study the ef
 
 \section{Acknowledgements}
 Support for the Young Scholars Research Experience in Mathematics (YSREM)  is through the MAA Tensor SUMMA Program. Support for the MAA National Research Experience for Undergraduates Program (NREUP) is provided by the National Science Foundation (Grant Number DMS-1950644). Support for the NSF EPSCoR project, Guam Ecosystems Collaboratorium for Corals and Oceans (GECCO) is provided by the National Science Foundation (Grant Number DMS-1946352). \par
-Special thanks to Dr. Bastian Bentlage, our faculty mentors (Dr. JaeYong Choi, Dr. HyunJu Oh, \& Dr. Leslie Aquino), and our Research Assistants (Jaron Bautista \& Regina-Mae Dominguez).
+Special thanks to the UOG Marine Laboratory (Dr. Laurie Raymundo, Dr. Bastian Bentlage \& Ms. Grace McDermott), our faculty mentors (Dr. JaeYong Choi, Dr. Hyunju Oh, \& Dr. Leslie Aquino), and our Research Assistants (Jaron Bautista \& Regina-Mae Dominguez).
 
 \newpage
 \appendix
@@ -478,13 +592,20 @@ Special thanks to Dr. Bastian Bentlage, our faculty mentors (Dr. JaeYong Choi, D
     \begin{align*}
         M^{*} &= \frac{\beta \omega(1-\frac{\mu_{1} + a(t)M^{*}}{r}-M^{*})(q - h - \mu_{2})}{\beta q (\frac{a(t)(r-\mu_{1}-a(t)M^{*}-rM^{*}}{r}) + \frac{\phi(\mu_{1} + a(t)M^{*})}{r})} - \frac{\mu_{1} + a(t)M^{*}}{r} \\
         &= \frac{\omega(1-\frac{\mu_{1} + a(t)M^{*}}{r}-M^{*})(q - h - \mu_{2})}{q (\frac{a(t)(r-\mu_{1}-a(t)M^{*}-rM^{*}}{r}) + \frac{\phi(\mu_{1} + a(t)M^{*})}{r}} - \frac{\mu_{1} + a(t)M^{*}}{r} \\
-        &= \frac{r\omega (q-h-\mu_{2})((r-\mu_{1})-(a(t) + r)M^{*} - (\mu_{1} + a(t)M^{*}q((a(t)r - a \mu_{1} + \phi \mu_{1}) + (-(a(t))^{2} - a(t)r + \phi a(t))M^{*})}{rq((a(t)r - a(t) \mu_{1} + \phi \mu_{1}) + (-(a(t))^{2} - a(t)r + \phi a(t))M^{*})} \\
+        &= \frac{r\omega (q-h-\mu_{2})((r-\mu_{1})-(a(t) + r)M^{*} - (\mu_{1} + a(t)M^{*}q((a(t)r - a \mu_{1} + \phi \mu_{1})}{rq((a(t)r - a(t) \mu_{1} + \phi \mu_{1}) + (-(a(t))^{2} - a(t)r + \phi a(t))M^{*})} \\
+        & \textcolor{white}{000000000} + \frac{(-(a(t))^{2} - a(t)r + \phi a(t))M^{*})}{rq((a(t)r - a(t) \mu_{1} + \phi \mu_{1}) + (-(a(t))^{2} - a(t)r + \phi a(t))M^{*})}
+        % &= \frac{r\omega (q-h-\mu_{2})((r-\mu_{1})-(a(t) + r)M^{*} - (\mu_{1} + a(t)M^{*}q((a(t)r - a \mu_{1} + \phi \mu_{1}) + (-(a(t))^{2} - a(t)r + \phi a(t))M^{*})}{rq((a(t)r - a(t) \mu_{1} + \phi \mu_{1}) + (-(a(t))^{2} - a(t)r + \phi a(t))M^{*})} \\
     \end{align*}
-    
+    \\
     % idk how to make this part look better
-    \begin{center}
-        $rq(a(t)r-a(t)\mu_{1} + \phi \mu_{1})M^{*} + rq(-(a(t))^{2} - a(t)r + \phi a(t))(M^{*})^{2} = r \omega (q - h - \mu_{2})(r - \mu_{1}) - r \omega(q-h-\mu_{2})(a(t)+r)M^{*} - q \mu_{1}(a(t)r-a(t) \mu_{1} + \phi \mu_{1}) - q(a(t)(a(t)r-a(t) \mu_{1} + \phi \mu_{1}) + \mu_{1}(-(a(t))^{2}-a(t)r+\phi a(t)))M^{*} - a(t)q(-a^{2}-a(t)r+ \phi a(t))(M^{*})^{2}$ \\ 
-    \end{center}
+    \begin{multline*}
+        \text{L.H.S} = 
+        rq(a(t)r-a(t)\mu_{1} + \phi \mu_{1})M^{*} + rq(-(a(t))^{2} - a(t)r + \phi a(t))(M^{*})^{2} \\
+    \end{multline*}
+    \begin{multline*}
+        \text{R.H.S} = r \omega (q - h - \mu_{2})(r - \mu_{1}) - r \omega(q-h-\mu_{2})(a(t)+r)M^{*} - q \mu_{1}(a(t)r-a(t) \mu_{1} + \phi \mu_{1})\\ - q(a(t)(a(t)r-a(t) \mu_{1} + \phi \mu_{1}) + \mu_{1}(-(a(t))^{2}-a(t)r+\phi a(t)))M^{*}\\ - a(t)q(-a^{2}-a(t)r+ \phi a(t))(M^{*})^{2} \\ 
+    \end{multline*}
+    where $L.H.S = R.H.S$.\\ \\
     
     By isolating all $M^{*}$ terms on one side, we obtain
     \begin{align*}
@@ -498,12 +619,14 @@ Special thanks to Dr. Bastian Bentlage, our faculty mentors (Dr. JaeYong Choi, D
     
     Thus, the general equation of $M^{*}$ is
     \begin{align*}
-        d &= (a(t)q-2a(t)r+r \phi ) - q(r^{2}+a(t)^{3})\\
-        e &= a(t)q(r(r-2\mu_{1}+a(t))-2\mu_{1}(a(t)+\phi )) +  r(q(\phi \mu_{1} + r \omega ) - \\ & \ \ \  \omega(hr+a(t) \mu_{2} + r\mu_{2})\\
-        f &= -qr^{2} \omega +qr\mu_{1} \omega + hr^{2} \omega - hr\mu_{1} \omega + r^2 \mu_{2} \omega - r \mu_{1} \mu_{2} \omega + a(t)qr \mu_{1} - \\ & \ \ \  a(t)q\mu_{1}^{2} +q\phi \mu_{1}^{2}
+        j &= (a(t)q-2a(t)r+r \phi ) - q(r^{2}+a(t)^{3})\\
+        k &= a(t)q(r(r-2\mu_{1}+a(t))-2\mu_{1}(a(t)+\phi )) +  r(q(\phi \mu_{1} + r \omega ) - \\ & \ \ \  \omega(hr+a(t) \mu_{2} + r\mu_{2})\\
+        n &= -qr^{2} \omega +qr\mu_{1} \omega + hr^{2} \omega - hr\mu_{1} \omega + r^2 \mu_{2} \omega - r \mu_{1} \mu_{2} \omega + a(t)qr \mu_{1} - \\ & \ \ \  a(t)q\mu_{1}^{2} +q\phi \mu_{1}^{2}
     \end{align*}
-    where $d$, $e$, and $f$ are values in the general quadratic equation:
-    $$\frac{-e \pm \sqrt{e^2 - 4df}}{2d}$$
+    where $j$, $k$, and $n$ are values in the general quadratic equation:
+    \begin{equation*}
+        \frac{-k \pm \sqrt{k^2 - 4jn}}{2j}
+    \end{equation*}
 
     \subsection{Basic Reproduction Number: $\mathscr{R}_0$}
         \label{appendix:A3}
@@ -559,7 +682,7 @@ Special thanks to Dr. Bastian Bentlage, our faculty mentors (Dr. JaeYong Choi, D
                         \end{bmatrix}
         \end{align*}
         
-        Lastly, we are able to calculate the eigenvalues of our $FV^{1}$ result:
+        Lastly, we are able to calculate the eigenvalues of our $FV^{-1}$ result:
         \begin{align*}
             \det(FV^{-1} - \lambda I) &= \begin{bmatrix}
                                             \frac{(a(t)C^{0}T^{0}+\phi (T^{0})^{2})(a(t)C^{0}T^{0})}{g(P^{0})}
@@ -582,7 +705,7 @@ Special thanks to Dr. Bastian Bentlage, our faculty mentors (Dr. JaeYong Choi, D
         \end{equation*}
         Typically, $\mathscr{R}_{0}$ will be the largest of all eigenvalues, however since we only have one eigenvalue, the singular eigenvalue will be our $\mathscr{R}_{0}$. After substituting in $C^{0}$, $T^{0}$, and $P^{0}$, our $\mathscr{R}_{0}$ is
         \begin{equation*}
-            \displaystyle {\mathscr{R}}_{0} = - \frac{\beta \mu_{1}q(a(t)(\frac{\mu_{1}}{r}-1)-\frac{\mu_{1}}{r})}{\omega r (\beta h (\frac{\mu_{1}}{r}-1) + \beta \mu_{2} (\frac{\mu_{1}}{r}-1) - \beta q(\frac{\mu_{1}}{r}-1))}
+            \displaystyle {\mathscr{R}}_{0} = \frac{\beta \mu_{1}q(a(t)(1 - \frac{\mu_{1}}{r}) + \frac{\mu_{1}}{r})}{\omega r (\beta h (\frac{\mu_{1}}{r}-1) + \beta \mu_{2} (\frac{\mu_{1}}{r}-1) - \beta q(\frac{\mu_{1}}{r}-1))}
         \end{equation*}
 
 
